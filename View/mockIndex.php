@@ -12,6 +12,6 @@ git commit -m "changes" <- this commits the changes to be uploaded the content o
 git push <- uploads the commited changes
 
 git fetch <- this downloads the changes to your local PC
-
+git merge origin <- saves the uploaded changes to your local PC
 
 -->
