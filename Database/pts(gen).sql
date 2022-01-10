@@ -3,7 +3,7 @@ CREATE DATABASE pts;
 CREATE TABLE classStatus (
   classStatusID int NOT NULL AUTO_INCREMENT,
   coordinatorID int NOT NULL,
-  status varchar(25),
+  Cstatus varchar(25),
   PRIMARY KEY (classStatusID),
   FOREIGN KEY (coordinatorID) REFERENCES Coordinator(coordinatorID)
 );
@@ -79,7 +79,7 @@ CREATE TABLE ReviewCards (
   FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
-CREATE TABLE ClassProfile (
+CREATE TABLE Class Profile (
   classProfileID int NOT NULL AUTO_INCREMENT,
   className varchar(96),
   classDescription varchar(96),
@@ -349,41 +349,49 @@ CREATE TABLE Meeting (
   FOREIGN KEY (instructorID) REFERENCES Instructor(instructorID)
 );
 
-CREATE TABLE Order (
-  `orderID` int NOT NULL AUTO_INCREMENT,
-  `dateRequest` <type>,
-  `numberoforder` <type>,
-  `orderStatus` <type>,
-  `packageID` <type>,
-  `learnerID` <type>,
-  `classID` <type>,
-  `procurementID` <type>,
-  PRIMARY KEY (`orderID`),
-  FOREIGN KEY (`orderID`) REFERENCES `Learner`(`learnerID`)
+CREATE TABLE Orders (
+  orderID int NOT NULL AUTO_INCREMENT,
+  dateRequest varchar(25),
+  numberoforder int(10),
+  orderStatus varchar(64),
+  packageID int NOT NULL,
+  learnerID int NOT NULL,
+  classID int NOT NULL,
+  procurementID int NOT NULL,
+  PRIMARY KEY (orderID),
+  FOREIGN KEY (packageID) REFERENCES Package(packageID),
+  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
+  FOREIGN KEY (classID) REFERENCES Class(classID),
+  FOREIGN KEY (procurementID) REFERENCES Procurement(procurementID)
 );
 
-CREATE TABLE `Admin` (
-  `adminID` int NOT NULL AUTO_INCREMENT,
-  `userID` <type>,
-  `roleType` <type>,
-  PRIMARY KEY (`adminID`),
-  FOREIGN KEY (`userID`) REFERENCES `Users`(`auditID`)
+CREATE TABLE Admin (
+  adminID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (adminID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
-CREATE TABLE `Delivery` (
-  `deliveryID` int NOT NULL AUTO_INCREMENT,
-  `deliveryDate` <type>,
-  `packageID` <type>,
-  `learnerID` <type>,
-  `orderID` <type>,
-  `procurementID` <type>,
-  PRIMARY KEY (`deliveryID`)
+CREATE TABLE Delivery (
+  deliveryID int NOT NULL AUTO_INCREMENT,
+  deliveryDate datetime(23),
+  packageID int NOT NULL,
+  learnerID int NOT NULL,
+  orderID int NOT NULL,
+  procurementID int NOT NULL,
+  PRIMARY KEY (deliveryID),
+  FOREIGN KEY (packageID) REFERENCES Package(packageID),
+  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
+  FOREIGN KEY (orderID) REFERENCES Orders(orderID),
+  FOREIGN KEY (procurementID) REFERENCES Procurement(procurementID)
 );
 
-CREATE TABLE `Procurement` (
-  `procurementID` int NOT NULL AUTO_INCREMENT,
-  `userID` <type>,
-  `roleType` <type>,
-  PRIMARY KEY (`procurementID`)
+CREATE TABLE Procurement (
+  procurementID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (procurementID)
+  FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
