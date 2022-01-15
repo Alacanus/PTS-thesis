@@ -1,33 +1,45 @@
 CREATE DATABASE pts;
 
-CREATE TABLE classStatus (
-  classStatusID int NOT NULL AUTO_INCREMENT,
-  coordinatorID int NOT NULL,
-  Cstatus varchar(25),
-  PRIMARY KEY (classStatusID),
-  FOREIGN KEY (coordinatorID) REFERENCES Coordinator(coordinatorID)
-);
+USE pts;
 
-CREATE TABLE AccessLevel (
-  accessID int NOT NULL AUTO_INCREMENT,
-  accessType varchar(64),
+/* ---- Tables without Foreign Key ---- */
+CREATE TABLE TransactionType (
+  transactionTypeID int NOT NULL AUTO_INCREMENT,
   description varchar(64),
-  PRIMARY KEY (accessID)
+  PRIMARY KEY (transactionTypeID)
 );
 
-CREATE TABLE Enrolled (
-  enrollmentID int NOT NULL AUTO_INCREMENT,
-  learnerID int NOT NULL,
-  classID int NOT NULL,
-  accessID int NOT NULL,
-  transcationID int NOT NULL,
-  scheduleID int NOT NULL,
-  PRIMARY KEY (enrollmentID),
-  FOREIGN KEY (accessID) REFERENCES AccessLevel(accessID),
-  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
-  FOREIGN KEY (classID) REFERENCES Class(classID),
-  FOREIGN KEY (transactionID) REFERENCES Transaction(transactionID),
-  FOREIGN KEY (scheduleID) REFERENCES Schedule(scheduleID)
+CREATE TABLE Package (
+  packageID int NOT NULL AUTO_INCREMENT,
+  description varchar(64),
+  PRIMARY KEY (packageID)
+);
+
+CREATE TABLE Questionnaire (
+  questionnaireID int NOT NULL AUTO_INCREMENT,
+  question char(64),
+  answer varchar(96),
+  points float(5),
+  PRIMARY KEY (questionnaireID)
+);
+
+CREATE TABLE Schedules (
+  scheduleID int NOT NULL AUTO_INCREMENT,
+  startDate varchar(16),
+  endDate varchar(16),
+  PRIMARY KEY (scheduleID)
+);
+
+CREATE TABLE ActionType (
+  actionID int NOT NULL AUTO_INCREMENT,
+  actionType char(64),
+  PRIMARY KEY (actionID)
+);
+
+CREATE TABLE PaymentStatus (
+  paymentStatusID int NOT NULL AUTO_INCREMENT,
+  description varchar(64),
+  PRIMARY KEY (paymentStatusID)
 );
 
 CREATE TABLE Blacklist (
@@ -37,17 +49,30 @@ CREATE TABLE Blacklist (
   PRIMARY KEY (blacklistID)
 );
 
-CREATE TABLE Profile (
-  profileID int NOT NULL AUTO_INCREMENT,
-  age char(2),
-  gender char(6),
-  birthday date(10),
-  address char(64),
-  contactno char(64),
-  aboutme varchar(96),
-  creationDate datetime(23),
-  PRIMARY KEY (profileID)
+CREATE TABLE Availability (
+  availID int NOT NULL AUTO_INCREMENT,
+  availableDate varchar(16),
+  availableSlots int(2),
+  PRIMARY KEY (availID)
 );
+
+CREATE TABLE AccessLevel (
+  accessID int NOT NULL AUTO_INCREMENT,
+  accessType varchar(64),
+  description varchar(64),
+  PRIMARY KEY (accessID)
+);
+
+CREATE TABLE Milestone (
+  mileStoneID int NOT NULL AUTO_INCREMENT,
+  descriptoin varchar(50),
+  Mtrigger varchar(25),
+  classID int NOT NULL,
+  earnedID int NOT NULL,
+  PRIMARY KEY (mileStoneID)
+);
+
+/* ---- Users, Audit, & Type of Users Table ---- */
 
 CREATE TABLE Users (
   userID int NOT NULL AUTO_INCREMENT,
@@ -55,15 +80,103 @@ CREATE TABLE Users (
   password char(64),
   firstname char(64),
   lastName char(64),
-  creationDate datetime(23),
-  modifiedDate datetime(23),
+  creationDate varchar(16),
+  modifiedDate varchar(16),
   profileID int NOT NULL,
   blacklistID int NOT NULL,
   auditID int NOT NULL,
-  PRIMARY KEY (userID),
-  FOREIGN KEY (profileID) REFERENCES Profile(profileID),
-  FOREIGN KEY (blacklistID) REFERENCES Blacklist(blacklistID),
-  FOREIGN KEY (auditID) REFERENCES AuditTrail(auditID)
+  PRIMARY KEY (userID)
+);
+
+CREATE TABLE UserProfile (
+  profileID int NOT NULL AUTO_INCREMENT,
+  age char(2),
+  gender char(6),
+  birthday varchar(8),
+  address char(64),
+  contactno char(64),
+  aboutme varchar(96),
+  creationDate varchar(16),
+  PRIMARY KEY (profileID)
+);
+
+CREATE TABLE Instructor (
+  instructorID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (instructorID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Learner (
+  learnerID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (learnerID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Procurement (
+  procurementID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (procurementID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Admin (
+  adminID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (adminID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Coordinator (
+  coordinatorID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  roleType char(64),
+  PRIMARY KEY (coordinatorID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE AuditTrail (
+  auditID int NOT NULL AUTO_INCREMENT,
+  Log char(64),
+  tableName char(64),
+  userID int NOT NULL,
+  actionID int NOT NULL,
+  PRIMARY KEY (auditID),
+  FOREIGN KEY (userID) REFERENCES Users(userID),
+  FOREIGN KEY (actionID) REFERENCES ActionType(actionID)
+);
+
+ALTER TABLE Users ADD CONSTRAINT fk_profileID FOREIGN KEY (profileID) REFERENCES UserProfile(profileID);
+ALTER TABLE Users ADD CONSTRAINT fk_blacklistID FOREIGN KEY (blacklistID) REFERENCES Blacklist(blacklistID);
+ALTER TABLE Users ADD CONSTRAINT fk_auditID FOREIGN KEY (auditID) REFERENCES AuditTrail(auditID);
+
+/* ---- Class Tables ---- */
+
+CREATE TABLE ClassProfile (
+  classProfileID int NOT NULL AUTO_INCREMENT,
+  className varchar(96),
+  classDescription varchar(96),
+  classDate varchar(16),
+  classStatus varchar(25),
+  videoAddress varchar(64),
+  imageAddress varchar(64),
+  modifiedDate varchar(16),
+  equivalentHours varchar(64),
+  skillLevel varchar(64),
+  PRIMARY KEY (classProfileID)
+);
+
+CREATE TABLE classStatus (
+  classStatusID int NOT NULL AUTO_INCREMENT,
+  coordinatorID int NOT NULL,
+  Cstatus varchar(25),
+  PRIMARY KEY (classStatusID),
+  FOREIGN KEY (coordinatorID) REFERENCES Coordinator(coordinatorID)
 );
 
 CREATE TABLE ReviewCards (
@@ -79,34 +192,12 @@ CREATE TABLE ReviewCards (
   FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
-CREATE TABLE Class Profile (
-  classProfileID int NOT NULL AUTO_INCREMENT,
-  className varchar(96),
-  classDescription varchar(96),
-  classDate date(23),
-  classStatus varchar(25),
-  videoAddress varchar(64),
-  imageAddress varchar(64),
-  modifiedDate datetime(23),
-  equivalentHours varchar(64),
-  skillLevel varchar(64),
-  PRIMARY KEY (classProfileID)
-);
-
-CREATE TABLE Instructor (
-  instructorID int NOT NULL AUTO_INCREMENT,
-  userID int NOT NULL,
-  roleType char(64),
-  PRIMARY KEY (instructorID),
-  FOREIGN KEY (userID) REFERENCES Users(userID)
-);
-
-CREATE TABLE Class (
+CREATE TABLE Classes (
   classID int NOT NULL AUTO_INCREMENT,
   className varchar(64),
   classStatus varchar(64),
-  creationDate datetime(23),
-  modefiedDate datetime(23),
+  creationDate varchar(16),
+  modefiedDate varchar(16),
   availabilityID int NOT NULL,
   reviewID int NOT NULL,
   instructorID int NOT NULL,
@@ -116,67 +207,60 @@ CREATE TABLE Class (
   enrollmentID int NOT NULL,
   mileStoneID int NOT NULL,
   testID int NOT NULL,
-  PRIMARY KEY (classID),
-  FOREIGN KEY (availabilityID) REFERENCES Availability(availabilityID),
-  FOREIGN KEY (reviewID) REFERENCES ReviewCards(reviewID),
-  FOREIGN KEY (instructorID) REFERENCES Instructor(instructorID),
-  FOREIGN KEY (classContentID) REFERENCES ClassContent(classContentID),
-  FOREIGN KEY (classProfileID) REFERENCES ClassProfile(classprofileID),
-  FOREIGN KEY (classStatusID) REFERENCES ClassStatus(classStatusID),
-  FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID),
-  FOREIGN KEY (mileStoneID) REFERENCES Milestone(mileStoneID),
-  FOREIGN KEY (testID) REFERENCES Test(testID)
+  PRIMARY KEY (classID)
 );
 
-CREATE TABLE PaymentRequest (
-  payRequestID int NOT NULL AUTO_INCREMENT,
-  amount varchar(64),
-  paymentAddress varchar(64),
-  fileAddress varchar(64),
-  classID int NOT NULL,
-  userID int NOT NULL,
+CREATE TABLE Enrolled (
+  enrollmentID int NOT NULL AUTO_INCREMENT,
   learnerID int NOT NULL,
-  PRIMARY KEY (payRequestID),
-  FOREIGN KEY (classID) REFERENCES Class(classID),
-  FOREIGN KEY (userID) REFERENCES Users(userID),
-  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID)
+  classID int NOT NULL,
+  accessID int NOT NULL,
+  transactionID int NOT NULL,
+  scheduleID int NOT NULL,
+  PRIMARY KEY (enrollmentID)
+);
+
+CREATE TABLE Test (
+  testID int NOT NULL AUTO_INCREMENT,
+  testName char(64),
+  testDescription char(64),
+  testType char(64),
+  meetingLink varchar(64),
+  result char(100),
+  questionnaireID iNT NOT NULL,
+  PRIMARY KEY (testID),
+  FOREIGN KEY (questionnaireID) REFERENCES Questionnaire(questionnaireID)
 );
 
 CREATE TABLE ClassContent (
   classContentID int NOT NULL AUTO_INCREMENT,
   description varchar(64),
-  datePosted datetime(23),
-  dateModified datetime(23),
+  datePosted varchar(16),
+  dateModified varchar(16),
   enrollmentID int NOT NULL,
   meetingID int NOT NULL,
   fileID int NOT NULL,
   classID int NOT NULL,
-  PRIMARY KEY (classContentID),
-  FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID),
-  FOREIGN KEY (meetingID) REFERENCES Meeting(meetingID),
-  FOREIGN KEY (fileID) REFERENCES FileContent(fileID),
-  FOREIGN KEY (classID) REFERENCES Class(classID)
+  PRIMARY KEY (classContentID)
 );
 
-CREATE TABLE Profit (
-  profitID int NOT NULL AUTO_INCREMENT,
-  profitDate datetime(23),
-  profitStatus varchar(96),
-  packageID int NOT NULL,
-  transactionID int NOT NULL,
-  classID int NOT NULL,
-  PRIMARY KEY (profitID),
-  FOREIGN KEY (classID) REFERENCES Class(classID),
-  FOREIGN KEY (packageID) REFERENCES Package(packageID),
-  FOREIGN KEY (transactionID) REFERENCES Transaction(transactionID)
+CREATE TABLE Meeting (
+  meetingID int NOT NULL AUTO_INCREMENT,
+  meetingLink varchar(64),
+  TimeDate varchar(16),
+  learnerID int NOT NULL,
+  instructorID int NOT NULL,
+  PRIMARY KEY (meetingID),
+  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
+  FOREIGN KEY (instructorID) REFERENCES Instructor(instructorID)
 );
 
 CREATE TABLE FileContent (
   fileID int NOT NULL AUTO_INCREMENT,
   fileName varchar(96),
   filePath varchar(96),
-  datePosted datetime(23),
-  dateModified datetime(23),
+  datePosted varchar(16),
+  dateModified varchar(16),
   userID int NOT NULL,
   classContentID int NOT NULL,
   PRIMARY KEY (fileID),
@@ -184,29 +268,9 @@ CREATE TABLE FileContent (
   FOREIGN KEY (classContentID) REFERENCES ClassContent(classContentID)
 );
 
-CREATE TABLE Learner (
-  learnerID int NOT NULL AUTO_INCREMENT,
-  userID int NOT NULL,
-  roleType char(64),
-  PRIMARY KEY (learnerID),
-  FOREIGN KEY (userID) REFERENCES Users(userID)
-);
-
-CREATE TABLE ActionType (
-  actionID int NOT NULL AUTO_INCREMENT,
-  actionType char(64),
-  PRIMARY KEY (actionID)
-);
-
-CREATE TABLE PaymentStatus (
-  paymentStatusID int NOT NULL AUTO_INCREMENT,
-  description varchar(64),
-  PRIMARY KEY (paymentStatusID)
-);
-
-CREATE TABLE Transaction (
+CREATE TABLE Transactions (
   transactionID int NOT NULL AUTO_INCREMENT,
-  dateOfPayment datetime(23),
+  dateOfPayment varchar(16),
   imageAddress char(64),
   paymentStatusID int NOT NULL,
   userID int NOT NULL,
@@ -217,39 +281,54 @@ CREATE TABLE Transaction (
   FOREIGN KEY (transactiontypeID) REFERENCES TransactionType(transactionTypeID)
 );
 
-CREATE TABLE AuditTrail (
-  auditID int NOT NULL AUTO_INCREMENT,
-  Log char(64),
-  tableName char(64),
-  userID int NOT NULL,
-  actionID int NOT NULL,
-  PRIMARY KEY (auditID),
-  FOREIGN KEY (userID) REFERENCES Users(userID),
-  FOREIGN KEY (actionID) REFERENCES ActionType(actionID)
-);
+ALTER TABLE Enrolled ADD CONSTRAINT fk_accessID FOREIGN KEY (accessID) REFERENCES AccessLevel(accessID);
+ALTER TABLE Enrolled ADD CONSTRAINT fk_learnerID FOREIGN KEY (learnerID) REFERENCES Learner(learnerID);
+ALTER TABLE Enrolled ADD CONSTRAINT fk_classID FOREIGN KEY (classID) REFERENCES Classes(classID);
+ALTER TABLE Enrolled ADD CONSTRAINT fk_transactionID FOREIGN KEY (transactionID) REFERENCES Transactions(transactionID);
+ALTER TABLE Enrolled ADD CONSTRAINT fk_scheduleID FOREIGN KEY (scheduleID) REFERENCES Schedules(scheduleID);
 
-CREATE TABLE Coordinator (
-  coordinatorID int NOT NULL AUTO_INCREMENT,
-  userID int NOT NULL,
-  roleType char(64),
-  PRIMARY KEY (coordinatorID),
-  FOREIGN KEY (userID) REFERENCES Users(userID)
-);
+ALTER TABLE Classes ADD CONSTRAINT fk_availID FOREIGN KEY (availID) REFERENCES Availability(availID);
+ALTER TABLE Classes ADD CONSTRAINT fk_reviewID FOREIGN KEY (reviewID) REFERENCES ReviewCards(reviewID);
+ALTER TABLE Classes ADD CONSTRAINT fk_instructorID FOREIGN KEY (instructorID) REFERENCES Instructor(instructorID);
+ALTER TABLE Classes ADD CONSTRAINT fk_classContentID FOREIGN KEY (classContentID) REFERENCES ClassContent(classContentID);
+ALTER TABLE Classes ADD CONSTRAINT fk_classProfileID FOREIGN KEY (classProfileID) REFERENCES ClassProfile(classprofileID);
+ALTER TABLE Classes ADD CONSTRAINT fk_classStatusID FOREIGN KEY (classStatusID) REFERENCES ClassStatus(classStatusID);
+ALTER TABLE Classes ADD CONSTRAINT fk_enrollmentID FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID);
+ALTER TABLE Classes ADD CONSTRAINT fk_milestoneID FOREIGN KEY (mileStoneID) REFERENCES Milestone(mileStoneID);
+ALTER TABLE Classes ADD CONSTRAINT fk_testID FOREIGN KEY (testID) REFERENCES Test(testID);
 
-CREATE TABLE Availability (
-  availablityID int NOT NULL AUTO_INCREMENT,
-  availableDate date(23),
-  availableSlots int(2),
-  PRIMARY KEY (availablityID)
-);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_enrollmentID FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_meetingID FOREIGN KEY (meetingID) REFERENCES Meeting(meetingID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_fileID FOREIGN KEY (fileID) REFERENCES FileContent(fileID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_classID FOREIGN KEY (classID) REFERENCES Classes(classID);
+/* ---- Transactions ---- */
 
-CREATE TABLE Milestone (
-  mileStoneID int NOT NULL AUTO_INCREMENT,
-  descriptoin varchar(50),
-  Mtrigger varchar(25),
+CREATE TABLE PaymentRequest (
+  payRequestID int NOT NULL AUTO_INCREMENT,
+  amount varchar(64),
+  paymentAddress varchar(64),
+  fileAddress varchar(64),
   classID int NOT NULL,
-  earnedID int NOT NULL,
-  PRIMARY KEY (mileStoneID)
+  userID int NOT NULL,
+  learnerID int NOT NULL,
+  PRIMARY KEY (payRequestID),
+  FOREIGN KEY (classID) REFERENCES Classes(classID),
+  FOREIGN KEY (userID) REFERENCES Users(userID),
+  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID)
+);
+
+
+CREATE TABLE Profit (
+  profitID int NOT NULL AUTO_INCREMENT,
+  profitDate varchar(16),
+  profitStatus varchar(96),
+  packageID int NOT NULL,
+  transactionID int NOT NULL,
+  classID int NOT NULL,
+  PRIMARY KEY (profitID),
+  FOREIGN KEY (classID) REFERENCES Classes(classID),
+  FOREIGN KEY (packageID) REFERENCES Package(packageID),
+  FOREIGN KEY (transactionID) REFERENCES Transactions(transactionID)
 );
 
 CREATE TABLE Certificate (
@@ -262,7 +341,7 @@ CREATE TABLE Certificate (
   PRIMARY KEY (certificateID),
   FOREIGN KEY (userID) REFERENCES Users(userID),
   FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
-  FOREIGN KEY (classID) REFERENCES Class(classID),
+  FOREIGN KEY (classID) REFERENCES Classes(classID),
   FOREIGN KEY (earnedID) REFERENCES MileStoneEarned(earnedID)
 );
 
@@ -291,7 +370,7 @@ CREATE TABLE Refund (
 
 CREATE TABLE MileStoneEarned (
   earnedID int NOT NULL AUTO_INCREMENT,
-  dateEarned datetime(23),
+  dateEarned varchar(16),
   learnerID int NOT NULL,
   milestoneID int NOT NULL,
   PRIMARY KEY (earnedID),
@@ -299,59 +378,9 @@ CREATE TABLE MileStoneEarned (
   FOREIGN KEY (milestoneID) REFERENCES Milestone(milestoneID)
 );
 
-CREATE TABLE TransactionType (
-  transactionTypeID int NOT NULL AUTO_INCREMENT,
-  description varchar(64),
-  PRIMARY KEY (transactionTypeID)
-);
-
-CREATE TABLE Package (
-  packageID int NOT NULL AUTO_INCREMENT,
-  description varchar(64),
-  PRIMARY KEY (packageID)
-);
-
-CREATE TABLE Test (
-  testID int NOT NULL AUTO_INCREMENT,
-  testName char(64),
-  testDescription char(64),
-  testType char(64),
-  meetingLink varchar(64),
-  result char(100),
-  questionnaireID iNT NOT NULL,
-  PRIMARY KEY (testID),
-  FOREIGN KEY (questionnaireID) REFERENCES Questionnaire(questionnaireID),
-);
-
-CREATE TABLE Questionnaire (
-  questionnaireID int NOT NULL AUTO_INCREMENT,
-  question char(64),
-  answer varchar(96),
-  points float(5),
-  PRIMARY KEY (questionnaireID)
-);
-
-CREATE TABLE Schedule (
-  scheduleID int NOT NULL AUTO_INCREMENT,
-  startDate datetime(23),
-  endDate datetime(23),
-  PRIMARY KEY (scheduleID)
-);
-
-CREATE TABLE Meeting (
-  meetingID int NOT NULL AUTO_INCREMENT,
-  meetingLink varchar(64),
-  TimeDate datetime(23),
-  learnerID int NOT NULL,
-  instructorID int NOT NULL,
-  PRIMARY KEY (meetingID),
-  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
-  FOREIGN KEY (instructorID) REFERENCES Instructor(instructorID)
-);
-
 CREATE TABLE Orders (
   orderID int NOT NULL AUTO_INCREMENT,
-  dateRequest varchar(25),
+  dateRequest varchar(16),
   numberoforder int(10),
   orderStatus varchar(64),
   packageID int NOT NULL,
@@ -361,21 +390,13 @@ CREATE TABLE Orders (
   PRIMARY KEY (orderID),
   FOREIGN KEY (packageID) REFERENCES Package(packageID),
   FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
-  FOREIGN KEY (classID) REFERENCES Class(classID),
+  FOREIGN KEY (classID) REFERENCES Classes(classID),
   FOREIGN KEY (procurementID) REFERENCES Procurement(procurementID)
-);
-
-CREATE TABLE Admin (
-  adminID int NOT NULL AUTO_INCREMENT,
-  userID int NOT NULL,
-  roleType char(64),
-  PRIMARY KEY (adminID),
-  FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
 CREATE TABLE Delivery (
   deliveryID int NOT NULL AUTO_INCREMENT,
-  deliveryDate datetime(23),
+  deliveryDate varchar(16),
   packageID int NOT NULL,
   learnerID int NOT NULL,
   orderID int NOT NULL,
@@ -386,12 +407,3 @@ CREATE TABLE Delivery (
   FOREIGN KEY (orderID) REFERENCES Orders(orderID),
   FOREIGN KEY (procurementID) REFERENCES Procurement(procurementID)
 );
-
-CREATE TABLE Procurement (
-  procurementID int NOT NULL AUTO_INCREMENT,
-  userID int NOT NULL,
-  roleType char(64),
-  PRIMARY KEY (procurementID)
-  FOREIGN KEY (userID) REFERENCES Users(userID)
-);
-
