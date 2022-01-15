@@ -9,7 +9,7 @@ if(isset($_POST["submit"])){
 
     //insta signupctr class
 
-    include "dbHandler.php";
+    include "../../Model/dbConnections/dbHandler.php";
     include "../../Controller/Classes/signupClass.php";
     include "../../Controller/Authorize/signupCtr.php";
 

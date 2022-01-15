@@ -3,7 +3,7 @@ session_start();
 ?>
 <div class ="Loginindex">
     <h4>Login</h4>
-    <form action="../Model/dbConnections/dbconLogin.php" method="post">
+    <form action="../Model/Includes/dbconLogin.php" method="post">
         <input type="text" name="uid" placeholder="Username">
         <input type="password" name="pwd" placeholder="Password">
         <br>
@@ -14,7 +14,7 @@ session_start();
 
 <div class ="Regindex">
     <h4>Sing up</h4>
-    <form action="../Model/dbConnections/dbconReg.php" method="post">
+    <form action="../Model/Includes/dbconReg.php" method="post">
         <input type="text" name="uid" placeholder="Username">
         <input type="password" name="pwd" placeholder="Password">
         <input type="password" name="pwdx2" placeholder="Repeat Password">
