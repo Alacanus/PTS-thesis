@@ -3,7 +3,7 @@ include "../Model/Includes/getConVar.php" ?>
 <html>
   <head><title>Front -End</title></head>
   <body>
-    <p><?php echo 'Hello Cleint,'; ?>
+    <p><?php echo 'Hello Cleint, im server'; ?>
     <br><?php echo 'sleep ends here GGW'?></p>
     <p><?php echo 'User Real IP - '.getUserIpAddr();?></p><br>
   </body>
