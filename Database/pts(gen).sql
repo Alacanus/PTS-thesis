@@ -198,7 +198,7 @@ CREATE TABLE Classes (
   classStatus varchar(64),
   creationDate varchar(16),
   modefiedDate varchar(16),
-  availabilityID int NOT NULL,
+  availID int NOT NULL,
   reviewID int NOT NULL,
   instructorID int NOT NULL,
   classContentID int NOT NULL,
@@ -297,10 +297,10 @@ ALTER TABLE Classes ADD CONSTRAINT fk_enrollmentID FOREIGN KEY (enrollmentID) RE
 ALTER TABLE Classes ADD CONSTRAINT fk_milestoneID FOREIGN KEY (mileStoneID) REFERENCES Milestone(mileStoneID);
 ALTER TABLE Classes ADD CONSTRAINT fk_testID FOREIGN KEY (testID) REFERENCES Test(testID);
 
-ALTER TABLE ClassContent ADD CONSTRAINT fk_enrollmentID FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID);
-ALTER TABLE ClassContent ADD CONSTRAINT fk_meetingID FOREIGN KEY (meetingID) REFERENCES Meeting(meetingID);
-ALTER TABLE ClassContent ADD CONSTRAINT fk_fileID FOREIGN KEY (fileID) REFERENCES FileContent(fileID);
-ALTER TABLE ClassContent ADD CONSTRAINT fk_classID FOREIGN KEY (classID) REFERENCES Classes(classID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_enrollment_ID FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_meeting_ID FOREIGN KEY (meetingID) REFERENCES Meeting(meetingID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_file_ID FOREIGN KEY (fileID) REFERENCES FileContent(fileID);
+ALTER TABLE ClassContent ADD CONSTRAINT fk_class_ID FOREIGN KEY (classID) REFERENCES Classes(classID);
 /* ---- Transactions ---- */
 
 CREATE TABLE PaymentRequest (
