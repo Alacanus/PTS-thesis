@@ -75,16 +75,21 @@ CREATE TABLE Milestone (
 /* ---- Users, Audit, & Type of Users Table ---- */
 
 CREATE TABLE Users (
-  userID int NOT NULL AUTO_INCREMENT,
-  email char(64),
-  password char(64),
-  firstname char(64),
-  lastName char(64),
-  creationDate varchar(16),
-  modifiedDate varchar(16),
-  profileID int NOT NULL,
-  blacklistID int NOT NULL,
-  auditID int NOT NULL,
+  userID int AUTO_INCREMENT,
+  username char(64) DEFAULT NULL,
+  email char(64) DEFAULT NULL,
+  password char(64) DEFAULT NULL,
+  firstname char(64) DEFAULT NULL,
+  lastName char(64) DEFAULT NULL,
+  profileID int(11) NOT NULL,
+  blacklistID int(11) NOT NULL,
+  auditID int(11) NOT NULL,
+  active tinyint(1) DEFAULT 0,
+  activation_code varchar(255) NOT NULL,
+  activation_expiry datetime NOT NULL,
+  activated_at datetime DEFAULT NULL,
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (userID)
 );
 
@@ -331,7 +336,17 @@ CREATE TABLE Profit (
   FOREIGN KEY (transactionID) REFERENCES Transactions(transactionID)
 );
 
-CREATE TABLE Certificate (
+CREATE TABLE MileStoneEarned (
+  earnedID int NOT NULL AUTO_INCREMENT,
+  dateEarned varchar(16),
+  learnerID int NOT NULL,
+  milestoneID int NOT NULL,
+  PRIMARY KEY (earnedID),
+  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
+  FOREIGN KEY (milestoneID) REFERENCES Milestone(milestoneID)
+);
+
+CREATE TABLE Certificates (
   certificateID int NOT NULL AUTO_INCREMENT,
   description varchar(50),
   userID int NOT NULL,
@@ -366,16 +381,6 @@ CREATE TABLE Refund (
   PRIMARY KEY (refundID),
   FOREIGN KEY (userID) REFERENCES Users(userID),
   FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID)
-);
-
-CREATE TABLE MileStoneEarned (
-  earnedID int NOT NULL AUTO_INCREMENT,
-  dateEarned varchar(16),
-  learnerID int NOT NULL,
-  milestoneID int NOT NULL,
-  PRIMARY KEY (earnedID),
-  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
-  FOREIGN KEY (milestoneID) REFERENCES Milestone(milestoneID)
 );
 
 CREATE TABLE Orders (
