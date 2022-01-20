@@ -24,6 +24,7 @@ session_start();
     </form>
 </div>
 
+
 <div>
 <button type="submit" name="submit" action="../../Model/Includes/logoutinc.php">LOGout</button>
 </div>

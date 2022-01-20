@@ -6,7 +6,7 @@ class Login extends Hanlder {
 
 
     protected  function getUser($uid, $pwd){
-        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ? or users_email = ?;');
+        $stmt = $this->connect()->prepare('SELECT password FROM users WHERE username = ? or email = ?;');
 
 
         if(!$stmt->execute(array($uid, $pwd))){
@@ -22,13 +22,13 @@ class Login extends Hanlder {
         }
 
         $pwdHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $checkpwd = password_verify($pwd, $pwdHashed[0]["users_pwd"]);
+        $checkpwd = password_verify($pwd, $pwdHashed[0]["password"]);
         if($checkpwd == false){
             $stmt = null;
             header("location: ../../index.php?error=wroungpassword");
             exit();
         }elseif($checkpwd == true){
-            $stmt = $this->connect()->prepare('SELECT * FROM users WHERE users_uid = ? or users_email = ? AND users_pwd = ?;');
+            $stmt = $this->connect()->prepare('SELECT * FROM users WHERE username = ? or email = ? AND password = ?;');
 
             if(!$stmt->execute(array($uid, $uid, $pwd))){
                 $stmt = null;
