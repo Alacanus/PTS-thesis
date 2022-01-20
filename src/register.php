@@ -37,12 +37,19 @@ if (is_post_request()) {
         ]);
     }
 
-    if (register_user($inputs['email'], $inputs['username'], $inputs['password'], $inputs['fname'], $inputs['lname'])) {
+    $activation_code = generate_activation_code();
+
+    if(register_user($inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
+        //send email
+
+        send_activation_email($inputs['email'], $activation_code);
+
         redirect_with_message(
             'login.php',
-            'Your account has been created successfully. Please login here.'
+            'please check your email to activate your account before signing in'
         );
-
+    }elseif (is_get_request()){
+        [$errors, $inputs] = session_flash('errors', 'inputs');
     }
 
 } else if (is_get_request()) {
