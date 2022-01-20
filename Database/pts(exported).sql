@@ -520,18 +520,24 @@ CREATE TABLE `userprofile` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` int(11) NOT NULL,
-  `email` char(64) DEFAULT NULL,
-  `password` char(64) DEFAULT NULL,
-  `firstname` char(64) DEFAULT NULL,
-  `lastName` char(64) DEFAULT NULL,
-  `creationDate` varchar(16) DEFAULT NULL,
-  `modifiedDate` varchar(16) DEFAULT NULL,
-  `profileID` int(11) NOT NULL,
-  `blacklistID` int(11) NOT NULL,
-  `auditID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE 'users' (
+  'userID' int auto_increment PRIMARY KEY,
+  'username' char(64) DEFAULT NULL,
+  'email' char(64) DEFAULT NULL,
+  'password' char(64) DEFAULT NULL,
+  'firstname' char(64) DEFAULT NULL,
+  'lastName' char(64) DEFAULT NULL,
+  'profileID' int(11) NOT NULL,
+  'blacklistID' int(11) NOT NULL,
+  'auditID' int(11) NOT NULL,
+  'active' tinyint(1) DEFAULT 0,
+  'activation_code' varchar(255) NOT NULL,
+  'activation_expiry' datetime NOT NULL,
+  'activated_at' datetime DEFAULT NULL,
+  'created_at' timestamp NOT NULL DEFAULT current_timestamp(),
+  'updated_at' datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+
+); ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
