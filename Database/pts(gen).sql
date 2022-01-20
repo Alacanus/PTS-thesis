@@ -25,8 +25,8 @@ CREATE TABLE Questionnaire (
 
 CREATE TABLE Schedules (
   scheduleID int NOT NULL AUTO_INCREMENT,
-  startDate varchar(16),
-  endDate varchar(16),
+  startDate datetime NULL,
+  endDate datetime NULL,
   PRIMARY KEY (scheduleID)
 );
 
@@ -51,7 +51,8 @@ CREATE TABLE Blacklist (
 
 CREATE TABLE Availability (
   availID int NOT NULL AUTO_INCREMENT,
-  availableDate varchar(16),
+  availableDate date NULL,
+  availableTime timestamp NULL,
   availableSlots int(2),
   PRIMARY KEY (availID)
 );
@@ -75,16 +76,21 @@ CREATE TABLE Milestone (
 /* ---- Users, Audit, & Type of Users Table ---- */
 
 CREATE TABLE Users (
-  userID int NOT NULL AUTO_INCREMENT,
-  email char(64),
-  password char(64),
-  firstname char(64),
-  lastName char(64),
-  creationDate varchar(16),
-  modifiedDate varchar(16),
-  profileID int NOT NULL,
-  blacklistID int NOT NULL,
-  auditID int NOT NULL,
+  userID int AUTO_INCREMENT,
+  username char(64) DEFAULT NULL,
+  email char(64) DEFAULT NULL,
+  password char(64) DEFAULT NULL,
+  firstname char(64) DEFAULT NULL,
+  lastName char(64) DEFAULT NULL,
+  profileID int(11) NOT NULL,
+  blacklistID int(11) NOT NULL,
+  auditID int(11) NOT NULL,
+  active tinyint(1) DEFAULT 0,
+  activation_code varchar(255) NOT NULL,
+  activation_expiry datetime NOT NULL,
+  activated_at datetime DEFAULT NULL,
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (userID)
 );
 
@@ -92,11 +98,11 @@ CREATE TABLE UserProfile (
   profileID int NOT NULL AUTO_INCREMENT,
   age char(2),
   gender char(6),
-  birthday varchar(8),
+  birthday date NULL,
   address char(64),
   contactno char(64),
   aboutme varchar(96),
-  creationDate varchar(16),
+  creationDate datetime,
   PRIMARY KEY (profileID)
 );
 
@@ -161,7 +167,7 @@ CREATE TABLE ClassProfile (
   classProfileID int NOT NULL AUTO_INCREMENT,
   className varchar(96),
   classDescription varchar(96),
-  classDate varchar(16),
+  classDate datetime NULL,
   classStatus varchar(25),
   videoAddress varchar(64),
   imageAddress varchar(64),
@@ -196,8 +202,8 @@ CREATE TABLE Classes (
   classID int NOT NULL AUTO_INCREMENT,
   className varchar(64),
   classStatus varchar(64),
-  creationDate varchar(16),
-  modefiedDate varchar(16),
+  creationDate datetime NULL DEFAULT current_timestamp(),
+  modefiedDate datetime NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   availID int NOT NULL,
   reviewID int NOT NULL,
   instructorID int NOT NULL,
@@ -235,8 +241,8 @@ CREATE TABLE Test (
 CREATE TABLE ClassContent (
   classContentID int NOT NULL AUTO_INCREMENT,
   description varchar(64),
-  datePosted varchar(16),
-  dateModified varchar(16),
+  datePosted datetime NULL DEFAULT current_timestamp(),
+  dateModified datetime NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   enrollmentID int NOT NULL,
   meetingID int NOT NULL,
   fileID int NOT NULL,
@@ -247,7 +253,7 @@ CREATE TABLE ClassContent (
 CREATE TABLE Meeting (
   meetingID int NOT NULL AUTO_INCREMENT,
   meetingLink varchar(64),
-  TimeDate varchar(16),
+  TimeDate datetime NULL,
   learnerID int NOT NULL,
   instructorID int NOT NULL,
   PRIMARY KEY (meetingID),
@@ -259,8 +265,8 @@ CREATE TABLE FileContent (
   fileID int NOT NULL AUTO_INCREMENT,
   fileName varchar(96),
   filePath varchar(96),
-  datePosted varchar(16),
-  dateModified varchar(16),
+  datePosted datetime NULL DEFAULT current_timestamp(),
+  dateModified datetime NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   userID int NOT NULL,
   classContentID int NOT NULL,
   PRIMARY KEY (fileID),
@@ -331,7 +337,17 @@ CREATE TABLE Profit (
   FOREIGN KEY (transactionID) REFERENCES Transactions(transactionID)
 );
 
-CREATE TABLE Certificate (
+CREATE TABLE MileStoneEarned (
+  earnedID int NOT NULL AUTO_INCREMENT,
+  dateEarned varchar(16),
+  learnerID int NOT NULL,
+  milestoneID int NOT NULL,
+  PRIMARY KEY (earnedID),
+  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
+  FOREIGN KEY (milestoneID) REFERENCES Milestone(milestoneID)
+);
+
+CREATE TABLE Certificates (
   certificateID int NOT NULL AUTO_INCREMENT,
   description varchar(50),
   userID int NOT NULL,
@@ -368,16 +384,6 @@ CREATE TABLE Refund (
   FOREIGN KEY (enrollmentID) REFERENCES Enrolled(enrollmentID)
 );
 
-CREATE TABLE MileStoneEarned (
-  earnedID int NOT NULL AUTO_INCREMENT,
-  dateEarned varchar(16),
-  learnerID int NOT NULL,
-  milestoneID int NOT NULL,
-  PRIMARY KEY (earnedID),
-  FOREIGN KEY (learnerID) REFERENCES Learner(learnerID),
-  FOREIGN KEY (milestoneID) REFERENCES Milestone(milestoneID)
-);
-
 CREATE TABLE Orders (
   orderID int NOT NULL AUTO_INCREMENT,
   dateRequest varchar(16),
@@ -396,7 +402,7 @@ CREATE TABLE Orders (
 
 CREATE TABLE Delivery (
   deliveryID int NOT NULL AUTO_INCREMENT,
-  deliveryDate varchar(16),
+  deliveryDate datetime NULL,
   packageID int NOT NULL,
   learnerID int NOT NULL,
   orderID int NOT NULL,
