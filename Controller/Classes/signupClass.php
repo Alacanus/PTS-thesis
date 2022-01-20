@@ -6,7 +6,7 @@ class Signup extends Hanlder {
 
 
     protected  function setUser($uid, $pwd, $email){
-        $stmt = $this->connect()->prepare('INSERT INTO users (users_uid, users_pwd, users_email)VALUES (?,?,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO users (username, password, email)VALUES (?,?,?);');
 
 
         $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
@@ -21,7 +21,7 @@ class Signup extends Hanlder {
     }
      
     protected  function checkuser($uid, $email){
-        $stmt = $this->connect()->prepare('SELECT users_uid FROM users WHERE users_uid = ? or users_email = ?;');
+        $stmt = $this->connect()->prepare('SELECT username FROM users WHERE username = ? or email = ?;');
 
         if(!$stmt->execute(array($uid, $email))){
             $stmt = null;
