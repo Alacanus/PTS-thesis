@@ -1,5 +1,6 @@
 <?php
 //check post
+
 if(isset($_POST["submit"])){
     //get data
     $uid = $_POST["uid"];
