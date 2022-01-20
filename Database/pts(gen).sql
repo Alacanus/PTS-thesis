@@ -25,8 +25,8 @@ CREATE TABLE Questionnaire (
 
 CREATE TABLE Schedules (
   scheduleID int NOT NULL AUTO_INCREMENT,
-  startDate varchar(16),
-  endDate varchar(16),
+  startDate datetime NULL,
+  endDate datetime NULL,
   PRIMARY KEY (scheduleID)
 );
 
@@ -51,7 +51,8 @@ CREATE TABLE Blacklist (
 
 CREATE TABLE Availability (
   availID int NOT NULL AUTO_INCREMENT,
-  availableDate varchar(16),
+  availableDate date NULL,
+  availableTime timestamp NULL,
   availableSlots int(2),
   PRIMARY KEY (availID)
 );
@@ -97,11 +98,11 @@ CREATE TABLE UserProfile (
   profileID int NOT NULL AUTO_INCREMENT,
   age char(2),
   gender char(6),
-  birthday varchar(8),
+  birthday date NULL,
   address char(64),
   contactno char(64),
   aboutme varchar(96),
-  creationDate varchar(16),
+  creationDate datetime,
   PRIMARY KEY (profileID)
 );
 
@@ -166,7 +167,7 @@ CREATE TABLE ClassProfile (
   classProfileID int NOT NULL AUTO_INCREMENT,
   className varchar(96),
   classDescription varchar(96),
-  classDate varchar(16),
+  classDate datetime NULL,
   classStatus varchar(25),
   videoAddress varchar(64),
   imageAddress varchar(64),
@@ -201,8 +202,8 @@ CREATE TABLE Classes (
   classID int NOT NULL AUTO_INCREMENT,
   className varchar(64),
   classStatus varchar(64),
-  creationDate varchar(16),
-  modefiedDate varchar(16),
+  creationDate datetime NULL current_timestamp(),
+  modefiedDate datetime NULL current_timestamp() ON UPDATE current_timestamp(),
   availID int NOT NULL,
   reviewID int NOT NULL,
   instructorID int NOT NULL,
@@ -240,8 +241,8 @@ CREATE TABLE Test (
 CREATE TABLE ClassContent (
   classContentID int NOT NULL AUTO_INCREMENT,
   description varchar(64),
-  datePosted varchar(16),
-  dateModified varchar(16),
+  datePosted datetime NULL current_timestamp(),
+  dateModified datetime NULL current_timestamp() ON UPDATE current_timestamp(),
   enrollmentID int NOT NULL,
   meetingID int NOT NULL,
   fileID int NOT NULL,
@@ -252,7 +253,7 @@ CREATE TABLE ClassContent (
 CREATE TABLE Meeting (
   meetingID int NOT NULL AUTO_INCREMENT,
   meetingLink varchar(64),
-  TimeDate varchar(16),
+  TimeDate datetime NULL,
   learnerID int NOT NULL,
   instructorID int NOT NULL,
   PRIMARY KEY (meetingID),
@@ -264,8 +265,8 @@ CREATE TABLE FileContent (
   fileID int NOT NULL AUTO_INCREMENT,
   fileName varchar(96),
   filePath varchar(96),
-  datePosted varchar(16),
-  dateModified varchar(16),
+  datePosted datetime NULL current_timestamp(),
+  dateModified datetime NULL current_timestamp() ON UPDATE current_timestamp(),
   userID int NOT NULL,
   classContentID int NOT NULL,
   PRIMARY KEY (fileID),
@@ -401,7 +402,7 @@ CREATE TABLE Orders (
 
 CREATE TABLE Delivery (
   deliveryID int NOT NULL AUTO_INCREMENT,
-  deliveryDate varchar(16),
+  deliveryDate datetime NULL,
   packageID int NOT NULL,
   learnerID int NOT NULL,
   orderID int NOT NULL,
