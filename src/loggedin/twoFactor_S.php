@@ -32,6 +32,7 @@ if (is_post_request()) {
 
     if(registred_user_auth($inputs['twofactorcode'], $_SESSION['activation_code'])){
         //code passed
+        //add prev
         redirect_with_message(
             'index.php',
             'please check your email to activate your account before signing in'
