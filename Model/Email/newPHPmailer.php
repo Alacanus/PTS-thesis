@@ -4,9 +4,11 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-require 'C:\xampp\htdocs\PTS-thesis\PHPMailer\src\Exception.php';
-require 'C:\xampp\htdocs\PTS-thesis\PHPMailer\src\PHPMailer.php';
-require 'C:\xampp\htdocs\PTS-thesis\PHPMailer\src\SMTP.php';
+
+// require '..\..\..\..\..\src\Exception.php';
+require __DIR__ . '/../../PHPMailer/src/Exception.php';
+require __DIR__ . '/../../PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/../../PHPMailer/src/SMTP.php';
 
 //Create an instance; passing `true` enables exceptions
 

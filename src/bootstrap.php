@@ -12,9 +12,10 @@ require_once __DIR__ . '/libs/filter.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-require 'C:\xampp\htdocs\PTS-thesis\PHPMailer\src\Exception.php';
-require 'C:\xampp\htdocs\PTS-thesis\PHPMailer\src\PHPMailer.php';
-require 'C:\xampp\htdocs\PTS-thesis\PHPMailer\src\SMTP.php';
+
+require __DIR__ . '/../PHPMailer/src/Exception.php';
+require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer/src/SMTP.php';
 
 function generate_activation_code(): string
 {
@@ -25,7 +26,7 @@ function send_activation_email(string $email, string $activation_code):Void
 {
 
     //create the activation link
-    $activation_link = APP_URL . "public/activate.php?email=$email&activation_code=$activation_code";
+    $activation_link = APP_URL . "/public/activate.php?email=$email&activation_code=$activation_code";
 
 
     //set email subject & body
@@ -76,7 +77,7 @@ function send_activation_email(string $email, string $activation_code):Void
 }
 
 function delete_user_by_id(int $userID, int $active = 0){
-    $sql = 'DELETE FROM users WHERE userID =:id and activate=:active';
+    $sql = 'DELETE FROM users WHERE userID =:id and active=:active';
 
     $statement = db()->prepare($sql);
     $statement->bindValue('id', $userID, PDO::PARAM_INT);
@@ -84,34 +85,6 @@ function delete_user_by_id(int $userID, int $active = 0){
 
     return $statement->execute();
 }
-
-// function find_unverified_user(string $activation_code, string $email){
-//     $sql = 'SELECT userID, activation_code, activation_expiry < now() as expired FROM
-//     users WHERE active=0 AND email:email';
-
-//     $statement = db()->prepare($sql);
-
-//     $statement->bindValue(':email', $email);
-//     $statement->execute();
-
-//     $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-//     if($user){
-//         //already expired, delete
-//         if((int)$user['expired'] === 1) {
-//             delete_user_by_id($user['id']);
-//             return null;
-//         }
-//         //verify passowrd
-
-//         if(password_verify($activation_code, $user['activation_code'])){
-//             return $user;
-//         }
-//     }
-
-//     return null;
-// }
-
 function find_unverified_user(string $activation_code, string $email)
 {
 
@@ -128,12 +101,11 @@ function find_unverified_user(string $activation_code, string $email)
 
     if ($user) {
 
-        $dtA = new DateTime($user['expired']);
+        $dtA = $user['expired'];
         $dtB = new DateTime();
-        echo $dtA > $dtB ? "A is later" : "A is equal or earlier" ;
         // already expired, delete the in active user with expired activation code
-        if ($dtA < $dtB) {
-            delete_user_by_id($user['id']);
+        if ($dtA > $dtB) {
+            delete_user_by_id($user['userID']);
             return null;
         }
         // verify the password
