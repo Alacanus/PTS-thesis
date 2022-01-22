@@ -30,7 +30,10 @@ if (is_post_request()) {
         ]);
     }
     // login successfully
-    redirect_to('index.php');
+    $activation_code = generate_activation_code();
+    send_authentication_email($_SESSION['userEmail'], 'twofacotr', $activation_code);
+    redirect_to('twoFactor.php');
+
 
 } else if (is_get_request()) {
     [$errors, $inputs] = session_flash('errors', 'inputs');

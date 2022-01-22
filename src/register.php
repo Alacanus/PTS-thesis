@@ -36,13 +36,12 @@ if (is_post_request()) {
             'errors' => $errors
         ]);
     }
-
     $activation_code = generate_activation_code();
-
     if(register_user($inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
         //send email
+    
 
-        send_activation_email($inputs['email'], $activation_code);
+        send_authentication_email($inputs['email'], 'register', $activation_code);
 
         redirect_with_message(
             'login.php',

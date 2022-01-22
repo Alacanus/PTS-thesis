@@ -58,7 +58,7 @@ function login(string $username, string $password):bool{
         //set session details
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_id'] = $user['userID'];
-        // $_SESSION['blacklist_id'] = $user['blacklistID'];
+        $_SESSION['userEmail'] = $user['email'];
         // $_SESSION['audit_id'] = $user['auditID'];
         //$_SESSION['user_id'] = $user['id'];
 
@@ -95,3 +95,5 @@ function current_user(){
 
     return null;
 }
+
+

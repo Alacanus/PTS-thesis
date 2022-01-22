@@ -22,22 +22,28 @@ function generate_activation_code(): string
     return bin2hex(random_bytes(16));
 }
 
-function send_activation_email(string $email, string $activation_code):Void
+
+
+function send_authentication_email(string $email, string $options ,$activation_code):Void
 {
-
-    //create the activation link
-    $activation_link = APP_URL . "/public/activate.php?email=$email&activation_code=$activation_code";
-
-
-    //set email subject & body
+    if($options == 'register'){
+        $activation_link = APP_URL . "/public/activate.php?email=$email&activation_code=$activation_code";
     $subject = 'PTS activation Email';
-    $message = <<<MESSAGE
+        $message = <<<MESSAGE
         Hello,
         Please click on the following link to activate your account:
         $activation_link
         MESSAGE;
-
-
+    }elseif($options == 'twofacotr'){
+    $subject = "PTS two factor code";
+        $message = <<<MESSAGE
+        Hello,
+        Please use the following code to access your account:
+        $activation_code
+        MESSAGE;
+        $_SESSION['activation_code'] = $activation_code;
+    }
+    
     //send the email
 
     try {
