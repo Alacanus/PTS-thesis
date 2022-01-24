@@ -1,5 +1,7 @@
 <?php
 require __DIR__ . '/../../config/database.php';
+const APP_URL = 'http://localhost/PTS-thesis';
+const SENDER_EMAIL_ADDRESS = 'no-reply@email.com';
 function db(): PDO
 {
     static $pdo;

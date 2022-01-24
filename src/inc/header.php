@@ -9,6 +9,7 @@
     <!--<link rel="stylesheet" type="text/css" href="/src/css/normalize.css">-->
     <link rel="stylesheet" type="text/css" href="/src/css/grid.css">
     <link rel="stylesheet" type="text/css" href="/src/css/ionicons.min.css">
+
     <link rel="stylesheet" type="text/css" href="/src/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/src/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

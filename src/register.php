@@ -1,5 +1,7 @@
 <?php
-
+if (is_user_logged_in()) {
+    redirect_to('index.php');
+}
 $errors = [];
 $inputs = [];
 
@@ -34,13 +36,19 @@ if (is_post_request()) {
             'errors' => $errors
         ]);
     }
+    $activation_code = generate_activation_code();
+    if(register_user($inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
+        //send email
+    
 
-    if (register_user($inputs['email'], $inputs['username'], $inputs['password'], $inputs['fname'], $inputs['lname'])) {
+        send_authentication_email($inputs['email'], 'register', $activation_code);
+
         redirect_with_message(
             'login.php',
-            'Your account has been created successfully. Please login here.'
+            'please check your email to activate your account before signing in'
         );
-
+    }elseif (is_get_request()){
+        [$errors, $inputs] = session_flash('errors', 'inputs');
     }
 
 } else if (is_get_request()) {
