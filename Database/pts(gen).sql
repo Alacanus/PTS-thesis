@@ -157,7 +157,7 @@ CREATE TABLE AuditTrail (
   FOREIGN KEY (actionID) REFERENCES ActionType(actionID)
 );
 
-ALTER TABLE Users ADD CONSTRAINT fk_userID FOREIGN KEY (userID) REFERENCES Users(userID);
+ALTER TABLE UserProfile ADD CONSTRAINT fk_userID FOREIGN KEY (userID) REFERENCES Users(userID);
 ALTER TABLE Users ADD CONSTRAINT fk_blacklistID FOREIGN KEY (blacklistID) REFERENCES Blacklist(blacklistID);
 ALTER TABLE Users ADD CONSTRAINT fk_auditID FOREIGN KEY (auditID) REFERENCES AuditTrail(auditID);
 
