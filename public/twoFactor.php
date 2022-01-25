@@ -13,7 +13,7 @@ require_login();
 <h2>Hello <?= current_user() ?></h2>
 <br>
 <h4>please enter two factor authentication code</h4>
-    <form action="twoFactor.php" method="post">
+    <form id="form" action="twoFactor.php" method="post">
     <div>
         <label for="twofactorcode">Two Factor:</label>
         <input type="text" name="twofactorcode" id="twofactorcode" value="<?= $inputs['twofactorcode'] ?? '' ?>"

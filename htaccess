@@ -1,4 +1,12 @@
-DirectoryIndex /public/register.php
+<Directory />
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
+DirectoryIndex ../public/register.php
+ErrorDocument 404 /404.php
+
 <IfModule mod_rewrite.c>
     RewriteEngine on
     RewriteBase /

@@ -4,9 +4,10 @@ require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/register.php';
 ?>
 
-<?php view('header', ['title' => 'Register']) ?>
+<?php view('header', ['title' => 'Register']);
+?>
 
-<form action="register.php" method="post">
+<form id="form" action="register.php" method="post">
     <h1>Sign Up</h1>
 
     <div>
@@ -61,7 +62,7 @@ require __DIR__ . '/../src/register.php';
         <small><?= $errors['agree'] ?? '' ?></small>
     </div>
 
-    <button type="submit">Register</button>
+    <button type="submit" name="regbtn" onsubmit="regbtn.disabled = true; return true">Register</button>
 
     <footer>Already a member? <a href="login.php">Login here</a></footer>
 

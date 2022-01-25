@@ -9,6 +9,7 @@ $errors = [];
 
 
 if (is_post_request()) {
+    
 
     [$inputs, $errors] = filter($_POST, [
         'username' => 'string | required',
@@ -19,20 +20,21 @@ if (is_post_request()) {
         redirect_with('login.php', ['errors' => $errors, 'inputs' => $inputs]);
     }
 
+    
+    if (login($inputs['username'], $inputs['password'])) {
+        // login successfully
+            $activation_code = generate_activation_code();
+            send_authentication_email($_SESSION['userEmail'], 'twofacotr', $activation_code);
+            redirect_to('twoFactor.php');
+        
+    }
     // if login fails
-    if (!login($inputs['username'], $inputs['password'])) {
-
-        $errors['login'] = 'Invalid username or password';
-
+    $errors['login'] = 'Invalid username or password';
         redirect_with('login.php', [
             'errors' => $errors,
             'inputs' => $inputs
         ]);
-    }
-    // login successfully
-    $activation_code = generate_activation_code();
-    send_authentication_email($_SESSION['userEmail'], 'twofacotr', $activation_code);
-    redirect_to('twoFactor.php');
+
 
 
 } else if (is_get_request()) {

@@ -73,12 +73,12 @@ function send_authentication_email(string $email, string $options ,$activation_c
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $message;
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     
         $mail->send();
-        echo 'Message has been sent';
+        echo "<script>alert('Message has been sent');</script>";
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "<script>alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}');</script>";
     }
 }
 
