@@ -1,15 +1,10 @@
-<Directory />
-    Options FollowSymLinks
-    AllowOverride All
-    Order allow,deny
-    Allow from all
-</Directory>
-DirectoryIndex ../public/register.php
+Options -MultiViews
+DirectoryIndex /public/register.php index.php
 ErrorDocument 404 /404.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine on
     RewriteBase /
     RewriteRule (.*) public/$1 [L]
-    RewriteRule . /index.php[L]
+    RewriteRule . /register.php[L]
 </IfModule>
