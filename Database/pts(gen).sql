@@ -75,25 +75,6 @@ CREATE TABLE Milestone (
 
 /* ---- Users, Audit, & Type of Users Table ---- */
 
-CREATE TABLE Users (
-  userID int AUTO_INCREMENT,
-  username char(64) DEFAULT NULL,
-  email char(64) DEFAULT NULL,
-  password char(64) DEFAULT NULL,
-  firstname char(64) DEFAULT NULL,
-  lastName char(64) DEFAULT NULL,
-  profileID int(11) NOT NULL,
-  blacklistID int(11) NOT NULL,
-  auditID int(11) NOT NULL,
-  active tinyint(1) DEFAULT 0,
-  activation_code varchar(255) NOT NULL,
-  activation_expiry datetime NOT NULL,
-  activated_at datetime DEFAULT NULL,
-  created_at timestamp NOT NULL DEFAULT current_timestamp(),
-  updated_at datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (userID)
-);
-
 CREATE TABLE UserProfile (
   profileID int NOT NULL AUTO_INCREMENT,
   age char(2),
@@ -103,7 +84,26 @@ CREATE TABLE UserProfile (
   contactno char(64),
   aboutme varchar(96),
   creationDate datetime,
+  userID int NOT NULL,
   PRIMARY KEY (profileID)
+);
+
+CREATE TABLE Users (
+  userID int AUTO_INCREMENT,
+  username char(64) DEFAULT NULL,
+  email char(64) DEFAULT NULL,
+  password char(64) DEFAULT NULL,
+  firstname char(64) DEFAULT NULL,
+  lastName char(64) DEFAULT NULL,
+  blacklistID int(11) NOT NULL,
+  auditID int(11) NOT NULL,
+  active tinyint(1) DEFAULT 0,
+  activation_code varchar(255) NOT NULL,
+  activation_expiry datetime NOT NULL,
+  activated_at datetime DEFAULT NULL,
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (userID)
 );
 
 CREATE TABLE Instructor (
@@ -157,7 +157,7 @@ CREATE TABLE AuditTrail (
   FOREIGN KEY (actionID) REFERENCES ActionType(actionID)
 );
 
-ALTER TABLE Users ADD CONSTRAINT fk_profileID FOREIGN KEY (profileID) REFERENCES UserProfile(profileID);
+ALTER TABLE UserProfile ADD CONSTRAINT fk_userID FOREIGN KEY (userID) REFERENCES Users(userID);
 ALTER TABLE Users ADD CONSTRAINT fk_blacklistID FOREIGN KEY (blacklistID) REFERENCES Blacklist(blacklistID);
 ALTER TABLE Users ADD CONSTRAINT fk_auditID FOREIGN KEY (auditID) REFERENCES AuditTrail(auditID);
 
