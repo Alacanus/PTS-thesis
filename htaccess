@@ -1,6 +1,6 @@
 Options -MultiViews
 DirectoryIndex /public/register.php index.php
-ErrorDocument 404 /404.php
+ErrorDocument 404 \404.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine on
