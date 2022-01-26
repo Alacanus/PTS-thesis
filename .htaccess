@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    Options -Multiviews
+    ErrorDocument 404 /PTS-thesis/404.php
+    DirectoryIndex /public/register.php index.php
+</IfModule>
