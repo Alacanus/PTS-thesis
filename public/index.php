@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-include "../Model/Includes/getConVar.php";
 is_user_2fa();
 ?>
 
