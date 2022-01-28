@@ -15,7 +15,22 @@ function view(string $filename, array $data = []): void
     }
     require_once __DIR__ . '/../inc/' . $filename . '.php';
 }
-
+function traverseArray($array)
+{
+    // Loops through each element. If element again is array, function is recalled. If not, result is echoed.
+    foreach ($array as $key => $value)
+    {
+        if (is_array($value))
+        {
+            //Self::traverseArray($value); // Or
+            traverseArray($value);
+        }
+        else
+        {
+            echo $key . " = " . $value . "<br />\n";
+        }
+    }
+}
 
 /**
  * Return the error class if error is found in the array $errors

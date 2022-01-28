@@ -5,8 +5,6 @@ include "../Model/Includes/getConVar.php";
 require __DIR__ . '/../src/loggedin/twoFactor_S.php';
 require_login();
 
- 
-
 ?>
 <?php view('header', ['title' => 'Two factor authentication']) ?>
 <main>

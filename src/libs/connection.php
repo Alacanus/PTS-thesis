@@ -1,6 +1,10 @@
 <?php
 require __DIR__ . '/../../config/database.php';
 const APP_URL = 'http://localhost/PTS-thesis';
+$dirs = __DIR__;
+$newdir = rtrim($dirs, "src");
+$APP_URL = $newdir;
+
 const SENDER_EMAIL_ADDRESS = 'no-reply@email.com';
 function db(): PDO
 {

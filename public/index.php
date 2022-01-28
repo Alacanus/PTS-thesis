@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../src/bootstrap.php';
 include "../Model/Includes/getConVar.php";
-require_login();
+is_user_2fa();
 ?>
 
 <?php view('header', ['title' => 'Dashboard']) ?>

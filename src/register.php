@@ -4,8 +4,12 @@ if (is_user_logged_in()) {
 }
 $errors = [];
 $inputs = [];
-
+$tableNAme ='userroles';
+$optionVal ='roleID';
+$optionName ='roleType'; 
+$option_list = get_db_Options($tableNAme , $optionVal, $optionName);
 if (is_post_request()) {
+
     $fields = [
         'username' => 'string | required | alphanumeric | between: 3, 25 | unique: users, username',
         'email' => 'email | required | email | unique: users, email',
@@ -14,6 +18,7 @@ if (is_post_request()) {
         'agree' => 'string | required',
         'fname' => 'string | required',
         'lname' => 'string | required',
+        'usertype' => 'string | required',
     ];
 
     // custom messages
@@ -36,7 +41,7 @@ if (is_post_request()) {
         ]);
     }
     $activation_code = generate_activation_code();
-    if(register_user($inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
+    if(register_user($inputs['usertype'], $inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
         //send email
     
 

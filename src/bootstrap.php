@@ -8,6 +8,7 @@ require_once __DIR__ . '/inc/auth.php';
 require_once __DIR__ . '/libs/validation.php';
 require_once __DIR__ . '/libs/flash.php';
 require_once __DIR__ . '/libs/filter.php';
+include "../Model/Includes/getConVar.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -20,6 +21,13 @@ require __DIR__ . '/../PHPMailer/src/SMTP.php';
 function generate_activation_code(): string
 {
     return bin2hex(random_bytes(16));
+}
+
+
+function audit_trail(string $userAction):void{
+    $datetime = new DateTime();
+    $userIP =getUserIpAddr();
+    
 }
 
 

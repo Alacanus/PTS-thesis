@@ -9,6 +9,19 @@ require __DIR__ . '/../src/register.php';
 
 <form id="form" action="register.php" method="post">
     <h1>Sign Up</h1>
+    <div>
+        <label for="usertype">User Type:</label>
+        <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
+            <option value="">----Select----</options>
+            <?php 
+            foreach($option_list as $options)
+            {
+                echo '<option value="'.$options[$optionVal].'">'.$options[$optionName].'</option>';
+            }
+            ?>
+        </select>
+        <small><?= $errors['usertype'] ?? '' ?></small>
+    </div>
 
     <div>
         <label for="username">Username:</label>
