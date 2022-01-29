@@ -75,7 +75,7 @@ require __DIR__ . '/../src/register.php';
         <small><?= $errors['agree'] ?? '' ?></small>
     </div>
 
-    <button type="submit" name="regbtn" onsubmit="regbtn.disabled = true; return true">Register</button>
+    <button type="submit" name="regbtn">Register</button>
 
     <footer>Already a member? <a href="login.php">Login here</a></footer>
 

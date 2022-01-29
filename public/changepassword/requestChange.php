@@ -18,7 +18,7 @@ require __DIR__ . '/../../src/requestChange.php';
         </div>
         <section>
             <button type="submit" name="btnCpass">Request</button>
-            <a href="register.php">Register</a>
+            <a href="../register.php">Register</a>
         </section>
     </form>
 </main>
