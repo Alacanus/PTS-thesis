@@ -8,7 +8,7 @@ require_once __DIR__ . '/inc/auth.php';
 require_once __DIR__ . '/libs/validation.php';
 require_once __DIR__ . '/libs/flash.php';
 require_once __DIR__ . '/libs/filter.php';
-include "../Model/Includes/getConVar.php";
+include __DIR__ . "/../Model/Includes/getConVar.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -17,6 +17,15 @@ use PHPMailer\PHPMailer\Exception;
 require __DIR__ . '/../PHPMailer/src/Exception.php';
 require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer/src/SMTP.php';
+
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+$link = "https";
+else $link = "http";
+// Here append the common URL characters.
+$link .= "://";
+// Append the host(domain name, ip) to the URL.
+$link .= $_SERVER['HTTP_HOST'];
+define("MYURL", $link);
 
 function generate_activation_code(): string
 {
@@ -27,7 +36,7 @@ function generate_activation_code(): string
 function audit_trail(string $userAction):void{
     $datetime = new DateTime();
     $userIP =getUserIpAddr();
-    
+
 }
 
 
@@ -35,7 +44,7 @@ function audit_trail(string $userAction):void{
 function send_authentication_email(string $email, string $options ,$activation_code):Void
 {
     if($options == 'register'){
-        $activation_link = APP_URL . "/public/activate.php?email=$email&activation_code=$activation_code";
+        $activation_link = MYURL . "/public/activate.php?email=$email&activation_code=$activation_code&change_password=false";
     $subject = 'PTS activation Email';
         $message = <<<MESSAGE
         Hello,
@@ -50,7 +59,15 @@ function send_authentication_email(string $email, string $options ,$activation_c
         $activation_code
         MESSAGE;
         $_SESSION['activation_code'] = $activation_code;
-    }
+    }elseif($options == 'changePassword'){
+        $subject = "PTS Password reset";
+        $activation_link = MYURL . "/public/activate.php?email=$email&activation_code=$activation_code&change_password=true";
+            $message = <<<MESSAGE
+            Hello,
+            Please use the following link to reset your account:
+            $activation_link
+            MESSAGE;
+        }
     
     //send the email
 

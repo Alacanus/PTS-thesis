@@ -15,23 +15,9 @@ require __DIR__ . '/../../src/libs/connection.php';
 
 $dtB = new DateTime();
 echo $dtB->format('Y-m-d H:i:s');
-
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-$link = "https";
-else $link = "http";
-
-// Here append the common URL characters.
-$link .= "://";
-
-// Append the host(domain name, ip) to the URL.
-$link .= $_SERVER['HTTP_HOST'];
-
-
-// Print the link
-echo $link;
 die();
 
-$activation_link = $APP_URL . "/public/activate.php?e";
+$activation_link = MYURL . "/public/activate.php?e";
     $subject = 'PTS activation Email';
         $message = <<<MESSAGE
         Hello,

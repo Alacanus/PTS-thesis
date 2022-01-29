@@ -15,8 +15,8 @@ require __DIR__ . '/../src/login.php';
         <?= $errors['login'] ?>
     </div>
 <?php endif ?>
-<main>
-    <form id="form" action="login.php" method="post">
+<main id="mymain1">
+    <form id="form" action="login.php" method="post" >
         <h1>Login</h1>
         <div>
             <label for="username">Username:</label>
@@ -29,6 +29,9 @@ require __DIR__ . '/../src/login.php';
         <section>
             <button type="submit" name="btnLogin">Login</button>
             <a href="register.php">Register</a>
+        </section>
+        <section>
+            <a href="changepassword/requestChange.php">Change Password</a>
         </section>
     </form>
 </main>
