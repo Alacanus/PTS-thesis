@@ -20,11 +20,13 @@ require __DIR__ . '/../src/login.php';
         <h1>Login</h1>
         <div>
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" class="<?= error_class($errors, 'username') ?>">
+        <small><?= $errors['username'] ?? '' ?></small>
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password"  class="<?= error_class($errors, 'password') ?>">
+        <small><?= $errors['password'] ?? '' ?></small>
         </div>
         <section>
             <button type="submit" name="btnLogin">Login</button>

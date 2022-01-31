@@ -1,6 +1,10 @@
 <?php
 $errors = [];
 $inputs = [];
+
+$user= array(
+    ""  => 'loading'
+);//get_user_Profile();
 if (is_post_request()) {
 
     $fields = [
@@ -14,8 +18,10 @@ if (is_post_request()) {
 
     [$inputs, $errors] = filter($_POST, $fields, $messages);
 
+    //write update
+
     if ($errors) {
-        redirect_with('userprofile.php', [
+        redirect_with('../userprofile.php', [
             'inputs' => $inputs,
             'errors' => $errors
         ]);
@@ -23,4 +29,7 @@ if (is_post_request()) {
 
 } else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');
+
+    //load file
+
 }

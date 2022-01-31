@@ -8,7 +8,10 @@ require_once __DIR__ . '/inc/auth.php';
 require_once __DIR__ . '/libs/validation.php';
 require_once __DIR__ . '/libs/flash.php';
 require_once __DIR__ . '/libs/filter.php';
+require_once __DIR__ . '/../Model/AES/crypt0.php';
+
 include __DIR__ . "/../Model/Includes/getConVar.php";
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

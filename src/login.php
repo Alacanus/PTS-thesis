@@ -7,7 +7,6 @@ if (is_user_logged_in()) {
 $inputs = [];
 $errors = [];
 
-
 if (is_post_request()) {
     
 
@@ -27,14 +26,14 @@ if (is_post_request()) {
             send_authentication_email($_SESSION['userEmail'], 'twofacotr', $activation_code);
             redirect_to('twoFactor.php');
         
-    }
-    // if login fails
-    $errors['login'] = 'Invalid username or password';
+    }else{
+        // if login fails
+        $errors['login'] = 'Invalid username or password';
         redirect_with('login.php', [
             'errors' => $errors,
             'inputs' => $inputs
         ]);
-
+    }
 
 
 } else if (is_get_request()) {

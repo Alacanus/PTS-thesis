@@ -5,36 +5,35 @@ require __DIR__ . '/../src/loggedin/userProfile.php';
 
 
 //is_user_2fa();
-$user = array();
 ?>
 
 <?php view('header', ['title' => 'User Profile']);
 ?>
 <main id="mymain1">
 
-    <h1>PHP_var's Profile</h1>
+    <h1><?= $user['']?>'s Profile</h1>
     <button type = "button" data-toggle="modal" data-target="#editProfileModal">Edit your profile(modal button)</button>
     <div>
-        <label for="usertype">user Type: PHP_var</label>
+        <label for="usertype">user Type: <?= $user['']?></label>
 
     </div>
     <div>
-        <label for="username">Username: PHP_var</label>
-
-    </div>
-
-    <div>
-        <label for="email">Email: PHP_var</label>
+        <label for="username">Username: <?= $user['']?></label>
 
     </div>
 
     <div>
-        <label for="fname">first name: PHP_var</label>
+        <label for="email">Email: <?= $user['']?></label>
 
     </div>
 
     <div>
-        <label for="lname">Last name: PHP_var</label>
+        <label for="fname">first name: <?= $user['']?></label>
+
+    </div>
+
+    <div>
+        <label for="lname">Last name: <?= $user['']?></label>
 
     </div>
 </main>
@@ -54,18 +53,18 @@ $user = array();
             <div class=modalTHIS> 
             <form id="form" action="userprofile.php" method="post">
             <div>
-            username<input type="text" name="username" id="username" value="<?= $inputs['username'] ?? '' ?>"
+            username<input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user[''] ?>"
             class="<?= error_class($errors, 'username') ?>">
             <small><?= $errors['username'] ?? '' ?></small>
-            email<input type="email" name="email" id="email" value="<?= $inputs['email'] ?? '' ?>"
+            email<input type="email" name="email" id="email" value="<?= $inputs['email'] ?? $user[''] ?>"
             class="<?= error_class($errors, 'email') ?>">
             <small><?= $errors['email'] ?? '' ?></small>
             </div>
             <div>
-            fname<input type="text" name="fname" id="fname" value="<?= $inputs['fname'] ?? '' ?>"
+            fname<input type="text" name="fname" id="fname" value="<?= $inputs['fname'] ?? $user[''] ?>"
             class="<?= error_class($errors, 'fname') ?>">
             <small><?= $errors['fname'] ?? '' ?></small>
-            lname<input type="text" name="lname" id="lname" value="<?= $inputs['lname'] ?? '' ?>"
+            lname<input type="text" name="lname" id="lname" value="<?= $inputs['lname'] ?? $user[''] ?>"
             class="<?= error_class($errors, 'lname') ?>">
             <small><?= $errors['lname'] ?? '' ?></small>
             </div>
