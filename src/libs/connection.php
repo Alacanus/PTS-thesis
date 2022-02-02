@@ -2,6 +2,15 @@
 require __DIR__ . '/../../config/database.php';
 const APP_URL = 'http://localhost/PTS-thesis';
 
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+$link = "https";
+else $link = "http";
+// Here append the common URL characters.
+$link .= "://";
+// Append the host(domain name, ip) to the URL.
+$link .= $_SERVER['HTTP_HOST'];
+define("MYURL", $link);
+
 const SENDER_EMAIL_ADDRESS = 'no-reply@email.com';
 function db(): PDO
 {

@@ -21,14 +21,6 @@ require __DIR__ . '/../PHPMailer/src/Exception.php';
 require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer/src/SMTP.php';
 
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-$link = "https";
-else $link = "http";
-// Here append the common URL characters.
-$link .= "://";
-// Append the host(domain name, ip) to the URL.
-$link .= $_SERVER['HTTP_HOST'];
-define("MYURL", $link);
 
 function generate_activation_code(): string
 {
