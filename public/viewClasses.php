@@ -61,7 +61,24 @@ require __DIR__ . '/../src/viewClasses.php';
     </div>
     <div>
         <label for="milestones">Class Milestones: <?= $class['']?></label>
-
+        <table id="milestonesTable">
+    <thead>
+        <th>Milestone </th>
+        <th>Description </th>
+        <th>achieved via </th>
+    </thead>
+    <tbody>
+        <?php if(!empty($arr_users)) { ?>
+            <?php foreach($arr_users as $user) { ?>
+                <tr>
+                    <td><?php echo $user['first_name']; ?></td>
+                    <td><?php echo $user['last_name']; ?></td>
+                    <td><?php echo $user['age']; ?></td>
+                </tr>
+            <?php } ?>
+        <?php } ?>
+    </tbody>
+</table>
     </div>
 </main>
 <!-- Trigger the modal with a button
