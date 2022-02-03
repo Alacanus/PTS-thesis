@@ -1,0 +1,6 @@
+-changes
+->Implementation Change and Need for additional technology,ADD PHPMAILER library for the use of sending emails and notifs native php mail() function need server configuration which may conflict with other projects in the server
+->Implementation Change,USE Bcrypt instead of AES for encryption, Bcrypt being native function of PHP removing added step of installing AES libs and bcrypt being more effecient in the server load
+->Implementation Change,BD char lenght 320 from 60 lenght of encrpytable entries, testing  revealed that data will be 320 char long if AES(OpenSSL_encrypt[CBC]) is used if bcrypt 255 can be used
+->Implementation Change and Need for additional technology,Add Bootstrap, library for the use of some client side view modules like modals and a dependency of reCaptcha 
+->Implementation Change, changed captcha version from 3 to 2, The version 3 of captcha implements an invisible human test based on website interaction but v2 implements humanTest wiggets in select page, we believe that applying captcha in certain pages like login and registration will be better than implementing it to all pages of the application(implementing v3 limitation on current project structure)

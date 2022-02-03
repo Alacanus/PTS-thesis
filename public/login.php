@@ -34,13 +34,11 @@ require __DIR__ . '/../src/login.php';
         <small><?= $errors['password'] ?? '' ?></small>
         </div>
         <div class="form-group">
-            <div class="g-recaptcha" data-sitekey="6LeY21QeAAAAABXgkFd4j6e7TirCMG0PEEGPT0lk">
+            <div class="g-recaptcha" data-sitekey="6Le6_lQeAAAAAG_6B4F-OjL0mbth_UQLUihCtxiG">
             </div>
             <small id="captcha_error" class="text-danger"></small>
-            <button class="g-recaptcha" 
-            data-sitekey="reCAPTCHA_site_key" 
-            data-callback='onSubmit' 
-            data-action='submit'>Login</button>
+            <button
+            >Login</button>
         </div>
         <section>
             <a href="register.php">Register</a>

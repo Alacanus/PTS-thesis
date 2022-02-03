@@ -19,6 +19,8 @@ if (is_post_request()) {
         'fname' => 'string | required',
         'lname' => 'string | required',
         'usertype' => 'string | required',
+        'g-recaptcha-response' => 'string | required'
+
     ];
 
     // custom messages
@@ -34,6 +36,14 @@ if (is_post_request()) {
 
     [$inputs, $errors] = filter($_POST, $fields, $messages);
 
+    if(isset($inputs['g-recaptcha-response']) && !empty($inputs['g-recaptcha-response'])){
+        $secretKey = '6Le6_lQeAAAAAKAzGT1KQC6xvXKIsv56SijGPSUT';
+        //API check
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$inputs['g-recaptcha-response']); 
+            // Decode result data 
+            $responseData = json_decode($verifyResponse); 
+    }
+
     if ($errors) {
         redirect_with('register.php', [
             'inputs' => $inputs,
@@ -41,7 +51,7 @@ if (is_post_request()) {
         ]);
     }
     $activation_code = generate_activation_code();
-    if(register_user($inputs['usertype'], $inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
+    if(register_user($inputs['usertype'], $inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code) && $responseData->success){
         //send email
     
 

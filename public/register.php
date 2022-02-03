@@ -6,7 +6,12 @@ require __DIR__ . '/../src/register.php';
 
 <?php view('header', ['title' => 'Register']);
 ?>
-
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+   function onSubmit(token) {
+     document.getElementById("form").submit();
+   }
+ </script>
 <form id="form" action="register.php" method="post">
     <h1>Sign Up</h1>
     <div>
@@ -75,7 +80,13 @@ require __DIR__ . '/../src/register.php';
         <small><?= $errors['agree'] ?? '' ?></small>
     </div>
 
-    <button type="submit" name="regbtn">Register</button>
+    <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6Le6_lQeAAAAAG_6B4F-OjL0mbth_UQLUihCtxiG">
+            </div>
+            <small id="captcha_error" class="text-danger"></small>
+            <button
+            >Register</button>
+        </div>
 
     <footer>Already a member? <a href="login.php">Login here</a></footer>
 
