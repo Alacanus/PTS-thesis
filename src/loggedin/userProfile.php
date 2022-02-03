@@ -1,28 +1,19 @@
 <?php
 $errors = [];
-$inputs = [];
 
 $user= array(
     ""  => 'loading'
 );//get_user_Profile();
+//write get profile
 if (is_post_request()) {
 
-    $fields = [
-        'username' => 'string | required | alphanumeric | between: 3, 25 | unique: users, username',
-        'email' => 'email | required | email | unique: users, email',
-        'fname' => 'string | required',
-        'lname' => 'string | required',
-        'usertype' => 'string | required',
-    ];
 
-
-    [$inputs, $errors] = filter($_POST, $fields, $messages);
 
     //write update
+    
 
     if ($errors) {
         redirect_with('../userprofile.php', [
-            'inputs' => $inputs,
             'errors' => $errors
         ]);
     }

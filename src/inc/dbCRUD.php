@@ -25,7 +25,6 @@ function read(string $tableName, string $optionVal, string $optionName) {
     $statement->execute();
     while($data=  $statement->fetchAll(PDO::FETCH_ASSOC)) {
         $option_list = $data;
-       //$option_list.="<option value='$data[$optionVal]'>$data[$optionName]</option>";
     }
     return $option_list;
  }
