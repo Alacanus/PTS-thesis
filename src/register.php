@@ -51,7 +51,7 @@ if (is_post_request()) {
         ]);
     }
     $activation_code = generate_activation_code();
-    if(register_user($inputs['usertype'], $inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code) && $responseData->success){
+    if(register_user($inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $inputs['usertype'], $activation_code) && $responseData->success){
         //send email
     
 

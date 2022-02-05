@@ -36,8 +36,8 @@ if (is_post_request()) {
         
     }else{
         // if login fails
-        // $errors['login'] = 'Invalid username or password';
-        $errors['login'] = serialize($responseData);
+        $errors['login'] = 'Invalid username or password';
+        // $errors['login'] = serialize($responseData);
 
         redirect_with('login.php', [
             'errors' => $errors,

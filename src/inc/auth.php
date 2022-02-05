@@ -98,10 +98,10 @@ function change_passwrod(string $email):bool{
     if($user && is_user_active($user)){
         //prevent session fixation attack
         session_regenerate_id();
-        session_destroy();
-        session_start();
+        // session_destroy();
+        // session_start();
         $_SESSION = array();
-        $_SESSION['userID']= $user['userID'];
+        $_SESSION['user_id']= $user['userID'];
         $_SESSION['userEmail'] = $user['email'];
         return true;
     }
@@ -110,12 +110,13 @@ function change_passwrod(string $email):bool{
 
 function reset_Password(string $password, string $password2):bool{
     if($password == $password2){
-        $sql = 'UPDATE users
-        SET password = :password, 
-        WHERE userID = :userID';
-    $statement = $pdo->prepare($sql);
-    $statement->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
-    $statement->bindParam(':password',password_hash($password, PASSWORD_BCRYPT));
+        $sql = "UPDATE users
+        SET password = :password 
+        WHERE userID = :userID and email = :email";
+    $statement = db()->prepare($sql);
+    $statement->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+    $statement->bindValue(':email', $_SESSION['userEmail'], PDO::PARAM_STR);
+    $statement->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
 
     // execute the UPDATE statment
     if ($statement->execute()) {

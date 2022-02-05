@@ -1,10 +1,4 @@
 <?php
-/**
- * PHP PRG (Post-Redirect-Get)
- * solve double submit problem
- */
-?>
-<?php
 require __DIR__ . '/../../src/bootstrap.php';
 require __DIR__ . '/../../src/changepassword.php';
 ?>
@@ -28,7 +22,7 @@ require __DIR__ . '/../../src/changepassword.php';
     </div>
         <section>
             <button type="submit" name="btnCpass">Request</button>
-            <a href="register.php">Register</a>
+            <a href="../register.php">Register</a>
         </section>
     </form>
 </main>

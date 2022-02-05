@@ -22,14 +22,14 @@ if (is_post_request()) {
 
 
     if ($errors) {
-        redirect_with('changepassword/changepassword.php', ['errors' => $errors, 'inputs' => $inputs]);
+        redirect_with('changepassword.php', ['errors' => $errors, 'inputs' => $inputs]);
     }
 
     
     if (reset_Password($inputs['password'], $inputs['password2'])) {
         echo "<script>Alert('Password has beed changed')</script>";
         sleep(2);
-        redirect_to('login.php');
+        redirect_to('../login.php');
         
         
     }

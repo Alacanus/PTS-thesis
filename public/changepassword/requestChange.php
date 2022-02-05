@@ -6,7 +6,7 @@ require __DIR__ . '/../../src/requestChange.php';
 <?php view('header', ['title' => 'Password Reset']) ?>
 <?php if (isset($errors['requestChange'])) : ?>
     <div class="alert alert-error">
-        <?= $errors['login'] ?>
+        <?= $errors['requestChange'] ?>
     </div>
 <?php endif ?>
 <main>
@@ -14,10 +14,12 @@ require __DIR__ . '/../../src/requestChange.php';
         <h1>Change Password</h1>
         <div>
             <label for="email">Email:</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" class="<?= error_class($errors, 'email') ?>">
+        <small><?= $errors['email'] ?? '' ?></small>
         </div>
+        
         <section>
-            <button type="submit" name="btnCpass">Request</button>
+            <button type="submit">Request</button>
             <a href="../register.php">Register</a>
         </section>
     </form>

@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-include "../Model/Includes/getConVar.php";
 require __DIR__ . '/../src/loggedin/twoFactor_S.php';
 require_login();
 
@@ -28,5 +27,5 @@ require_login();
         </section>
     </form>
 </main>
- <p><?php echo current_user() . '\'s IP address' .getUserIpAddr();?><br> <a href="logout.php">Logout</a> </p><br>
+ <p><?php echo current_user() . '\'s IP address' .getUserIpAddr()?><br> <a href="logout.php">Logout</a> </p><br>
 <?php view('footer') ?>

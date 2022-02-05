@@ -20,25 +20,24 @@ if (is_post_request()) {
 
 
     if ($errors) {
-        redirect_with('changepassword/requestChange.php', ['errors' => $errors, 'inputs' => $inputs]);
+        redirect_with('requestChange.php', ['errors' => $errors, 'inputs' => $inputs]);
     }
 
     
     if (change_passwrod($inputs['email'])) {
         // successfully find user
     $activation_code = generate_activation_code();
-        send_authentication_email($user['email'], 'changePassword', $activation_code);
+        send_authentication_email($inputs['email'], 'changePassword', $activation_code);
         $_SESSION['resetCode'] = $activation_code;
-        session_write_close();
         echo "<script>alert('Message has been sent');</script>";
-        die();
-    }
-    // if find fails
-    $errors['requestChange'] = 'No Email account in record';
-        redirect_with('changepassword/requestChange.php', [
+    }else{
+        $errors['requestChange'] = 'No Email account in record';
+        redirect_with('requestChange.php', [
             'errors' => $errors,
             'inputs' => $inputs
         ]);
+    }
+
 
 
 
