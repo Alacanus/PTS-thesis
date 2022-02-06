@@ -11,6 +11,14 @@ require __DIR__ . '/../src/viewClasses.php';
 ?>
 <main id="mymain1">
 
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="static/OIP.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
     <h1><?= $class['']?>'s page</h1>
     <button type = "button" data-toggle="modal" data-target="#editProfileModal">Edit your Class(modal button)</button>
     <div>
@@ -81,49 +89,21 @@ require __DIR__ . '/../src/viewClasses.php';
 </table>
     </div>
 </main>
-<!-- Trigger the modal with a button
-    Update on CLass CRUD
-  -->
-
-<!-- Modal -->
-<div class="modal fade" id="editProfileModal" role="dialog">
+<div class="modal" tabindex="-1">
   <div class="modal-dialog">
-  
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit your profile</h4>
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-            <div class=modalTHIS> 
-            <form id="form" action="userprofile.php" method="post">
-            <div>
-            username<input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user[''] ?>"
-            class="<?= error_class($errors, 'username') ?>">
-            <small><?= $errors['username'] ?? '' ?></small>
-            email<input type="email" name="email" id="email" value="<?= $inputs['email'] ?? $user[''] ?>"
-            class="<?= error_class($errors, 'email') ?>">
-            <small><?= $errors['email'] ?? '' ?></small>
-            </div>
-            <div>
-            fname<input type="text" name="fname" id="fname" value="<?= $inputs['fname'] ?? $user[''] ?>"
-            class="<?= error_class($errors, 'fname') ?>">
-            <small><?= $errors['fname'] ?? '' ?></small>
-            lname<input type="text" name="lname" id="lname" value="<?= $inputs['lname'] ?? $user[''] ?>"
-            class="<?= error_class($errors, 'lname') ?>">
-            <small><?= $errors['lname'] ?? '' ?></small>
-            </div>
-            </form>
-        </div>
+        <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
-
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
-    
   </div>
 </div>
 
