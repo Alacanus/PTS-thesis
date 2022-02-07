@@ -38,7 +38,7 @@ function get_db_Options(string $tableName, string $optionVal, string $optionName
  }
 
 function find_user_by_username(string $username){
-    $sql = 'SELECT username, password, active, email FROM users WHERE username= :username';
+    $sql = 'SELECT username, userID,  password, active, email FROM users WHERE username= :username';
     $statement = db()->prepare($sql);
     $statement->bindValue(':username', $username, PDO::PARAM_STR);
     $statement->execute();
@@ -81,7 +81,6 @@ function login(string $username, string $password):bool{
         $_SESSION['user_id'] = $user['userID'];
         $_SESSION['userEmail'] = $user['email'];
         // $_SESSION['audit_id'] = $user['auditID'];
-        //$_SESSION['user_id'] = $user['id'];
 
 
         return true;

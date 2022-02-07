@@ -1,10 +1,6 @@
 <?php
 $errors = [];
-
-$user= array(
-    ""  => 'loading'
-);//get_user_Profile();
-//write get profile
+$user = get_user_Profile($_SESSION['user_id']);
 if (is_post_request()) {
 
 
@@ -22,5 +18,6 @@ if (is_post_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');
 
     //load file
+
 
 }

@@ -18,15 +18,13 @@ function create(string $email, string $username, string $password, string $fname
 
     return $statement->execute();
 }
-function read(string $tableName, string $optionVal, string $optionName) {
-    $option_list = '';
-    $sql = "SELECT * FROM `$tableName`";
+function read_db(string $tableName) {
+    $sql = "SELECT * FROM `$tableName` WHERE userID = :userID";
     $statement = db()->prepare($sql);
+    $statement->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
     $statement->execute();
-    while($data=  $statement->fetchAll(PDO::FETCH_ASSOC)) {
-        $option_list = $data;
-    }
-    return $option_list;
+    
+    return $statement->fetch(PDO::FETCH_ASSOC);
  }
 
  function update(string $password, string $password2):bool{
@@ -53,4 +51,16 @@ function delete(){
     $statement = db()->prepare($sql);
     $statement->bindValue(':username', $username);
     $statement->execute();
+}
+
+function get_user_Profile( $userID){
+    $sql = "SELECT * FROM userprofile 
+    INNER JOIN users
+      ON users.userID = userprofile.userID
+  WHERE users.userID = :userID";
+    $statement = db()->prepare($sql);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    
+    return $statement->fetch(PDO::FETCH_ASSOC);
 }

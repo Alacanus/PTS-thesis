@@ -43,21 +43,6 @@ if (is_post_request()) {
         $errors['twofactorcode'] = 'Invalid username or password';
     }
 
-
-
-    // if(register_user($inputs['email'], $inputs['username'], $inputs['password'],  $inputs['fname'], $inputs['lname'], $activation_code)){
-    //     //send email
-
-    //     send_activation_email($inputs['email'], $activation_code);
-
-    //     redirect_with_message(
-    //         'login.php',
-    //         'please check your email to activate your account before signing in'
-    //     );
-    // }elseif (is_get_request()){
-    //     [$errors, $inputs] = session_flash('errors', 'inputs');
-    // }
-
 } else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');
 }

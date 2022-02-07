@@ -9,7 +9,7 @@ require __DIR__ . '/../src/bootstrap.php';
 ?>
 
 <?php view('header', ['title' => 'PTS']) ?>
-<main id="mymain1">
+<main id="mymain1" class="d-flex aligns-items-center">
 <a href="login.php">
   <button>Login</button>
 </a>
@@ -25,6 +25,27 @@ require __DIR__ . '/../src/bootstrap.php';
 <a href="viewClasses.php">
   <button>View Classes</button>
 </a>
+<br>
+<a href="viewfaq.php">
+  <button>View Faqs</button>
+</a>
+<br>
+<a href="viewfaq.php">
+  <button>View Faqs</button>
+</a>
+<br>
+<a href="viewfaq.php">
+  <button>View Faqs</button>
+</a>
+<br>
+<a href="viewfaq.php">
+  <button>View Faqs</button>
+</a>
+<br>
+<a href="viewfaq.php">
+  <button>View Faqs</button>
+</a>
+<br>
 </main>
 
 <?php view('footer') ?>

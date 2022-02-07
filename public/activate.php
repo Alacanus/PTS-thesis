@@ -27,8 +27,8 @@ if (is_get_request()) {
 }
 
 //redirect to the register page in other cases
-// redirect_with_message(
-//     'register.php',
-//     'The activation link is not valid, please register again.',
-//     FLASH_ERROR
-// );
+redirect_with_message(
+    'register.php',
+    'The activation link is not valid, please register again.',
+    FLASH_ERROR
+);

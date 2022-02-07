@@ -1,5 +1,5 @@
 <?php
-session_start();
+if (!isset($_SESSION)) { session_start();}
 //require __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/libs/titlehelper.php';
 require_once __DIR__ . '/libs/sanitization.php';
@@ -9,6 +9,9 @@ require_once __DIR__ . '/libs/validation.php';
 require_once __DIR__ . '/libs/flash.php';
 require_once __DIR__ . '/libs/filter.php';
 require_once __DIR__ . '/../Model/AES/crypt0.php';
+require_once __DIR__ . '/inc/dbCRUD.php';
+
+
 
 include __DIR__ . "/../Model/Includes/getConVar.php";
 
