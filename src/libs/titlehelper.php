@@ -120,3 +120,24 @@ function session_flash(...$keys): array
     }
     return $data;
 }
+
+function convert_roleID2Type(int $roleID){
+    switch ($roleID) {
+        case "2":
+          $roletype = 'Admin';
+          break;
+        case "3":
+          $roletype = 'Learner';
+          break;
+        case "4":
+          $roletype = 'Instructor';
+          break;
+        case "5":
+          $roletype = 'Coordinator';
+          break;
+        case "6":
+          $roletype = 'Procurement';
+          break;
+        }
+    return $roletype;
+}

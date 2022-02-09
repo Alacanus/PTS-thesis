@@ -2,14 +2,16 @@
 $inputs = [];
 $errors = [];
 
-$user = get_user_Profile($_SESSION['user_id']);
-$tableNAme ='userroles';
+$tableNAme ='users';
 $optionVal ='roleID';
 $optionName ='roleType'; 
 $option_list = get_db_Options($tableNAme , $optionVal, $optionName);
+$tableNAme2 ='userroles';
+$optionVal2 ='roleID';
+$optionName2 ='roleType'; 
+$option_list2 = get_db_Options($tableNAme2 , $optionVal2, $optionName2);
 
 if (is_post_request()) {
-
 
 
     [$inputs, $errors] = filter($_POST, [
@@ -60,11 +62,30 @@ if (is_post_request()) {
         ]);
     }
 
+    $obj = json_decode($_POST['userID'], false);
+    if($obj){
+        $errors['accountMGT'] = 'NO workey';
+        
+        $user = get_user_Profile($obj);
+        redirect_with('userprofile.php', [
+            'errors' => $errors,
+            'inputs' => $inputs
+        ]);
+    }
+
 
 } else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');
 
-    //load file
+    
+    [$inputsget, $errors] = filter($_GET, [
+        'userID' => 'string | required',
+    ]);
 
+    if($inputsget['userID']){
+            
+            echo $user = get_user_Profile($inputsget['userID']);
+
+    }
 
 }

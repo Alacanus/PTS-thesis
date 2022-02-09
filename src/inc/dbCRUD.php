@@ -67,42 +67,53 @@ function get_user_Profile(int $userID){
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-function update_user_Profile(string $userID, string $email, string $username,
-string $fname, string $lname, int $userType, string $gender, int $age, string $bDay, string $adress, string $contact, string $about):bool{
+function update_user_Profile(string $userID, string $email, string $username, string $fname, string $lname, int $userType, string $gender, int $age, string $bDay, string $adress, string $contact, string $about):bool{
     try{
         
         $sql1 = "UPDATE users
-        SET roleID = :userType, username = :username, email = :email, firstname = :firstname, lastName = :lastname
-        WHERE userID = :userID";
-        $sqltest = "UPDATE users
-        SET roleID = 2,firstname = 'linlin'
-        WHERE userID = 9;";
+        SET users.roleID = :userType, users.username = :username, users.email = :email, users.firstname = :firstname, users.lastName = :lastname
+        WHERE users.userID = :userID";
         db()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = db()->prepare($sql1);
-        $statement->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
-        $statement->bindParam(':userType', $userType, PDO::PARAM_INT);
-        $statement->bindValue(':username', $username, PDO::PARAM_STR);
-        $statement->bindValue(':email', $email, PDO::PARAM_STR);
-        $statement->bindValue(':firstname', $fname, PDO::PARAM_STR);
-        $statement->bindValue(':lastname', $lname, PDO::PARAM_STR);
-        $statement->closeCursor();
+        $statement->bindParam(':userType', $userType);
+        $statement->bindParam(':username', $username);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':firstname', $fname);
+        $statement->bindParam(':lastname', $lname);
+        $statement->bindParam(':userID', $userID);    
         $statement->execute();
-        //2nd sql
+        // 2nd sql
         $sql2 = "UPDATE userprofile
         JOIN
         users
         ON userprofile.userID = users.userID
         SET userprofile.age = :age, userprofile.gender = :gender, userprofile.birthday = :birthday, userprofile.address = :address, userprofile.contactno = :contactno, userprofile.aboutme  = :aboutme
         WHERE userprofile.userID = :userID";
-        $statement = db()->prepare($sql2);
-        $statement->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
-        $statement->bindParam(':age', $age, PDO::PARAM_INT);
-        $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
-        $statement->bindValue(':birthday', $bDay, PDO::PARAM_STR);
-        $statement->bindValue(':address', $adress, PDO::PARAM_STR);
-        $statement->bindParam(':contactno', $contact, PDO::PARAM_INT);
-        $statement->bindParam(':aboutme', $about, PDO::PARAM_STR);
-        $statement->execute();
+        $statement2 = db()->prepare($sql2);
+        $statement2->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+        $statement2->bindParam(':age', $age, PDO::PARAM_INT);
+        $statement2->bindParam(':gender', $gender, PDO::PARAM_STR);
+        $statement2->bindValue(':birthday', $bDay, PDO::PARAM_STR);
+        $statement2->bindValue(':address', $adress, PDO::PARAM_STR);
+        $statement2->bindParam(':contactno', $contact, PDO::PARAM_INT);
+        $statement2->bindParam(':aboutme', $about, PDO::PARAM_STR);
+        $statement2->execute();
+        return true;
+
+    }catch(PDOException $e) {
+            // db()->rollBack();
+            die($e->getMessage());
+            return false;
+    }
+
+}
+
+function create_user_Profile(string $userID):bool{
+    try{
+        $sql2 = "INSERT INTO userprofile (`userID`) VALUES (:userID)";
+        $statement2 = db()->prepare($sql2);
+        $statement2->bindParam('userID', $userID, PDO::PARAM_INT);
+        $statement2->execute();
         return true;
 
     }catch(PDOException $e) {

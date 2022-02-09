@@ -16,10 +16,13 @@ if (is_get_request()) {
         
         // if user exists and activate the user successfully
         if ($user && activate_user($user['userID'])) {
-            redirect_with_message(
-                'login.php',
-                'You account has been activated successfully. Please login here.'
-            );
+            create_user_Profile($user['userID']);
+
+            $errors['login.php'] = 'User account has been activated, please login';
+
+            redirect_with('login.php', [
+                'errors' => $errors
+            ]);
         }
     }elseif(!$errors && $inputs['change_password'] == 'true' && $_SESSION['resetCode'] == $inputs['activation_code']){
         redirect_to('changepassword/changepassword.php');
