@@ -9,6 +9,11 @@ is_user_2fa();
 
 <?php view('header', ['title' => 'User Profile']);
 ?>
+<?php if (isset($errors['userProfile'])) : ?>
+    <div class="alert alert-error">
+        <?= $errors['userProfile'] ?>
+    </div>
+<?php endif ?>
 <main id="mymain1">
     <h1><?= $user['username']?>'s Profile</h1>
     <div>
@@ -81,18 +86,29 @@ is_user_2fa();
       </div>
       <div class="modal-body">
             <form id="form" action="userprofile.php" method="post">
+            <label for="usertype">User Type:</label>
+            <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
+            <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
+            <?php 
+            foreach($option_list as $options)
+            {
+                echo '<option value="'.$options[$optionVal].'">'.$options[$optionName].'</option>';
+            }
+            ?>
+            </select>
+            <small><?= $errors['usertype'] ?? '' ?></small><br>
             username<input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user['username'] ?>"
             class="<?= error_class($errors, 'username') ?>">
             <small><?= $errors['username'] ?? '' ?></small><br>
             email<input type="email" name="email" id="email" value="<?= $inputs['email'] ?? $user['email'] ?>"
             class="<?= error_class($errors, 'email') ?>">
             <small><?= $errors['email'] ?? '' ?></small><br>
-            fname<input type="text" name="fname" id="fname" value="<?= $inputs['fname'] ?? $user['firstname'] ?>"
-            class="<?= error_class($errors, 'fname') ?>">
-            <small><?= $errors['fname'] ?? '' ?></small><br>
-            lname<input type="text" name="lname" id="lname" value="<?= $inputs['lname'] ?? $user['lastName'] ?>"
-            class="<?= error_class($errors, 'lname') ?>">
-            <small><?= $errors['lname'] ?? '' ?></small><br>
+            fname<input type="text" name="firstname" id="firstname" value="<?= $inputs['firstname'] ?? $user['firstname'] ?>"
+            class="<?= error_class($errors, 'firstname') ?>">
+            <small><?= $errors['firstname'] ?? '' ?></small><br>
+            lname<input type="text" name="lastName" id="lastName" value="<?= $inputs['lastName'] ?? $user['lastName'] ?>"
+            class="<?= error_class($errors, 'lastName') ?>">
+            <small><?= $errors['lastName'] ?? '' ?></small><br>
             gender<input type="text" name="gender" id="gender" value="<?= $inputs['gender'] ?? $user['gender'] ?>"
             class="<?= error_class($errors, 'gender') ?>">
             <small><?= $errors['gender'] ?? '' ?></small><br>
@@ -116,7 +132,7 @@ is_user_2fa();
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" form="form" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

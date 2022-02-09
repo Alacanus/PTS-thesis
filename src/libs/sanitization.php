@@ -1,15 +1,15 @@
 <?php
 const FILTERS = [
+    'int' => [
+    'filter' => FILTER_SANITIZE_NUMBER_INT,
+    'flags' => FILTER_REQUIRE_SCALAR
+    ],
     'string ' => FILTER_SANITIZE_STRING,
     'string[]' => [
         'filter' => FILTER_SANITIZE_STRING,
         'flags' => FILTER_REQUIRE_ARRAY
     ],
     'email ' => FILTER_SANITIZE_EMAIL,
-    'int' => [
-        'filter' => FILTER_SANITIZE_NUMBER_INT,
-        'flags' => FILTER_REQUIRE_SCALAR
-    ],
     'int[]' => [
         'filter' => FILTER_SANITIZE_NUMBER_INT,
         'flags' => FILTER_REQUIRE_ARRAY

@@ -14,6 +14,7 @@ define("MYURL", $link);
 const SENDER_EMAIL_ADDRESS = 'no-reply@email.com';
 function db(): PDO
 {
+
     static $pdo;
 
     if (!$pdo) {

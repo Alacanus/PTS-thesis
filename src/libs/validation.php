@@ -20,6 +20,7 @@ const DEFAULT_VALIDATION_ERRORS = [
     'max' => 'The %s must have at most %s characters',
     'between' => 'The %s must have between %d and %d characters',
     'same' => 'The %s must match with %s',
+    'int' => 'The %s should have only numbers',
     'alphanumeric' => 'The %s should have only letters and numbers',
     'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
 ];
