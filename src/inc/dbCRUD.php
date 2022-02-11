@@ -90,7 +90,7 @@ function update_user_Profile(string $userID, string $email, string $username, st
         SET userprofile.age = :age, userprofile.gender = :gender, userprofile.birthday = :birthday, userprofile.address = :address, userprofile.contactno = :contactno, userprofile.aboutme  = :aboutme
         WHERE userprofile.userID = :userID";
         $statement2 = db()->prepare($sql2);
-        $statement2->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+        $statement2->bindParam(':userID', $userID, PDO::PARAM_INT);
         $statement2->bindParam(':age', $age, PDO::PARAM_INT);
         $statement2->bindParam(':gender', $gender, PDO::PARAM_STR);
         $statement2->bindValue(':birthday', $bDay, PDO::PARAM_STR);
@@ -112,7 +112,7 @@ function create_user_Profile(string $userID):bool{
     try{
         $sql2 = "INSERT INTO userprofile (`userID`) VALUES (:userID)";
         $statement2 = db()->prepare($sql2);
-        $statement2->bindParam('userID', $userID, PDO::PARAM_INT);
+        $statement2->bindParam(':userID', $userID, PDO::PARAM_INT);
         $statement2->execute();
         return true;
 

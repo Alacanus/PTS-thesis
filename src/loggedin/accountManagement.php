@@ -26,12 +26,12 @@ if (is_post_request()) {
         'contactno' => 'string | required',
         'aboutme' => 'string | required',
         'usertype' => 'string | required',
-
+        'user_id' => 'string | required',
     ]);
     
 
     if ($errors) {
-        redirect_with('userprofile.php', [
+        redirect_with('accountManagement.php', [
             'errors' => $errors
         ]);
     }
@@ -42,50 +42,26 @@ if (is_post_request()) {
         ]
     ];
 
-    if(update_user_Profile($_SESSION['user_id'], $inputs['email'], $inputs['username'],  $inputs['firstname'], $inputs['lastName'], $inputs['usertype'],
+    if(update_user_Profile($inputs['user_id'], $inputs['email'], $inputs['username'],  $inputs['firstname'], $inputs['lastName'], $inputs['usertype'],
     $inputs['gender'],  $inputs['age'],  $inputs['birthday'], $inputs['address'], $inputs['contactno'], $inputs['aboutme']
     )){
+        $errors['accountMGT'] = 'User account has been Edited';
         sleep(3);
-        $user = null;
-        $errors['userProfile'] = 'User account has been Edited';
 
-        redirect_with('userprofile.php', [
+        redirect_with('accountManagement.php', [
             'errors' => $errors,
             'inputs' => $inputs
         ]);
     }else{
-        $errors['userProfile'] = 'NO workey';
-
-        redirect_with('userprofile.php', [
-            'errors' => $errors,
-            'inputs' => $inputs
-        ]);
-    }
-
-    $obj = json_decode($_POST['userID'], false);
-    if($obj){
         $errors['accountMGT'] = 'NO workey';
-        
-        $user = get_user_Profile($obj);
-        redirect_with('userprofile.php', [
+
+        redirect_with('accountManagement.php', [
             'errors' => $errors,
             'inputs' => $inputs
         ]);
     }
-
 
 } else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');
-
-    
-    [$inputsget, $errors] = filter($_GET, [
-        'userID' => 'string | required',
-    ]);
-
-    if($inputsget['userID']){
-            
-            echo $user = get_user_Profile($inputsget['userID']);
-
-    }
 
 }

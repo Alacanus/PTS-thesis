@@ -33,6 +33,7 @@ if (is_post_request()) {
     if(registred_user_auth($inputs['twofactorcode'], $_SESSION['activation_code'])){
         //code passed
         //add prev
+        audit_trail('user has passed 2fa');
         redirect_with_message(
             'index.php',
             'please check your email to activate your account before signing in'
@@ -40,7 +41,7 @@ if (is_post_request()) {
     }else{
         $activation_code = generate_activation_code();
         send_authentication_email($_SESSION['userEmail'], 'twofacotr', $activation_code);
-        $errors['twofactorcode'] = 'Invalid username or password';
+        $errors['twofactorcode'] = 'Invalid Activation Code';
     }
 
 } else if (is_get_request()) {

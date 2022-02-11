@@ -30,10 +30,21 @@ function generate_activation_code(): string
     return bin2hex(random_bytes(16));
 }
 
-
-function audit_trail(string $userAction):void{
+function audit_trail(string $logDesc, int $userAction = 1):void{
     $datetime = new DateTime();
-    $userIP =getUserIpAddr();
+    $datetime = $datetime->format('d/m/Y');
+    $userIP = getUserIpAddr();
+    $sesID = session_id();
+
+    $logs = 'user: '. $_SESSION['user_id'] . ' with IP: '. $userIP . '<'.$datetime.'>' .'= '.$logDesc;
+
+    $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
+        $statement2 = db()->prepare($sql2);
+        $statement2->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+        $statement2->bindParam(':logs', $logs, PDO::PARAM_STR);
+        $statement2->bindParam(':actionID', $userAction, PDO::PARAM_INT);
+        $statement2->bindParam(':sessionID', $sesID);
+        $statement2->execute();
 
 }
 
@@ -155,4 +166,23 @@ function activate_user(int $user_id): bool
     $statement->bindValue(':id', $user_id, PDO::PARAM_INT);
 
     return $statement->execute();
+}
+
+
+function auth_Level( string $requirement)
+{
+    $sql = 'SELECT roleType FROM userroles 
+      JOIN users
+      ON users.roleID = userroles.roleID
+  WHERE users.userID = :userID';
+
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+
+    $statement->execute();
+    $result= $statement->fetch(PDO::FETCH_ASSOC);
+    if($result['roleType'] == $requirement){
+        return true;
+    }
+    return false;
 }

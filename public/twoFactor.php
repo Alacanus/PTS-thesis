@@ -19,7 +19,7 @@ require_login();
     </div>
 
         <div>
-            <label for="retry email">in case of incorrect code another one will be send to you:</label>
+            <label for="retry email">in case of incorrect code another one will be send to you at: <?= $_SESSION['userEmail']?></label>
         </div>
 
         <section>
