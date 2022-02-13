@@ -30,13 +30,13 @@ function generate_activation_code(): string
     return bin2hex(random_bytes(16));
 }
 
-function audit_trail(string $logDesc, int $userAction = 1):void{
+function audit_trail(string $logDesc, int $userAction){
     $datetime = new DateTime();
     $datetime = $datetime->format('d/m/Y');
     $userIP = getUserIpAddr();
     $sesID = session_id();
 
-    $logs = 'user: '. $_SESSION['user_id'] . ' with IP: '. $userIP . '<'.$datetime.'>' .'= '.$logDesc;
+    $logs = 'With IP: '. $userIP . '<'.$datetime.'>' .'= '.$logDesc;
 
     $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
         $statement2 = db()->prepare($sql2);
@@ -44,7 +44,8 @@ function audit_trail(string $logDesc, int $userAction = 1):void{
         $statement2->bindParam(':logs', $logs, PDO::PARAM_STR);
         $statement2->bindParam(':actionID', $userAction, PDO::PARAM_INT);
         $statement2->bindParam(':sessionID', $sesID);
-        $statement2->execute();
+
+        return $statement2->execute();
 
 }
 
