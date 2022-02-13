@@ -12,7 +12,7 @@ html,
 body {
     background-color: #fff;
     color: #555;
-    font-family: "Raleway",sans-serif;
+    font-family: "Raleway", sans-serif;
     font-weight: 300;
     font-size: 20px;
     text-rendering: optimizeLegibility;
@@ -79,7 +79,6 @@ h3 {
 h2:after {
     display: block;
     height: 2px;
-    background-color: #e67e22;
     content: " ";
     width: 100px;
     margin: 0 auto;
@@ -190,7 +189,28 @@ nav {
     font-size: 18px;
 }
 
+/* Error Message */
+
+.errormsg {
+    float: right;
+    font-size: 18px;
+    color: red;
+}
+
+.reqcolor{
+    display: inline;
+    color: #fab32e;
+}
+
 /* Login */
+
+.overlaybg {
+    background: linear-gradient(to right, #2465c7, 30%, #6fc5f0);
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    z-index: 10;
+}
 
 .login .center-form {
     position: absolute;
@@ -198,7 +218,7 @@ nav {
     left: 50%;
     transform: translate(-50%,-50%) scale(1.25);
     width: 1080px;
-    height: 50vh;
+    height: 60vh;
     padding: 20px 30px;
     background: #fff;
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
@@ -207,7 +227,8 @@ nav {
 
 /* Background */
 .login .center-form {
-    background-image: url("/test/rsc/loginbg.jpg");
+    background-image: url("/PTS-thesis/static/loginbg.jpg");
+    object-fit: contain;
     background-repeat: no-repeat;
     background-size: 50% 100%;
     transform: translate(-50%,-50%) scale(1);
@@ -218,7 +239,7 @@ nav {
     width: 50%;
     float: right;
     padding-left: 20px;
-    margin-top: 7%;
+    margin-top: 2%;
 }
 
 .login .center-form h2 {
@@ -232,24 +253,24 @@ nav {
     margin: 15px 0px;
 }
 
-.login .form-container h2 {
+.login .form-style h2 {
     text-align: center;
     color: #222;
     margin: 10px 0px 20px;
     font-size: 25px;
 }
 
-.login .form-container .form-element{
+.login .form-css .form-element{
     margin: 15px 0px;
 }
 
-.login .form-container .form-element label {
+.login .form-style .form-element label {
     font-size: 14px;
     color: #222;
 }
 
-.login .form-container .form-element input[type="text"],
-.login .form-container .form-element input[type="password"] {
+.login .form-style .form-element input[type="text"],
+.login .form-style .form-element input[type="password"] {
     margin-top: 5px;
     display: block;
     width: 100%;
@@ -259,19 +280,126 @@ nav {
     border-radius: 5px;
 }
 
-.login .form-container .form-element button {
+.login .form-style .form-element button {
     width: 100%;
     height: 40px;
     border: none;
     outline: none;
     font-size: 16px;
-    background: #1890FF;
+    background: #0084ff;
     color: #f5f5f5;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.login .form-container .form-element a{
+.login .form-style .form-element .btnsignup {
+    background: #32a5f1;
+}
+
+.login .form-style .form-element a{
+    display: block;
+    text-align: right;
+    font-size: 15px;
+    color:#5fa3df;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+/* Register */
+
+.overlaybg-signup {
+    background: linear-gradient(to right, #2465c7, 30%, #6fc5f0);
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    z-index: 10;
+}
+
+.signup .center-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1.25);
+    width: 1080px;
+    height: 60vh;
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+/* Background */
+.signup .center-form {
+    background-image: url("/PTS-thesis/static/loginbg.jpg");
+    object-fit: contain;
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+/* Container and Design for Elements */
+.signup .center-form .container-login {
+    width: 50%;
+    float: right;
+    padding-left: 20px;
+    margin-top: 2%;
+}
+
+.signup .center-form h2 {
+    text-align: center;
+    color: #222;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.signup .center-form .form-element{
+    margin: 15px 0px;
+}
+
+.signup .form-style h2 {
+    text-align: center;
+    color: #222;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.signup .form-css .form-element{
+    margin: 15px 0px;
+}
+
+.signup .form-style .form-element label {
+    font-size: 14px;
+    color: #222;
+}
+
+.signup .form-style .form-element input[type="text"],
+.signup .form-style .form-element input[type="password"] {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.signup .form-style .form-element button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: #0084ff;
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.signup .form-style .form-element .btnsignup {
+    background: #32a5f1;
+}
+
+.signup .form-style .form-element a{
     display: block;
     text-align: right;
     font-size: 15px;

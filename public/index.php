@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../src/bootstrap.php';
 is_user_2fa();
-echo audit_trail('User has successfuly viewed the landing page', 2);
+audit_trail('User has successfuly viewed the landing page', 2);
 ?>
 
 <?php view('header', ['title' => 'Dashboard']) ?>
