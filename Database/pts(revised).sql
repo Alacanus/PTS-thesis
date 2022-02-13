@@ -70,10 +70,8 @@ CREATE TABLE UserProfile (
 
 CREATE TABLE UserRoles (
   roleID int NOT NULL AUTO_INCREMENT,
-  userID int NOT NULL,
   roleType char(64),
-  PRIMARY KEY (roleID),
-  FOREIGN KEY (userID) REFERENCES Users(userID)
+  PRIMARY KEY (roleID)
 );
 
 CREATE TABLE AuditTrail (
