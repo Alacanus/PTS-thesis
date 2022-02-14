@@ -12,7 +12,7 @@ if(!auth_Level('Admin')){
 view('header', ['title' => 'Account Manage']) ?>
 <?php if (isset($errors['accountMGT'])) : ?>
     <div class="alert alert-error">
-        <?= $errors['accountMGT'] ?? print_r($errors) ?>
+        <?= $errors['accountMGT']?>
     </div>
 <?php endif ?>
 <script>
@@ -96,6 +96,46 @@ function createUser(){
     },
     });
 }
+
+function downloadFile(id){
+  var Option = 'download';
+    var link = '../src/inc/ajaxModal.php?fileID=';
+    var newlink = link + id + '&modalOption=' + Option;
+
+
+    $.ajax({
+    type: 'GET',
+    url: newlink,
+    success: function(data) {
+      const myJSON = JSON.parse(data);
+
+        console.log('it workz', myJSON['fileName']);
+        var Option = 'download2';
+        var link = '../src/inc/ajaxModal.php?fileID=';
+        var newlink = link + id + '&modalOption=' + Option;
+        fetch(newlink)
+        .then(resp => resp.blob())
+        .then(blob => {
+          var blobf = new Blob([blob], {type: "application/zip"});
+          var link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blobf);
+          var fileName = myJSON['fileName'];
+          link.download = fileName;
+          link.click();
+          alert('your file has downloaded!'); // or you know, something with better UX...
+        })
+        .catch(() => alert('oh no!'));
+
+
+
+    },
+    error:function(err){
+        // alert("error"+JSON.stringify(err));
+        alert("error");
+
+    },
+    });
+}
 </script>
 
 <div>
@@ -125,7 +165,7 @@ function createUser(){
                   echo '<button class="btn" src="../static/select.png"><i class="fa fa-bars"></i> View</button>';
                   echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modal" onclick ="UpdateStatus('.$options['userID'].')" src="../static/delete-user.png"><i class="fa fa-trash"></i> Update User</button>';
                   echo '<button class="btn" onclick ="deleteUser('.$options['userID'].')" src="../static/editing.png"><i class="fa fa-close"></i> Delete</button>';
-                  echo '<button class="btn" ><i class="fa fa-folder"></i> Folder</button></td>';
+                  echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modalFile" ><i class="fa fa-folder"></i> Folder</button></td>';
                 echo '</tr>';
             }
         ?>
@@ -227,6 +267,59 @@ function createUser(){
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="#modalCreate">Close</button> 
         <button onclick="createUser()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalFile" tabindex="-2" aria-labelledby="modalLavelFile" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLavelFile">User Files</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="#modalCreate" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">File name</th>
+            <th scope="col">class</th>
+            <th scope="col">owner</th>
+            <th scope="col">controls</th>
+          </tr>
+        </thead>
+              <tbody>
+                <?php
+                foreach($option_list3 as $options)
+                echo "<tr>";
+                echo '<td>'. $options['fileName'] .'</td>';
+                echo '<td>'. $options['filePath'] .'</td>';
+                echo '<td>'. $options['userID'] .'</td>';
+                echo '<td>';
+                  echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
+                  echo '<button class="btn" onclick ="deleteUser('.$options['userID'].')"><i class="fa fa-close"></i> Delete</button>';
+                echo '</tr>';
+
+
+                ?>
+              </tbody>
+      </table>
+      <form action="../src/upload.php" method="post" enctype="multipart/form-data">
+      Select image to upload:
+      <input type="file" name="fileToUpload" id="fileToUpload">
+      <input type="submit" value="Upload Image" name="submit">
+      </form>
+            <?php if (isset($errors['accountMGTFile'])) : ?>
+            <div class="alert alert-error">
+                <?= $errors['accountMGTFile']?>
+            </div>
+            <?php endif ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="#modalCreate">Close</button> 
+        <button onclick="" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

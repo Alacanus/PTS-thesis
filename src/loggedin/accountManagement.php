@@ -10,6 +10,10 @@ $tableNAme2 ='userroles';
 $optionVal2 ='roleID';
 $optionName2 ='roleType'; 
 $option_list2 = get_db_Options($tableNAme2 , $optionVal2, $optionName2);
+$tableNAme3 ='debugfiles';
+$optionVal3 ='fileName';
+$optionName3 ='filePath'; 
+$option_list3 = get_db_Options($tableNAme3 , $optionVal3, $optionName3);
 
 if (is_post_request()) {
 
@@ -38,7 +42,7 @@ if (is_post_request()) {
 
     $messages = [
         'usertype' => [
-            'required' => 'You need to agree to the term of services to register'
+            'required' => 'You need to select user type'
         ]
     ];
 

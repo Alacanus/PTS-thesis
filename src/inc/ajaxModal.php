@@ -5,7 +5,9 @@ require __DIR__ . '/../bootstrap.php';
 $return_arr = array();
 [$inputsget, $errors] = filter($_GET, [
     'userID' => 'string | required',
-    'modalOption' => 'string | required'
+    'modalOption' => 'string | required',
+    'fileID' => 'string | required',
+
 ]);
 
 [$inputs, $errors] = filter($_POST, [
@@ -94,6 +96,37 @@ if($inputsget['modalOption'] == 'get'){
     echo json_encode($return_arr);
    
     
+}elseif($inputsget['modalOption'] == 'download'){
+    $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['fileID'], PDO::PARAM_INT);
+    $statement->execute();
+    $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+    echo json_encode($filearr);
+
+    
+}elseif($inputsget['modalOption'] == 'download2'){
+    $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['fileID'], PDO::PARAM_INT);
+    $statement->execute();
+    $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if(file_exists($filearr['filePath']) && is_file($filearr['filePath']))
+    {
+        header('Cache-control: private');
+        header('Content-Type: application/octet-stream');
+        header('Content-Length: '.filesize($filearr['filePath']));
+        header('Content-Disposition: attachment; filename="'.basename($filearr['filePath']).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($filearr['filePath']));
+        readfile($filearr['filePath']);
+        exit;
+    
+    }
 }else{
+
     echo json_encode($_POST);
 }
