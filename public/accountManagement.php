@@ -16,6 +16,16 @@ view('header', ['title' => 'Account Manage']) ?>
     </div>
 <?php endif ?>
 <script>
+
+function SetID(id){
+  var temp = id;
+  console.log("this->",temp);
+  document.getElementById("user_idfile").value = temp;
+//   $.post('../src/loggedin/accountManagement.php', { user_idfile: id }, function(result) { 
+//    alert(result); 
+// });
+}
+
 function UpdateStatus(id)
     {
         var Option = 'get';
@@ -26,7 +36,6 @@ function UpdateStatus(id)
         url: newlink,
         success: function(data) {
             const myJSON = JSON.parse(data);
-        console.log('it workz', myJSON[0]);
             var select = document.querySelector('#usertype');
             select.options[select.selectedIndex].value = myJSON[0]['roleID'];
             select.options[select.selectedIndex].text = myJSON[0]['roleType'];
@@ -61,7 +70,6 @@ function deleteUser(id){
     url: newlink,
     success: function(data) {
         // const myJSON = JSON.parse(data);
-        console.log('it workz', data);
         alert("User Deleted");
         location.reload();
     },
@@ -81,9 +89,9 @@ function deleteFile(id){
     type: 'GET',
     url: newlink,
     success: function(data) {
+      console.log(data);
         // const myJSON = JSON.parse(data);
-        console.log('it workz', data);
-        alert("User Deleted");
+        alert("File Deleted", data);
         location.reload();
     },
     error:function(err){
@@ -173,6 +181,7 @@ function downloadFile(id){
   </thead>
   <tbody>
     <?php 
+                    if(is_array($option_list)){
             foreach($option_list as $options)
             { 
                 echo "<tr>";
@@ -186,9 +195,10 @@ function downloadFile(id){
                   echo '<button class="btn" src="../static/select.png"><i class="fa fa-bars"></i> View</button>';
                   echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modal" onclick ="UpdateStatus('.$options['userID'].')" src="../static/delete-user.png"><i class="fa fa-trash"></i> Update User</button>';
                   echo '<button class="btn" onclick ="deleteUser('.$options['userID'].')" src="../static/editing.png"><i class="fa fa-close"></i> Delete</button>';
-                  echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modalFile" ><i class="fa fa-folder"></i> Folder</button></td>';
+                  echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modalFile" onclick = SetID('.$options['userID'].')><i class="fa fa-folder"></i> Folder</button></td>';
                 echo '</tr>';
             }
+          }
         ?>
   </tbody>
 </table>
@@ -209,10 +219,12 @@ function downloadFile(id){
             <label for="usertype">User Type:</label>
             <select name="usertype" id="usertype"  class="<?= error_class($errors, 'usertype') ?>"required>
             <option value=""></option>
-            <?php 
+            <?php
+            if(is_array($option_list2)){
             foreach($option_list2 as $options2)
-            {
-                echo '<option value="'.$options2[$optionVal2].'">'.$options2[$optionName2].'</option>';
+              {
+                  echo '<option value="'.$options2[$optionVal2].'">'.$options2[$optionName2].'</option>';
+              }
             }
             ?>
             </select>
@@ -312,24 +324,40 @@ function downloadFile(id){
           </tr>
         </thead>
               <tbody>
+                <script>
+                  // $.ajax({    
+                  // type: "POST",
+                  // url: "/users/index/friendsnamefromids",
+                  // data: "IDS="+requests,
+                  // dataType: "json", 
+                  // success: function(response){
+                  //     var name = response;
+                  //             //Important code starts here to populate table  
+                  //     var yourTableHTML = "";
+                  //         jQuery.each(name, function(i,data) {
+                  //             $("#tablefriendsname").append("<tr><td>" + data + "</td></tr>");
+                  //         });
+                </script>
                 <?php
-                foreach($option_list3 as $options)
-                echo "<tr>";
-                echo '<td>'. $options['fileName'] .'</td>';
-                echo '<td>'. $options['filePath'] .'</td>';
-                echo '<td>'. $options['userID'] .'</td>';
-                echo '<td>';
-                  echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
-                  echo '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
-                echo '</tr>';
-
-
+                if(is_array($option_list3)){
+                foreach($option_list3 as $options){
+                    echo "<tr>";
+                    echo '<td>'. $options['fileName'] .'</td>';
+                    echo '<td>'. $options['filePath'] .'</td>';
+                    echo '<td>'. $options['userID'] .'</td>';
+                    echo '<td>';
+                      echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
+                      echo '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
+                    echo '</tr>';
+                  }
+                }
                 ?>
               </tbody>
       </table>
       <form action="../src/upload.php" method="post" enctype="multipart/form-data">
       Select image to upload:
-      <input type="file" name="fileToUpload" id="fileToUpload">
+      <input type="hidden" name="user_idfile" id="user_idfile" value ="">
+      <input type="file" name="fileToUpload" id="fileToUpload" required>
       <input type="submit" value="Upload Image" name="submit">
       </form>
             <?php if (isset($errors['accountMGTFile'])) : ?>

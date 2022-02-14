@@ -79,12 +79,26 @@ if($inputsget['modalOption'] == 'get'){
     echo json_encode($return_arr);
 
 }elseif($inputsget['modalOption'] == 'delete2'){
-
-    $sql = 'DELETE FROM debugfiles WHERE debugfiles.fileID = :userID';
+    $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
     $statement = db()->prepare($sql);
-    $statement->bindParam(':userID', $inputsget['userID'], PDO::PARAM_INT);
-    $return_arr = $statement->execute();
-    echo json_encode($return_arr);   
+    $statement->bindValue(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+    $statement->execute();
+    $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+    if (!unlink($filearr['filePath'])) { 
+        echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
+    } 
+    else { 
+        
+        $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
+
+        $statement2 = db()->prepare($sql2);
+        $statement2->bindParam(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+        $return_arr = $statement2->execute();
+        echo ($filearr['fileName'] ." has been deleted"); 
+    } 
+
+
+
 }elseif($inputs['Option'] == "Create"){
 
 

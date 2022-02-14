@@ -11,8 +11,8 @@ $optionVal2 ='roleID';
 $optionName2 ='roleType'; 
 $option_list2 = get_db_Options($tableNAme2 , $optionVal2, $optionName2);
 $tableNAme3 ='debugfiles';
-$optionVal3 ='fileName';
-$optionName3 ='filePath'; 
+$optionVal3 =$_SESSION['user_id'];
+$optionName3 ='userID'; 
 $option_list3 = get_db_Options($tableNAme3 , $optionVal3, $optionName3);
 
 if (is_post_request()) {

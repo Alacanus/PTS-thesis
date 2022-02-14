@@ -51,13 +51,13 @@ if ($uploadOk == 0) {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
   $sql = 'INSERT INTO debugfiles(fileName, filePath, userID)
-  VALUES(:fileName, :filePath, :userType)';
+  VALUES(:fileName, :filePath, :userID)';
   
   $statement = db()->prepare($sql);
   
   $statement->bindValue(':fileName', $_FILES["fileToUpload"]["name"]);
   $statement->bindValue(':filePath', $target_file);
-  $statement->bindValue(':userType', $_SESSION['user_id']);
+  $statement->bindValue(':userID', $_POST['user_idfile'] ?? $_SESSION['user_id']);
   
   $statement->execute();
 
