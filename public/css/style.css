@@ -12,7 +12,7 @@ html,
 body {
     background-color: #fff;
     color: #555;
-    font-family: "Raleway",sans-serif;
+    font-family: "Raleway", sans-serif;
     font-weight: 300;
     font-size: 20px;
     text-rendering: optimizeLegibility;
@@ -76,15 +76,14 @@ h3 {
     margin-bottom: 15px;
 }
 
-h2:after {
+/* h2:after {
     display: block;
     height: 2px;
-    background-color: #e67e22;
     content: " ";
     width: 100px;
     margin: 0 auto;
     margin-top: 30px;
-}
+} */
 
 /* ----- PARAGRAPHS ----- */
 .long-copy {
@@ -190,24 +189,46 @@ nav {
     font-size: 18px;
 }
 
+/* Error Message */
+
+.errormsg {
+    float: right;
+    font-size: 18px;
+    color: red;
+}
+
+.reqcolor{
+    display: inline;
+    color: #fab32e;
+}
+
 /* Login */
+
+.overlaybg {
+    background: linear-gradient(to right, #005c96, 60%, #6fc5f0);
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    z-index: 10;
+}
 
 .login .center-form {
     position: absolute;
-    top: 50%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%,-50%) scale(1.25);
     width: 1080px;
-    height: 50vh;
+    height: 60vh;
     padding: 20px 30px;
-    background: #fff;
+    background: rgb(250, 250, 250);
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
 }
 
 /* Background */
 .login .center-form {
-    background-image: url("/test/rsc/loginbg.jpg");
+    background-image: url("/PTS-thesis/static/loginbg2.jpg");
+    object-fit: fill;
     background-repeat: no-repeat;
     background-size: 50% 100%;
     transform: translate(-50%,-50%) scale(1);
@@ -218,11 +239,11 @@ nav {
     width: 50%;
     float: right;
     padding-left: 20px;
-    margin-top: 7%;
+    margin-top: 5%;
 }
 
 .login .center-form h2 {
-    text-align: center;
+    text-align: left;
     color: #222;
     margin: 10px 0px 20px;
     font-size: 25px;
@@ -232,24 +253,17 @@ nav {
     margin: 15px 0px;
 }
 
-.login .form-container h2 {
-    text-align: center;
-    color: #222;
-    margin: 10px 0px 20px;
-    font-size: 25px;
-}
-
-.login .form-container .form-element{
+.login .form-style .form-element{
     margin: 15px 0px;
 }
 
-.login .form-container .form-element label {
+.login .form-style .form-element label {
     font-size: 14px;
     color: #222;
 }
 
-.login .form-container .form-element input[type="text"],
-.login .form-container .form-element input[type="password"] {
+.login .form-style .form-element input[type="text"],
+.login .form-style .form-element input[type="password"] {
     margin-top: 5px;
     display: block;
     width: 100%;
@@ -259,19 +273,250 @@ nav {
     border-radius: 5px;
 }
 
-.login .form-container .form-element button {
+.login .form-style .form-element button {
     width: 100%;
     height: 40px;
     border: none;
     outline: none;
     font-size: 16px;
-    background: #1890FF;
+    background: #0084ff;
     color: #f5f5f5;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.login .form-container .form-element a{
+.login .form-style .form-element .btnsignup {
+    background: #32a5f1;
+}
+
+.login .form-style .form-element a{
+    display: block;
+    text-align: right;
+    font-size: 15px;
+    color:#5fa3df;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+/* --------- Register --------- */
+
+.signup .center-form-signup {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    width: 1280px;
+    height: 74vh;
+    padding: 5px 30px;
+    background: rgb(250, 250, 250);
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+}
+
+/* Background */
+.signup .center-form-signup {
+    background-image: url("/PTS-thesis/static/registerbg2.jpg");
+    object-fit: fill;
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+/* Container and Design for Elements */
+.signup .center-form-signup .container-signup {
+    width: 50%;
+    float: right;
+    padding-left: 20px;
+    margin-top: 2%;
+}
+
+.signup .center-form-signup h2 {
+    text-align: left;
+    color: #222;
+    margin: 5px 0px;
+    font-size: 30px;
+}
+
+.signup .center-form-signup .form-element{
+    margin: 1px 0px;
+}
+
+.signup .form-style .form-element{
+    margin: 15px 0px;
+}
+
+.signup .form-style .form-element label {
+    font-size: 14px;
+    color: #222;
+}
+
+.signup .form-style .form-element #fname,
+.signup .form-style .form-element #lname {
+    display: block;
+    width: 100%;
+}
+
+.signup .form-style .form-element input[type="text"],
+.signup .form-style .form-element input[type="password"],
+.signup .form-style .form-element input[type="email"],
+.signup .form-style .form-element input[type="email"],
+.signup .form-style .form-element input[type="username"],
+.signup .form-style .form-element select {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.signup .form-style .form-element .form-inline {
+    width: 49.5%;
+    margin-right: 0.5%;
+    margin-bottom: 3%;
+    float: left;
+}
+
+.signup .form-style .form-element button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: #0084ff;
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.signup .form-style .form-element .btnsignup {
+    background: #32a5f1;
+}
+
+.signup .form-style .form-element a {
+    display: block;
+    text-align: right;
+    font-size: 15px;
+    color:#5fa3df;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.signup .form-style .terms-container {
+    margin: 15px 0px;
+}
+
+.signup .form-style .terms-container label {
+    font-size: 16px;
+    color: #222;
+}
+
+.signup .form-style .terms-container label input {
+    margin-top: 2px;
+    margin-right: 7px;
+}
+
+.signup .form-style .terms-container a {
+    display: inline;
+    font-size: 16px;
+    color:#5fa3df;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.signup .form-style .signup-footer p {
+    font-size: 16px;
+}
+
+.signup .form-style .signup-footer a {
+    display: inline;
+    font-size: 16px;
+    color:#5fa3df;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Two-Step Verification */
+
+.twofactor .center-form-twofactor {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1.25);
+    width: 1080px;
+    height: 60vh;
+    padding: 20px 30px;
+    background: rgb(250, 250, 250);
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+/* Background */
+.twofactor .center-form-twofactor {
+    background-image: url("/PTS-thesis/static/twofactorbg.jpg");
+    object-fit: fill;
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+/* Container and Design for Elements */
+.twofactor .center-form-twofactor .container-twofactor {
+    width: 50%;
+    float: right;
+    padding-left: 20px;
+    margin-top: 5%;
+}
+
+.twofactor .center-form-twofactor h2 {
+    text-align: left;
+    color: #222;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.twofactor .center-form-twofactor .form-element{
+    margin: 15px 0px;
+}
+
+.twofactor .form-style .form-element{
+    margin: 15px 0px;
+}
+
+.twofactor .form-style .form-element label {
+    font-size: 14px;
+    color: #222;
+}
+
+.twofactor .form-style .form-element input[type="text"],
+.twofactor .form-style .form-element input[type="password"] {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.twofactor .form-style .form-element button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: #0084ff;
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.twofactor .form-style .form-element .btnsignup {
+    background: #32a5f1;
+}
+
+.twofactor .form-style .form-element a{
     display: block;
     text-align: right;
     font-size: 15px;

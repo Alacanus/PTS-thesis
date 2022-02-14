@@ -30,7 +30,7 @@ function generate_activation_code(): string
     return bin2hex(random_bytes(16));
 }
 
-function audit_trail(string $logDesc, int $userAction){
+function audit_trail(string $logDesc, int $userAction = 1){
     $datetime = new DateTime();
     $datetime = $datetime->format('d/m/Y');
     $userIP = getUserIpAddr();
