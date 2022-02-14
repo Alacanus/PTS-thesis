@@ -38,8 +38,8 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Courses</a></li>
-                    <li><button class="btn btn-nav btn-full">LOGIN</button></li>
-                    <li><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></li>
+                    <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
+                    <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
                 </ul>
             </div>
         </nav>
