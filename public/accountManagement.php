@@ -2,6 +2,9 @@
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/loggedin/accountManagement.php';
 
+// if (is_user_2fa() == 'false'){
+//   redirect_to('login.php');
+// }
 is_user_2fa();
 if(!auth_Level('Admin')){
     redirect_to('login.php');

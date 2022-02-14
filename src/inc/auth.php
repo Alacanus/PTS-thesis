@@ -1,5 +1,4 @@
 <?php
-
 /** bindValue for more flexibility
  * PDO::PARAM_BOOL (int)
  * PDO::PARAM_NULL (int)
@@ -127,37 +126,9 @@ function reset_Password(string $password, string $password2):bool{
     return false;
 }
 
-//isset check null
-function is_user_logged_in():bool{
-    return isset($_SESSION['username']);
-}
-
-function require_login():void{
-    if(!is_user_logged_in()){
-        redirect_to('login.php');
+function registred_user_auth(string $twofactorcode, string $genCode):bool{
+    if($twofactorcode == $genCode){
+        return true;
     }
+    return false;
 }
-
-function is_user_2fa():void{
-    if(!is_user_logged_in() && !isset($_SESSION['2fa'])){
-        redirect_to('login.php');
-    }
-}
-
-function logout():void{
-    if(is_user_logged_in()){
-        $_SESSION = array();
-        session_destroy();
-        redirect_to('login.php');
-    }
-}
-
-function current_user(){
-    if (is_user_logged_in()){
-        return $_SESSION['username'];
-        //pull from session
-    }
-    return null;
-}
-
-

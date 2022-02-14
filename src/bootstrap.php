@@ -187,3 +187,40 @@ function auth_Level( string $requirement)
     }
     return false;
 }
+
+//isset check null
+function is_user_logged_in():bool{
+    return isset($_SESSION['username']);
+}
+
+function require_login():void{
+    if(!is_user_logged_in()){
+        redirect_to('login.php');
+    }
+}
+
+function is_user_2fa(){
+    if(isset($_SESSION['2fa']) && isset($_SESSION['username'])){
+    return 'true';
+    // redirect_to('login.php');
+    }
+    return 'false';
+}
+
+function logout():void{
+    if(is_user_logged_in()){
+        $_SESSION = array();
+        session_destroy();
+        redirect_to('login.php');
+    }
+}
+
+function current_user(){
+    if (is_user_logged_in()){
+        return $_SESSION['username'];
+        //pull from session
+    }
+    return null;
+}
+
+

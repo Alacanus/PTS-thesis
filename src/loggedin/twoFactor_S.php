@@ -1,5 +1,4 @@
 <?php
-require __DIR__ . '/script/step1.php';
 $errors = [];
 $inputs = [];
 
@@ -34,9 +33,10 @@ if (is_post_request()) {
         //code passed
         //add prev
         audit_trail('user has passed 2fa');
+        $_SESSION['2fa'] = '2fa passed';
         redirect_with_message(
             'index.php',
-            'please check your email to activate your account before signing in'
+            'Two factor passed'
         );
     }else{
         $activation_code = generate_activation_code();

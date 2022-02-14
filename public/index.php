@@ -1,11 +1,18 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-is_user_2fa();
-audit_trail('User has successfuly viewed the landing page', 2);
+if (is_user_2fa() == 'false'){
+    redirect_to('login.php');
+}else{
+  audit_trail('User has successfuly viewed the landing page', 2);
+}
 ?>
 
 <?php view('header', ['title' => 'Dashboard']) ?>
+<p><?php if(!isset($_SESSION['2fa'])){
+echo $_SESSION['2fa'];
+} ?>
+</p>
 <pre>
 ───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───
 ───█▒▒░░░░░░░░░▒▒█───

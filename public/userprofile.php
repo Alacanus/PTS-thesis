@@ -3,8 +3,11 @@
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/loggedin/userProfile.php';
 
-
-is_user_2fa();
+if (is_user_2fa() == 'false'){
+    redirect_to('login.php');
+}else{
+  audit_trail('User has successfuly viewed the userprofile page', 2);
+}
 ?>
 
 <?php view('header', ['title' => 'User Profile']);
