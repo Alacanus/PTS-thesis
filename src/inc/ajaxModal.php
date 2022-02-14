@@ -72,12 +72,19 @@ if($inputsget['modalOption'] == 'get'){
         echo json_encode($return_arr);
 }elseif($inputsget['modalOption'] == 'delete'){
 
-    $sql = 'DELETE FROM users WHERE users.userID = :userID;';
+    $sql = 'DELETE FROM users WHERE users.userID = :userID';
     $statement = db()->prepare($sql);
     $statement->bindParam(':userID', $inputsget['userID'], PDO::PARAM_INT);
     $return_arr = $statement->execute();
     echo json_encode($return_arr);
-    
+
+}elseif($inputsget['modalOption'] == 'delete2'){
+
+    $sql = 'DELETE FROM debugfiles WHERE debugfiles.fileID = :userID';
+    $statement = db()->prepare($sql);
+    $statement->bindParam(':userID', $inputsget['userID'], PDO::PARAM_INT);
+    $return_arr = $statement->execute();
+    echo json_encode($return_arr);   
 }elseif($inputs['Option'] == "Create"){
 
 

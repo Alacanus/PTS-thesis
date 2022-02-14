@@ -73,6 +73,27 @@ function deleteUser(id){
     });
 
 }
+function deleteFile(id){
+    var Option = 'delete2';
+    var link = '../src/inc/ajaxModal.php?userID=';
+    var newlink = link + id + '&modalOption=' + Option;
+    $.ajax({
+    type: 'GET',
+    url: newlink,
+    success: function(data) {
+        // const myJSON = JSON.parse(data);
+        console.log('it workz', data);
+        alert("User Deleted");
+        location.reload();
+    },
+    error:function(err){
+        // alert("error"+JSON.stringify(err));
+        alert("error");
+
+    },
+    });
+
+}
 
 function createUser(){
     var link = '../src/inc/ajaxModal.php';
@@ -299,7 +320,7 @@ function downloadFile(id){
                 echo '<td>'. $options['userID'] .'</td>';
                 echo '<td>';
                   echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
-                  echo '<button class="btn" onclick ="deleteUser('.$options['userID'].')"><i class="fa fa-close"></i> Delete</button>';
+                  echo '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
                 echo '</tr>';
 
 
