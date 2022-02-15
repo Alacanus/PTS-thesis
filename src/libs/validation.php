@@ -23,6 +23,7 @@ const DEFAULT_VALIDATION_ERRORS = [
     'int' => 'The %s should have only numbers',
     'alphanumeric' => 'The %s should have only letters and numbers',
     'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
+    'unique' => 'The %s already exists',
 ];
 
 
@@ -205,4 +206,28 @@ function is_secure(array $data, string $field): bool
 
     $pattern = "#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#";
     return preg_match($pattern, $data[$field]);
+}
+
+/**
+* Return true if the $value is unique in the column of a table
+* @param array $data
+* @param string $field
+* @param string $table
+* @param string $column
+* @return bool
+*/
+function is_unique(array $data, string $field, string $table, string $column): bool
+{
+    if (!isset($data[$field])) {
+        return true;
+    }
+
+    $sql = "SELECT $column FROM $table WHERE $column = :value";
+
+    $stmt = db()->prepare($sql);
+    $stmt->bindValue(":value", $data[$field]);
+
+    $stmt->execute();
+
+    return $stmt->fetchColumn() === false;
 }

@@ -7,7 +7,7 @@ require __DIR__ . '/../src/loggedin/accountManagement.php';
 // }
 is_user_2fa();
 if(!auth_Level('Admin')){
-    redirect_to('login.php');
+    redirect_to('allowwedNOT.php');
 }
 view('header', ['title' => 'Account Manage']) ?>
 <?php if (isset($errors['accountMGT'])) : ?>
