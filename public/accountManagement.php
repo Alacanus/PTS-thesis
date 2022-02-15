@@ -19,11 +19,42 @@ view('header', ['title' => 'Account Manage']) ?>
 
 function SetID(id){
   var temp = id;
-  console.log("this->",temp);
+  // console.log("this->",temp);
   document.getElementById("user_idfile").value = temp;
 //   $.post('../src/loggedin/accountManagement.php', { user_idfile: id }, function(result) { 
 //    alert(result); 
 // });
+function loadTableData(items) {
+                    const table = document.getElementById("filesT");
+                    for(var i = 0; i < items.length; i++) {
+                      let row = table.insertRow();
+                      let Filename = row.insertCell(0);
+                      Filename.innerHTML = items[0]['fileName'];
+                      let Classname = row.insertCell(1);
+                      Classname.innerHTML = items[0]['filePath'];
+                      let Owner = row.insertCell(2);
+                      Owner.innerHTML = items[0]['userID'];
+                      let Controls = row.insertCell(3);
+                      Controls.innerHTML = items[0]['fileName'];
+                      // '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
+                      // '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
+                    }
+                  }
+                  var tname = 'debugfiles';
+                  var tcol = 'userID';
+                  var id = temp;
+                  $.ajax({    
+                  type: "POST",
+                  url: "../src/libs/tableFill.php",
+                  data: {tableName: tname, tableCol: tcol, tableVal: id},
+                  success: function(response){
+                    const myJSON = JSON.parse(response);
+                    // console.log("respone->",response);
+                    if(typeof myJSON[0]['fileName'] !== 'undefined'){
+                      loadTableData(myJSON);
+                    }
+                  }
+                      });
 }
 
 function UpdateStatus(id)
@@ -313,44 +344,29 @@ function downloadFile(id){
         <button type="button" class="btn-close" data-bs-dismiss="#modalCreate" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-  <table class="table">
+  <table class="table" name="filesT">
         <thead>
           <tr>
-            <th scope="col"></th>
             <th scope="col">File name</th>
-            <th scope="col">class</th>
+            <th scope="col">Path</th>
             <th scope="col">owner</th>
             <th scope="col">controls</th>
           </tr>
         </thead>
-              <tbody>
-                <script>
-                  // $.ajax({    
-                  // type: "POST",
-                  // url: "/users/index/friendsnamefromids",
-                  // data: "IDS="+requests,
-                  // dataType: "json", 
-                  // success: function(response){
-                  //     var name = response;
-                  //             //Important code starts here to populate table  
-                  //     var yourTableHTML = "";
-                  //         jQuery.each(name, function(i,data) {
-                  //             $("#tablefriendsname").append("<tr><td>" + data + "</td></tr>");
-                  //         });
-                </script>
+              <tbody id= "filesT">
                 <?php
-                if(is_array($option_list3)){
-                foreach($option_list3 as $options){
-                    echo "<tr>";
-                    echo '<td>'. $options['fileName'] .'</td>';
-                    echo '<td>'. $options['filePath'] .'</td>';
-                    echo '<td>'. $options['userID'] .'</td>';
-                    echo '<td>';
-                      echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
-                      echo '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
-                    echo '</tr>';
-                  }
-                }
+                // if(is_array($option_list3)){
+                // foreach($option_list3 as $options){
+                //     echo "<tr>";
+                //     echo '<td>'. $options['fileName'] .'</td>';
+                //     echo '<td>'. $options['filePath'] .'</td>';
+                //     echo '<td>'. $options['userID'] .'</td>';
+                //     echo '<td>';
+                //       echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
+                //       echo '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
+                //     echo '</tr>';
+                //   }
+                // }
                 ?>
               </tbody>
       </table>

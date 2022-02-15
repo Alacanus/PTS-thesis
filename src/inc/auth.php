@@ -36,17 +36,6 @@ function get_db_Options(string $tableName, string $optionVal, string $optionName
     return $option_list;
  }
 
- function get_db_Options2(string $tableName, string $optionVal, string $optionName) {
-    $option_list = '';
-    $sql = "SELECT * FROM `$tableName` WHERE $optionName = $optionVal";
-    $statement = db()->prepare($sql);
-    $statement->execute();
-    while($data=  $statement->fetchAll(PDO::FETCH_ASSOC)) {
-        $option_list = $data;
-       //$option_list.="<option value='$data[$optionVal]'>$data[$optionName]</option>";
-    }
-    return $option_list;
- }
 function find_user_by_username(string $username){
     $sql = 'SELECT username, userID,  password, active, email FROM users WHERE username= :username';
     $statement = db()->prepare($sql);
