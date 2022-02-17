@@ -3,6 +3,10 @@ $inputs = [];
 $errors = [];
 
 $option_list = get_db_Modules($_SESSION['post']['tempClassid']);
+$tableNAme3 ='actiontype';
+$optionVal3 ="actionType ";
+$optionName3 ='actionType'; 
+$option_list2 = get_db_Options($tableNAme3 , $optionVal3, $optionName3);
 if (is_post_request()) {
 
     [$inputs, $errors] = filter($_POST, [
@@ -49,21 +53,22 @@ if (is_post_request()) {
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
     
-            $assoc= upload_file_Record(basename($_FILES["fileToUpload"]["name"]), $target_file);
-            $_SESSION['key'] = $assoc;
-        $sql2 = 'INSERT INTO classmodules (moduleName, chapter, fileID, classID)
-        VALUES(:moduleName, :chapter, :fileID,:classID)';
-        
-        $statement2 = db()->prepare($sql2);
-        
-        $statement2->bindValue(':moduleName', $inputs['moduleName']);
-        $statement2->bindValue(':chapter', $inputs['chapter']);
-        $statement2->bindValue(':fileID', $assoc['fileID'] ?? 0);
-        $statement2->bindValue(':classID', $_SESSION['post']['tempClassid']);
 
-        
-        $statement2->execute();
-
+            $sql = 'INSERT INTO debugfiles(fileName, filePath, userID, classID)
+            VALUES(:fileName, :filePath, :userID, :contID);
+            INSERT INTO classmodules (moduleName, chapter, fileID, classID)
+            VALUES(:moduleName, :chapter, LAST_INSERT_ID(),:classID)';
+            
+            $statement = db()->prepare($sql);
+            
+            $statement->bindValue(':fileName', basename( $_FILES["fileToUpload"]["name"]));
+            $statement->bindValue(':filePath', $target_file);
+            $statement->bindValue(':userID', $_SESSION['user_id']);
+            $statement->bindValue(':contID', $_SESSION['post']['tempClassid']);
+            $statement->bindValue(':classID', $_SESSION['post']['tempClassid']);
+            $statement->bindValue(':moduleName', $inputs['moduleName']);
+            $statement->bindValue(':chapter', $inputs['chapter']);
+            $statement->execute();
         
 
 
@@ -72,10 +77,12 @@ if (is_post_request()) {
             }
     
         $errors['classRooms'] = "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-    
+        if($inputs['next']){
             redirect_with('createClass3.php', [
                 'errors' => $errors
             ]);
+        }
+
         } else {
         $errors['classRooms'] = "Sorry, there was an error in your submission your file.";
     

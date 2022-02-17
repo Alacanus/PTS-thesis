@@ -34,10 +34,10 @@ function read_db(string $tableName) {
 
  function get_db_Modules(string $classID) {
     $option_list = '';
-        $sql = "SELECT * FROM classmodules INNER JOIN debugfiles ON debugfiles.classContentID  = classmodules.classID 
-        WHERE classmodules.classID = :classID";
+        $sql = "SELECT * FROM classmodules INNER JOIN debugfiles ON debugfiles.fileID  = classmodules.fileID 
+        WHERE classmodules.fileID = debugfiles.fileID";
         $statement = db()->prepare($sql);
-        $statement->bindValue(':classID', $classID, PDO::PARAM_INT);
+        // $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
         $statement->execute();
         while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
             $option_list = $data;
@@ -45,21 +45,6 @@ function read_db(string $tableName) {
       
     return $option_list;
  }
-
- function upload_file_Record(string $fname, string $fpath){
-    $sql = 'INSERT INTO debugfiles(fileName, filePath, userID, classContentID)
-    VALUES(:fileName, :filePath, :userID, :contID)';
-    
-    $statement = db()->prepare($sql);
-    
-    $statement->bindValue(':fileName', $fname);
-    $statement->bindValue(':filePath', $fpath);
-    $statement->bindValue(':userID', $_SESSION['user_id']);
-    $statement->bindValue(':contID', $_SESSION['post']['tempClassid']);
-    $statement->execute();
-    return $statement->fetch(PDO::FETCH_ASSOC);
- }
-
  function update(string $password, string $password2):bool{
     if($password == $password2){
         $sql = 'UPDATE users

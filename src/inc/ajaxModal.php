@@ -26,6 +26,8 @@ $return_arr = array();
     'Option' => 'string | required',
     'usertype' => 'string | required',
     'password' => 'string | required',
+    'Learners' => 'string | required',
+    'Instructors' => 'string | required',
 
 ]);
 
@@ -141,9 +143,34 @@ if($inputsget['modalOption'] == 'get'){
 
     $return_arr=$statement->execute();
     echo json_encode($return_arr);
-   
+
+
+}elseif($inputs['Option'] == "createStone"){
+
+        // $sql = 'INSERT INTO milestone (milestoneName, description, Mtrigger)VALUES(:milestoneName, :description, :Mtrigger)';
+    // if(isset($_POST['Instructors'])) {
+        $sql = 'INSERT INTO milestone (milestoneName, description, Mtrigger , userID )VALUES(:milestoneName, :description, :Mtrigger, :userid);';
+//         return $sql;
+//    }
+
+   if(filter_has_var(INPUT_POST,'Learners')) {
+    // ...add sql option for 
+}
+
+    $statement = db()->prepare($sql);
+
+
+    $statement->bindValue(':milestoneName', $_POST['milestoneName'], PDO::PARAM_STR);
+    $statement->bindValue(':description', $_POST['milestonedesc'], PDO::PARAM_STR);
+    $statement->bindValue(':Mtrigger', $_POST['milestoneTrigger'], PDO::PARAM_INT);
+    $statement->bindValue(':userid', $_SESSION['user_id'], PDO::PARAM_INT);
+    //$statement->bindValue(':password', $_SESSION['enrolID'], PDO::PARAM_INT);
+
+
+    $return_arr=$statement->execute();
+    echo json_encode($return_arr);
     
-}elseif($inputsget['modalOption'] == 'download'){
+}elseif($inputsget['modalOption'] == 'download'){//get file details
     $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
     $statement = db()->prepare($sql);
     $statement->bindValue(':fileID', $inputsget['fileID'], PDO::PARAM_INT);
@@ -152,7 +179,7 @@ if($inputsget['modalOption'] == 'get'){
     echo json_encode($filearr);
 
     
-}elseif($inputsget['modalOption'] == 'download2'){
+}elseif($inputsget['modalOption'] == 'download2'){//get file stream
     $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
     $statement = db()->prepare($sql);
     $statement->bindValue(':fileID', $inputsget['fileID'], PDO::PARAM_INT);

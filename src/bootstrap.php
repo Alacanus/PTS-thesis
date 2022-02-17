@@ -108,7 +108,7 @@ function send_authentication_email(string $email, string $options ,$activation_c
         $mail->Host = 'smtp.titan.email';
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username = 'no-reply@pts-thesis.website';            //SMTP username
-        $mail->Password = 'Zn=m4v*Jrv4?L)4c';                       //SMTP password will try to hide this
+        $mail->Password = '3Lbe8jY=JSs$m^vy';                       //SMTP password will try to hide this
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
