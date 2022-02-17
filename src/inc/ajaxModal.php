@@ -99,6 +99,14 @@ if($inputsget['modalOption'] == 'get'){
         echo ($filearr['fileName'] ." has been deleted"); 
     } 
 
+}elseif($inputsget['modalOption'] == 'RemoveStone'){
+    $sql = 'DELETE FROM milestone WHERE mileStoneID = :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+    $filearr = $statement->execute();
+    echo ($filearr['milestoneName'] ." has been deleted");
+
+
 
 }elseif($inputsget['modalOption'] == 'delete2f'){
         $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
@@ -128,6 +136,23 @@ if($inputsget['modalOption'] == 'get'){
 
 
 }elseif($inputs['Option'] == "Create"){
+
+
+    $sql = 'INSERT INTO users (username, email, password, firstname, lastname, roleID, active)VALUES(:username, :email, :password, :firstname, :lastname, :userType, 1);
+    INSERT INTO userprofile (`userID`) VALUES (LAST_INSERT_ID())';
+    $statement = db()->prepare($sql);
+
+    $statement->bindValue(':username', $inputs['username']);
+    $statement->bindValue(':email', $inputs['email']);
+    $statement->bindValue(':firstname', $inputs['firstname'], PDO::PARAM_STR);
+    $statement->bindValue(':lastname', $inputs['lastName'], PDO::PARAM_STR);
+    $statement->bindValue(':userType', $inputs['usertype'], PDO::PARAM_INT);
+    $statement->bindValue(':password', password_hash($inputs['password'], PASSWORD_BCRYPT));
+
+    $return_arr=$statement->execute();
+    echo json_encode($return_arr);
+
+}elseif($inputs['Option'] == "applyStone"){
 
 
     $sql = 'INSERT INTO users (username, email, password, firstname, lastname, roleID, active)VALUES(:username, :email, :password, :firstname, :lastname, :userType, 1);

@@ -155,6 +155,28 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
 
 }
 
+function RemoveStone(id){
+    var Option = 'RemoveStone';
+    var link = '../../src/inc/ajaxModal.php?userID=';
+    var newlink = link + id + '&modalOption=' + Option;
+    $.ajax({
+    type: 'GET',
+    url: newlink,
+    success: function(data) {
+      console.log(data);
+        // const myJSON = JSON.parse(data);
+        alert("File Deleted", data);
+        location.reload();
+    },
+    error:function(err){
+        // alert("error"+JSON.stringify(err));
+        alert("error"+JSON.stringify(err));
+
+    },
+    });
+
+}
+
 function downloadFile(id){
   var Option = 'download';
     var link = '../../src/inc/ajaxModal.php?fileID=';
@@ -213,20 +235,20 @@ function resetTable(){
                       let Owner = row.insertCell(2);
                       Owner.innerHTML = items[i]['Mtrigger'];
                       let Controls = row.insertCell(3);
-                      Controls.innerHTML = "<button type='button' onclick=\"downloadFile(\'" + items[i]['fileID'] + "\')\" >Apply</button><br><button type='button' onclick=\"deleteFile(\'" + items[i]['fileID'] + "\')\" >Remove</button><br>";
+                      Controls.innerHTML = "<button type='button' onclick=\"appymileStone(\'" + items[i]['mileStoneID'] + "\')\" >Apply</button><br><button type='button' onclick=\"RemoveStone(\'" + items[i]['mileStoneID'] + "\')\" >Remove</button><br>";
                       // '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
                       // '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
                     }
                   }
                   var tname = 'milestone';
-                  var tcol = 'mileStoneID ';
-                  var id = '2';
+                  var tcol = null;
+                  var id = null;
                   $.ajax({    
-                  type: "POST",
+                  type: "GET",
                   url: "../../src/libs/tableFill.php",
                   data: {tableName: tname, tableCol: tcol , tableVal: id},
                   success: function(response){
-                    console.log("respone->",response);
+                    // console.log("respone->",response);
                     const myJSON = JSON.parse(response);
                     if(typeof myJSON[0]['mileStoneID'] !== 'undefined'){
                       loadTableData(myJSON);
@@ -264,6 +286,32 @@ function createmileStone(){
 
 function move2(){
   window.location.href="/createClass4.php";
+}
+
+function appymileStone(id){
+  var link = '../../src/inc/ajaxModal.php';
+
+var data = $("form[name=createStoneForm]").serializeArray(); // convert form to array
+data.push({name: 'Option', value: 'applyStone'});
+data.push({name: 'id', value: id});
+
+// $.ajax({
+// type: 'POST',
+// url: link,
+// data: data,
+// success: function(data) {
+//     // const myJSON = JSON.parse(data);
+//     console.log('it workz', data);
+//     alert("Milestone Created");
+//     location.reload();
+// },
+// error:function(err){
+//     // alert("error"+JSON.stringify(err));
+//     alert("error");
+
+// },
+// });
+alert('not working yet');
 }
 </script>
 

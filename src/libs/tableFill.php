@@ -19,4 +19,21 @@ $return_arr = array(0);
        echo json_encode($option_list);
     }
 
+ }else{
+   $tableName = $_GET['tableName'];
+   $tableCol = $_GET['tableCol'];
+   $tableVal = $_GET['tableVal'];
+   $sql = "SELECT * FROM `$tableName`";
+   $statement = db()->prepare($sql);
+   $statement->execute();
+   while($data=  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+       $option_list = $data;
+      //$option_list.="<option value='$data[$optionVal]'>$data[$optionName]</option>";
+   }
+   $count = $statement->rowCount();
+   if($count <= 0){
+      echo json_encode($return_arr);
+   }else{
+      echo json_encode($option_list);
+   }
  }
