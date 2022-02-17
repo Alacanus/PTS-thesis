@@ -1,5 +1,10 @@
 <?php
 //sql functions
+define("ROW_PER_PAGE",10);
+$per_page_html = '';
+$page = 1;
+$start=0;
+$limit=" limit " . $start . "," . ROW_PER_PAGE;
 function create(string $email, string $username, string $password, string $fname, string $lname, string $userType, string $activation_code, int $expiry = 1 * 24  * 60 * 60): bool
 {
     $sql = 'INSERT INTO users(username, email, password, firstname, lastname, roleID, activation_code, activation_expiry)

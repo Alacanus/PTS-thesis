@@ -23,8 +23,25 @@ use PHPMailer\PHPMailer\Exception;
 require __DIR__ . '/../PHPMailer/src/Exception.php';
 require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer/src/SMTP.php';
+$globalARR = array();
 
 
+function global_arr(string $arrKey){
+    global $globalARR;
+    switch ($arrKey) {
+        case 1:
+          return $globalARR['classcrt1'];
+          break;
+        case 2:
+          return $globalARR['classcrt2'];
+          break;
+        case 3:
+          return $globalARR['classcrt3'];
+          break;
+        default:
+          return $globalARR;
+      }
+}
 function generate_activation_code(): string
 {
     return bin2hex(random_bytes(16));

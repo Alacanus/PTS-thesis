@@ -2,26 +2,39 @@
 require __DIR__ . '/../src/bootstrap.php';
 $errors = [];
 
+/**improvement 
+function check_file_uploaded_name ($filename)
+{
+    (bool) ((preg_match("`^[-0-9A-Z_\.]+$`i",$filename)) ? true : false);
+}
 
+*/
 if (is_post_request()) {
   define ('SITE_ROOT', realpath(dirname(__FILE__)));
 
   $target_dir = SITE_ROOT."/../Writable/";
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  // $FileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
   // Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
+// if(isset($_POST["submit"])) {
+//   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+//   if($check !== false) {
+//     echo "File is an image - " . $check["mime"] . ".";
+//     $uploadOk = 1;
+//   } else {
+//     echo "File is not an image.";
+//     $uploadOk = 0;
+//   }
+// }
+
+// if(!mb_strlen($_FILES["fileToUpload"]["name"],"UTF-8")> 225){
+//   $uploadOk = 0;
+// }
+// if(!preg_match("`^[-0-9A-Z_\.]+$`i",$filename)){
+//   $uploadOk = 0;
+// }
 
 // Check if file already exists
 if (file_exists($target_file)) {

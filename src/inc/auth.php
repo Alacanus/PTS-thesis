@@ -1,4 +1,5 @@
 <?php
+
 /** bindValue for more flexibility
  * PDO::PARAM_BOOL (int)
  * PDO::PARAM_NULL (int)

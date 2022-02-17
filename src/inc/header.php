@@ -35,9 +35,9 @@
             <div class="row">
                 <div class="logo">PTS</div>
                 <ul class="main-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Courses</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="viewfaq.php">About</a></li>
+                    <li><a href="classlist.php">Courses</a></li>
                     <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
                     <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
                 </ul>

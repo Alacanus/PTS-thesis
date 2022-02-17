@@ -19,8 +19,8 @@ if (is_post_request()) {
 
 
     [$inputs, $errors] = filter($_POST, [
-        'username' => 'string | required',
-        'email' => 'string | required',
+        'username' => 'string | required | alphanumeric | between: 3, 25',
+        'email' => 'email | required | email',
         'firstname' => 'string | required',
         'lastName' => 'string | required',
         'gender' => 'string | required',
