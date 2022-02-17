@@ -9,7 +9,7 @@ if (is_post_request()) {
     
 
     [$inputs, $errors] = filter($_POST, [
-        'email' => 'email | required | email | unique: users, email',
+        'email' => 'email | required | email | between: 3, 255',
     ]);
 
     $messages = [

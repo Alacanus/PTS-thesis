@@ -15,7 +15,6 @@ require_once __DIR__ . '/inc/dbCRUD.php';
 
 include __DIR__ . "/../Model/Includes/getConVar.php";
 
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -55,7 +54,8 @@ function audit_trail(string $logDesc, int $userAction = 1){
 
     $logs = 'With IP: '. $userIP . '<'.$datetime.'>' .'= '.$logDesc;
 
-    $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
+    if(isset($_SESSION['user_id'])){
+        $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
         $statement2 = db()->prepare($sql2);
         $statement2->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
         $statement2->bindParam(':logs', $logs, PDO::PARAM_STR);
@@ -64,6 +64,7 @@ function audit_trail(string $logDesc, int $userAction = 1){
 
         return $statement2->execute();
 
+    }
 }
 
 

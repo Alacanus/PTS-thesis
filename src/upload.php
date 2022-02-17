@@ -2,13 +2,7 @@
 require __DIR__ . '/../src/bootstrap.php';
 $errors = [];
 
-/**improvement 
-function check_file_uploaded_name ($filename)
-{
-    (bool) ((preg_match("`^[-0-9A-Z_\.]+$`i",$filename)) ? true : false);
-}
 
-*/
 if (is_post_request()) {
   define ('SITE_ROOT', realpath(dirname(__FILE__)));
 
@@ -29,12 +23,12 @@ if (is_post_request()) {
 //   }
 // }
 
-// if(!mb_strlen($_FILES["fileToUpload"]["name"],"UTF-8")> 225){
-//   $uploadOk = 0;
-// }
-// if(!preg_match("`^[-0-9A-Z_\.]+$`i",$filename)){
-//   $uploadOk = 0;
-// }
+if(mb_strlen($_FILES["fileToUpload"]["name"],"UTF-8")> 225){
+  $uploadOk = 0;
+}
+if(preg_match("`^[-0-9A-Z_\.]+$`i",$filename)){
+  $uploadOk = 0;
+}
 
 // Check if file already exists
 if (file_exists($target_file)) {

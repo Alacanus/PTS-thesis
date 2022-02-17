@@ -2,12 +2,13 @@
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/loggedin/accountManagement.php';
 
-// if (is_user_2fa() == 'false'){
-//   redirect_to('login.php');
-// }
-is_user_2fa();
+if (is_user_2fa() == 'false'){
+  redirect_to('login.php');
+}else{
+  audit_trail('User has visited AccountManagement', 2);
+  }
 if(!auth_Level('Admin')){
-    redirect_to('allowwedNOT.php');
+    redirect_to('allowedNOT.php');
 }
 view('header', ['title' => 'Account Manage']) ?>
 <?php if (isset($errors['accountMGT'])) : ?>
@@ -163,7 +164,7 @@ view('header', ['title' => 'Account Manage']) ?>
         <button type="button" class="btn-close" data-bs-dismiss="#modalCreate" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-  <table class="table" name="filesT">
+      <table class="table" name="filesT">
         <thead>
           <tr>
             <th scope="col">File name</th>
@@ -230,6 +231,7 @@ function SetID(id){
 //   $.post('../src/loggedin/accountManagement.php', { user_idfile: id }, function(result) { 
 //    alert(result); 
 // });
+resetTable();
 function resetTable(){
   document.getElementById("filesT").innerHTML = '';
 }
@@ -339,7 +341,7 @@ function deleteFile(id){
     },
     error:function(err){
         // alert("error"+JSON.stringify(err));
-        alert("error");
+        alert("error"+JSON.stringify(err));
 
     },
     });

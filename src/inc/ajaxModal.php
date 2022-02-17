@@ -98,6 +98,32 @@ if($inputsget['modalOption'] == 'get'){
     } 
 
 
+}elseif($inputsget['modalOption'] == 'delete2f'){
+        $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+        $statement->execute();
+        $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!unlink($filearr['filePath'])) { 
+            echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
+        } 
+        else { 
+            
+            $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
+    
+            $statement2 = db()->prepare($sql2);
+            $statement2->bindParam(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+            $return_arr = $statement2->execute();
+
+            $sql = 'DELETE FROM classmodules WHERE fileID = :fileID';
+    
+            $statement = db()->prepare($sql);
+            $statement->bindParam(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+            $return_arr = $statement->execute();
+            echo ($filearr['fileName'] ." has been deleted"); 
+        }
+
+
 
 }elseif($inputs['Option'] == "Create"){
 

@@ -1,42 +1,40 @@
 <?php
-
 $inputs = [];
 $errors = [];
 
 if (is_post_request()) {
 
-    // if ($errors) {
-    //     redirect_with('userprofile.php', [
-    //         'errors' => $errors
-    //     ]);
-    // }
 
-    // $messages = [
-    //     'usertype' => [
-    //         'required' => 'You need to agree to the term of services to register'
-    //     ]
-    // ];
 
-    // if(update_user_Profile($_SESSION['user_id'], $inputs['email'], $inputs['username'],  $inputs['firstname'], $inputs['lastName'], $inputs['usertype'],
-    // $inputs['gender'],  $inputs['age'],  $inputs['birthday'], $inputs['address'], $inputs['contactno'], $inputs['aboutme']
-    // )){
-    //     sleep(3);
-    //     $user = null;
-    //     $errors['userProfile'] = 'User account has been Edited';
+    [$inputs, $errors] = filter($_POST, [
+        'className' => 'string | required | between: 3, 255',
+        'description' => 'string | required | between: 3, 255',
+    ]);
+    
 
-    //     redirect_with('userprofile.php', [
-    //         'errors' => $errors,
-    //         'inputs' => $inputs
-    //     ]);
-    // }else{
-    //     $errors['userProfile'] = 'NO workey';
+    if ($errors) {
+        redirect_with('createClass1.php', [
+            'errors' => $errors,
+            'inputs' => $inputs
 
-    //     redirect_with('userprofile.php', [
-    //         'errors' => $errors,
-    //         'inputs' => $inputs
-    //     ]);
-    // }
+        ]);
+    }
 
+    foreach ($_POST as $key => $value) {
+        $_SESSION['post'][$key] = $value;
+        }
+
+        // $sql2 = "INSERT INTO package (`className`,`description` ) VALUES (:userID)";
+        // $statement2 = db()->prepare($sql2);
+        // $statement2->bindParam(':userID', $userID, PDO::PARAM_INT);
+        // if($statement2->execute()){
+        //     redirect_with('createClass2.php', [
+        //         'inputs' => $inputs
+        //     ]);
+        // }
+            redirect_with('createClass2.php', [
+                'inputs' => $inputs
+            ]);
 
 } else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2022 at 01:20 PM
+-- Generation Time: Feb 13, 2022 at 10:17 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -77,6 +77,76 @@ CREATE TABLE `audittrail` (
   `userID` int(11) NOT NULL,
   `actionID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `audittrail`
+--
+
+INSERT INTO `audittrail` (`auditID`, `logs`, `tableName`, `userID`, `actionID`) VALUES
+(2, '', '', 2, 2),
+(3, '', '', 3, 2),
+(4, '', '', 6, 2),
+(5, '', '', 5, 2),
+(6, '', '', 4, 2),
+(7, 'user: 9with IP: ::1= User has successfuly viewed the landing pag', NULL, 9, 1),
+(8, 'user: 9with IP: ::1= User has successfuly viewed the landing pag', NULL, 9, 1),
+(9, 'user: 9with IP: ::1= User logouted of the system', NULL, 9, 1),
+(18, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(19, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(20, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(21, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(22, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(23, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(24, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(25, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(26, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(27, 'user: 9 with IP: ::1<11/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(28, 'user: 9 with IP: ::1<12/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(29, 'user: 9 with IP: ::1<12/02/2022>= User has successfuly viewed th', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(30, 'user: 9 with IP: ::1<12/02/2022>= User logouted of the system', 'fbu585fj4ng5rbt0bsicdvimkm', 9, 1),
+(31, 'user: 69 with IP: ::1<12/02/2022>= user has login', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 2),
+(32, 'user: 69 with IP: ::1<12/02/2022>= user has passed 2fa', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 1),
+(33, 'user: 69 with IP: ::1<12/02/2022>= User has successfuly viewed t', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 1),
+(34, 'user: 69 with IP: ::1<12/02/2022>= User has successfuly viewed t', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 1),
+(35, 'user: 69 with IP: ::1<12/02/2022>= User has successfuly viewed t', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 1),
+(36, 'user: 69 with IP: ::1<12/02/2022>= User has successfuly viewed t', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 1),
+(37, 'user: 69 with IP: ::1<12/02/2022>= User logouted of the system', 'mtkfdg2sfkisud6vpq3aa18b3i', 69, 1),
+(38, 'user: 66 with IP: ::1<12/02/2022>= user has login', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 2),
+(39, 'user: 66 with IP: ::1<12/02/2022>= user has passed 2fa', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(40, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(41, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(42, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(43, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(44, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(45, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(46, 'user: 66 with IP: ::1<12/02/2022>= User has successfuly viewed t', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(47, 'with IP: ::1<12/02/2022>= User has successfuly viewed the landin', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(48, 'with IP: ::1<12/02/2022>= User has successfuly viewed the landin', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(49, 'with IP: ::1<12/02/2022>= User logouted of the system', '0sfc2c24eppbhs71sk6hn6gdh2', 66, 1),
+(50, 'with IP: ::1<12/02/2022>= user has login', 'ck9lhotf189lgqtargc8nmud6v', 66, 2),
+(51, 'with IP: ::1<12/02/2022>= user has passed 2fa', 'ck9lhotf189lgqtargc8nmud6v', 66, 1),
+(52, 'with IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'ck9lhotf189lgqtargc8nmud6v', 66, 1),
+(53, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'ck9lhotf189lgqtargc8nmud6v', 66, 1),
+(54, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'ck9lhotf189lgqtargc8nmud6v', 66, 1),
+(55, 'With IP: ::1<12/02/2022>= User logouted of the system', 'ck9lhotf189lgqtargc8nmud6v', 66, 1),
+(56, 'With IP: ::1<12/02/2022>= user has login', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(57, 'With IP: ::1<12/02/2022>= user has passed 2fa', 'emegrn2digbsv3pjg3gc68d0s8', 9, 1),
+(58, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 1),
+(59, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(60, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(61, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(62, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(63, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(64, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(65, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(66, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(67, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(68, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(69, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(70, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(71, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(72, 'With IP: ::1<12/02/2022>= User has successfuly viewed the landin', 'emegrn2digbsv3pjg3gc68d0s8', 9, 2),
+(73, 'With IP: ::1<13/02/2022>= User logouted of the system', 'emegrn2digbsv3pjg3gc68d0s8', 9, 3);
 
 -- --------------------------------------------------------
 
@@ -158,6 +228,7 @@ CREATE TABLE `classes` (
 
 CREATE TABLE `classevaluation` (
   `evaluateID` int(11) NOT NULL,
+  `coordinatorID` int(11) NOT NULL,
   `Cstatus` varchar(25) DEFAULT NULL,
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -193,29 +264,6 @@ CREATE TABLE `classprofile` (
   `skillLevel` varchar(64) DEFAULT NULL,
   `classID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `debugfiles`
---
-
-CREATE TABLE `debugfiles` (
-  `fileID` int(11) NOT NULL,
-  `fileName` varchar(196) DEFAULT NULL,
-  `filePath` varchar(196) DEFAULT NULL,
-  `datePosted` datetime DEFAULT current_timestamp(),
-  `dateModified` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `userID` int(11) NOT NULL,
-  `classContentID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `debugfiles`
---
-
-INSERT INTO `debugfiles` (`fileID`, `fileName`, `filePath`, `datePosted`, `dateModified`, `userID`, `classContentID`) VALUES
-(17, '271992504_2089108887931014_5179518123402378248_n.png', 'C:\\xampp\\htdocs\\PTS-thesis\\src/../Writable/271992504_2089108887931014_5179518123402378248_n.png', '2022-02-15 19:10:52', '2022-02-15 19:10:52', 71, 0);
 
 -- --------------------------------------------------------
 
@@ -421,13 +469,6 @@ CREATE TABLE `questionnaire` (
   `testID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `questionnaire`
---
-
-INSERT INTO `questionnaire` (`questionnaireID`, `question`, `answer`, `points`, `testID`) VALUES
-(1, NULL, NULL, NULL, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -503,13 +544,6 @@ CREATE TABLE `test` (
   `questionnaireID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`testID`, `testName`, `testDescription`, `testType`, `meetingLink`, `result`, `questionnaireID`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -560,7 +594,7 @@ CREATE TABLE `userprofile` (
   `birthday` date DEFAULT NULL,
   `address` char(64) DEFAULT NULL,
   `contactno` char(64) DEFAULT NULL,
-  `aboutme` varchar(320) DEFAULT NULL,
+  `aboutme` varchar(96) DEFAULT NULL,
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -569,8 +603,19 @@ CREATE TABLE `userprofile` (
 --
 
 INSERT INTO `userprofile` (`profileID`, `age`, `gender`, `birthday`, `address`, `contactno`, `aboutme`, `userID`) VALUES
-(33, NULL, NULL, NULL, NULL, NULL, NULL, 71),
-(34, NULL, NULL, NULL, NULL, NULL, NULL, 72);
+(1, '22', 'M', '0000-00-00', '#00 St. Galor Westmanor Maybuhay Pasig City', '639', 'A person you can vibe with', 2),
+(2, '23', 'M', '0000-00-00', '#00 St. Galor Westmanor Maybuhay Pasig City', '639', 'A person you can vibe with', 3),
+(3, '24', 'M', '0000-00-00', '#00 St. Galor Westmanor Maybuhay Pasig City', '639', 'A person you can vibe with', 4),
+(4, '21', 'M', '0000-00-00', '#00 St. Galor Westmanor Maybuhay Pasig City', '639', 'A person you can vibe with', 5),
+(5, '27', 'male', '1996-05-08', 'The ff', '0', 'i can code2', 9),
+(10, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(11, NULL, NULL, NULL, NULL, NULL, NULL, 8),
+(25, NULL, NULL, NULL, NULL, NULL, NULL, 62),
+(26, NULL, NULL, NULL, NULL, NULL, NULL, 63),
+(27, NULL, NULL, NULL, NULL, NULL, NULL, 65),
+(28, NULL, NULL, NULL, NULL, NULL, NULL, 66),
+(31, '27', 'male', '2022-02-24', '52 kamagong', '777', 'we can code', 69),
+(32, NULL, NULL, NULL, NULL, NULL, NULL, 70);
 
 -- --------------------------------------------------------
 
@@ -622,8 +667,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `username`, `email`, `password`, `firstname`, `lastName`, `roleID`, `active`, `activation_code`, `activation_expiry`, `activated_at`, `created_at`, `updated_at`) VALUES
-(71, 'henrickL', 'markhenrick.linsangan@benilde.edu.ph', '$2y$10$oQADZSELzP.5ttBOYZYOcOQnUe6P6LqZfqD3xNP3WdAv6y9hzIdmC', 'mark henrick', 'linsangan', 2, 1, '$2y$10$Ncu/BWUGBY7TIbrQ3Zvuhe4s/j./GeUQjVTP45fPTHnSxIAfRiDHy', '2022-02-16 11:43:21', '2022-02-15 18:44:07', '2022-02-15 10:43:21', '2022-02-15 18:44:07'),
-(72, 'Emailed', 'marklinsangan@pts-thesis.website', '$2y$10$6iGL/Ad/oAn6ATGiWcv3f.cCxK9zL.Kt9FmzF0HzmUOpcGbAceKqC', 'Oscar', 'Ruby', 4, 1, '', '0000-00-00 00:00:00', NULL, '2022-02-15 11:57:39', '2022-02-15 19:57:39');
+(2, 'genesis', 'genesis.fragas@benilde.edu.ph', 'Zxcvbnmz12#', 'Genesis', 'Fragas', 2, 1, '0000', '0000-00-00 00:00:00', NULL, '2022-02-05 18:28:11', '2022-02-06 02:28:11'),
+(3, 'dennie', 'dennnie.go@benilde.edu.ph', 'Zxcvbnmz12#', 'Dennie', 'Go', 2, 1, '0000', '0000-00-00 00:00:00', NULL, '2022-02-05 18:28:11', '2022-02-06 02:28:11'),
+(4, 'genesis', 'genesis.fragas@benilde.edu.ph', 'Zxcvbnmz12#', 'Genesis', 'Fragas', 2, 1, '0000', '0000-00-00 00:00:00', NULL, '2022-02-05 18:29:19', '2022-02-06 02:29:19'),
+(5, 'dennie', 'dennnie.go@benilde.edu.ph', 'Zxcvbnmz12#', 'Dennie', 'Go', 2, 1, '0000', '0000-00-00 00:00:00', NULL, '2022-02-05 18:29:19', '2022-02-06 02:29:19'),
+(6, 'Samboi', 'samuelnarbuada@benilde.edu.ph', 'Zxcvbnmz12#', 'Samuel', 'Narbuada', 2, 1, '0000', '0000-00-00 00:00:00', NULL, '2022-02-05 18:29:19', '2022-02-06 02:29:19'),
+(8, 'shadowpick', 'shadow.pick@benilde.edu.ph', 'Zxcvbnmz12#', 'Shadow', 'Pick', 2, 1, '0000', '0000-00-00 00:00:00', NULL, '2022-02-05 18:29:19', '2022-02-06 02:29:19'),
+(9, 'henrickL', 'marklinsangan@pts-thesis.website', '$2y$10$O83/ZnEns44jK21p7jxEt.b/2BkDiEu9otE7DJj7Mt5602FBDJyKe', 'linlin', 'mark', 2, 1, '$2y$10$iw1gGRQXSU2qnldZuIpEDuDjQ4tyn4KC/P5QJPw2BLK5FRhJzRdna', '2022-02-06 20:16:14', '2022-02-06 03:16:36', '2022-02-05 19:16:14', '2022-02-12 16:28:16'),
+(62, 'try', 'try@gmail.com', 'password', 'fname', 'lname', 5, 1, '', '0000-00-00 00:00:00', NULL, '2022-02-10 16:34:42', '2022-02-11 00:34:42'),
+(63, 'try', 'try@gmail.com', 'password', 'fname', 'lname', 5, 1, '', '0000-00-00 00:00:00', NULL, '2022-02-10 16:37:21', '2022-02-11 00:37:21'),
+(65, 'crr9oG', 'markhenrick.linsangan@gmail.com', '$2y$10$MifS5Olhip1.DpYdXzerR.uYI7p.u3.3p3jyEz07dQ/V.xA.2M6LO', 'mark', 'linsangan', 2, 1, '', '0000-00-00 00:00:00', NULL, '2022-02-10 17:01:55', '2022-02-11 01:01:55'),
+(66, 'Emailed', 'marklinsangan@pts-thesis.website', '$2y$10$lhnP7/j3U9LPmHs1/ZAJ.un1GgMBbFsIf1oKW58OsBkDEK46kJucq', 'linlin', 'mark', 6, 1, '', '0000-00-00 00:00:00', NULL, '2022-02-10 17:02:30', '2022-02-11 01:02:30'),
+(69, 'Deni22', 'markhenrick.linsangan@gmail.com', '$2y$10$AeJRtDePQeu8D8lpnnFk8.95bKXK7mcPQEqJxEiKEV.BnCan7U5fi', 'mark', 'linsangan', 2, 1, '$2y$10$M5eCLbmPrUaTKdEBoC0CIOTvCi24QfQ6r.48WKijdUFuheE8slH/e', '2022-02-13 08:33:57', '2022-02-12 15:34:49', '2022-02-12 07:33:57', '2022-02-12 15:42:24'),
+(70, 'crr9oG', 'hostc@zx.com', '$2y$10$vA/EhC82L9OwpO9IuLdtxubV798Vr.67HWoeebMR6QO5T2dFIZx8S', 'mark', 'linsangan', 3, 1, '', '0000-00-00 00:00:00', NULL, '2022-02-12 07:43:04', '2022-02-12 15:43:04');
 
 --
 -- Indexes for dumped tables
@@ -646,8 +702,8 @@ ALTER TABLE `actiontype`
 --
 ALTER TABLE `audittrail`
   ADD PRIMARY KEY (`auditID`),
-  ADD KEY `audittrail_ibfk_1` (`userID`),
-  ADD KEY `audittrail_ibfk_2` (`actionID`);
+  ADD KEY `userID` (`userID`),
+  ADD KEY `actionID` (`actionID`);
 
 --
 -- Indexes for table `blacklist`
@@ -680,9 +736,9 @@ ALTER TABLE `classcontent`
 --
 ALTER TABLE `classes`
   ADD PRIMARY KEY (`classID`),
+  ADD KEY `fk_userIDClass` (`userID`),
   ADD KEY `fk_milestoneID` (`mileStoneID`),
-  ADD KEY `fk_testID` (`testID`),
-  ADD KEY `fk_userIDClass` (`userID`);
+  ADD KEY `fk_testID` (`testID`);
 
 --
 -- Indexes for table `classevaluation`
@@ -705,13 +761,6 @@ ALTER TABLE `classlist`
 ALTER TABLE `classprofile`
   ADD PRIMARY KEY (`classProfileID`),
   ADD KEY `fk_classIDProf` (`classID`);
-
---
--- Indexes for table `debugfiles`
---
-ALTER TABLE `debugfiles`
-  ADD PRIMARY KEY (`fileID`),
-  ADD KEY `userID` (`userID`);
 
 --
 -- Indexes for table `delivery`
@@ -902,7 +951,7 @@ ALTER TABLE `actiontype`
 -- AUTO_INCREMENT for table `audittrail`
 --
 ALTER TABLE `audittrail`
-  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `blacklist`
@@ -926,7 +975,7 @@ ALTER TABLE `classcontent`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `classID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `classID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `classevaluation`
@@ -945,12 +994,6 @@ ALTER TABLE `classlist`
 --
 ALTER TABLE `classprofile`
   MODIFY `classProfileID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `debugfiles`
---
-ALTER TABLE `debugfiles`
-  MODIFY `fileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `delivery`
@@ -974,7 +1017,7 @@ ALTER TABLE `fees`
 -- AUTO_INCREMENT for table `filecontent`
 --
 ALTER TABLE `filecontent`
-  MODIFY `fileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fileID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting`
@@ -986,7 +1029,7 @@ ALTER TABLE `meeting`
 -- AUTO_INCREMENT for table `milestone`
 --
 ALTER TABLE `milestone`
-  MODIFY `mileStoneID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mileStoneID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `milestoneearned`
@@ -1028,7 +1071,7 @@ ALTER TABLE `profit`
 -- AUTO_INCREMENT for table `questionnaire`
 --
 ALTER TABLE `questionnaire`
-  MODIFY `questionnaireID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `questionnaireID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `refund`
@@ -1052,7 +1095,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `testID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `testID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -1070,7 +1113,7 @@ ALTER TABLE `transactiontype`
 -- AUTO_INCREMENT for table `userprofile`
 --
 ALTER TABLE `userprofile`
-  MODIFY `profileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `profileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `userroles`
@@ -1082,7 +1125,7 @@ ALTER TABLE `userroles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- Constraints for dumped tables
@@ -1092,8 +1135,8 @@ ALTER TABLE `users`
 -- Constraints for table `audittrail`
 --
 ALTER TABLE `audittrail`
-  ADD CONSTRAINT `audittrail_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `audittrail_ibfk_2` FOREIGN KEY (`actionID`) REFERENCES `actiontype` (`actionID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `audittrail_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
+  ADD CONSTRAINT `audittrail_ibfk_2` FOREIGN KEY (`actionID`) REFERENCES `actiontype` (`actionID`);
 
 --
 -- Constraints for table `certificates`
@@ -1109,14 +1152,16 @@ ALTER TABLE `certificates`
 --
 ALTER TABLE `classcontent`
   ADD CONSTRAINT `fk_class_ID` FOREIGN KEY (`classID`) REFERENCES `classes` (`classID`),
-  ADD CONSTRAINT `fk_enrollment_ID` FOREIGN KEY (`enrollmentID`) REFERENCES `enrolled` (`enrollmentID`);
+  ADD CONSTRAINT `fk_enrollment_ID` FOREIGN KEY (`enrollmentID`) REFERENCES `enrolled` (`enrollmentID`),
+  ADD CONSTRAINT `fk_file_ID` FOREIGN KEY (`fileID`) REFERENCES `filecontent` (`fileID`);
 
 --
 -- Constraints for table `classes`
 --
 ALTER TABLE `classes`
+  ADD CONSTRAINT `fk_milestoneID` FOREIGN KEY (`mileStoneID`) REFERENCES `milestone` (`mileStoneID`),
   ADD CONSTRAINT `fk_testID` FOREIGN KEY (`testID`) REFERENCES `test` (`testID`),
-  ADD CONSTRAINT `fk_userIDClass` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_userIDClass` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 --
 -- Constraints for table `classevaluation`
