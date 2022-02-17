@@ -2,14 +2,14 @@
 require __DIR__ . '/../../src/bootstrap.php';
 require __DIR__ . '/../../src/loggedin/classStep1.php';
 
-if (is_user_2fa() == 'false'){
-  redirect_to('login.php');
-}else{
-audit_trail('User has procedeed step4', 2);
-}
-if(!auth_Level('Instructor')){
-    redirect_to('../allowedNOT.php');
-}
+// if (is_user_2fa() == 'false'){
+//   redirect_to('login.php');
+// }else{
+// audit_trail('User has procedeed step4', 2);
+// }
+// if(!auth_Level('Instructor')){
+//     redirect_to('../allowedNOT.php');
+// }
 ?>
   <?php
 echo '<pre>' , var_dump($_SESSION['post']) , '</pre>';

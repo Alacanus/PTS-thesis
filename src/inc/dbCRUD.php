@@ -34,17 +34,13 @@ function read_db(string $tableName) {
 
  function get_db_Modules(string $classID) {
     $option_list = '';
-        $sql = "SELECT * FROM classmodules INNER JOIN debugfiles
-          ON debugfiles.fileID  = classmodules.fileID 
-        WHERE classmodules.classID = :classID
-        ";
+        $sql = "SELECT * FROM classmodules INNER JOIN debugfiles ON debugfiles.classContentID  = classmodules.classID 
+        WHERE classmodules.classID = :classID";
         $statement = db()->prepare($sql);
         $statement->bindValue(':classID', $classID, PDO::PARAM_INT);
-        // $statement->bindValue(':fileID', $optionName, PDO::PARAM_INT);
         $statement->execute();
         while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
             $option_list = $data;
-           //$option_list.="<option value='$data[$optionVal]'>$data[$optionName]</option>";
         }
       
     return $option_list;
