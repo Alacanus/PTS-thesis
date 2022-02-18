@@ -1,6 +1,6 @@
 <?php
 
-if (is_user_logged_in()) {
+if (is_user_logged_in() && isset($_SESSION['2fa'])) {
     redirect_to('index.php');
 }
 
@@ -10,8 +10,8 @@ $errors = [];
 if (is_post_request()) {
     
     [$inputs, $errors] = filter($_POST, [
-        'username' => 'string | required',
-        'password' => 'string | required',
+        'username' => 'string | required | between: 3, 255',
+        'password' => 'string | required | between: 3, 255',
         'g-recaptcha-response' => 'string | required'
 
     ]);

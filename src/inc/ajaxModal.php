@@ -5,7 +5,9 @@ require __DIR__ . '/../bootstrap.php';
 $return_arr = array();
 [$inputsget, $errors] = filter($_GET, [
     'userID' => 'string | required',
-    'modalOption' => 'string | required'
+    'modalOption' => 'string | required',
+    'fileID' => 'string | required',
+
 ]);
 
 [$inputs, $errors] = filter($_POST, [
@@ -24,6 +26,8 @@ $return_arr = array();
     'Option' => 'string | required',
     'usertype' => 'string | required',
     'password' => 'string | required',
+    'Learners' => 'string | required',
+    'Instructors' => 'string | required',
 
 ]);
 
@@ -70,12 +74,67 @@ if($inputsget['modalOption'] == 'get'){
         echo json_encode($return_arr);
 }elseif($inputsget['modalOption'] == 'delete'){
 
-    $sql = 'DELETE FROM users WHERE users.userID = :userID;';
+    $sql = 'DELETE FROM users WHERE users.userID = :userID';
     $statement = db()->prepare($sql);
     $statement->bindParam(':userID', $inputsget['userID'], PDO::PARAM_INT);
     $return_arr = $statement->execute();
     echo json_encode($return_arr);
+
+}elseif($inputsget['modalOption'] == 'delete2'){
+    $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+    $statement->execute();
+    $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+    if (!unlink($filearr['filePath'])) { 
+        echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
+    } 
+    else { 
+        
+        $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
+
+        $statement2 = db()->prepare($sql2);
+        $statement2->bindParam(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+        $return_arr = $statement2->execute();
+        echo ($filearr['fileName'] ." has been deleted"); 
+    } 
+
+}elseif($inputsget['modalOption'] == 'RemoveStone'){
+    $sql = 'DELETE FROM milestone WHERE mileStoneID = :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+    $filearr = $statement->execute();
+    echo ($filearr['milestoneName'] ." has been deleted");
+
+
+
+}elseif($inputsget['modalOption'] == 'delete2f'){
+        $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+        $statement->execute();
+        $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!unlink($filearr['filePath'])) { 
+            echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
+        } 
+        else { 
+            
+            $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
     
+            $statement2 = db()->prepare($sql2);
+            $statement2->bindParam(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+            $return_arr = $statement2->execute();
+
+            $sql = 'DELETE FROM classmodules WHERE fileID = :fileID';
+    
+            $statement = db()->prepare($sql);
+            $statement->bindParam(':fileID', $inputsget['userID'], PDO::PARAM_INT);
+            $return_arr = $statement->execute();
+            echo ($filearr['fileName'] ." has been deleted"); 
+        }
+
+
+
 }elseif($inputs['Option'] == "Create"){
 
 
@@ -92,8 +151,81 @@ if($inputsget['modalOption'] == 'get'){
 
     $return_arr=$statement->execute();
     echo json_encode($return_arr);
-   
+
+}elseif($inputs['Option'] == "applyStone"){
+
+
+    $sql = 'INSERT INTO users (username, email, password, firstname, lastname, roleID, active)VALUES(:username, :email, :password, :firstname, :lastname, :userType, 1);
+    INSERT INTO userprofile (`userID`) VALUES (LAST_INSERT_ID())';
+    $statement = db()->prepare($sql);
+
+    $statement->bindValue(':username', $inputs['username']);
+    $statement->bindValue(':email', $inputs['email']);
+    $statement->bindValue(':firstname', $inputs['firstname'], PDO::PARAM_STR);
+    $statement->bindValue(':lastname', $inputs['lastName'], PDO::PARAM_STR);
+    $statement->bindValue(':userType', $inputs['usertype'], PDO::PARAM_INT);
+    $statement->bindValue(':password', password_hash($inputs['password'], PASSWORD_BCRYPT));
+
+    $return_arr=$statement->execute();
+    echo json_encode($return_arr);
+
+
+}elseif($inputs['Option'] == "createStone"){
+
+        // $sql = 'INSERT INTO milestone (milestoneName, description, Mtrigger)VALUES(:milestoneName, :description, :Mtrigger)';
+    // if(isset($_POST['Instructors'])) {
+        $sql = 'INSERT INTO milestone (milestoneName, description, Mtrigger , userID )VALUES(:milestoneName, :description, :Mtrigger, :userid);';
+//         return $sql;
+//    }
+
+   if(filter_has_var(INPUT_POST,'Learners')) {
+    // ...add sql option for 
+}
+
+    $statement = db()->prepare($sql);
+
+
+    $statement->bindValue(':milestoneName', $_POST['milestoneName'], PDO::PARAM_STR);
+    $statement->bindValue(':description', $_POST['milestonedesc'], PDO::PARAM_STR);
+    $statement->bindValue(':Mtrigger', $_POST['milestoneTrigger'], PDO::PARAM_INT);
+    $statement->bindValue(':userid', $_SESSION['user_id'], PDO::PARAM_INT);
+    //$statement->bindValue(':password', $_SESSION['enrolID'], PDO::PARAM_INT);
+
+
+    $return_arr=$statement->execute();
+    echo json_encode($return_arr);
     
+}elseif($inputsget['modalOption'] == 'download'){//get file details
+    $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['fileID'], PDO::PARAM_INT);
+    $statement->execute();
+    $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+    echo json_encode($filearr);
+
+    
+}elseif($inputsget['modalOption'] == 'download2'){//get file stream
+    $sql = 'SELECT * FROM debugfiles WHERE fileID= :fileID';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':fileID', $inputsget['fileID'], PDO::PARAM_INT);
+    $statement->execute();
+    $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if(file_exists($filearr['filePath']) && is_file($filearr['filePath']))
+    {
+        header('Cache-control: private');
+        header('Content-Type: application/octet-stream');
+        header('Content-Length: '.filesize($filearr['filePath']));
+        header('Content-Disposition: attachment; filename="'.basename($filearr['filePath']).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($filearr['filePath']));
+        readfile($filearr['filePath']);
+        exit;
+    
+    }
 }else{
+
     echo json_encode($_POST);
 }

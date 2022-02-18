@@ -15,7 +15,6 @@ require_once __DIR__ . '/inc/dbCRUD.php';
 
 include __DIR__ . "/../Model/Includes/getConVar.php";
 
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -23,8 +22,25 @@ use PHPMailer\PHPMailer\Exception;
 require __DIR__ . '/../PHPMailer/src/Exception.php';
 require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer/src/SMTP.php';
+$globalARR = array();
 
 
+function global_arr(string $arrKey){
+    global $globalARR;
+    switch ($arrKey) {
+        case 1:
+          return $globalARR['classcrt1'];
+          break;
+        case 2:
+          return $globalARR['classcrt2'];
+          break;
+        case 3:
+          return $globalARR['classcrt3'];
+          break;
+        default:
+          return $globalARR;
+      }
+}
 function generate_activation_code(): string
 {
     return bin2hex(random_bytes(16));
@@ -38,7 +54,8 @@ function audit_trail(string $logDesc, int $userAction = 1){
 
     $logs = 'With IP: '. $userIP . '<'.$datetime.'>' .'= '.$logDesc;
 
-    $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
+    if(isset($_SESSION['user_id'])){
+        $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
         $statement2 = db()->prepare($sql2);
         $statement2->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
         $statement2->bindParam(':logs', $logs, PDO::PARAM_STR);
@@ -47,6 +64,7 @@ function audit_trail(string $logDesc, int $userAction = 1){
 
         return $statement2->execute();
 
+    }
 }
 
 
@@ -90,7 +108,7 @@ function send_authentication_email(string $email, string $options ,$activation_c
         $mail->Host = 'smtp.titan.email';
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username = 'no-reply@pts-thesis.website';            //SMTP username
-        $mail->Password = 'Zn=m4v*Jrv4?L)4c';                       //SMTP password will try to hide this
+        $mail->Password = '3Lbe8jY=JSs$m^vy';                       //SMTP password will try to hide this
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
@@ -187,3 +205,40 @@ function auth_Level( string $requirement)
     }
     return false;
 }
+
+//isset check null
+function is_user_logged_in():bool{
+    return isset($_SESSION['username']);
+}
+
+function require_login():void{
+    if(!is_user_logged_in()){
+        redirect_to('login.php');
+    }
+}
+
+function is_user_2fa(){
+    if(isset($_SESSION['2fa']) && isset($_SESSION['username'])){
+    return 'true';
+    // redirect_to('login.php');
+    }
+    return 'false';
+}
+
+function logout():void{
+    if(is_user_logged_in()){
+        $_SESSION = array();
+        session_destroy();
+        redirect_to('login.php');
+    }
+}
+
+function current_user(){
+    if (is_user_logged_in()){
+        return $_SESSION['username'];
+        //pull from session
+    }
+    return null;
+}
+
+

@@ -10,22 +10,26 @@ $tableNAme2 ='userroles';
 $optionVal2 ='roleID';
 $optionName2 ='roleType'; 
 $option_list2 = get_db_Options($tableNAme2 , $optionVal2, $optionName2);
+$tableNAme3 ='debugfiles';
+$optionVal3 =$_SESSION['user_id'] ?? "";
+$optionName3 ='userID'; 
+$option_list3 = get_db_Options($tableNAme3 , $optionVal3, $optionName3);
 
 if (is_post_request()) {
 
 
     [$inputs, $errors] = filter($_POST, [
-        'username' => 'string | required',
-        'email' => 'string | required',
-        'firstname' => 'string | required',
-        'lastName' => 'string | required',
-        'gender' => 'string | required',
-        'age' => 'string | required | alphanumeric',
-        'birthday' => 'string | required',
-        'address' => 'string | required',
-        'contactno' => 'string | required',
-        'aboutme' => 'string | required',
-        'usertype' => 'string | required',
+        'username' => 'string | required | alphanumeric | between: 3, 255',
+        'email' => 'email | required | email |between: 3, 255',
+        'firstname' => 'string | required | between: 3, 255',
+        'lastName' => 'string | required | between: 3, 255',
+        'gender' => 'string | required | between: 3, 255',
+        'age' => 'string | required | between: 2, 255',
+        'birthday' => 'string | required | between: 3, 255',
+        'address' => 'string | required | between: 3, 255',
+        'contactno' => 'string | required | between: 3, 255',
+        'aboutme' => 'string | required | between: 3, 255',
+        'usertype' => 'string | required | between: 3, 255',
         'user_id' => 'string | required',
     ]);
     
@@ -38,7 +42,7 @@ if (is_post_request()) {
 
     $messages = [
         'usertype' => [
-            'required' => 'You need to agree to the term of services to register'
+            'required' => 'You need to select user type'
         ]
     ];
 

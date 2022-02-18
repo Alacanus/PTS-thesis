@@ -1,5 +1,10 @@
 <?php
 //sql functions
+define("ROW_PER_PAGE",10);
+$per_page_html = '';
+$page = 1;
+$start=0;
+$limit=" limit " . $start . "," . ROW_PER_PAGE;
 function create(string $email, string $username, string $password, string $fname, string $lname, string $userType, string $activation_code, int $expiry = 1 * 24  * 60 * 60): bool
 {
     $sql = 'INSERT INTO users(username, email, password, firstname, lastname, roleID, activation_code, activation_expiry)
@@ -27,6 +32,19 @@ function read_db(string $tableName) {
     return $statement->fetch(PDO::FETCH_ASSOC);
  }
 
+ function get_db_Modules(string $classID) {
+    $option_list = '';
+        $sql = "SELECT * FROM classmodules INNER JOIN debugfiles ON debugfiles.fileID  = classmodules.fileID 
+        WHERE classmodules.fileID = debugfiles.fileID";
+        $statement = db()->prepare($sql);
+        // $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+      
+    return $option_list;
+ }
  function update(string $password, string $password2):bool{
     if($password == $password2){
         $sql = 'UPDATE users

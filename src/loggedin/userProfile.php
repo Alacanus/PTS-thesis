@@ -13,16 +13,16 @@ if (is_post_request()) {
 
 
     [$inputs, $errors] = filter($_POST, [
-        'username' => 'string | required',
-        'email' => 'string | required',
-        'firstname' => 'string | required',
-        'lastName' => 'string | required',
-        'gender' => 'string | required',
-        'age' => 'string | required | alphanumeric',
-        'birthday' => 'string | required',
-        'address' => 'string | required',
-        'contactno' => 'string | required',
-        'aboutme' => 'string | required',
+        'username' => 'string | required | between: 3, 255',
+        'email' => 'string | required | email |between: 3, 255',
+        'firstname' => 'string | required | between: 3, 255',
+        'lastName' => 'string | required | between: 3, 255',
+        'gender' => 'string | required | between: 1, 255',
+        'age' => 'string | required',
+        'birthday' => 'string | required | between: 3, 255',
+        'address' => 'string | required | between: 3, 255',
+        'contactno' => 'string | required | between: 3, 255',
+        'aboutme' => 'string | required | between: 3, 255',
         'usertype' => 'string | required',
 
     ]);
