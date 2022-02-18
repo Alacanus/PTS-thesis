@@ -14,16 +14,26 @@
 */
 
 const DEFAULT_VALIDATION_ERRORS = [
-    'required' => 'The %s is required',
-    'email' => 'The %s is not a valid email address',
-    'min' => 'The %s must have at least %s characters',
-    'max' => 'The %s must have at most %s characters',
-    'between' => 'The %s must have between %d and %d characters',
-    'same' => 'The %s must match with %s',
-    'int' => 'The %s should have only numbers',
-    'alphanumeric' => 'The %s should have only letters and numbers',
-    'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
-    'unique' => 'The %s already exists',
+    // 'required' => 'The %s is required',
+    // 'email' => 'The %s is not a valid email address',
+    // 'min' => 'The %s must have at least %s characters',
+    // 'max' => 'The %s must have at most %s characters',
+    // 'between' => 'The %s must have between %d and %d characters',
+    // 'same' => 'The %s must match with %s',
+    // 'int' => 'The %s should have only numbers',
+    // 'alphanumeric' => 'The %s should have only letters and numbers',
+    // 'secure' => 'The %s must have between 8 and 64 characters and contain at least one number, one upper case letter, one lower case letter and one special character',
+    // 'unique' => 'The %s already exists',
+    'required' => ' %s is required', 
+    'email' => ' %s is not a valid email address',
+    'min' => ' %s must have at least %s characters',
+    'max' => ' %s must have at most %s characters',
+    'between' => ' %s must be between %d and %d characters',
+    'same' => ' %s must match with %s',
+    'int' => ' %s should have only numbers',
+    'alphanumeric' => ' The %s should have only letters and numbers',
+    'secure' => ' %s must have between 8 and 64 characters and contain at least one number, UPPER CASE, lower case, and special character',
+    'unique' => ' %s already exists',
 ];
 
 

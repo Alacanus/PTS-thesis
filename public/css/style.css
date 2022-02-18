@@ -219,7 +219,6 @@ nav {
     transform: translate(-50%,-50%) scale(1.25);
     width: 1080px;
     height: 60vh;
-    padding: 20px 30px;
     background: rgb(250, 250, 250);
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
@@ -238,7 +237,7 @@ nav {
 .login .center-form .container-login {
     width: 50%;
     float: right;
-    padding: 5% 2%;
+    padding: 6.4% 2%;
 }
 
 .login .center-form h2 {
@@ -302,7 +301,6 @@ nav {
     transform: translate(-50%,-50%) scale(1);
     width: 1280px;
     height: 80vh;
-    padding: 5px 30px;
     background: rgb(250, 250, 250);
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
@@ -311,17 +309,16 @@ nav {
 /* Background */
 .signup .center-form-signup {
     background-image: url("/PTS-thesis/static/registerbg2.jpg");
-    object-fit: fill;
+    object-fit: cover;
     background-repeat: no-repeat;
     background-size: 50% 100%;
-    transform: translate(-50%,-50%) scale(1);
 }
 
 /* Container and Design for Elements */
 .signup .center-form-signup .container-signup {
     width: 50%;
     float: right;
-    padding: 3% 2%;
+    padding: 4.48% 3%;
 }
 
 .signup .center-form-signup h2 {
@@ -331,32 +328,39 @@ nav {
     font-size: 30px;
 }
 
-.signup .center-form-signup .form-element{
-    margin: 1px 0px;
-}
-
-.signup .form-style .form-element{
-    margin: 15px 0px;
-}
-
 .signup .form-style .form-element label {
     font-size: 14px;
     color: #222;
 }
 
-.signup .form-style .form-element #fname,
-.signup .form-style .form-element #lname {
-    display: block;
-    width: 100%;
+.signup .form-style .form-element {
+    margin-bottom: 15px;
 }
 
-.signup .form-style .form-element input[type="text"],
+.signup .form-style .form-element input#password {
+    margin-bottom: 23px;
+}
+
+.signup .form-style .form-element small#errorpwd{
+    margin-top: -23px;
+}
+
+.signup .form-style .form-element small#agreeid {
+    margin: 8px;
+}
+
+/* .signup .form-style .form-element small {
+    margin: -10px auto 20px auto;
+} */
+
 .signup .form-style .form-element input[type="password"],
 .signup .form-style .form-element input[type="email"],
 .signup .form-style .form-element input[type="email"],
 .signup .form-style .form-element input[type="username"],
-.signup .form-style .form-element select {
-    margin-top: 5px;
+.signup .form-style .form-element select,
+.signup .form-style .form-element input#fname,
+.signup .form-style .form-element input#lname,
+.signup .form-style .form-element input#username {
     display: block;
     width: 100%;
     padding: 10px;
@@ -365,12 +369,34 @@ nav {
     border-radius: 5px;
 }
 
-.signup .form-style .form-element .form-inline {
-    width: 49.5%;
-    margin-right: 0.5%;
-    margin-bottom: 3%;
-    float: left;
+.signup .form-style .form-element .inline-item-1 {
+    display: inline-block;
+    width: 49%;
+    margin-right: 6px;
 }
+.signup .form-style .form-element .inline-item-2 {
+    display: inline-block;
+    width: 49%;
+}
+.signup .form-style .form-element .inline-item-3 {
+    display: inline-block;
+    width: 23%;
+    margin-right: 3px;
+}
+.signup .form-style .form-element .inline-item-4 {
+    display: inline-block;
+    width: 75%;
+}
+.signup .form-style .form-element .inline-item-5 {
+    display: inline-block;
+    width: 48%;
+    margin-right: 2px;
+}
+.signup .form-style .form-element .inline-item-6 {
+    display: inline-block;
+    width: 48%;
+}
+
 
 .signup .form-style .form-element button {
     width: 100%;
@@ -398,17 +424,12 @@ nav {
 }
 
 .signup .form-style .terms-container {
-    margin: 15px 0px;
+    margin: 20px auto 10px;
 }
 
 .signup .form-style .terms-container label {
     font-size: 16px;
     color: #222;
-}
-
-.signup .form-style .terms-container label input {
-    margin-top: 2px;
-    margin-right: 7px;
 }
 
 .signup .form-style .terms-container a {
@@ -433,7 +454,7 @@ nav {
 
 .signup .form-style small {
     font-size: 12px;
-    margin: 0;
+    position: absolute;
     color: rgb(182, 0, 0);
 }
 
@@ -740,6 +761,7 @@ section {
 .overlaybg-hidden {
     position: absolute;
     background: rgba(34, 34, 34, 0.87);
+    top: -20px;
     width: 100%;
     height: 100%;
     z-index: 2;
