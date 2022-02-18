@@ -17,67 +17,171 @@ if (is_user_2fa() == 'false'){
         <?= $errors['userProfile'] ?>
     </div>
 <?php endif ?>
-<main id="mymain1">
-    <h1><?= $user['username']?>'s Profile</h1>
-    <div>
-        <label for="usertype">user Type: <?= $user['roleType']?></label>
 
+<div class="userprofile">
+    <div class="profile-conainter">
+        <section class="section-myprofile">
+            <div class="row">
+                <div class="item--1">
+                    <h2>My Profile</h2>
+                </div>
+                <div class="item--2">
+                    <hr>
+                </div>
+            </div>
+            <div class="row row-style">
+                <div class="item--3">
+                    <img src="/PTS-thesis/static/profilepic.JPG" alt="userprofile">
+                </div>
+                <div class="item--4">
+                    <div class="profile-name">
+                        <p><?= $user['firstname'] ?> <?= $user['lastName'] ?></p>
+                    </div>
+                    <div class="profile-role">
+                        <p><?= $user['roleType'] ?></p>
+                    </div>
+                    <div class="general-info">
+                        <i class="ion-android-person icon-small"></i>
+                        <p> <?= $user['gender'] ?></p>
+                        <i class="person-outline"></i>
+                        <p> <?= $user['age'] ?></p>
+                        <p> <?= $user['birthday'] ?></p>
+                        <p> <?= $user['contactno'] ?></p>
+                        <p> <?= $user['address'] ?></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-nav btn-full" id="show-editprofile">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-aboutme header-space">
+            <div class="row">
+                <div class="item--1">
+                    <h2>About Me</h2>
+                </div>
+                <div class="item--6">
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <label for="aboutme"><?= $user['aboutme'] ?></label>
+            </div>
+        </section>
+        <section class="section-enrolled">
+            <div class="row">
+                <div class="item--1">
+                    <h2>Enrolled Classes</h2>
+                </div>
+                <div class="item--5">
+                    <hr>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="/PTS-thesis/static/loginbg.jpg" alt="Card-Header">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">
+                            <p>Cooking Adobo: The Chinese Way</p>
+                        </div>
+                        <span class="tag tag-blue">Status</span>
+                        <div class="card-desc">
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <img src="/PTS-thesis/static/instructorpf.jpg" alt="instructor picture">
+                        <div class="footer-info">
+                            <p>Dennie Go</p>
+                        </div>
+                        <a href="#"><i></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="/PTS-thesis/static/loginbg.jpg" alt="Card-Header">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">
+                            <p>Cooking Adobo: The Chinese Way</p>
+                        </div>
+                        <span class="tag tag-blue">Status</span>
+                        <div class="card-desc">
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <img src="/PTS-thesis/static/instructorpf.jpg" alt="instructor picture">
+                        <div class="footer-info">
+                            <p>Dennie Go</p>
+                        </div>
+                        <a href="#"><i></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="/PTS-thesis/static/loginbg.jpg" alt="Card-Header">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">
+                            <p>Cooking Adobo: The Chinese Way</p>
+                        </div>
+                        <span class="tag tag-blue">Status</span>
+                        <div class="card-desc">
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <img src="/PTS-thesis/static/instructorpf.jpg" alt="instructor picture">
+                        <div class="footer-info">
+                            <p>Dennie Go</p>
+                        </div>
+                        <a href="#"><i></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="/PTS-thesis/static/loginbg.jpg" alt="Card-Header">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">
+                            <p>Cooking Adobo: The Chinese Way</p>
+                        </div>
+                        <span class="tag tag-blue">Status</span>
+                        <div class="card-desc">
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <img src="/PTS-thesis/static/instructorpf.jpg" alt="instructor picture">
+                        <div class="footer-info">
+                            <p>Dennie Go</p>
+                        </div>
+                        <a href="#"><i></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div>
-        <label for="username">Username: <?= $user['username']?></label>
-
-    </div>
-
-    <div>
-        <label for="email">Email: <?= $user['email']?></label>
-
-    </div>
-
-    <div>
-        <label for="fname">first name: <?= $user['firstname']?></label>
-
-    </div>
-
-    <div>
-        <label for="lname">Last name: <?= $user['lastName']?></label>
-
-    </div>
-
-    <div>
-        <label for="age">Age: <?= $user['age']?></label>
-
-    </div>
-
-    <div>
-        <label for="gender">Gender: <?= $user['gender']?></label>
-
-    </div>
-
-    <div>
-        <label for="birthday">Birthday: <?= $user['birthday']?></label>
-
-    </div>
-
-    <div>
-        <label for="address">Address: <?= $user['address']?></label>
-
-    </div>
-
-    <div>
-        <label for="contactno">Contact No: <?= $user['contactno']?></label>
-
-    </div>
-
-    <div>
-        <label for="aboutme">About me: <?= $user['aboutme']?></label>
-
-    </div>
-</main>
-<!-- Trigger the modal with a button -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
-  Edit
-</button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,31 +259,8 @@ if (is_user_2fa() == 'false'){
         <button type="submit" form="form" class="btn btn-primary">Save changes</button>
       </div>
     </div>
-  </div>
 </div>
 
 PLACE IN MODAL <br>
-
-
-<!-- <form id="form" action="userprofile.php" method="post">
-        <h1>Change Password</h1>
-        <div>
-        <label for="password">Password New:</label>
-        <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? 'Zxcvbnmz12#' ?>"
-               class="<?= error_class($errors, 'password') ?>">
-        <small><?= $errors['password'] ?? '' ?></small>
-    </div>
-
-    <div>
-        <label for="password2">Password Again:</label>
-        <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? 'Zxcvbnmz12#' ?>"
-               class="<?= error_class($errors, 'password2') ?>">
-        <small><?= $errors['password2'] ?? '' ?></small>
-    </div>
-        <section>
-            <button type="submit" name="btnCpass">Change</button>
-        </section>
-    </form> -->
-
 
 <?php view('footer') ?>

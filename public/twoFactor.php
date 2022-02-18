@@ -22,15 +22,18 @@ require_login();
                                 <small><?= $errors['twofactorcode'] ?? '' ?></small>
                             </div>
                             <div class="form-element">
-                                <label for="retry email">in case of incorrect code another one will be send to you at: <?= $_SESSION['userEmail']?></label>
+                                <button type="submit">authentication</button>
                             </div>
                             <div class="form-element">
-                                <button type="submit">authentication</button>
+                                <label for="retry email">Note: In case of incorrect code, another one will be send to you at: <?= $_SESSION['userEmail']?></label>
+                            </div>
+                            <div class="form-element">
+                                <a href="logout.php">Return</a>
                             </div>
                         </form>
                     </div>
                 </main>
-                <p><?php echo current_user() . '\'s IP address' .getUserIpAddr()?><br> <a href="logout.php">Logout</a> </p><br>
+                
             </div>
         </div>
     </div>
