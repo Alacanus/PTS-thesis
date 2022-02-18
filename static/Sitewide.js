@@ -21,3 +21,20 @@ $(document).ready(function(){
         }
     })
 })
+
+
+document.querySelector("#show-editprofile").addEventListener("click", function(){
+    document.querySelector(".edit-profile").classList.add("active");
+});
+
+document.querySelector(".edit-profile .close-btn").addEventListener("click", function(){
+    document.querySelector(".edit-profile").classList.remove("active");
+});
+
+function onoverlay() {
+    document.getElementById("overlaybg-hidden").style = "block";
+}
+
+function offoverlay() {
+    document.getElementById("overlaybg-hidden").style = "none";
+}

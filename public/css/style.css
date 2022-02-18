@@ -238,8 +238,7 @@ nav {
 .login .center-form .container-login {
     width: 50%;
     float: right;
-    padding-left: 20px;
-    margin-top: 5%;
+    padding: 5% 2%;
 }
 
 .login .center-form h2 {
@@ -250,10 +249,6 @@ nav {
 }
 
 .login .center-form .form-element{
-    margin: 15px 0px;
-}
-
-.login .form-style .form-element{
     margin: 15px 0px;
 }
 
@@ -306,7 +301,7 @@ nav {
     left: 50%;
     transform: translate(-50%,-50%) scale(1);
     width: 1280px;
-    height: 74vh;
+    height: 80vh;
     padding: 5px 30px;
     background: rgb(250, 250, 250);
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
@@ -326,8 +321,7 @@ nav {
 .signup .center-form-signup .container-signup {
     width: 50%;
     float: right;
-    padding-left: 20px;
-    margin-top: 2%;
+    padding: 3% 2%;
 }
 
 .signup .center-form-signup h2 {
@@ -437,6 +431,12 @@ nav {
     font-weight: 600;
 }
 
+.signup .form-style small {
+    font-size: 12px;
+    margin: 0;
+    color: rgb(182, 0, 0);
+}
+
 /* Two-Step Verification */
 
 .twofactor .center-form-twofactor {
@@ -466,7 +466,7 @@ nav {
     width: 50%;
     float: right;
     padding-left: 20px;
-    margin-top: 5%;
+    margin-top: 12%;
 }
 
 .twofactor .center-form-twofactor h2 {
@@ -490,7 +490,7 @@ nav {
 }
 
 .twofactor .form-style .form-element input[type="text"],
-.twofactor .form-style .form-element input[type="password"] {
+.twofactor .form-style .form-element input[type="twofactorcode"] {
     margin-top: 5px;
     display: block;
     width: 100%;
@@ -523,4 +523,322 @@ nav {
     color:#5fa3df;
     text-decoration: none;
     font-weight: 300;
+}
+
+/* -------------------------- User Profile -------------------------- */
+
+section {
+    margin: 0;
+    padding: 0;
+}
+
+.userprofile {
+    max-width: 1280px;
+}
+
+.userprofile .profile-conainter {
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.icon-big {
+    font-size: 350%;
+    display: block;
+    color: #005c96;
+    margin-bottom: 10px;
+}
+
+.icon-small {
+    display: inline-block;
+    width: 30px;
+    text-align: left;
+    color: #005c96;
+    font-size: 120%;
+    margin-right: 10px;
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+/* Section My Profile */
+
+.row .item--1 {
+    display: block;
+    float: left;
+}
+
+.row .item--2 hr {
+    display: block;
+    float: left;
+    width: 80%;
+    margin-left: 20px;
+    margin-top: 19px;
+}
+
+.row .item--3 img {
+    display: block;
+    float: left;
+    width: 361px;
+    height: 361px;
+    object-fit: cover;
+    background-position-x: center;
+    background-position-y: 10%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.row .item--4 {
+    display: block;
+    float: left;
+    margin-left: 80px;
+}
+
+.row .item--5 hr {
+    display: block;
+    float: left;
+    width: 69%;
+    margin-left: 20px;
+    margin-top: 19px;
+}
+
+.row .item--6 hr {
+    display: block;
+    float: left;
+    width: 83%;
+    margin-left: 20px;
+    margin-top: 19px;
+}
+
+.userprofile .profile-conainter .section-myprofile .row p {
+    margin: 4px 0px;
+}
+
+.row .item--4 .profile-name p{
+    font-size: 40px;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+
+.row .item--4 .profile-role p{
+    font-size: 25px;
+    font-weight: 500;
+    color: #4aa5fa;
+}
+
+.row .item--4 .general-info {
+    margin: 20px 0;
+}
+
+.row .item--4 .general-info p {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.section-myprofile{
+    margin: 3% auto 0% auto; 
+    height: 45vh;
+}
+
+.section-aboutme {
+    margin: 3% auto;
+    background: #001827;
+    height: 40vh;
+    color: rgb(247, 247, 247);
+}
+
+.header-space {
+    padding: 3% 0;
+}
+
+.section-enrolled {
+    margin: 3% auto;
+    
+}
+
+/* --------------- Cards --------------- */
+
+.section-enrolled .grid-container {
+    display: flex;
+    width: 1280px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: inherit;
+}
+
+.grid-container .card {
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 300px;
+}
+
+.grid-container .card .card-header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.grid-container .card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+.card .card-body p {
+    font-size: 16px;
+}
+
+.card .card-body .tag {
+    background: #cccccc;
+    border-radius: 50px;
+    font-size: 12px;
+    margin: 0;
+    color: #fff;
+    padding: 2px 10px;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.card .card-body .tag-blue {
+    background-color: #005c96;
+}
+
+.card .card-body .card-title {
+    margin: 20px 0 -5px;
+}
+
+.card .card-body .card-desc {
+    margin: 20px 0;
+    color: #545d7a;
+}
+
+.grid-container .card .card-footer {
+    display: flex;
+    margin-top: auto;
+}
+
+.grid-container .card .card-footer img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 10px 20px;
+}
+
+.card .card-footer .footer-info {
+    margin-top: 15px;
+}
+
+/* EDIT PROFILE */
+
+.overlaybg-hidden {
+    position: absolute;
+    background: rgba(34, 34, 34, 0.87);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.edit-profile .center-form {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1.25);
+    width: 800px;
+    height: 60vh;
+    padding: 20px 30px;
+    background: rgb(250, 250, 250);
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    transition: top 0ms ease-in-out 200ms, 
+                opacity 200ms ease-in-out 0ms, 
+                transform 20ms ease-in-out 0ms;
+}
+
+/* Background */
+.edit-profile .center-form.active {
+    transform: translate(-50%,-50%) scale(1);
+    transition: top 0ms ease-in-out 200ms, 
+    opacity 200ms ease-in-out 0ms, 
+    transform 20ms ease-in-out 0ms;
+}
+
+/* Container and Design for Elements */
+.edit-profile .center-form .container-edit {
+    width: 100%;
+    padding-left: 20px;
+    margin-top: 2%;
+}
+
+.edit-profile .center-form h2 {
+    text-align: left;
+    color: #222;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.edit-profile .center-form .form-element{
+    margin: 0px 0px 10px;
+}
+
+.edit-profile .form-style .form-element label {
+    font-size: 12px;
+    color: #222;
+}
+
+.edit-profile .form-style .form-element input[type="text"],
+.edit-profile .form-style .form-element input[type="password"],
+.edit-profile .form-style .form-element input[type="email"],
+.edit-profile .form-style .form-element input[type="date"],
+.edit-profile .form-style .form-element input[type="birthday"],
+.edit-profile .form-style .form-element select,
+.edit-profile .form-style .form-element textarea {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.edit-profile .form-style .form-element textarea {
+    height: 100px;
+    resize: none;
+}
+
+.edit-profile .center-form .container-edit .form-style .form-element a {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color:#5fa3df;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.edit-profile .center-form .container-edit .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: rgb(46, 46, 46);
+    color:#eee;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.form-element .btn-edit {
+    width: 100%;
+    margin: 5px 0;
 }
