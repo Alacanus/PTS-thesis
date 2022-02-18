@@ -89,7 +89,7 @@ function update_user_Profile(string $userID, string $email, string $username, st
     try{
         
         $sql1 = "UPDATE users
-        SET users.roleID = :userType, users.username = :username, users.email = :email, users.firstname = :firstname, users.lastName = :lastname
+        SET users.roleID = :userType, users.username = :username, users.email = :email, users.firstname = :firstname, users.lastName = :lastname,
         WHERE users.userID = :userID";
         db()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = db()->prepare($sql1);
@@ -98,7 +98,9 @@ function update_user_Profile(string $userID, string $email, string $username, st
         $statement->bindParam(':email', $email);
         $statement->bindParam(':firstname', $fname);
         $statement->bindParam(':lastname', $lname);
-        $statement->bindParam(':userID', $userID);    
+        $statement->bindParam(':userID', $userID);
+
+            
         $statement->execute();
         // 2nd sql
         $sql2 = "UPDATE userprofile

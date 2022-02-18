@@ -37,6 +37,18 @@ function get_db_Options(string $tableName, string $optionVal, string $optionName
     return $option_list;
  }
 
+
+ function get_db_usertype() {
+    $option_list = '';
+    $sql = "SELECT * FROM `userroles` WHERE roleID > 2 AND roleID < 5";
+    $statement = db()->prepare($sql);
+    $statement->execute();
+    while($data=  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+        $option_list = $data;
+    }
+    return $option_list;
+ }
+
 function find_user_by_username(string $username){
     $sql = 'SELECT username, userID,  password, active, email FROM users WHERE username= :username';
     $statement = db()->prepare($sql);

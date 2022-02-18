@@ -95,7 +95,7 @@ if (is_user_2fa() == 'false'){
             <?php 
             foreach($option_list as $options)
             {
-                echo '<option value="'.$options[$optionVal].'">'.$options[$optionName].'</option>';
+                echo '<option value="'.$options['roleID'].'">'.$options['roleType'].'</option>';
             }
             ?>
             </select>
@@ -131,6 +131,23 @@ if (is_user_2fa() == 'false'){
             aboutme<input type="text" name="aboutme" id="aboutme" value="<?= $inputs['aboutme'] ?? $user['aboutme'] ?>"
             class="<?= error_class($errors, 'aboutme') ?>">
             <small><?= $errors['aboutme'] ?? '' ?></small><br>
+            <input type="checkbox" name="checkbox" value="YesiWANT"> I WANT to Change password button
+        <div>
+        <label for="password">Password New:</label>
+        <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>"
+               class="<?= error_class($errors, 'password') ?>">
+        <small><?= $errors['password'] ?? '' ?></small>
+    </div>
+
+    <div>
+        <label for="password2">Password Again:</label>
+        <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>"
+               class="<?= error_class($errors, 'password2') ?>">
+        <small><?= $errors['password2'] ?? '' ?></small>
+    </div>
+        <section>
+            <button type="submit" name="btnCpass">Change</button>
+        </section>
             </form>
       </div>
       <div class="modal-footer">
@@ -141,6 +158,28 @@ if (is_user_2fa() == 'false'){
   </div>
 </div>
 
+PLACE IN MODAL <br>
+
+
+<!-- <form id="form" action="userprofile.php" method="post">
+        <h1>Change Password</h1>
+        <div>
+        <label for="password">Password New:</label>
+        <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? 'Zxcvbnmz12#' ?>"
+               class="<?= error_class($errors, 'password') ?>">
+        <small><?= $errors['password'] ?? '' ?></small>
+    </div>
+
+    <div>
+        <label for="password2">Password Again:</label>
+        <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? 'Zxcvbnmz12#' ?>"
+               class="<?= error_class($errors, 'password2') ?>">
+        <small><?= $errors['password2'] ?? '' ?></small>
+    </div>
+        <section>
+            <button type="submit" name="btnCpass">Change</button>
+        </section>
+    </form> -->
 
 
 <?php view('footer') ?>

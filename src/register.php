@@ -4,10 +4,7 @@ if (is_user_logged_in() && isset($_SESSION['2fa'])) {
 }
 $errors = [];
 $inputs = [];
-$tableNAme ='userroles';
-$optionVal ='roleID';
-$optionName ='roleType'; 
-$option_list = get_db_Options($tableNAme , $optionVal, $optionName);
+$option_list = get_db_usertype();
 if (is_post_request()) {
 
     $fields = [
