@@ -183,6 +183,29 @@ if (is_user_2fa() == 'false') {
     </div>
 </div>
 
+<!-- <input type="checkbox" name="checkbox" value="YesiWANT"> I WANT to Change password button
+        <div>
+        <label for="password">Password New:</label>
+        <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>"
+               class="<?= error_class($errors, 'password') ?>">
+        <small><?= $errors['password'] ?? '' ?></small>
+    </div>
+
+    <div>
+        <label for="password2">Password Again:</label>
+        <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>"
+               class="<?= error_class($errors, 'password2') ?>">
+        <small><?= $errors['password2'] ?? '' ?></small> 
+    <label for="usertype">User Type:</label>
+            <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
+            <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
+            <?php
+            foreach ($option_list as $options) {
+                echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
+            }
+            ?>
+            </select>-->
+
 <!-- Modal -->
 <div class="overlaybg-hidden">
     <div class="edit-profile">
@@ -218,15 +241,14 @@ if (is_user_2fa() == 'false') {
                         <div class="form-element">
                             <div class="inline-item-3">
                                 <label for="usertype">User Type:</label>
-                                <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
-                                    <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
-                                            <?php
-                                            foreach ($option_list as $options) {
-                                                echo '<option value="' . $options[$optionVal] . '">' . $options[$optionName] . '</option>';
-                                            }
-                                            ?>
+                                <select name="usertype" class="<?= error_class($errors, 'usertype') ?>" hidden>
+                                <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
+                                        <?php
+                                        foreach ($option_list as $options) {
+                                            echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
+                                        }
+                                        ?>
                                 </select>
-                                <small><?= $errors['usertype'] ?? '' ?></small>
                             </div>
                             <div class="inline-item-4">
                                 <label>Username</label>
@@ -272,6 +294,17 @@ if (is_user_2fa() == 'false') {
                             <textarea type="text" name="aboutme" id="aboutme" value="<?= $inputs['aboutme'] ?? $user['aboutme'] ?>" class="<?= error_class($errors, 'aboutme') ?>"><?= $user['aboutme'] ?></textarea>
                             <small><?= $errors['aboutme'] ?? '' ?></small>
                         </div>
+                        <input type="checkbox" name="checkbox" value="YesiWANT"> I WANT to Change password button
+                        <div class="form-element">
+                            <label for="password">Password New:</label>
+                            <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>">
+                            <small><?= $errors['password'] ?? '' ?></small>
+                        </div>
+                        <div class="form-element">
+                            <label for="password2">Password Again:</label>
+                            <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>">
+                            <small><?= $errors['password2'] ?? '' ?></small>    
+                        </div>
                         <div class="form-element">
                             <button type="submit" class="btn btn-nav btn-full btn-edit">Save Changes</button>
                             <button type="button" class="btn btn-nav btn-ghost btn-edit" data-bs-dismiss="modal">Cancel</button>
@@ -283,5 +316,6 @@ if (is_user_2fa() == 'false') {
     </div>
 </div>
 
+PLACE IN MODAL <br>
 
 <?php view('footer') ?>

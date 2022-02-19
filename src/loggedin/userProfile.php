@@ -3,10 +3,7 @@ $inputs = [];
 $errors = [];
 
 $user = get_user_Profile($_SESSION['user_id']);
-$tableNAme ='userroles';
-$optionVal ='roleID';
-$optionName ='roleType'; 
-$option_list = get_db_Options($tableNAme , $optionVal, $optionName);
+$option_list = get_db_usertype();
 
 if (is_post_request()) {
 
@@ -22,8 +19,10 @@ if (is_post_request()) {
         'birthday' => 'string | required | between: 3, 255',
         'address' => 'string | required | between: 3, 255',
         'contactno' => 'string | required | between: 3, 255',
-        'aboutme' => 'string | required | between: 3, 255',
+        'aboutme' => 'string | between: 3, 255',
         'usertype' => 'string | required',
+        'password' => 'string | secure',
+        'password2' => 'string | same: password',
 
     ]);
     
@@ -40,25 +39,40 @@ if (is_post_request()) {
         ]
     ];
 
-    if(update_user_Profile($_SESSION['user_id'], $inputs['email'], $inputs['username'],  $inputs['firstname'], $inputs['lastName'], $inputs['usertype'],
-    $inputs['gender'],  $inputs['age'],  $inputs['birthday'], $inputs['address'], $inputs['contactno'], $inputs['aboutme']
-    )){
-        sleep(3);
-        $user = null;
-        $errors['userProfile'] = 'User account has been Edited';
+    if($_POST['checkbox'] == 'YesiWANT'){
+        if (reset_Password($inputs['password'], $inputs['password2'])) {
+            $errors['userProfile'] = 'Password Changed';
 
-        redirect_with('userprofile.php', [
-            'errors' => $errors,
-            'inputs' => $inputs
-        ]);
+            redirect_with('userprofile.php', [
+                'errors' => $errors,
+                'inputs' => $inputs
+            ]);
+        }
     }else{
-        $errors['userProfile'] = 'NO workey';
+        if(update_user_Profile($_SESSION['user_id'], $inputs['email'], $inputs['username'],  $inputs['firstname'], $inputs['lastName'], $inputs['usertype'],
+        $inputs['gender'],  $inputs['age'],  $inputs['birthday'], $inputs['address'], $inputs['contactno'], $inputs['aboutme']
+        )){
+            sleep(3);
+            $user = null;
+            $errors['userProfile'] = 'User account has been Edited';
+    
+    
+            redirect_with('userprofile.php', [
+                'errors' => $errors,
+                'inputs' => $inputs
+            ]);
+        }else{
+            $errors['userProfile'] = 'NO workey';
+    
+            redirect_with('userprofile.php', [
+                'errors' => $errors,
+                'inputs' => $inputs
+            ]);
+        }
 
-        redirect_with('userprofile.php', [
-            'errors' => $errors,
-            'inputs' => $inputs
-        ]);
     }
+
+
 
 
 } else if (is_get_request()) {

@@ -2,14 +2,14 @@
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/loggedin/accountManagement.php';
 
-if (is_user_2fa() == 'false'){
-  redirect_to('login.php');
-}else{
-  audit_trail('User has visited AccountManagement', 2);
-  }
-if(!auth_Level('Admin')){
-    redirect_to('allowedNOT.php');
-}
+// if (is_user_2fa() == 'false'){
+//   redirect_to('login.php');
+// }else{
+//   audit_trail('User has visited AccountManagement', 2);
+//   }
+// if(!auth_Level('Admin')){
+//     redirect_to('allowedNOT.php');
+// }
 view('header', ['title' => 'Account Manage']) ?>
 <?php if (isset($errors['accountMGT'])) : ?>
     <div class="alert alert-error">
@@ -121,7 +121,7 @@ view('header', ['title' => 'Account Manage']) ?>
     </div>
   </div>
 </div>
-
+<!-- from boostrap.com/modal-->
 <div class="modal fade" id="modalCreate" tabindex="-2" aria-labelledby="modalLavelCreate" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
