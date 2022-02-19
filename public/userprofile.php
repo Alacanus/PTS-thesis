@@ -3,10 +3,10 @@
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/loggedin/userProfile.php';
 
-if (is_user_2fa() == 'false'){
+if (is_user_2fa() == 'false') {
     redirect_to('login.php');
-}else{
-  audit_trail('User has successfuly viewed the userprofile page', 2);
+} else {
+    audit_trail('User has successfuly viewed the userprofile page', 2);
 }
 ?>
 
@@ -187,76 +187,94 @@ if (is_user_2fa() == 'false'){
 <div class="overlaybg-hidden">
     <div class="edit-profile">
         <div class="center-form">
+            <h2>Edit Profile</h2>
+            <div class="container-edit-left">
+                <div class="form-element">
+                    <img src="" alt="">
+                </div>
+                <div class="form-element">
+                    <label for=""></label>
+                    <input type="text">
+                </div>
+            </div>
             <div class="container-edit">
                 <form id="form" action="userprofile.php" method="post">
                     <div class="close-btn">&times;</div>
-                    <h2>Edit Profile</h2>
+
                     <div class="form-style">
                         <div class="form-element">
-                            <label for="usertype">User Type:</label>
-                            <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
-                                <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
-                                        <?php
-                                        foreach ($option_list as $options) {
-                                            echo '<option value="' . $options[$optionVal] . '">' . $options[$optionName] . '</option>';
-                                        }
-                                        ?>
-                            </select>
-                            <small><?= $errors['usertype'] ?? '' ?></small>
+                            <div class="inline-item-1">
+                                <label>First Name</label>
+                                <input type="text" name="firstname" id="firstname" value="<?= $inputs['firstname'] ?? $user['firstname'] ?>" class="<?= error_class($errors, 'firstname') ?>">
+                                <small><?= $errors['firstname'] ?? '' ?></small>
+                            </div>
+                            <div class="inline-item-2">
+                                <label>Last Name</label>
+                                <input type="text" name="lastName" id="lastName" value="<?= $inputs['lastName'] ?? $user['lastName'] ?>" class="<?= error_class($errors, 'lastName') ?>">
+                                <small><?= $errors['lastName'] ?? '' ?></small>
+                            </div>
                         </div>
+
                         <div class="form-element">
-                            <label>Username</label>
-                            <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user['username'] ?>" class="<?= error_class($errors, 'username') ?>">
-                            <small><?= $errors['username'] ?? '' ?></small>
+                            <div class="inline-item-3">
+                                <label for="usertype">User Type:</label>
+                                <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
+                                    <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
+                                            <?php
+                                            foreach ($option_list as $options) {
+                                                echo '<option value="' . $options[$optionVal] . '">' . $options[$optionName] . '</option>';
+                                            }
+                                            ?>
+                                </select>
+                                <small><?= $errors['usertype'] ?? '' ?></small>
+                            </div>
+                            <div class="inline-item-4">
+                                <label>Username</label>
+                                <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user['username'] ?>" class="<?= error_class($errors, 'username') ?>">
+                                <small><?= $errors['username'] ?? '' ?></small>
+                            </div>
+                            <div class="inline-item-5">
+                                <label>Age</label>
+                                <input type="text" name="age" id="age" value="<?= $inputs['age'] ?? $user['age'] ?>" class="<?= error_class($errors, 'age') ?>">
+                                <small><?= $errors['age'] ?? '' ?></small>
+                            </div>
                         </div>
                         <div class="form-element">
                             <label>Email</label>
                             <input type="email" name="email" id="email" value="<?= $inputs['email'] ?? $user['email'] ?>" class="<?= error_class($errors, 'email') ?>">
                             <small><?= $errors['email'] ?? '' ?></small>
                         </div>
-                        <div class="form-element">
-                            <label>First Name</label>
-                            <input type="text" name="firstname" id="firstname" value="<?= $inputs['firstname'] ?? $user['firstname'] ?>" class="<?= error_class($errors, 'firstname') ?>">
-                            <small><?= $errors['firstname'] ?? '' ?></small>
-                        </div>
-                        <div class="form-element">
-                            <label>Last Name</label>
-                            <input type="text" name="lastName" id="lastName" value="<?= $inputs['lastName'] ?? $user['lastName'] ?>" class="<?= error_class($errors, 'lastName') ?>">
-                            <small><?= $errors['lastName'] ?? '' ?></small>
-                        </div>
+
                         <div class="form-element">
                             <label>Address</label>
                             <input type="text" name="address" id="address" value="<?= $inputs['address'] ?? $user['address'] ?>" class="<?= error_class($errors, 'address') ?>">
                             <small><?= $errors['address'] ?? '' ?></small>
                         </div>
                         <div class="form-element">
-                            <label>Age</label>
-                            <input type="text" name="age" id="age" value="<?= $inputs['age'] ?? $user['age'] ?>" class="<?= error_class($errors, 'age') ?>">
-                            <small><?= $errors['age'] ?? '' ?></small>
-                        </div>
-                        <div class="form-element">
-                            <label for="birthday">Birthday</label>
-                            <input type="date" name="birthday" id="birthday" type="date" value="<?= $inputs['birthday'] ?? $user['birthday'] ?>" class="<?= error_class($errors, 'birthday') ?>">
-                            <small><?= $errors['birthday'] ?? '' ?></small>
-                        </div>
-                        <div class="form-element">
-                            <label>Gender</label>
-                            <input type="text" name="gender" id="gender" value="<?= $inputs['gender'] ?? $user['gender'] ?>" class="<?= error_class($errors, 'gender') ?>">
-                            <small><?= $errors['gender'] ?? '' ?></small>
-                        </div>
-                        <div class="form-element">
-                            <label>Contact no.</label>
-                            <input type="text" name="contactno" id="contactno" value="<?= $inputs['contactno'] ?? $user['contactno'] ?>" class="<?= error_class($errors, 'contactno') ?>">
-                            <small><?= $errors['contactno'] ?? '' ?></small>
+                            <div class="inline-item-6">
+                                <label for="birthday">Birthday</label>
+                                <input type="date" name="birthday" id="birthday" type="date" value="<?= $inputs['birthday'] ?? $user['birthday'] ?>" class="<?= error_class($errors, 'birthday') ?>">
+                                <small><?= $errors['birthday'] ?? '' ?></small>
+                            </div>
+                            <div class="inline-item-7">
+                                <label>Gender</label>
+                                <input type="text" name="gender" id="gender" value="<?= $inputs['gender'] ?? $user['gender'] ?>" class="<?= error_class($errors, 'gender') ?>">
+                                <small><?= $errors['gender'] ?? '' ?></small>
+                            </div>
+                            <div class="inline-item-8">
+                                <label>Contact no.</label>
+                                <input type="text" name="contactno" id="contactno" value="<?= $inputs['contactno'] ?? $user['contactno'] ?>" class="<?= error_class($errors, 'contactno') ?>">
+                                <small><?= $errors['contactno'] ?? '' ?></small>
+                            </div>
                         </div>
                         <div class="form-element">
                             <label>About Me</label>
-                            <textarea type="text" name="aboutme" id="aboutme" value="<?= $inputs['aboutme'] ?? $user['aboutme'] ?>" class="<?= error_class($errors, 'aboutme') ?>"><?= $user['aboutme']?></textarea>
+                            <textarea type="text" name="aboutme" id="aboutme" value="<?= $inputs['aboutme'] ?? $user['aboutme'] ?>" class="<?= error_class($errors, 'aboutme') ?>"><?= $user['aboutme'] ?></textarea>
                             <small><?= $errors['aboutme'] ?? '' ?></small>
                         </div>
                         <div class="form-element">
                             <button type="submit" class="btn btn-nav btn-full btn-edit">Save Changes</button>
-                            <button type="button" class="btn btn-nav btn-ghost btn-edit" data-bs-dismiss="modal">Return</button>
+                            <button type="button" class="btn btn-nav btn-ghost btn-edit" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </form>

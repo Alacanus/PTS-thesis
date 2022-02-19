@@ -770,33 +770,41 @@ section {
 
 .edit-profile .center-form {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%) scale(1.25);
-    width: 800px;
-    height: 60vh;
+    width: 900px;
+    height: 70vh;
     padding: 20px 30px;
     background: rgb(250, 250, 250);
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    transition: top 0ms ease-in-out 200ms, 
+    /* transition: top 0ms ease-in-out 200ms, 
                 opacity 200ms ease-in-out 0ms, 
-                transform 20ms ease-in-out 0ms;
+                transform 20ms ease-in-out 0ms; */
 }
 
 /* Background */
 .edit-profile .center-form.active {
     transform: translate(-50%,-50%) scale(1);
-    transition: top 0ms ease-in-out 200ms, 
+    /* transition: top 0ms ease-in-out 200ms, 
     opacity 200ms ease-in-out 0ms, 
-    transform 20ms ease-in-out 0ms;
+    transform 20ms ease-in-out 0ms; */
 }
 
 /* Container and Design for Elements */
 .edit-profile .center-form .container-edit {
-    width: 100%;
-    padding-left: 20px;
-    margin-top: 2%;
+    width: 50%;
+    padding: 0 20px;
+    float: right;
+    display: block;
+}
+
+.edit-profile .center-form .container-edit-left {
+    width: 50%;
+    padding: 0 20px;
+    float: left;
+    display: block;
 }
 
 .edit-profile .center-form h2 {
@@ -836,6 +844,50 @@ section {
     height: 100px;
     resize: none;
 }
+
+.edit-profile .form-style .form-element .inline-item-1 {
+    display: inline-block;
+    width: 48%;
+    margin-right: 9px;
+}
+.edit-profile .form-style .form-element .inline-item-2 {
+    display: inline-block;
+    width: 48%;
+}
+
+.edit-profile .form-style .form-element .inline-item-3 {
+    display: inline-block;
+    width: 25%;
+    margin-right: 6px;
+}
+
+.edit-profile .form-style .form-element .inline-item-4 {
+    display: inline-block;
+    width: 60%;
+    margin-right: 2px;
+}
+
+.edit-profile .form-style .form-element .inline-item-5 {
+    display: inline-block;
+    width: 10%;
+}
+
+.edit-profile .form-style .form-element .inline-item-6 {
+    display: inline-block;
+    width: 40%;
+}
+
+.edit-profile .form-style .form-element .inline-item-7 {
+    display: inline-block;
+    width: 15%;
+    margin-right: 2px;
+}
+
+.edit-profile .form-style .form-element .inline-item-8 {
+    display: inline-block;
+    width: 40%;
+}
+
 
 .edit-profile .center-form .container-edit .form-style .form-element a {
     display: block;
