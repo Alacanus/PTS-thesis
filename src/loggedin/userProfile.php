@@ -43,7 +43,6 @@ if (is_post_request()) {
         replaceprofilePic($_SESSION['user_id']);
         $fileDATA=uploadImage($_FILES);
     }
-    print_r($fileDATA);
 
     if(isset($_POST['checkbox']) && $_POST['checkbox'] == 'YesiWANT'){
         if (reset_Password($inputs['password'], $inputs['password2'])) {

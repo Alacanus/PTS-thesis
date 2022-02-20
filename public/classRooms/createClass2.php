@@ -20,11 +20,6 @@ require __DIR__ . '/../../src/loggedin/classStep2.php';
     </div>
 <?php endif ?>
 <main id="mymain1">
-<?php
-traverseArray($_SESSION);
-// print_r($_POST);
-
-  ?>
 <button id="addIngredient">Add Ingredient</button>
 <form action="createClass2.php" method="post">
   <div id = "ingredientContainer">

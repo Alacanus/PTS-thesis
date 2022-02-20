@@ -1,8 +1,8 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-require __DIR__ . '/../src/loggedin/twoFactor_S.php';
 require_login();
+require __DIR__ . '/../src/loggedin/twoFactor_S.php';
 
 ?>
 <?php view('header', ['title' => 'Two factor authentication']) ?>
