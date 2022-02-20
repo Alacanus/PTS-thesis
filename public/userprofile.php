@@ -8,6 +8,8 @@ if (is_user_2fa() == 'false') {
 } else {
     audit_trail('User has successfuly viewed the userprofile page', 2);
 }
+
+$imageAddress = '../Writable/php_8_released.png'
 ?>
 
 <?php view('header', ['title' => 'User Profile']);
@@ -213,11 +215,11 @@ if (is_user_2fa() == 'false') {
             <h2>Edit Profile</h2>
             <div class="container-edit-left">
                 <div class="form-element">
-                    <img src="" alt="">
+                <img src="<?= $imageAddress ?>" alt="" width="130" height="50">
                 </div>
                 <div class="form-element">
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="fileToUpload">Upload New Image</label>
+                    <input type="file" name="fileToUpload" id="fileToUpload">
                 </div>
             </div>
             <div class="container-edit">
