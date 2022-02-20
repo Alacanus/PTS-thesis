@@ -8,8 +8,9 @@ if (is_user_2fa() == 'false') {
 } else {
     audit_trail('User has successfuly viewed the userprofile page', 2);
 }
+$temp = getprofilePic($_SESSION['user_id']);
+$imageAddress = substr($temp['filePath'],15);
 
-$imageAddress = '../Writable/php_8_released.png'
 ?>
 
 <?php view('header', ['title' => 'User Profile']);
@@ -185,29 +186,6 @@ $imageAddress = '../Writable/php_8_released.png'
     </div>
 </div>
 
-<!-- <input type="checkbox" name="checkbox" value="YesiWANT"> I WANT to Change password button
-        <div>
-        <label for="password">Password New:</label>
-        <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>"
-               class="<?= error_class($errors, 'password') ?>">
-        <small><?= $errors['password'] ?? '' ?></small>
-    </div>
-
-    <div>
-        <label for="password2">Password Again:</label>
-        <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>"
-               class="<?= error_class($errors, 'password2') ?>">
-        <small><?= $errors['password2'] ?? '' ?></small> 
-    <label for="usertype">User Type:</label>
-            <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
-            <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
-            <?php
-            foreach ($option_list as $options) {
-                echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
-            }
-            ?>
-            </select>-->
-
 <!-- Modal -->
 <div class="overlaybg-hidden">
     <div class="edit-profile">
@@ -217,18 +195,18 @@ $imageAddress = '../Writable/php_8_released.png'
                 <div class="form-element">
                 <img src="<?= $imageAddress ?>" alt="" width="130" height="50">
                 </div>
-                <div class="form-element">
-                    <label for="fileToUpload">Upload New Image</label>
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                </div>
             </div>
             <div class="container-edit">
-                <form id="form" action="userprofile.php" method="post">
+                <form id="form" action="userprofile.php" method="post" enctype="multipart/form-data">
                     <div class="close-btn">&times;</div>
 
                     <div class="form-style">
                         <div class="form-element">
                             <div class="inline-item-1">
+                            <div class="form-element">
+                    <label for="imageUpload">Upload New Image</label>
+                    <input type="file" name="imageUpload" id="imageUpload">
+                </div>
                                 <label>First Name</label>
                                 <input type="text" name="firstname" id="firstname" value="<?= $inputs['firstname'] ?? $user['firstname'] ?>" class="<?= error_class($errors, 'firstname') ?>">
                                 <small><?= $errors['firstname'] ?? '' ?></small>

@@ -18,11 +18,11 @@ if (is_post_request()) {
         'age' => 'string | required',
         'birthday' => 'string | required | between: 3, 255',
         'address' => 'string | required | between: 3, 255',
-        'contactno' => 'string | required | between: 3, 255',
-        'aboutme' => 'string | between: 3, 255',
+        'contactno' => 'string | required | between: 2, 12',
+        'aboutme' => 'string | between: 2, 255',
         'usertype' => 'string | required',
-        'password' => 'string | secure',
-        'password2' => 'string | same: password',
+        // 'password' => 'string | secure',
+        // 'password2' => 'string | same: password',
 
     ]);
     
@@ -38,8 +38,14 @@ if (is_post_request()) {
             'required' => 'You need to agree to the term of services to register'
         ]
     ];
+    
+    if(isset($_FILES['imageUpload'])){
+        replaceprofilePic($_SESSION['user_id']);
+        $fileDATA=uploadImage($_FILES);
+    }
+    print_r($fileDATA);
 
-    if($_POST['checkbox'] == 'YesiWANT'){
+    if(isset($_POST['checkbox']) && $_POST['checkbox'] == 'YesiWANT'){
         if (reset_Password($inputs['password'], $inputs['password2'])) {
             $errors['userProfile'] = 'Password Changed';
 
@@ -50,11 +56,11 @@ if (is_post_request()) {
         }
     }else{
         if(update_user_Profile($_SESSION['user_id'], $inputs['email'], $inputs['username'],  $inputs['firstname'], $inputs['lastName'], $inputs['usertype'],
-        $inputs['gender'],  $inputs['age'],  $inputs['birthday'], $inputs['address'], $inputs['contactno'], $inputs['aboutme']
+        $inputs['gender'],  $inputs['age'],  $inputs['birthday'], $inputs['address'], $inputs['contactno'], $inputs['aboutme'], $fileDATA['Data']
         )){
             sleep(3);
             $user = null;
-            $errors['userProfile'] = 'User account has been Edited';
+            $errors['userProfile'] = 'User account has been Edited' . $fileDATA['message'];
     
     
             redirect_with('userprofile.php', [
