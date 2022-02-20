@@ -14,7 +14,7 @@ function uploadImage(){
   if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
-      return array('result' => false, 'Message' => "File is an image - " . $check["mime"] . ".");
+      return array('Message' => "File is an image - " . $check["mime"] . ".");
       $uploadOk = 1;
     } else {
         return [false,"File is not an image."];
