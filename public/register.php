@@ -47,7 +47,7 @@ require __DIR__ . '/../src/register.php';
                                     <option value="">- - - - Select - - - -</options>
                                         <?php
                                         foreach ($option_list as $options) {
-                                            echo '<option value="'.$options['roleID'].'">'.$options['roleType'].'</option>';
+                                            echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
                                         }
                                         ?>
                                 </select>
