@@ -1,15 +1,15 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
+if (is_user_2fa() == 'false'){
+  redirect_to('login.php');
+}else{
+  audit_trail('User has visited AccountManagement', 2);
+  }
+if(!auth_Level('Admin')){
+    redirect_to('allowedNOT.php');
+}
 require __DIR__ . '/../src/loggedin/accountManagement.php';
 
-// if (is_user_2fa() == 'false'){
-//   redirect_to('login.php');
-// }else{
-//   audit_trail('User has visited AccountManagement', 2);
-//   }
-// if(!auth_Level('Admin')){
-//     redirect_to('allowedNOT.php');
-// }
 view('header', ['title' => 'Account Manage']) ?>
 <?php if (isset($errors['accountMGT'])) : ?>
     <div class="alert alert-error">

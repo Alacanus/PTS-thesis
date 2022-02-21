@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
+//Codes are referred too https://www.php.net/manual/en/function.move-uploaded-file
 $errors = [];
 
 

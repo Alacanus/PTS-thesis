@@ -187,7 +187,7 @@ if($inputsget['modalOption'] == 'get'){
 
     $statement->bindValue(':milestoneName', $_POST['milestoneName'], PDO::PARAM_STR);
     $statement->bindValue(':description', $_POST['milestonedesc'], PDO::PARAM_STR);
-    $statement->bindValue(':Mtrigger', $_POST['milestoneTrigger'], PDO::PARAM_INT);
+    $statement->bindValue(':Mtrigger', $_POST['milestoneTrigger']);
     $statement->bindValue(':userid', $_SESSION['user_id'], PDO::PARAM_INT);
     //$statement->bindValue(':password', $_SESSION['enrolID'], PDO::PARAM_INT);
 

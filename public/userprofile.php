@@ -1,13 +1,16 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-require __DIR__ . '/../src/loggedin/userProfile.php';
-
 if (is_user_2fa() == 'false') {
     redirect_to('login.php');
 } else {
     audit_trail('User has successfuly viewed the userprofile page', 2);
 }
+require __DIR__ . '/../src/loggedin/userProfile.php';
+
+$temp = getprofilePic($_SESSION['user_id']);
+$imageAddress = substr($temp['filePath'],15);
+
 ?>
 
 <?php view('header', ['title' => 'User Profile']);

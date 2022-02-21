@@ -85,11 +85,11 @@ function get_user_Profile(int $userID){
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-function update_user_Profile(string $userID, string $email, string $username, string $fname, string $lname, int $userType, string $gender, int $age, string $bDay, string $adress, string $contact, string $about):bool{
+function update_user_Profile(string $userID, string $email, string $username, string $fname, string $lname, int $userType, string $gender, int $age, string $bDay, string $adress, string $contact, string $about , int $fileID = 73):bool{//place holder image
     try{
         
         $sql1 = "UPDATE users
-        SET users.roleID = :userType, users.username = :username, users.email = :email, users.firstname = :firstname, users.lastName = :lastname,
+        SET users.roleID = :userType, users.username = :username, users.email = :email, users.firstname = :firstname, users.lastName = :lastname
         WHERE users.userID = :userID";
         db()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = db()->prepare($sql1);
@@ -107,7 +107,8 @@ function update_user_Profile(string $userID, string $email, string $username, st
         JOIN
         users
         ON userprofile.userID = users.userID
-        SET userprofile.age = :age, userprofile.gender = :gender, userprofile.birthday = :birthday, userprofile.address = :address, userprofile.contactno = :contactno, userprofile.aboutme  = :aboutme
+        SET userprofile.age = :age, userprofile.gender = :gender, userprofile.birthday = :birthday, userprofile.address = :address, 
+        userprofile.contactno = :contactno, userprofile.aboutme  = :aboutme, userprofile.pictureID=:fileID
         WHERE userprofile.userID = :userID";
         $statement2 = db()->prepare($sql2);
         $statement2->bindParam(':userID', $userID, PDO::PARAM_INT);
@@ -117,6 +118,7 @@ function update_user_Profile(string $userID, string $email, string $username, st
         $statement2->bindValue(':address', $adress, PDO::PARAM_STR);
         $statement2->bindParam(':contactno', $contact, PDO::PARAM_INT);
         $statement2->bindParam(':aboutme', $about, PDO::PARAM_STR);
+        $statement2->bindParam(':fileID', $fileID, PDO::PARAM_INT);
         $statement2->execute();
         return true;
 

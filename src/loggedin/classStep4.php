@@ -8,7 +8,7 @@ if (is_post_request()) {
 
     [$inputs, $errors] = filter($_POST, [
         // 'className' => 'string | required | between: 3, 255',
-        'chnlYout' => 'string | required | between: 3, 255',
+        // 'chnlYout' => 'string | required | between: 3, 255',
     ]);
     
 
@@ -19,10 +19,18 @@ if (is_post_request()) {
 
         ]);
     }
+    if(isset($_FILES['imageUpload'])){
+        if(isset($_SESSION['post']['fileData']['Data'])){
+        deletePic_byID($_SESSION['post']['fileData']['Data']);
+        }
+        $_SESSION['post']['fileData']=uploadImage($_FILES);
+    }
 
     foreach ($_POST as $key => $value) {
         $_SESSION['post'][$key] = $value;
         }
+
+
 
         // $sql2 = "INSERT INTO package (`className`,`description` ) VALUES (:userID)";
         // $statement2 = db()->prepare($sql2);

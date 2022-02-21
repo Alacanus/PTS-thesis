@@ -13,7 +13,6 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
 ?>
   <?php
 // echo '<pre>classID' , var_dump($_SESSION['post']['tempClassid']) , '</pre>';
-
 ?>
 <?php view('header', ['title' => 'Create Class']);
 ?>
@@ -37,7 +36,7 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
         </thead>
               <tbody>
                 <?php
-                if(!isset($option_list['chapter'])){
+                if(is_array($option_list)){
                 foreach($option_list as $options){
                     echo "<tr>";
                     echo '<td>'. $options['chapter'] .'</td>';
@@ -89,17 +88,17 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
       <form action="" name="createStoneForm" method="post">
       <label for="milestoneName">Milestone Name<div class="reqcolor">*</div></label>
       <small><?= $errors['milestoneName'] ?? '' ?></small>
-      <input type="text" name="milestoneName" id="milestoneName" value="<?= $inputs['milestoneName'] ?? 'The acolyte' ?>" class="<?= error_class($errors, 'milestoneName') ?>">
+      <input type="text" name="milestoneName" id="milestoneName" value="<?= $inputs['milestoneName'] ?? '' ?>" class="<?= error_class($errors, 'milestoneName') ?>">
       <label for="milestonedesc">Milestone Description<div class="reqcolor">*</div></label>
       <small><?= $errors['milestonedesc'] ?? '' ?></small>
-      <input type="text" name="milestonedesc" id="milestonedesc" value="<?= $inputs['milestonedesc'] ?? 'A Learner imbarking in a new lession' ?>" class="<?= error_class($errors, 'milestonedesc') ?>">
+      <input type="text" name="milestonedesc" id="milestonedesc" value="<?= $inputs['milestonedesc'] ?? '' ?>" class="<?= error_class($errors, 'milestonedesc') ?>">
       <label for="milestoneTrigger">Milestone Trigger<div class="reqcolor">*</div></label>
       <select name="milestoneTrigger" id="milestoneTrigger"  class="<?= error_class($errors, 'milestoneTrigger') ?>"required>
             <option value=""></option>
             <?php 
             foreach($option_list2 as $options2)
             {
-                echo '<option value="'.$options2['actionid'].'">'.$options2['actionType'].'</option>';
+                echo '<option value="'.$options2['actionID'].'">'.$options2['actionType'].'</option>';
             }
             ?>
             </select>
@@ -266,13 +265,14 @@ function createmileStone(){
 
     var data = $("form[name=createStoneForm]").serializeArray(); // convert form to array
     data.push({name: 'Option', value: 'createStone'});
+    console.log('it workz', data)
     $.ajax({
     type: 'POST',
     url: link,
     data: data,
     success: function(data) {
         // const myJSON = JSON.parse(data);
-        console.log('it workz', data);
+        // console.log('it workz', data);
         alert("Milestone Created");
         location.reload();
     },
@@ -285,7 +285,7 @@ function createmileStone(){
 }
 
 function move2(){
-  window.location.href="/createClass4.php";
+  window.location.href="createClass4.php";
 }
 
 function appymileStone(id){
