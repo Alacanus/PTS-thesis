@@ -24,8 +24,11 @@ $(document).ready(function(){
 
 
 document.querySelector("#show-editprofile").addEventListener("click", function(){
-    document.querySelector(".edit-profile").classList.add("active");
+    // document.querySelector(".edit-profile").classList.add("active"); 
+    $(document).ready(function(){ $('.edit-profile').modal('show'); });
 });
+
+
 
 document.querySelector(".edit-profile .close-btn").addEventListener("click", function(){
     document.querySelector(".edit-profile").classList.remove("active");

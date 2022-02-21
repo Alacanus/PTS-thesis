@@ -44,10 +44,10 @@ require __DIR__ . '/../src/register.php';
                             <div class="inline-item-3">
                                 <label for="usertype">User Type<div class="reqcolor">*</div></label>
                                 <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
-                                    <option value="">- - - - Select - - - -</options>
+                                    <option value="">- - - - - Select - - - - -</options>
                                         <?php
                                         foreach ($option_list as $options) {
-                                            echo '<option value="'.$options['roleID'].'">'.$options['roleType'].'</option>';
+                                            echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
                                         }
                                         ?>
                                 </select>
@@ -69,7 +69,7 @@ require __DIR__ . '/../src/register.php';
                         <div class="form-element">
                             <label for="password2">Re-Type Password<div class="reqcolor">*</div></label>
                             <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>">
-                            <small><?= $errors['password2'] ?? '' ?></small>
+                            <small id="errorpwd2"><?= $errors['password2'] ?? '' ?></small>
                         </div>
 
                         <div class="form-element">
@@ -96,10 +96,8 @@ require __DIR__ . '/../src/register.php';
                             <button>Register</button>
                         </div>
 
-                        <div class="form-element">
-                            <div class="signup-footer">
-                                <p>Already have an existing account?<a href="login.php"> Login Here...</a></p>
-                            </div>
+                        <div class="signup-footer">
+                            <p>Already have an existing account?<a href="login.php"> Login Here...</a></p>
                         </div>
                     </div>
                 </form>
