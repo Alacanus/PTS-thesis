@@ -9,19 +9,32 @@ require __DIR__ . '/../../src/requestChange.php';
         <?= $errors['requestChange'] ?>
     </div>
 <?php endif ?>
-<main>
-<form id="form" action="requestChange.php" method="post">
-        <h1>Change Password</h1>
-        <div>
-            <label for="email">Email:</label>
-            <input type="text" name="email" id="email" class="<?= error_class($errors, 'email') ?>">
-        <small><?= $errors['email'] ?? '' ?></small>
+<div class="overlaybg">
+    <div class="request">
+        <div class="center-form-request">
+            <div class="container-request">
+                <main>
+                    <div class="form-style">
+                        <form id="form" action="requestChange.php" method="post">
+                            <h2>Change Password</h2>
+                            <div class="form-element">
+                                <label for="email">Email:</label>
+                                <div class="errormsg">
+                                    <small><?= $errors['email'] ?? '' ?></small>
+                                </div>
+                                <input type="text" name="email" id="email" class="<?= error_class($errors, 'email') ?>">
+                            </div>
+                            <div class="form-element">
+                                <button type="submit">Request</button>
+                            </div>
+                            <div class="form-element">
+                                <a href="../register.php">Register</a>
+                            </div>
+                        </form>
+                    </div>
+                </main>
+            </div>
         </div>
-        
-        <section>
-            <button type="submit">Request</button>
-            <a href="../register.php">Register</a>
-        </section>
-    </form>
-</main>
+    </div>
+</div>
 <?php view('footer') ?>

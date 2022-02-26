@@ -20,7 +20,6 @@ $imageAddress = substr($temp['filePath'],15);
         <?= $errors['userProfile'] ?>
     </div>
 <?php endif ?>
-
 <div class="userprofile">
     <div class="profile-conainter">
         <section class="section-myprofile">
@@ -54,6 +53,114 @@ $imageAddress = substr($temp['filePath'],15);
                     </div>
                     <div>
                         <button class="btn btn-nav btn-full" id="show-editprofile">Edit Profile</button>
+                        <div class="overlaybg-hidden">
+                            <div class="edit-profile">
+                                <div class="center-form">
+                                    <h2>Edit Profile</h2>
+                                    <div class="container-edit-left">
+                                        <div class="form-element">
+                                            <img src="" alt="">
+                                        </div>
+                                        <div class="form-element">
+                                            <label for=""></label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                    <div class="container-edit">
+                                        <form id="form" action="userprofile.php" method="post">
+                                            <div class="close-btn">&times;</div>
+
+                                            <div class="form-style">
+                                                <div class="form-element">
+                                                    <div class="inline-item-1">
+                                                        <label>First Name</label>
+                                                        <input type="text" name="firstname" id="firstname" value="<?= $inputs['firstname'] ?? $user['firstname'] ?>" class="<?= error_class($errors, 'firstname') ?>">
+                                                        <small><?= $errors['firstname'] ?? '' ?></small>
+                                                    </div>
+                                                    <div class="inline-item-2">
+                                                        <label>Last Name</label>
+                                                        <input type="text" name="lastName" id="lastName" value="<?= $inputs['lastName'] ?? $user['lastName'] ?>" class="<?= error_class($errors, 'lastName') ?>">
+                                                        <small><?= $errors['lastName'] ?? '' ?></small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-element">
+                                                    <div class="inline-item-3">
+                                                        <label for="usertype">User Type:</label>
+                                                        <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
+                                                            <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
+                                                                    <?php
+                                                                    foreach ($option_list as $options) {
+                                                                        echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
+                                                                    }
+                                                                    ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="inline-item-4">
+                                                        <label>Username</label>
+                                                        <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user['username'] ?>" class="<?= error_class($errors, 'username') ?>">
+                                                        <small><?= $errors['username'] ?? '' ?></small>
+                                                    </div>
+                                                    <div class="inline-item-5">
+                                                        <label>Age</label>
+                                                        <input type="text" name="age" id="age" value="<?= $inputs['age'] ?? $user['age'] ?>" class="<?= error_class($errors, 'age') ?>">
+                                                        <small><?= $errors['age'] ?? '' ?></small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-element">
+                                                    <label>Email</label>
+                                                    <input type="email" name="email" id="email" value="<?= $inputs['email'] ?? $user['email'] ?>" class="<?= error_class($errors, 'email') ?>">
+                                                    <small><?= $errors['email'] ?? '' ?></small>
+                                                </div>
+
+                                                <div class="form-element">
+                                                    <label>Address</label>
+                                                    <input type="text" name="address" id="address" value="<?= $inputs['address'] ?? $user['address'] ?>" class="<?= error_class($errors, 'address') ?>">
+                                                    <small><?= $errors['address'] ?? '' ?></small>
+                                                </div>
+                                                <div class="form-element">
+                                                    <div class="inline-item-6">
+                                                        <label for="birthday">Birthday</label>
+                                                        <input type="date" name="birthday" id="birthday" type="date" value="<?= $inputs['birthday'] ?? $user['birthday'] ?>" class="<?= error_class($errors, 'birthday') ?>">
+                                                        <small><?= $errors['birthday'] ?? '' ?></small>
+                                                    </div>
+                                                    <div class="inline-item-7">
+                                                        <label>Gender</label>
+                                                        <input type="text" name="gender" id="gender" value="<?= $inputs['gender'] ?? $user['gender'] ?>" class="<?= error_class($errors, 'gender') ?>">
+                                                        <small><?= $errors['gender'] ?? '' ?></small>
+                                                    </div>
+                                                    <div class="inline-item-8">
+                                                        <label>Contact no.</label>
+                                                        <input type="text" name="contactno" id="contactno" value="<?= $inputs['contactno'] ?? $user['contactno'] ?>" class="<?= error_class($errors, 'contactno') ?>">
+                                                        <small><?= $errors['contactno'] ?? '' ?></small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-element">
+                                                    <label>About Me</label>
+                                                    <textarea type="text" name="aboutme" id="aboutme" value="<?= $inputs['aboutme'] ?? $user['aboutme'] ?>" class="<?= error_class($errors, 'aboutme') ?>"><?= $user['aboutme'] ?></textarea>
+                                                    <small><?= $errors['aboutme'] ?? '' ?></small>
+                                                </div>
+                                                <input type="checkbox" name="checkbox" value="YesiWANT"> I WANT to Change password button
+                                                <div class="form-element">
+                                                    <label for="password">Password New:</label>
+                                                    <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>">
+                                                    <small><?= $errors['password'] ?? '' ?></small>
+                                                </div>
+                                                <div class="form-element">
+                                                    <label for="password2">Password Again:</label>
+                                                    <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>">
+                                                    <small><?= $errors['password2'] ?? '' ?></small>
+                                                </div>
+                                                <div class="form-element">
+                                                    <button type="submit" class="btn btn-nav btn-full btn-edit">Save Changes</button>
+                                                    <button type="button" class="btn btn-nav btn-ghost btn-edit" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,117 +292,5 @@ $imageAddress = substr($temp['filePath'],15);
         </section>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="overlaybg-hidden">
-    <div class="edit-profile">
-        <div class="center-form">
-            <h2>Edit Profile</h2>
-            <div class="container-edit-left">
-                <div class="form-element">
-                <img src="<?= $imageAddress ?>" alt="" width="130" height="50">
-                </div>
-            </div>
-            <div class="container-edit">
-                <form id="form" action="userprofile.php" method="post" enctype="multipart/form-data">
-                    <div class="close-btn">&times;</div>
-
-                    <div class="form-style">
-                        <div class="form-element">
-                            <div class="inline-item-1">
-                            <div class="form-element">
-                    <label for="imageUpload">Upload New Image</label>
-                    <input type="file" name="imageUpload" id="imageUpload">
-                </div>
-                                <label>First Name</label>
-                                <input type="text" name="firstname" id="firstname" value="<?= $inputs['firstname'] ?? $user['firstname'] ?>" class="<?= error_class($errors, 'firstname') ?>">
-                                <small><?= $errors['firstname'] ?? '' ?></small>
-                            </div>
-                            <div class="inline-item-2">
-                                <label>Last Name</label>
-                                <input type="text" name="lastName" id="lastName" value="<?= $inputs['lastName'] ?? $user['lastName'] ?>" class="<?= error_class($errors, 'lastName') ?>">
-                                <small><?= $errors['lastName'] ?? '' ?></small>
-                            </div>
-                        </div>
-
-                        <div class="form-element">
-                            <div class="inline-item-3">
-                                <label for="usertype">User Type:</label>
-                                <select name="usertype" class="<?= error_class($errors, 'usertype') ?>" hidden>
-                                <option value="<?= $user['roleID'] ?>"><?= $user['roleType'] ?><options>
-                                        <?php
-                                        foreach ($option_list as $options) {
-                                            echo '<option value="' . $options['roleID'] . '">' . $options['roleType'] . '</option>';
-                                        }
-                                        ?>
-                                </select>
-                            </div>
-                            <div class="inline-item-4">
-                                <label>Username</label>
-                                <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? $user['username'] ?>" class="<?= error_class($errors, 'username') ?>">
-                                <small><?= $errors['username'] ?? '' ?></small>
-                            </div>
-                            <div class="inline-item-5">
-                                <label>Age</label>
-                                <input type="text" name="age" id="age" value="<?= $inputs['age'] ?? $user['age'] ?>" class="<?= error_class($errors, 'age') ?>">
-                                <small><?= $errors['age'] ?? '' ?></small>
-                            </div>
-                        </div>
-                        <div class="form-element">
-                            <label>Email</label>
-                            <input type="email" name="email" id="email" value="<?= $inputs['email'] ?? $user['email'] ?>" class="<?= error_class($errors, 'email') ?>">
-                            <small><?= $errors['email'] ?? '' ?></small>
-                        </div>
-
-                        <div class="form-element">
-                            <label>Address</label>
-                            <input type="text" name="address" id="address" value="<?= $inputs['address'] ?? $user['address'] ?>" class="<?= error_class($errors, 'address') ?>">
-                            <small><?= $errors['address'] ?? '' ?></small>
-                        </div>
-                        <div class="form-element">
-                            <div class="inline-item-6">
-                                <label for="birthday">Birthday</label>
-                                <input type="date" name="birthday" id="birthday" type="date" value="<?= $inputs['birthday'] ?? $user['birthday'] ?>" class="<?= error_class($errors, 'birthday') ?>">
-                                <small><?= $errors['birthday'] ?? '' ?></small>
-                            </div>
-                            <div class="inline-item-7">
-                                <label>Gender</label>
-                                <input type="text" name="gender" id="gender" value="<?= $inputs['gender'] ?? $user['gender'] ?>" class="<?= error_class($errors, 'gender') ?>">
-                                <small><?= $errors['gender'] ?? '' ?></small>
-                            </div>
-                            <div class="inline-item-8">
-                                <label>Contact no.</label>
-                                <input type="text" name="contactno" id="contactno" value="<?= $inputs['contactno'] ?? $user['contactno'] ?>" class="<?= error_class($errors, 'contactno') ?>">
-                                <small><?= $errors['contactno'] ?? '' ?></small>
-                            </div>
-                        </div>
-                        <div class="form-element">
-                            <label>About Me</label>
-                            <textarea type="text" name="aboutme" id="aboutme" value="<?= $inputs['aboutme'] ?? $user['aboutme'] ?>" class="<?= error_class($errors, 'aboutme') ?>"><?= $user['aboutme'] ?></textarea>
-                            <small><?= $errors['aboutme'] ?? '' ?></small>
-                        </div>
-                        <input type="checkbox" name="checkbox" value="YesiWANT"> I WANT to Change password button
-                        <div class="form-element">
-                            <label for="password">Password New:</label>
-                            <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>">
-                            <small><?= $errors['password'] ?? '' ?></small>
-                        </div>
-                        <div class="form-element">
-                            <label for="password2">Password Again:</label>
-                            <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>">
-                            <small><?= $errors['password2'] ?? '' ?></small>    
-                        </div>
-                        <div class="form-element">
-                            <button type="submit" class="btn btn-nav btn-full btn-edit">Save Changes</button>
-                            <button type="button" class="btn btn-nav btn-ghost btn-edit" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-PLACE IN MODAL <br>
 
 <?php view('footer') ?>
