@@ -35,9 +35,9 @@ function read_db(string $tableName) {
  function get_db_Modules(string $classID) {
     $option_list = '';
         $sql = "SELECT * FROM classmodules INNER JOIN debugfiles ON debugfiles.fileID  = classmodules.fileID 
-        WHERE classmodules.fileID = debugfiles.fileID";
+        WHERE classmodules.classID = :fileID";
         $statement = db()->prepare($sql);
-        // $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
         $statement->execute();
         while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
             $option_list = $data;
@@ -139,9 +139,80 @@ function create_user_Profile(string $userID):bool{
         return true;
 
     }catch(PDOException $e) {
-            // db()->rollBack();
             die($e->getMessage());
             return false;
     }
 
 }
+function update_vidData(int $vidID, string $youtubeID ){
+        $sql = 'UPDATE videofiles
+        SET youtubeVidID = :youtubeVidID
+        WHERE vidID = :userID ';
+    $statement = db()->prepare($sql);
+    $statement->bindParam(':userID', $vidID, PDO::PARAM_INT);
+    $statement->bindParam(':youtubeVidID', $youtubeID, PDO::PARAM_STR);
+    // execute the UPDATE statment
+    if ($statement->execute()) {
+        return true;
+        }   
+    return false;
+}
+
+function insert_vidData(string $videoTitle, string $videoDesc, string $videoTags, string $videoFilePath)
+{
+$conn = new PDO(
+    sprintf("mysql:host=%s;dbname=%s;charset=UTF8", 'localhost', 'u657624546_pts'),
+    'u657624546_eslp',
+    'Zxcvbnm1',
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
+    $sql = 'INSERT INTO videofiles(vidTitle, vidDesc, vidTags, vidPath)
+            VALUES(:videoTitle, :videoDesc, :videoTags, :videoFilePath)';
+
+    $statement = $conn->prepare($sql);
+
+    $statement->bindValue(':videoTitle', $videoTitle, PDO::PARAM_STR);
+    $statement->bindValue(':videoDesc', $videoDesc, PDO::PARAM_STR);
+    $statement->bindValue(':videoTags', $videoTags, PDO::PARAM_STR);
+    $statement->bindValue(':videoFilePath', $videoFilePath, PDO::PARAM_STR);
+
+
+    $statement->execute();
+    $temp = $conn->lastInsertId();
+    $sql2 = 'SELECT * FROM videofiles WHERE vidID  = :vidID  ';
+    $statement2 = $conn->prepare($sql2);
+    $statement2->bindValue(':vidID', $temp, PDO::PARAM_INT);
+    $statement2->execute();
+
+    return $statement2->fetch(PDO::FETCH_ASSOC);
+
+}
+
+
+function get_Class_CARDS() {
+    $option_list = '';
+        $sql = "SELECT * FROM classes INNER JOIN classprofile ON classes.classID  = classprofile.classID 
+        ";//WHERE classes.classID = :fileID
+        $statement = db()->prepare($sql);
+        // $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+      
+    return $option_list;
+ }
+
+ function get_class_Info(int $classID) {
+    $option_list = '';
+        $sql = "SELECT * FROM classes INNER JOIN classprofile ON classes.classID  = classprofile.classID 
+        WHERE classes.classID = :fileID";
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+      
+    return $option_list;
+ }

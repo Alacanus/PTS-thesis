@@ -1,5 +1,4 @@
 <?php
-
 /** bindValue for more flexibility
  * PDO::PARAM_BOOL (int)
  * PDO::PARAM_NULL (int)
@@ -70,6 +69,15 @@ function find_user_by_email(string $email){
     $sql = 'SELECT userID, email, active FROM users WHERE email= :email';
     $statement = db()->prepare($sql);
     $statement->bindValue(':email', $email, PDO::PARAM_STR);
+    $statement->execute();
+
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function find_user_by_uid(string $uid){
+    $sql = 'SELECT * FROM users WHERE userID = :uid';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':uid', $uid, PDO::PARAM_STR);
     $statement->execute();
 
     return $statement->fetch(PDO::FETCH_ASSOC);

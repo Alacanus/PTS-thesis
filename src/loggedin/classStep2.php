@@ -28,8 +28,11 @@ if (is_post_request()) {
         ]);
     }
     foreach ($_POST['ingredients'] as $key => $value) {
+        $_SESSION['post']['ingredient'][$key] = array(
+            'ingredientName' => $value
+        );
         $_SESSION['post']['ingredients'][$key] = array(
-            'ingredients' => $value
+            'ingredientDesc' => $value
         );
         $_SESSION['post']['amount'][$key] = array(
             'amount' => $_POST['amount'][$key]

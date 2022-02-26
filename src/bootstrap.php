@@ -11,8 +11,8 @@ require_once __DIR__ . '/libs/filter.php';
 require_once __DIR__ . '/../Model/AES/crypt0.php';
 require_once __DIR__ . '/inc/dbCRUD.php';
 require_once __DIR__ . '/inc/scriptFile.php';
-
-
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/oAuth.php';
 
 
 include __DIR__ . "/../Model/Includes/getConVar.php";
@@ -25,7 +25,6 @@ require __DIR__ . '/../PHPMailer/src/Exception.php';
 require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer/src/SMTP.php';
 $globalARR = array();
-
 
 function global_arr(string $arrKey){
     global $globalARR;
@@ -118,9 +117,7 @@ function send_authentication_email(string $email, string $options ,$activation_c
         $mail->SetFrom('no-reply@pts-thesis.website');
         $mail->addAddress($email);     //Add a recipient Name is optional    
         $mail->addReplyTo('marklinsangan@pts-thesis.website', 'Admin');
-        // $mail->addCC('cc@example.com');
-        // $mail->addBCC('bcc@example.com');
-    
+
         //Attachments
         // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
@@ -129,8 +126,7 @@ function send_authentication_email(string $email, string $options ,$activation_c
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $message;
-        //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    
+
         $mail->send();
         echo "<script>alert('Message has been sent');</script>";
     } catch (Exception $e) {

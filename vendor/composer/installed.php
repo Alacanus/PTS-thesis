@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f580f5fd25e62815ac3ea6f5e876009bdbe4bc1a',
+        'reference' => '23fe44123dd8d1b906d943c5c1f4aafb41e6d6d6',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f580f5fd25e62815ac3ea6f5e876009bdbe4bc1a',
+            'reference' => '23fe44123dd8d1b906d943c5c1f4aafb41e6d6d6',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(
@@ -38,8 +38,8 @@
             'dev_requirement' => false,
         ),
         'google/apiclient-services' => array(
-            'pretty_version' => 'v0.235.0',
-            'version' => '0.235.0.0',
+            'pretty_version' => 'v0.236.0',
+            'version' => '0.236.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../google/apiclient-services',
             'aliases' => array(),

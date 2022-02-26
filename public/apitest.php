@@ -16,7 +16,7 @@
  */
 
 include_once __DIR__ . '/../vendor/autoload.php';
-include_once "templates/base.php";
+include_once "../src/libs/base.php";
 
 echo pageHeader("File Upload - Uploading a simple file");
 

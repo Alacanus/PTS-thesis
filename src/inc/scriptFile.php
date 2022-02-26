@@ -74,10 +74,10 @@ if ($uploadOk == 0) {
 
 
   return array('result'=>true,'message' => "The file ". htmlspecialchars( basename( $files["imageUpload"]["name"])). " has been uploaded.",
-  'Data'=>$temp);
+  'Data'=>$temp, 'filePath' =>$target_file);
   } else {
     return array('result'=>false,'message' => "Sorry, there was an error uploading your file.",
-    'Data'=>'0'
+    'Data'=>'0', 'filePath' => placeholderPIC
     );
   }
 }
@@ -98,7 +98,7 @@ function getPic_byID(int $fileID){
         return $filearr;
     }
   }else{
-    return ['filePath' => 'C:\xampp\htdocs\PTS-thesis\src\inc/../../public/Writable/SM-placeholder.png'];
+    return ['filePath' => placeholderPIC];
   }
 }
 
@@ -139,7 +139,7 @@ function getprofilePic(int $userID){
         return $filearr;
     }
   }else{
-    return ['filePath' => 'C:\xampp\htdocs\PTS-thesis\src\inc/../../public/Writable/SM-placeholder.png'];
+    return ['filePath' => placeholderPIC];
   }
 }
 
@@ -166,7 +166,50 @@ function replaceprofilePic(int $userID){
         }
 }
 
+function getclassPic(int $userID){
+  $sql = 'SELECT * FROM debugfiles 
+  JOIN classprofile
+  ON classprofile.imageAddress = debugfiles.filePath
+  JOIN classes
+  ON classprofile.classID = classes.classID
+  WHERE classes.userID = :userID AND classes.classID = :classID
+  ';
+  $statement = db()->prepare($sql);
+  $statement->bindValue(':userID', $userID, PDO::PARAM_INT);
+  $statement->bindValue(':classID', $_SESSION['post']['classID'], PDO::PARAM_INT); 
+  $statement->execute();
+  $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+    return $filearr;
+}
+
 function replaceclassPic(int $userID){
+  $sql = 'SELECT * FROM debugfiles 
+  JOIN classprofile
+  ON classprofile.imageAddress = debugfiles.filePath
+  JOIN classes
+  ON classprofile.classID = classes.classID
+  WHERE classes.userID = :userID
+  ';
+  $statement = db()->prepare($sql);
+  $statement->bindValue(':userID', $userID, PDO::PARAM_INT);
+  $statement->execute();
+  $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+  if($filearr['filePath'] !== placeholderPIC){
+    if (!unlink($filearr['filePath'])) { 
+      echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
+  } 
+  else { 
+    $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
+    $statement2 = db()->prepare($sql2);
+    $statement2->bindParam(':fileID', $filearr['fileID'], PDO::PARAM_INT);
+    $return_arr = $statement2->execute();
+  }
+  }
+}
+
+
+
+function replacepaymentPic(int $userID){
   $sql = 'SELECT * FROM debugfiles 
   JOIN userprofile
   ON userprofile.pictureID = debugfiles.fileID

@@ -1,15 +1,15 @@
 <?php
 require __DIR__ . '/../../src/bootstrap.php';
-require __DIR__ . '/../../src/loggedin/classStep1.php';
+require __DIR__ . '/../../src/loggedin/classStep5.php';
 
-if (is_user_2fa() == 'false'){
-  redirect_to('login.php');
-}else{
-audit_trail('User has procedeed step 5', 2);
-}
-if(!auth_Level('Instructor')){
-    redirect_to('../allowedNOT.php');
-}
+// if (is_user_2fa() == 'false'){
+//   redirect_to('login.php');
+// }else{
+// audit_trail('User has procedeed step 5', 2);
+// }
+// if(!auth_Level('Instructor')){
+//     redirect_to('../allowedNOT.php');
+// }
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
@@ -21,35 +21,42 @@ if(!auth_Level('Instructor')){
 <?php endif ?>
 <main id="mymain1">
 <div class="form-style">
-                            <div class="form-element">
-                                <label for="username">Username<div class="reqcolor">*</div></label>
-                                <div class="errormsg">
-                                    <small><?= $errors['username'] ?? '' ?></small>
-                                </div>
-                                <input type="text" name="username" id="username" class="<?= error_class($errors, 'username') ?>">
+<div class="form-element">
+<form action="" method="POST"> 
+                            <div class="inline-item-3">
+                                <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
+                                <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
+                                    <option value="">- - - - Select - - - -</options>
+                                        <?php
+                                        foreach ($option_list as $options) {
+                                            echo '<option value="' . $options['paylistID'] . '">' . $options['paymentName'] . '</option>';
+                                        }
+                                        ?>
+                                </select>
+                                <small><?= $errors['paylistID'] ?? '' ?></small>
                             </div>
                             <div class="form-element">
-                                <label for="password">Password<div class="reqcolor">*</div></label>
+                                <label for="accountName">Accounnt Name<div class="reqcolor">*</div></label>
                                 <div class="errormsg">       
-                                    <small><?= $errors['password'] ?? '' ?></small>
+                                    <small><?= $errors['accountName'] ?? '' ?></small>
                                 </div>
-                                <input type="password" name="password" id="password"  class="<?= error_class($errors, 'password') ?>">
-                            </div>
-                            <div class="form-group">
-                                <div class="g-recaptcha" data-sitekey="6Le6_lQeAAAAAG_6B4F-OjL0mbth_UQLUihCtxiG">
-                                </div>
-                                <small id="captcha_error" class="text-danger"></small>
-                                <div class="form-element">
-                                    <button>Login</button>
-                                </div>      
+                                <input type="text" name="accountName" id="accountName"  class="<?= error_class($errors, 'accountName') ?>">
                             </div>
                             <div class="form-element">
-                                <a href="register.php"><button class="btnsignup">Sign Up</button></a>
+                                <label for="accountName">Accounnt Details {account number}<div class="reqcolor">*</div></label>
+                                <div class="errormsg">       
+                                    <small><?= $errors['accountName'] ?? '' ?></small>
+                                </div>
+                                <input type="text" name="accountName" id="accountName"  class="<?= error_class($errors, 'accountName') ?>">
                             </div>
                             <div class="form-element">
-                                <a href="changepassword/requestChange.php">Change Password</a>
+                                <label for="imageUpload">Upload Image</label>
+                                <input type="file" name="imageUpload" id="imageUpload">
                             </div>
+                            <div class="form-element">
+                            <button type=="submit">Next</button>
                         </div>
+                                    </form>
 </main>
 
 

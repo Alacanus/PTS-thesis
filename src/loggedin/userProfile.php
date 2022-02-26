@@ -4,7 +4,7 @@ $errors = [];
 
 $user = get_user_Profile($_SESSION['user_id']);
 $option_list = get_db_usertype();
-
+$temp = getprofilePic($_SESSION['user_id']);
 if (is_post_request()) {
 
 
@@ -39,9 +39,22 @@ if (is_post_request()) {
         ]
     ];
     
-    if(isset($_FILES['imageUpload'])){
+    if(isset($_FILES['imageUpload']) && $_FILES['imageUpload']['size'] > 0){
         replaceprofilePic($_SESSION['user_id']);
         $fileDATA=uploadImage($_FILES);
+        $_SESSION['debug'] = $fileDATA;
+    }else{
+        $fileDATA = $temp;
+        $fileDATA['result'] = false;
+        $fileID = getprofilePic($_SESSION['user_id']);
+        
+        if(!isset($fileID['fileID'])){
+            $fileDATA['Data'] = 0;
+        }else{
+            $fileDATA['Data'] = $fileID['fileID'];
+        }
+        
+        $fileDATA['message'] = ' ';
     }
 
     if(isset($_POST['checkbox']) && $_POST['checkbox'] == 'YesiWANT'){

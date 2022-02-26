@@ -62,7 +62,9 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
       <button >Upload File</button>
 
       </form>
-      <button name="Next" onclick="move2()">Next</button>
+      <a href="createClass4.php">
+        <input type="submit" value ="Next"/>
+      </a>
       <button data-bs-toggle="modal" onclick="SetID()" data-bs-target="#modalMilestone">Milestones</button>
 
       <div class="modal fade" id="modalMilestone" tabindex="-2" aria-labelledby="modalLavelFile" aria-hidden="true">

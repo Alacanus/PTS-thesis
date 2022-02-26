@@ -6,20 +6,24 @@ require __DIR__ . '/../src/viewClasses.php';
 ?>
 
 <?php view('header', ['title' => 'Class page']);
+$teacher=find_user_by_uid($classInfo[0]['userID']);
+
+$temp = $classInfo[0]['imageAddress'];;
+$imageAddress = substr($temp,15);
 ?>
 <main id="mymain1">
     <h1><?= $class['']?>'s page</h1>
-    <img src="../static/OIP.jpg" class="card-img-top" style="width: 40rem;">
+    <img src="<?= $imageAddress?>" class="card-img-top" style="width: 40rem;">
     <div>
-        <label for="className">class name: <?= $class['']?></label>
+        <label for="className">class name: <?= $classInfo[0]['className']?></label>
 
     </div>
     <div>
-        <label for="classStatus">Status: <?= $class['']?></label>
+        <label for="classStatus">Status: <?= $classInfo[0]['classStatus']?></label>
 
     </div>
     <div>
-        <label for="classDescription">Description: <?= $class['']?></label>
+        <label for="classDescription">Description: <?= $classInfo[0]['classDescription']?></label>
 
     </div>
     <div>
@@ -31,16 +35,16 @@ require __DIR__ . '/../src/viewClasses.php';
 
     </div>
     <div>
-        <label for="classImage">Class banner: <?= $class['']?></label>
+        <label for="classImage">Class banner: <?=  $classInfo[0]['imageAddress']?></label>
 
     </div>
     <div>
-        <label for="createdDate">Teaching students since: <?= $class['']?></label>
+        <label for="createdDate">Teaching students since: <?= $classInfo[0]['creationDate']?></label>
 
     </div>
 
     <div>
-        <label for="modifiedDate">Updated on: <?= $class['']?></label>
+        <label for="modifiedDate">Updated on: <?= $classInfo[0]['modifiedDate']?></label>
 
     </div>
     <div>
@@ -53,7 +57,7 @@ require __DIR__ . '/../src/viewClasses.php';
     </div>
 
     <div>
-        <label for="userID">Teacher name: <?= $class['']?></label>
+        <label for="userID">Teacher name: <?=$teacher['firstname']. " ". $teacher['lastName']?></label>
 
     </div>
     <div>

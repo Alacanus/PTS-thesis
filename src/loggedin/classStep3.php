@@ -91,9 +91,6 @@ if (is_post_request()) {
         ]);
         }
     }
-    // redirect_with('createClass4.php', [
-    //     'inputs' => $inputs
-    // ]);
 
 } else if (is_get_request()) {
     [$inputs, $errors] = session_flash('inputs', 'errors');

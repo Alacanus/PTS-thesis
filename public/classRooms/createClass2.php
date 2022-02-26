@@ -14,18 +14,21 @@ require __DIR__ . '/../../src/loggedin/classStep2.php';
 
 <?php view('header', ['title' => 'Create Class']);
 ?>
-<?php if (isset($errors['errors'])) : ?>
+<?php if (isset($errors['classRooms'])) : ?>
     <div class="alert alert-error">
-        <?= $errors['errors'] ?>
+        <?= $errors['classRooms'] ?>
     </div>
 <?php endif ?>
 <main id="mymain1">
 <button id="addIngredient">Add Ingredient</button>
 <form action="createClass2.php" method="post">
   <div id = "ingredientContainer">
-    <label for="ingredients[]">Ingredients and Discription<div class="reqcolor">*</div></label>
-    <small><?= $errors['ingredients[]'] ?? '' ?></small>
-    <input type="text" name="ingredients[]" id="ingredients[]" class="<?= error_class($errors, 'ingredients[]') ?>" required = "required"/>
+    <label for="IngredientName[]">Ingredients Name<div class="reqcolor">*</div></label>
+    <small><?= $errors['IngredientName[]'] ?? '' ?></small>
+    <input type="text" name="IngredientName[]" id="IngredientName[]" class="<?= error_class($errors, 'IngredientName[]') ?>" required = "required"/>
+    <label for="discription[]">Discription<div class="reqcolor">*</div></label>
+    <small><?= $errors['discription[]'] ?? '' ?></small>
+    <input type="text" name="discription[]" id="discription[]" class="<?= error_class($errors, 'discription[]') ?>" required = "discription"/>
     <label for="price[]">Price<div class="reqcolor">*</div></label>
     <small><?= $errors['price[]'] ?? '' ?></small>
     <input  type="number" name="price[]" id="price[]" min="0.00" class="<?= error_class($errors, 'price[]') ?>" step="any" required = "required"/>
@@ -41,9 +44,14 @@ require __DIR__ . '/../../src/loggedin/classStep2.php';
   var count = 0;
     $(document).ready(function(){
         $('#addIngredient').click(function(){
-                $input = $('<div class = "form-group">'
-                + '<label for="ingredients[]">Ingredients and Discription<div class="reqcolor">*</div></label>'
-                + '<input type="text" name="ingredients[]" id="ingredients[]" class="<?= error_class($errors, 'ingredients[]') ?>" required = "required"/>'
+                $input = $('
+                <div class = "form-group">'
+                + '<label for="IngredientName[]">Ingredients Name<div class="reqcolor">*</div></label>'
+                + '<input type="text" name="IngredientName[]" id="IngredientName[]" class="<?= error_class($errors, 'IngredientName[]') ?>" required = "required"/>'
+                + '</div>'
+                + '<div class = "form-group">'
+                + '<label for="discription[]">Discription<div class="reqcolor">*</div></label>'
+                + '<input type="text" name="discription[]" id="discription[]" class="<?= error_class($errors, 'discription[]') ?>" required = "required"/>'
                 + '</div>'
                 + '<div class = "form-group">'
                 + '<label for="price[]">price<div class="reqcolor">*</div></label>'
