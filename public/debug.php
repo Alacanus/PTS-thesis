@@ -12,5 +12,6 @@ $client = init_Client();
 
 $client->revokeToken();
 unset($_SESSION['upload_token']);
+unset($_SESSION['post']);
 
 

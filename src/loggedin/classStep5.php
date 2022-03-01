@@ -2,9 +2,7 @@
 $inputs = [];
 $errors = [];
 $tableNAme ="paymentlist";
-$optionVal ="actionType";
-$optionName ='paymentName'; 
-$option_list = get_db_Options($tableNAme , $optionVal, $optionName);
+$option_list = get_db_Options($tableNAme);
 if (is_post_request()) {
 
 

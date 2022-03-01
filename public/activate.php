@@ -18,7 +18,7 @@ if (is_get_request()) {
         if ($user && activate_user($user['userID'])) {
             create_user_Profile($user['userID']);
 
-            $errors['login.php'] = 'User account has been activated, please login';
+            $errors['login'] = 'User account has been activated, please login';
 
             redirect_with('login.php', [
                 'errors' => $errors

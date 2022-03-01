@@ -191,7 +191,7 @@ $conn = new PDO(
 
 function get_Class_CARDS() {
     $option_list = '';
-        $sql = "SELECT * FROM classes INNER JOIN classprofile ON classes.classID  = classprofile.classID 
+        $sql = "SELECT * FROM classes JOIN classprofile ON classes.classID  = classprofile.classID 
         ";//WHERE classes.classID = :fileID
         $statement = db()->prepare($sql);
         // $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
@@ -205,10 +205,24 @@ function get_Class_CARDS() {
 
  function get_class_Info(int $classID) {
     $option_list = '';
-        $sql = "SELECT * FROM classes INNER JOIN classprofile ON classes.classID  = classprofile.classID 
+        $sql = "SELECT * FROM classes JOIN classprofile ON classes.classID  = classprofile.classID 
         WHERE classes.classID = :fileID";
         $statement = db()->prepare($sql);
         $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+      
+    return $option_list;
+ }
+
+ function get_ingredient_CARDS(int $classID) {
+    $option_list = '';
+        $sql = "SELECT * FROM package WHERE classID  = :classID 
+        ";//WHERE classes.classID = :fileID
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':classID', $classID, PDO::PARAM_INT);
         $statement->execute();
         while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
             $option_list = $data;

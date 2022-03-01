@@ -7,10 +7,8 @@ require __DIR__ . '/../src/bootstrap.php';
  */
 
 view('header', ['title' => 'Create Event']);
-$tableNAme3 ='users';
-$optionVal3 ="actionType ";
-$optionName3 ='actionType'; 
-$option_list = get_db_Options($tableNAme3 , $optionVal3, $optionName3);
+$tableNAme ='users';
+$option_list = get_db_Options($tableNAme);
 $errors ='';
 $client = init_Cal_Client();
 if (isset($_GET['code'])) {

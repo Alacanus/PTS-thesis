@@ -14,7 +14,7 @@ $ClassCARD = get_Class_CARDS();
   <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
     <div class="col mt-4">
       <div class="card">
-        <img src="https://via.placeholder.com/340x440/7fec59/FFFFFF" alt="...">
+        <img src="<?= placeholderPIC?>" alt="...">
       </div>
     </div>
     <div class="col mt-4">

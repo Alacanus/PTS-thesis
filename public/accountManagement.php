@@ -74,7 +74,7 @@ view('header', ['title' => 'Account Manage']) ?>
             if(is_array($option_list2)){
             foreach($option_list2 as $options2)
               {
-                  echo '<option value="'.$options2[$optionVal2].'">'.$options2[$optionName2].'</option>';
+                  echo '<option value="'.$options2['roleID'].'">'.$options2['roleType'].'</option>';
               }
             }
             ?>
@@ -137,7 +137,7 @@ view('header', ['title' => 'Account Manage']) ?>
             <?php 
             foreach($option_list2 as $options2)
             {
-                echo '<option value="'.$options2[$optionVal2].'">'.$options2[$optionName2].'</option>';
+                echo '<option value="'.$options2['roleID'].'">'.$options2['roleType'].'</option>';
             }
             ?>
             </select>

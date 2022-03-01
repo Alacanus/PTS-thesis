@@ -24,14 +24,13 @@ function register_user(string $email, string $username, string $password, string
     return $statement->execute();
 }
 
-function get_db_Options(string $tableName, string $optionVal, string $optionName) {
+function get_db_Options(string $tableName) {
     $option_list = '';
     $sql = "SELECT * FROM `$tableName`";
     $statement = db()->prepare($sql);
     $statement->execute();
     while($data=  $statement->fetchAll(PDO::FETCH_ASSOC)) {
         $option_list = $data;
-       //$option_list.="<option value='$data[$optionVal]'>$data[$optionName]</option>";
     }
     return $option_list;
  }

@@ -3,10 +3,8 @@ $inputs = [];
 $errors = [];
 
 $option_list = get_db_Modules($_SESSION['post']['tempClassid']);
-$tableNAme3 ='actiontype';
-$optionVal3 ="actionType ";
-$optionName3 ='actionType'; 
-$option_list2 = get_db_Options($tableNAme3 , $optionVal3, $optionName3);
+$tableNAme ='actiontype';
+$option_list2 = get_db_Options($tableNAme);
 if (is_post_request()) {
 
     [$inputs, $errors] = filter($_POST, [

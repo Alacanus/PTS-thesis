@@ -10,6 +10,9 @@ require __DIR__ . '/../../src/loggedin/classStep2.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
+$tableNAme ='unitofmeasurement';
+$option_list2 = get_db_Options($tableNAme);
+$Card_entries = get_ingredient_CARDS($_SESSION['post']['classID']);
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
@@ -20,49 +23,94 @@ require __DIR__ . '/../../src/loggedin/classStep2.php';
     </div>
 <?php endif ?>
 <main id="mymain1">
-<button id="addIngredient">Add Ingredient</button>
+  <div>
+    <?php
+    // var_dump($_SESSION['post']['classID']);
+    // var_dump($Card_entries);
+    if(!empty($Card_entries)){
+      foreach($Card_entries as $options2)
+      {
+          echo '<div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">'.$options2['IngredientName'].'</h5>
+                <p class="card-text">Description: '.$options2['description'].', Unit of Measure: '.$options2['unitMID'].', Quanitity: '.
+                $options2['amount'].', Price: '.$options2['price'].'
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>';
+      }
+    }
+    ?>
+  </div>
 <form action="createClass2.php" method="post">
   <div id = "ingredientContainer">
-    <label for="IngredientName[]">Ingredients Name<div class="reqcolor">*</div></label>
-    <small><?= $errors['IngredientName[]'] ?? '' ?></small>
-    <input type="text" name="IngredientName[]" id="IngredientName[]" class="<?= error_class($errors, 'IngredientName[]') ?>" required = "required"/>
-    <label for="discription[]">Discription<div class="reqcolor">*</div></label>
-    <small><?= $errors['discription[]'] ?? '' ?></small>
-    <input type="text" name="discription[]" id="discription[]" class="<?= error_class($errors, 'discription[]') ?>" required = "discription"/>
-    <label for="price[]">Price<div class="reqcolor">*</div></label>
-    <small><?= $errors['price[]'] ?? '' ?></small>
-    <input  type="number" name="price[]" id="price[]" min="0.00" class="<?= error_class($errors, 'price[]') ?>" step="any" required = "required"/>
-    <label for="amount[]">amount<div class="reqcolor">*</div></label>
-    <small><?= $errors['amount[]'] ?? '' ?></small>
-    <input  type="number" name="amount[]" id="amount[]" value="1" min="1" class="<?= error_class($errors, 'amount[]') ?>" required = "required"/>
+
+    <table class="table table-bordered" id="dynamic_field">
+      <th><label >Ingredients Name</label></th>
+      <th><label >Ingredients Description</label></th>
+      <th><label >Unit of Measurement</label></th>
+      <th><label >Ingredients Price</label></th>
+      <th><label >Ingredients Quantity</label></th>
+      <th><label >Controls</label></th>
+      
+      <tr>
+        <td><input type="text" name="IngredientName[]" id="IngredientName[]"  placeholder="Ingredient Name" required/></td>
+        <td><input type="text" name="description[]" id="description[]" placeholder="Description" required/></td>
+        <td><select name="unitOfMeasure[]" id="unitOfMeasure[]" required>
+            <?php 
+            foreach($option_list2 as $options2)
+            {
+                echo '<option value="'.$options2['unitName '].'">'.$options2['unitName'].'</option>';
+            }
+            ?>
+            </select>
+        </td>
+        <td><input  type="number" name="price[]" id="price[]" min="0.00" step="any" placeholder="price" required/></td>
+        <td><input  type="number" name="quantity[]" id="quantity[]" value="1" min="1"/ placeholder="Quantity" required></td>
+        <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+      </tr>
+    </table>
   </div>
-  <button>Reset</button>
-  <button type=="submit">Next</button>
+  <button type="submit">Next</button>
 </form>
 </main>
+<button onclick="history.back()">Back</button>
+
+
 <script type = "text/javascript">
-  var count = 0;
     $(document).ready(function(){
-        $('#addIngredient').click(function(){
-                $input = $('
-                <div class = "form-group">'
-                + '<label for="IngredientName[]">Ingredients Name<div class="reqcolor">*</div></label>'
-                + '<input type="text" name="IngredientName[]" id="IngredientName[]" class="<?= error_class($errors, 'IngredientName[]') ?>" required = "required"/>'
-                + '</div>'
-                + '<div class = "form-group">'
-                + '<label for="discription[]">Discription<div class="reqcolor">*</div></label>'
-                + '<input type="text" name="discription[]" id="discription[]" class="<?= error_class($errors, 'discription[]') ?>" required = "required"/>'
-                + '</div>'
-                + '<div class = "form-group">'
-                + '<label for="price[]">price<div class="reqcolor">*</div></label>'
-                + '<input  type="number" name="price[]" id="price[]" min="0.00" class="<?= error_class($errors, 'price[]') ?>" step="any" required = "required"/>'
-                +'<label for="amount[]">amount<div class="reqcolor">*</div></label>'
-                +'<input  type="number" name="amount[]" id="amount[]" value="1" min="1" class="<?= error_class($errors, 'amount[]') ?>" required = "required"/>'
-                + '</div>');
-                $input.fadeIn(1000).appendTo('#ingredientContainer');
-        });
+      var i=1;
+      $('#add').click(function(){
+        i++;
+        $('#dynamic_field').append('<tr id="row'+i+'">'
+        +'<td><input type="text" name="IngredientName[]" id="IngredientName[]"  placeholder="Ingredient Name" required/></td>'
+        +'<td><input type="text" name="description[]" id="description[]" placeholder="Description" required/></td>'
+        +'<td><select name="unitOfMeasure[]" id="unitOfMeasure[]" required>'
+            + '<?php 
+            foreach($option_list2 as $options2)
+            {
+                echo '<option value="'.$options2['unitName'].'">'.$options2['unitName'].'</option>';
+            }
+            ?>'
+            +'</select></td>'
+        +'<td><input  type="number" name="price[]" id="price[]" min="0.00" step="any" placeholder="price"required/></td>'
+        +'<td><input  type="number" name="quantity[]" id="quantity[]" value="1" min="1"/ placeholder="Quantity" required></td>'
+        +'<td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td>'
+        +'</tr>');
+      });
+
+    $(document).on('click', '.btn_remove', function(){
+      var button_id = $(this).attr("id"); 
+      $('#row'+button_id+'').remove();
     });
+});
 </script>  
 
 
-<?php view('footer') ?>
+<?php view('footer');
+
+?>
