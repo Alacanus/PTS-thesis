@@ -1,7 +1,7 @@
 {
     "require": {
         "google/apiclient": "^2.12.1",
-        "setasign/fpdf": "1.8.*",
+        "tecnickcom/tcpdf": "6.3.*",
         "setasign/fpdi": "^2.0"
     },
     "scripts": {

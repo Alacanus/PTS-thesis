@@ -2,49 +2,53 @@
 
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/viewClasses.php';
-
+// $revidewCARD=[];
+$Username="KAT";
 ?>
 
 <?php view('header', ['title' => 'Class page']);
-$teacher=find_user_by_uid($classInfo[0]['userID']);
+if(isset($classInfo)){
+    $teacher=find_user_by_uid($classInfo[0]['userID']);
 
-$temp = $classInfo[0]['imageAddress'];;
-$imageAddress = substr($temp,15);
+    $temp = $classInfo[0]['imageAddress'];
+    $imageAddress = substr($temp,15);
+}
+
 ?>
 <main id="mymain1">
     <h1><?= $class['']?>'s page</h1>
     <img src="<?= $imageAddress?>" class="card-img-top" style="width: 40rem;">
     <div>
-        <label for="className">class name: <?= $classInfo[0]['className']?></label>
+        <label for="className">class name: <?= $classInfo[0]['className'] ?? '' ?></label>
 
     </div>
     <div>
-        <label for="classStatus">Status: <?= $classInfo[0]['classStatus']?></label>
+        <label for="classStatus">Status: <?= $classInfo[0]['classStatus'] ?? ''?></label>
 
     </div>
     <div>
-        <label for="classDescription">Description: <?= $classInfo[0]['classDescription']?></label>
+        <label for="classDescription">Description: <?= $classInfo[0]['classDescription'] ?? ''?></label>
 
     </div>
     <div>
-        <label for="classSchedules">Schedules Available: <?= $class['']?></label>
+        <label for="classSchedules">Schedules Available: <?= $class[''] ?? ''?></label>
 
     </div>
     <div>
-        <label for="classVideointo">View introduction: <?= $class['']?></label>
+        <label for="classVideointo">View introduction: <?= $class[''] ?? ''?></label>
 
     </div>
     <div>
-        <label for="classImage">Class banner: <?=  $classInfo[0]['imageAddress']?></label>
+        <label for="classImage">Class banner: <?=  $classInfo[0]['imageAddress'] ?? ''?></label>
 
     </div>
     <div>
-        <label for="createdDate">Teaching students since: <?= $classInfo[0]['creationDate']?></label>
+        <label for="createdDate">Teaching students since: <?= $classInfo[0]['creationDate'] ?? ''?></label>
 
     </div>
 
     <div>
-        <label for="modifiedDate">Updated on: <?= $classInfo[0]['modifiedDate']?></label>
+        <label for="modifiedDate">Updated on: <?= $classInfo[0]['modifiedDate'] ?? ''?></label>
 
     </div>
     <div>
@@ -57,11 +61,14 @@ $imageAddress = substr($temp,15);
     </div>
 
     <div>
-        <label for="userID">Teacher name: <?=$teacher['firstname']. " ". $teacher['lastName']?></label>
+        <label for="userID">Teacher name: <?php if(isset($teacher['firstname'])){
+            echo $teacher['firstname']. " ". $teacher['lastName'];}else{
+                echo '';
+            } ?></label>
 
     </div>
     <div>
-        <label for="milestones">Class Milestones: <?= $class['']?></label>
+        <label for="milestones">Class Milestones: <?= $class[''] ?? ''?></label>
         <table id="milestonesTable">
     <thead>
         <th>Milestone </th>
@@ -82,30 +89,81 @@ $imageAddress = substr($temp,15);
 </table>
     </div>
 </main>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
-  Edit
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<div>
+    <h2>Review Cards</h2>
+    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">Feedback DemoUsername</div>
+    <div class="card-body">
+        <h4 class="card-title">Overall <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i><i class="bi bi-star"></i></h4>
+        <h6 class="card-title">Presentation <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></h6>
+        <h6 class="card-title">Content <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></h6>
+        <h6 class="card-title">Grammar <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></h6>
+        <h6 class="card-title">Attendance <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></h6>
+        <p class="card-text"> Chef Stevie made each lesson a fun and informative experience! She was ver encouraging and great in explaining things in a simple and direct way that made each dish a rewarding experience. By the end of the lesson I felt like I really accomplished something!</p>
     </div>
-  </div>
 </div>
+<?php
+if(!empty($revidewCARD)){
+    foreach ($revidewCARD as $options) {
+$reviewer=find_user_by_uid($options['userID']);
+        echo '<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">'. $reviewer['lastName'] .'</div>
+        <div class="card-body">
+            <h4 class="card-title">Overall '. $options['totalRating'].'</h4>
+            <h6 class="card-title">Presentation  '. $options['presentation'].'</h6>
+            <h6 class="card-title">Content '.$options['content'].'</h6>
+            <h6 class="card-title">Grammar '.$options['legibility'].'</h6>
+            <h6 class="card-title">Attendance '.$options['attendance'].'</h6>
+            <p class="card-text">'.$options['description'].'</p>
+        </div>
+        </div>
+        <br>';
+      }
+}
 
+    ?>
+</div>
+<form action="viewClasses.php" method="post" accept-charset="utf-8">
+    <fieldset><legend>Review The Class</legend>	
+    <p>
+        <label for="rating">Presentation</label>
+        <input type="radio" name="presentation" value="5" /> 5 
+        <input type="radio" name="presentation" value="4" /> 4
+        <input type="radio" name="presentation" value="3" /> 3 
+        <input type="radio" name="presentation" value="2" /> 2 
+        <input type="radio" name="presentation" value="1" /> 1
+    </p>
+    <p>
+        <label for="rating">Legibility</label>
+        <input type="radio" name="legibility" value="5" /> 5 
+        <input type="radio" name="legibility" value="4" /> 4
+        <input type="radio" name="legibility" value="3" /> 3 
+        <input type="radio" name="legibility" value="2" /> 2 
+        <input type="radio" name="legibility" value="1" /> 1
+    </p>
+    <p>
+        <label for="rating">Content</label>
+        <input type="radio" name="content" value="5" /> 5 
+        <input type="radio" name="content" value="4" /> 4
+        <input type="radio" name="content" value="3" /> 3 
+        <input type="radio" name="content" value="2" /> 2 
+        <input type="radio" name="content" value="1" /> 1
+    </p>
+    <p>
+        <label for="rating">Attendance</label>
+        <input type="radio" name="attendance" value="5" /> 5 
+        <input type="radio" name="attendance" value="4" /> 4
+        <input type="radio" name="attendance" value="3" /> 3 
+        <input type="radio" name="attendance" value="2" /> 2 
+        <input type="radio" name="attendance" value="1" /> 1
+    </p>
+    <p>
+        <label for="review">Review</label>
+        <textarea name="reviewText" rows="8" cols="40"></textarea></p>
+    <p><input type="submit" value="Submit Review"></p>
+</fieldset>
+</form>
+<?php 
 
-
-<?php view('footer') ?>
+view('footer') ?>

@@ -230,3 +230,17 @@ function get_Class_CARDS() {
       
     return $option_list;
  }
+
+ function get_review_CARDS(int $classID) {
+    $option_list = '';
+        $sql = "SELECT * FROM reviewcards WHERE classID  = :classID 
+        ";//WHERE classes.classID = :fileID
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':classID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+      
+    return $option_list;
+ }
