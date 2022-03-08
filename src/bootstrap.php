@@ -71,6 +71,7 @@ function audit_trail(string $logDesc, int $userAction = 1){
 
 
 
+
 function send_authentication_email(string $email, string $options ,$activation_code):Void
 {
     if($options == 'register'){
