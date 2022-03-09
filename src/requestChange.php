@@ -29,7 +29,8 @@ if (is_post_request()) {
     $activation_code = generate_activation_code();
         send_authentication_email($inputs['email'], 'changePassword', $activation_code);
         $_SESSION['resetCode'] = $activation_code;
-        echo "<script>alert('Message has been sent');</script>";
+        redirect_to('../requestchangemsg.php');
+        // email sent message
     }else{
         $errors['requestChange'] = 'No Email account in record';
         redirect_with('requestChange.php', [

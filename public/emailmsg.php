@@ -1,15 +1,16 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
+?>
 
-
-view('header', ['title' => 'Register']);
+<?php view('header', ['title' => 'Email Sent']);
 ?>
 <div class="overlaybg">
     <div class="success-msg">
         <div class="msg-container">
             <div class="msg-content">
-                <i class="bi bi-lock-fill"></i>
-                <h2><?= current_user() ?>, Sorry the Link you have directed to is not Allowed</h2>
+                <i id="icon-color" class="bi bi-envelope-check"></i>
+                <h2>successfully Sent to your email</h2>
+                <p>Please Check Your Spam</p>
                 <div class="msg-btn">
                     <a href="landing.php"><button id="msg-btn" class="btn btn-nav btn-full">Home</button></a>
                     <a href="login.php"><button id="msg-btn2" class="btn btn-nav btn-ghost2">Login</button></a>
