@@ -54,10 +54,8 @@ if (is_post_request()) {
 
         send_authentication_email($inputs['email'], 'register', $activation_code);
 
-        redirect_with_message(
-            'login.php',
-            'please check your email to activate your account before signing in'
-        );
+        redirect_to('emailmsg.php');
+
     }elseif (is_get_request()){
         [$errors, $inputs] = session_flash('errors', 'inputs');
     }

@@ -163,6 +163,12 @@ a:active {
   color: #18a0fb;
 }
 
+.btn-ghost2 {
+  border: 1px solid #00dce4;
+  background-color: #00dce4;
+  color: #ffffff;
+}
+
 .btn-full:hover,
 .btn-full:active {
   background-color: #0075b4;
@@ -173,6 +179,13 @@ a:active {
 .btn-ghost:active {
   background-color: #0060a0;
   border: #0060a0;
+  color: #fff;
+}
+
+.btn-ghost2:hover,
+.btn-ghost2:active {
+  background-color: #009ba0;
+  border: #009ba0;
   color: #fff;
 }
 
@@ -2040,7 +2053,7 @@ section {
 .wrapper label {
   position: relative;
   float: right;
-  color: #C8C8C8;
+  color: #c8c8c8;
 }
 
 .wrapper label:before {
@@ -2082,4 +2095,57 @@ section {
 
 .wrapper label:hover:before {
   color: #0084ff;
+}
+
+/* Not Allowed Page ================ */
+
+.success-msg {
+  max-width: 1280px;
+}
+
+.msg-container {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 1200px;
+  height: 500px;
+  background: rgb(250, 250, 250);
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+}
+
+.msg-container h2 {
+  margin: 0;
+}
+
+.msg-container h2#msg-404 {
+  font-size: 50px;
+}
+
+.msg-container .msg-content i {
+  display: flex;
+  font-size: 100px;
+  color: crimson;
+  align-items: center;
+}
+
+.msg-container .msg-content i#icon-color {
+  color: #00dce4;
+}
+
+.msg-container .msg-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 20px;
+  gap: 40px;
+}
+
+.msg-content button#msg-btn,
+.msg-content button#msg-btn2 {
+  width: 180px;
+  height: 50px;
 }

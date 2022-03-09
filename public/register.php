@@ -12,7 +12,6 @@ require __DIR__ . '/../src/register.php';
         document.getElementById("form").submit();
     }
 </script>
-a
 <!-------- Divider -------->
 <div class="overlaybg">
     <div class="signup">
