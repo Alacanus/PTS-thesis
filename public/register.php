@@ -12,7 +12,7 @@ require __DIR__ . '/../src/register.php';
         document.getElementById("form").submit();
     }
 </script>
-a
+
 <!-------- Divider -------->
 <div class="overlaybg">
     <div class="signup">
@@ -24,26 +24,26 @@ a
                         <div class="form-element">
                             <div class="inline-item-1">
                                 <label for="fname">First Name<div class="reqcolor">*</div></label>
-                                <input type="text" name="fname" id="fname" value="<?= $inputs['fname'] ?? '' ?>" class="<?= error_class($errors, 'fname') ?>" required>
+                                <input type="text" name="fname" id="fname" value="<?= $inputs['fname'] ?? '' ?>" class="<?= error_class($errors, 'fname') ?>">
                                 <small><?= $errors['fname'] ?? '' ?></small>
                             </div>
                             <div class="inline-item-2">
                                 <label for="lname">Last Name<div class="reqcolor">*</div></label>
-                                <input type="text" name="lname" id="lname" value="<?= $inputs['lname'] ?? '' ?>" class="<?= error_class($errors, 'lname') ?>" required>
+                                <input type="text" name="lname" id="lname" value="<?= $inputs['lname'] ?? '' ?>" class="<?= error_class($errors, 'lname') ?>">
                                 <small><?= $errors['lname'] ?? '' ?></small>
                             </div>
                         </div>
 
                         <div class="form-element">
                             <label for="email">Email<div class="reqcolor">*</div></label>
-                            <input type="email" name="email" id="email" value="<?= $inputs['email'] ?? '' ?>" class="<?= error_class($errors, 'email') ?>" required>
+                            <input type="email" name="email" id="email" value="<?= $inputs['email'] ?? '' ?>" class="<?= error_class($errors, 'email') ?>">
                             <small><?= $errors['email'] ?? '' ?></small>
                         </div>
 
                         <div class="form-element">
                             <div class="inline-item-3">
                                 <label for="usertype">User Type<div class="reqcolor">*</div></label>
-                                <select name="usertype" class="<?= error_class($errors, 'usertype') ?>" required>
+                                <select name="usertype" class="<?= error_class($errors, 'usertype') ?>">
                                     <option value="">- - - - - Select - - - - -</options>
                                         <?php
                                         foreach ($option_list as $options) {
@@ -55,20 +55,20 @@ a
                             </div>
                             <div class="inline-item-4">
                                 <label for="username">User Name<div class="reqcolor">*</div></label>
-                                <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? '' ?>" class="<?= error_class($errors, 'username') ?>" required>
+                                <input type="text" name="username" id="username" value="<?= $inputs['username'] ?? '' ?>" class="<?= error_class($errors, 'username') ?>">
                                 <small><?= $errors['username'] ?? '' ?></small>
                             </div>
                         </div>
 
                         <div class="form-element">
                             <label for="password">Password<div class="reqcolor">*</div></label>
-                            <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>" required>
+                            <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>">
                             <small id="errorpwd"><?= $errors['password'] ?? '' ?></small>
                         </div>
 
                         <div class="form-element">
                             <label for="password2">Re-Type Password<div class="reqcolor">*</div></label>
-                            <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>" required>
+                            <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>">
                             <small id="errorpwd2"><?= $errors['password2'] ?? '' ?></small>
                         </div>
 
