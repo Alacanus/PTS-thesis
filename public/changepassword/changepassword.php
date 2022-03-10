@@ -14,13 +14,13 @@ require __DIR__ . '/../../src/changepassword.php';
                             <h2>Change Password</h2>
                             <div class="form-element">
                                 <label for="password">Password New:</label>
-                                <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>" required>
+                                <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>" class="<?= error_class($errors, 'password') ?>">
                                 <small id="changepass"><?= $errors['password'] ?? '' ?></small>
                             </div>
 
                             <div class="form-element">
                                 <label for="password2">Password Again:</label>
-                                <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>" required>
+                                <input type="password" name="password2" id="password2" value="<?= $inputs['password2'] ?? '' ?>" class="<?= error_class($errors, 'password2') ?>">
                                 <small id="changepass2"><?= $errors['password2'] ?? '' ?></small>
                             </div>
                             <div class="form-element">
