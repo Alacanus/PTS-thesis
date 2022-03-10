@@ -28,8 +28,6 @@ document.querySelector("#show-editprofile").addEventListener("click", function()
     $(document).ready(function(){ $('.edit-profile').modal('show'); });
 });
 
-
-
 document.querySelector(".edit-profile .close-btn").addEventListener("click", function(){
     document.querySelector(".edit-profile").classList.remove("active");
 });
@@ -41,11 +39,6 @@ document.querySelector(".edit-profile .close-btn").addEventListener("click", fun
 // function offoverlay() {
 //     document.getElementById("overlaybg-hidden").style = "none";
 // }
-
-
-
-
-
 
 function upload_progress() 
 {
@@ -73,10 +66,4 @@ function completeProgress(event){
     var percent = (event.loaded / event.total)*100;
     _("progressBar").value = 0;
     _("status").innerHTML = event.target.responseText;
-<<<<<<< HEAD
 }
-
-
-=======
-}
->>>>>>> 32100b8b37341faf320d60c5f233362011a1de09

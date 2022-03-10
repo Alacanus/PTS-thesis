@@ -78,10 +78,17 @@ view('header', ['title' => 'Account Manage']) ?>
         <div class="td-item tbl-item--5">Item 4</div>
         <div class="td-item tbl-item--6">Item 5</div>
         <div class="td-item tbl-item--7">
-          <!-- <button class="btn btn-full" src="../static/select.png"><i class="fa fa-bars"></i> View</button>
+          <div class="tbl-icon" onclick="tblToggle()">
+            <p>&#8942;</p>
+          </div>
+          <div class="tbl-menu">
+            <div class="tbl-content">
+              <!-- <button class="btn btn-full" src="../static/select.png"><i class="fa fa-bars"></i> View</button>
               <button class="btn btn-full" data-bs-toggle="modal" data-bs-target="#modal" onclick ="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="fa fa-trash"></i> Update User</button>
               <button class="btn btn-full" onclick ="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="fa fa-close"></i> Delete</button>
               <button class="btn btn-full" data-bs-toggle="modal" data-bs-target="#modalFile" onclick = SetID(' . $options['userID'] . ')><i class="fa fa-folder"></i> Folder</button></td> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -440,5 +447,10 @@ view('header', ['title' => 'Account Manage']) ?>
 
       },
     });
+  }
+
+  function tblToggle() {
+    const toggleTbl = document.querySelector('.tbl-menu');
+    toggleTbl.classList.toggle('active')
   }
 </script>
