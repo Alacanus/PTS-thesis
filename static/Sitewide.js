@@ -67,3 +67,5 @@ function completeProgress(event){
     _("progressBar").value = 0;
     _("status").innerHTML = event.target.responseText;
 }
+
+
