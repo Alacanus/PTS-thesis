@@ -1,6 +1,6 @@
 </main>
 </body>
-<!-- <footer class="footer-container">
+<footer class="footer-container">
     <div class="row">
         <div class="footer-logo">
             <h3 id="logo-pts">Personal Tutoring Service</h3>
@@ -53,5 +53,5 @@
     <div class="row copy-right">
         Personal Tutoring Services © 2022 All Rights Reserved
     </div>
-</footer> -->
+</footer>
 </html>

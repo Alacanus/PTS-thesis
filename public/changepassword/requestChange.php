@@ -22,7 +22,7 @@ require __DIR__ . '/../../src/requestChange.php';
                                 <div class="errormsg">
                                     <small><?= $errors['email'] ?? '' ?></small>
                                 </div>
-                                <input type="text" name="email" id="email" class="<?= error_class($errors, 'email') ?>" required>
+                                <input type="text" name="email" id="email" class="<?= error_class($errors, 'email') ?>">
                             </div>
                             <div class="form-element">
                                 <button type="submit">Request</button>

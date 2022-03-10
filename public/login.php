@@ -33,14 +33,14 @@ require __DIR__ . '/../src/login.php';
                                 <div class="errormsg">
                                     <small><?= $errors['username'] ?? '' ?></small>
                                 </div>
-                                <input type="text" name="username" id="username" class="<?= error_class($errors, 'username') ?>" required>
+                                <input type="text" name="username" id="username" class="<?= error_class($errors, 'username') ?>">
                             </div>
                             <div class="form-element">
                                 <label for="password">Password<div class="reqcolor">*</div></label>
                                 <div class="errormsg">       
                                     <small><?= $errors['password'] ?? '' ?></small>
                                 </div>
-                                <input type="password" name="password" id="password"  class="<?= error_class($errors, 'password') ?>" required>
+                                <input type="password" name="password" id="password"  class="<?= error_class($errors, 'password') ?>">
                             </div>
                             <div class="form-group">
                                 <div class="g-recaptcha" data-sitekey="6Le6_lQeAAAAAG_6B4F-OjL0mbth_UQLUihCtxiG">

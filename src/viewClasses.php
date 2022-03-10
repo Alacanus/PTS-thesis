@@ -73,7 +73,6 @@ if (is_post_request()) {
                      }
                  }
         
-        
              $sql = 'INSERT INTO reviewcards(description, content, presentation, attendance, legibility, totalRating, userID, classID)
              VALUES(:description, :content, :presentation, :attendance, :legibility, :totalRating, :userID,:classID)';
              $statement = db()->prepare($sql);

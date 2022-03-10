@@ -8,8 +8,11 @@ require_once('../vendor/autoload.php');
 function Get_PDF_INFO($classID){
     $PDFarr = [];
     $learnerName = 'Genesis fragas';//select learner
+    //array result
     $instructorName = 'Instructor Alpha';//select class
+    //arr
     $coordinatorName = 'Coordinator theta';//select class
+    //arr
     $equivalenthours = '12';//select class
     $sql = "SELECT * FROM classes 
     WHERE classes.classID = :classID";
@@ -20,8 +23,6 @@ function Get_PDF_INFO($classID){
         
         return $statement->fetch(PDO::FETCH_ASSOC);
     // return $PDFarr;
-
-
 }
 
 function Store_PDF($dtB, $learnerName, $equivalenthours, $className, $instructorName, $coordinatorName){
