@@ -5,7 +5,7 @@ require __DIR__ . '/../src/bootstrap.php';
 <?php view('header', ['title' => 'Change Password']); ?>
 
 <!--======================== LoggedIn - Learner ========================-->
-<nav class="nav-loggedin">
+<!-- <nav class="nav-loggedin">
     <div class="row">
         <div class="logo">
             <h2>
@@ -40,10 +40,10 @@ require __DIR__ . '/../src/bootstrap.php';
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <!--======================== LoggedIn - Instructor ========================-->
-<nav class="nav-loggedin">
+<!-- <nav class="nav-loggedin">
     <div class="row">
         <div class="logo">
             <h2>
@@ -77,10 +77,10 @@ require __DIR__ . '/../src/bootstrap.php';
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <!--======================== LoggedIn - Coordinator ========================-->
-<nav class="nav-loggedin">
+<!-- <nav class="nav-loggedin">
     <div class="row">
         <div class="logo">
             <h2>
@@ -113,10 +113,10 @@ require __DIR__ . '/../src/bootstrap.php';
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <!--======================== LoggedIn - Procurement ========================-->
-<nav class="nav-loggedin">
+<!-- <nav class="nav-loggedin">
     <div class="row">
         <div class="logo">
             <h2>
@@ -148,10 +148,10 @@ require __DIR__ . '/../src/bootstrap.php';
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <!--======================== LoggedIn - Admin ========================-->
-<nav class="nav-loggedin">
+<!-- <nav class="nav-loggedin">
     <div class="row">
         <div class="logo">
             <h2>
@@ -183,7 +183,7 @@ require __DIR__ . '/../src/bootstrap.php';
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <!--======================== Script for Img Menu Drop Down ========================-->
 
