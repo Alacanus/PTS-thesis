@@ -115,7 +115,7 @@ $imageAddress = substr($temp['filePath'],15);
 
                                                 <div class="form-element">
                                                     <label>Address</label>
-                                                    <input type="text" name="address" id="address" value="<?= $inputs['address'] ?? $user['address'] ?>" class="<?= error_class($errors, 'address') ?>">
+                                                    <input type="text" name="address" id="address" value="<?= $inputs['address'] ?? $user['address'] ?? ''?>" class="<?= error_class($errors, 'address') ?>">
                                                     <small><?= $errors['address'] ?? '' ?></small>
                                                 </div>
                                                 <div class="form-element">
