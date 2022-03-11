@@ -196,7 +196,7 @@ view('header', ['title' => 'Account Manage']) ?>
           </div>
           <div class="form-element">
             <label for="aboutme">About Me</label>
-            <textarea type="text" name="aboutme" id="aboutme" class="<?= error_class($errors, 'aboutme') ?>" required><?= $user['aboutme'] ?? $inputs['aboutme'] ?></textarea>
+            <input type="text" name="aboutme" id="aboutme" class="<?= error_class($errors, 'aboutme') ?>" required>
             <small><?= $errors['aboutme'] ?? '' ?></small>
           </div>
           <div class="form-element">
@@ -352,7 +352,7 @@ view('header', ['title' => 'Account Manage']) ?>
       },
       success: function(response) {
         const myJSON = JSON.parse(response);
-        // console.log("respone->",response);
+        console.log("respone->",response);
         if (typeof myJSON[0]['fileName'] !== 'undefined') {
           loadTableData(myJSON);
         }
@@ -360,47 +360,18 @@ view('header', ['title' => 'Account Manage']) ?>
     });
   }
 
-  function UpdateStatus(id) {
-    var Option = 'get';
-    var link = '../src/inc/ajaxModal.php?userID=';
-    var newlink = link + id + '&modalOption=' + Option;
-    modal.style.display = "block";
-    $.ajax({
-      type: 'GET',
-      url: newlink,
-      success: function(data) {
-        // console.log(data);
-        const myJSON = JSON.parse(data);
-        var select = document.querySelector('#usertype');
-        select.options[select.selectedIndex].value = myJSON[0]['roleID'];
-        select.options[select.selectedIndex].text = myJSON[0]['roleType'];
-        document.getElementById("user_id").value = myJSON[0]['userID'];
-        document.getElementById("username").value = myJSON[0]['username'];
-        document.getElementById("email").value = myJSON[0]['email'];
-        document.getElementById("firstname").value = myJSON[0]['firstname'];
-        document.getElementById("lastName").value = myJSON[0]['lastName'];
-        document.getElementById("gender").value = myJSON[0]['gender'];
-        document.getElementById("age").value = myJSON[0]['age'];
-        document.getElementById("birthday").value = myJSON[0]['birthday'];
-        document.getElementById("address").value = myJSON[0]['address'];
-        document.getElementById("contactno").value = myJSON[0]['contactno'];
-        document.getElementById("aboutme").value = myJSON[0]['aboutme'];
-        //convert to forloop to build modal body
-
-      },
-      error: function(err) {
-        alert("error");
-
 function UpdateStatus(id)
     {
         var Option = 'get';
         var link = '../src/inc/ajaxModal.php?userID=';
         var newlink = link + id + '&modalOption=' + Option;
+        console.log(newlink);
+        modal.style.display = "block";
         $.ajax({
         type: 'GET',
         url: newlink,
         success: function(data) {
-          // console.log(data);
+          console.log(data);
             const myJSON = JSON.parse(data);
             var select = document.querySelector('#usertype');
             select.options[select.selectedIndex].value = myJSON[0]['roleID'];
@@ -546,9 +517,9 @@ function downloadFile(id){
   var modalDlt = document.getElementById("dlt-modal");
   var span = document.getElementsByClassName("close-btn")[0];
 
-  btnEdit.onclick = function() {
-    modal.style.display = "block";
-  }
+  // btnEdit.onclick = function() {
+  //   modal.style.display = "block";
+  // } remove this
 
   btnFolder.onclick = function() {
     modalCrtUsr.style.display = "block";
