@@ -151,7 +151,7 @@ require __DIR__ . '/../src/bootstrap.php';
 </nav> -->
 
 <!--======================== LoggedIn - Admin ========================-->
-<nav class="nav-loggedin">
+<!-- <nav class="nav-loggedin">
     <div class="row">
         <div class="logo">
             <h2>
@@ -183,7 +183,7 @@ require __DIR__ . '/../src/bootstrap.php';
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <!--======================== Script for Img Menu Drop Down ========================-->
 

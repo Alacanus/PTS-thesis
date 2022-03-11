@@ -31,13 +31,17 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="not-loggedin">
             <div class="row">
-                <div class="logo">PTS</div>
+                <div class="logo">
+                    <h2>
+                        <div class="logo-blue">P</div>TS
+                    </h2>
+                </div>
                 <ul class="main-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Courses</a></li>
+                    <li><a href="landing.php">Home</a></li>
+                    <li><a href="aboutus.php">About Us</a></li>
+                    <li><a href="viewFAQ.php">FAQ</a></li>
                     <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
                     <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
                 </ul>

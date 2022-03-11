@@ -56,7 +56,7 @@ function audit_trail(string $logDesc, int $userAction = 1){
     $logs = 'With IP: '. $userIP . '<'.$datetime.'>' .'= '.$logDesc;
 
     if(isset($_SESSION['user_id'])){
-        $sql2 = "INSERT INTO audittrail (logs, userID, actionID, tableName) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
+        $sql2 = "INSERT INTO audittrail (logs, userID, actionID, sessionID) VALUES (:logs, :userID, :actionID, :sessionID)"; //add REPLACE sql-case
         $statement2 = db()->prepare($sql2);
         $statement2->bindParam(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
         $statement2->bindParam(':logs', $logs, PDO::PARAM_STR);
