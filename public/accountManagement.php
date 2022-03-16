@@ -1,12 +1,12 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
-if (is_user_2fa() == 'false') {
+if (is_user_2fa() == 'false'){
   redirect_to('login.php');
-} else {
+}else{
   audit_trail('User has visited AccountManagement', 2);
-}
-if (!auth_Level('Admin')) {
-  redirect_to('allowedNOT.php');
+  }
+if(!auth_Level('Admin')){
+    redirect_to('allowedNOT.php');
 }
 require __DIR__ . '/../src/loggedin/accountManagement.php';
 
@@ -197,7 +197,7 @@ view('header', ['title' => 'Account Manage']) ?>
           </div>
           <div class="form-element">
             <label for="aboutme">About Me</label>
-            <textarea type="text" name="aboutme" id="aboutme" class="<?= error_class($errors, 'aboutme') ?>" required><?= $user['aboutme'] ?? $inputs['aboutme'] ?></textarea>
+            <input type="text" name="aboutme" id="aboutme" class="<?= error_class($errors, 'aboutme') ?>" required>
             <small><?= $errors['aboutme'] ?? '' ?></small>
           </div>
           <div class="form-element">
@@ -403,7 +403,7 @@ view('header', ['title' => 'Account Manage']) ?>
       },
       success: function(response) {
         const myJSON = JSON.parse(response);
-        // console.log("respone->",response);
+        console.log("respone->",response);
         if (typeof myJSON[0]['fileName'] !== 'undefined') {
           loadTableData(myJSON);
         }
@@ -411,38 +411,40 @@ view('header', ['title' => 'Account Manage']) ?>
     });
   }
 
-  function UpdateStatus(id) {
-    var Option = 'get';
-    var link = '../src/inc/ajaxModal.php?userID=';
-    var newlink = link + id + '&modalOption=' + Option;
-    modal.style.display = "block";
-    $.ajax({
-      type: 'GET',
-      url: newlink,
-      success: function(data) {
-        // console.log(data);
-        const myJSON = JSON.parse(data);
-        var select = document.querySelector('#usertype');
-        select.options[select.selectedIndex].value = myJSON[0]['roleID'];
-        select.options[select.selectedIndex].text = myJSON[0]['roleType'];
-        document.getElementById("user_id").value = myJSON[0]['userID'];
-        document.getElementById("username").value = myJSON[0]['username'];
-        document.getElementById("email").value = myJSON[0]['email'];
-        document.getElementById("firstname").value = myJSON[0]['firstname'];
-        document.getElementById("lastName").value = myJSON[0]['lastName'];
-        document.getElementById("gender").value = myJSON[0]['gender'];
-        document.getElementById("age").value = myJSON[0]['age'];
-        document.getElementById("birthday").value = myJSON[0]['birthday'];
-        document.getElementById("address").value = myJSON[0]['address'];
-        document.getElementById("contactno").value = myJSON[0]['contactno'];
-        document.getElementById("aboutme").value = myJSON[0]['aboutme'];
-        //convert to forloop to build modal body
+function UpdateStatus(id)
+    {
+        var Option = 'get';
+        var link = '../src/inc/ajaxModal.php?userID=';
+        var newlink = link + id + '&modalOption=' + Option;
+        console.log(newlink);
+        modal.style.display = "block";
+        $.ajax({
+        type: 'GET',
+        url: newlink,
+        success: function(data) {
+          console.log(data);
+            const myJSON = JSON.parse(data);
+            var select = document.querySelector('#usertype');
+            select.options[select.selectedIndex].value = myJSON[0]['roleID'];
+            select.options[select.selectedIndex].text = myJSON[0]['roleType'];
+            document.getElementById("user_id").value = myJSON[0]['userID'];
+            document.getElementById("username").value = myJSON[0]['username'];
+            document.getElementById("email").value = myJSON[0]['email'];
+            document.getElementById("firstname").value = myJSON[0]['firstname'];
+            document.getElementById("lastName").value = myJSON[0]['lastName'];
+            document.getElementById("gender").value = myJSON[0]['gender'];
+            document.getElementById("age").value = myJSON[0]['age'];
+            document.getElementById("birthday").value = myJSON[0]['birthday'];
+            document.getElementById("address").value = myJSON[0]['address'];
+            document.getElementById("contactno").value = myJSON[0]['contactno'];
+            document.getElementById("aboutme").value = myJSON[0]['aboutme'];
+            //convert to forloop to build modal body
 
-      },
-      error: function(err) {
-        alert("error");
+        },
+        error:function(err){
+            alert("error");
 
-      },
+        },
     });
   }
 
@@ -451,108 +453,102 @@ view('header', ['title' => 'Account Manage']) ?>
     var link = '../src/inc/ajaxModal.php?userID=';
     var newlink = link + id + '&modalOption=' + Option;
     $.ajax({
-      type: 'GET',
-      url: newlink,
-      success: function(data) {
+    type: 'GET',
+    url: newlink,
+    success: function(data) {
         // const myJSON = JSON.parse(data);
         alert("User Deleted");
         location.reload();
-      },
-      error: function(err) {
+    },
+    error:function(err){
         // alert("error"+JSON.stringify(err));
         alert("error");
 
-      },
+    },
     });
 
-  }
-
-  function deleteFile(id) {
+}
+function deleteFile(id){
     var Option = 'delete2';
     var link = '../src/inc/ajaxModal.php?userID=';
     var newlink = link + id + '&modalOption=' + Option;
     $.ajax({
-      type: 'GET',
-      url: newlink,
-      success: function(data) {
-        console.log(data);
+    type: 'GET',
+    url: newlink,
+    success: function(data) {
+      console.log(data);
         // const myJSON = JSON.parse(data);
         alert("File Deleted", data);
         location.reload();
-      },
-      error: function(err) {
+    },
+    error:function(err){
         // alert("error"+JSON.stringify(err));
-        alert("error" + JSON.stringify(err));
+        alert("error"+JSON.stringify(err));
 
-      },
+    },
     });
 
-  }
+}
 
-  function createUser() {
+function createUser(){
     var link = '../src/inc/ajaxModal.php';
 
     var data = $("form[name=createForm]").serializeArray(); // convert form to array
-    data.push({
-      name: 'Option',
-      value: 'Create'
-    });
+    data.push({name: 'Option', value: 'Create'});
     $.ajax({
-      type: 'POST',
-      url: link,
-      data: data,
-      success: function(data) {
+    type: 'POST',
+    url: link,
+    data: data,
+    success: function(data) {
         // const myJSON = JSON.parse(data);
         console.log('it workz', data);
         alert("User Created");
         location.reload();
-      },
-      error: function(err) {
+    },
+    error:function(err){
         // alert("error"+JSON.stringify(err));
         alert("error");
 
-      },
+    },
     });
-  }
+}
 
-  function downloadFile(id) {
-    var Option = 'download';
+function downloadFile(id){
+  var Option = 'download';
     var link = '../src/inc/ajaxModal.php?fileID=';
     var newlink = link + id + '&modalOption=' + Option;
 
 
     $.ajax({
-      type: 'GET',
-      url: newlink,
-      success: function(data) {
-        const myJSON = JSON.parse(data);
+    type: 'GET',
+    url: newlink,
+    success: function(data) {
+      const myJSON = JSON.parse(data);
         // console.log('it workz', myJSON['fileName']);
         var Option = 'download2';
         var link = '../src/inc/ajaxModal.php?fileID=';
         var newlink = link + id + '&modalOption=' + Option;
         fetch(newlink)
-          .then(resp => resp.blob())
-          .then(blob => {
-            var blobf = new Blob([blob], {
-              type: "application/zip"
-            });
-            var link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blobf);
-            var fileName = myJSON['fileName'];
-            link.download = fileName;
-            link.click();
-            alert('your file has downloaded!'); // or you know, something with better UX...
-          })
-          .catch(() => alert('oh no!'));
+        .then(resp => resp.blob())
+        .then(blob => {
+          var blobf = new Blob([blob], {type: "application/zip"});
+          var link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blobf);
+          var fileName = myJSON['fileName'];
+          link.download = fileName;
+          link.click();
+          alert('your file has downloaded!'); // or you know, something with better UX...
+        })
+        .catch(() => alert('oh no!'));
 
 
 
-      },
-      error: function(err) {
+    },
+    error:function(err){
         // alert("error"+JSON.stringify(err));
         alert("error");
 
-      },
+    },
     });
   }
 

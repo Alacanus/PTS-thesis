@@ -283,113 +283,8 @@ a:active {
 }
 
 .main-nav a {
+  padding: 0%;
   font-size: 18px;
-  margin: 10px 0;
-  text-transform: uppercase;
-}
-
-.nav-loggedin .user-img img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  vertical-align: middle;
-}
-
-/* logged in User Nav */
-
-.user-menu {
-  position: absolute;
-  top: 10%;
-  right: 16%;
-  padding: 10px 20px;
-  background: #ecf0f1;
-  width: 230px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  z-index: 1;
-  transition: 0.5s;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.user-menu.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.user-menu:before {
-  content: "";
-  position: absolute;
-  top: -5px;
-  right: 20px;
-  width: 20px;
-  height: 20px;
-  background: #ecf0f1;
-  transform: rotate(45deg);
-}
-
-.user-menu a {
-  text-transform: capitalize;
-}
-
-.user-menu a:visited,
-.user-menu a:link {
-  color: #001827;
-}
-
-.user-menu a:hover,
-.user-menu a:active {
-  color: #18a0fb;
-}
-
-.user-menu .user-content p {
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  color: #000000;
-}
-
-.user-menu .user-content p:nth-child(1) {
-  margin-top: 10px;
-}
-
-.user-menu .user-content p:nth-child(2) {
-  margin-bottom: 10px;
-}
-
-.user-menu .user-content p#content--1 {
-  font-weight: 400;
-  color: #0099ff;
-}
-
-.user-menu ul li {
-  padding: 10px 0;
-  margin: 0 10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  display: flex;
-  align-items: center;
-}
-
-.user-menu ul li img {
-  max-width: 20px;
-  margin-right: 10px;
-  opacity: 0.5;
-  transition: 0.5s;
-}
-
-.user-menu ul li i {
-  max-width: 20px;
-  margin-right: 10px;
-  opacity: 0.5;
-  transition: 0.5s;
-}
-
-.user-menu ul li:hover img {
-  opacity: 1;
-}
-
-.user-menu ul li:hover i {
-  opacity: 1;
 }
 
 /* Error Message */
@@ -851,7 +746,6 @@ a:active {
   text-decoration: none;
   font-weight: 300;
 }
-
 .twofactor .form-style small {
   font-size: 14px;
   position: absolute;
@@ -866,8 +760,6 @@ a:active {
 .twofactor .form-style input#twofactorcode {
   margin-bottom: 25px;
 }
-
-/* Request Change Password Form */
 
 .request .center-form-request {
   position: absolute;
