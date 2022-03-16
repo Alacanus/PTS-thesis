@@ -21,7 +21,7 @@ if (isset($classInfo)) {
             <section class="vc--section01">
                 <div class="vc-block-01">
                     <div class="block vc--item1">
-                        <img src="/PTS-thesis/static/ourteam01.jpg" alt="classimg.jpg">
+                        <iframe src="https://www.youtube.com/embed/S7brGlaYNdM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="block vc--item2">
                         <label for="Price">Price: &#x20B1;1000</label>

@@ -38,13 +38,12 @@ if (is_post_request()) {
             
             if($statement2->execute()){
                 $temp = $conn->lastInsertId();
-                $sql = "INSERT INTO classprofile (`className`, `classDescription`, `imageAddress`, `youtubeChannel`, `equivalentHours`, `skillLevel`, `classID`) VALUES (:className, :classDescription, :imageAddress, :youtubeChannel, :equivalentHours, :skillLevel, :classID)";
+                $sql = "INSERT INTO classprofile (`className`, `classDescription`, `imageAddress`, `equivalentHours`, `skillLevel`, `classID`) VALUES (:className, :classDescription, :imageAddress, :equivalentHours, :skillLevel, :classID)";
                 $statement = $conn->prepare($sql);
                 $statement->bindParam(':className', $inputs['className'], PDO::PARAM_STR);
                 $statement->bindParam(':classDescription', $inputs['classDescription'], PDO::PARAM_STR);
                 $statement->bindValue(':imageAddress', placeholderPIC, PDO::PARAM_STR);
                 $statement->bindParam(':equivalentHours',$_POST['equivalentHours'], PDO::PARAM_STR);
-                $statement->bindParam(':youtubeChannel',$inputs['youtubeChannel'] ?? ' ', PDO::PARAM_STR);
                 $statement->bindParam(':skillLevel',$_POST['skillLevel'] , PDO::PARAM_STR);
                 $statement->bindParam(':classID', $temp, PDO::PARAM_INT);
                 $statement->execute();
