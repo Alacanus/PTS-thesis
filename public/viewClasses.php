@@ -13,7 +13,6 @@ if (isset($classInfo)) {
     $temp = $classInfo[0]['imageAddress'];
     $imageAddress = substr($temp, 15);
 }
-var_dump($_SESSION['Debugval']);
 ?>
 <main id="mymain1">
     <div class="ViewClass">
@@ -183,7 +182,7 @@ var_dump($_SESSION['Debugval']);
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title">
-                                        <p>' . $reviewer['lastName'] . '</p>
+                                        <p> Reviewer: ' . $reviewer['lastName'] . '</p>
                                     </div>
                                 <div class="card-desc">
                                     <p>Overall ' . $revidewCARDfeild['totalRating'] . '</p>
