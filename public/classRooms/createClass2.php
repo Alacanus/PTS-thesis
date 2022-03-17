@@ -13,6 +13,7 @@ require __DIR__ . '/../../src/loggedin/classStep2.php';
 $tableNAme ='unitofmeasurement';
 $option_list2 = get_db_Options($tableNAme);
 $Card_entries = get_ingredient_CARDS($_SESSION['post']['classID']);
+echo $_SESSION['post']['classID'];
 ?>
 
 <?php view('header', ['title' => 'Create Class']);

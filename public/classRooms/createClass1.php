@@ -14,6 +14,7 @@ $tableNAme ='skilllevels';
 $option_list = get_db_Options($tableNAme);
 $tableNAme2 ='equivalenthours';
 $option_list2 = get_db_Options($tableNAme2);
+$submitMethod = "post";
 if(is_get_request()) {
   [$inputs, $errors] = session_flash('inputs', 'errors');
 
@@ -29,7 +30,10 @@ if(is_get_request()) {
       $submitMethod = "post";
      }
   }
+}else{
+  $submitMethod = "post";
 }
+echo $submitMethod;
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
