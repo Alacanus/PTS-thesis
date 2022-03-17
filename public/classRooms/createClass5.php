@@ -20,43 +20,76 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
     </div>
 <?php endif ?>
 <main id="mymain1">
-<div class="form-style">
-<div class="form-element">
-<form action="" method="POST"> 
-                            <div class="inline-item-3">
-                                <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
-                                <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
-                                    <option value="">- - - - Select - - - -</options>
-                                        <?php
-                                        foreach ($option_list as $options) {
-                                            echo '<option value="' . $options['paylistID'] . '">' . $options['paymentName'] . '</option>';
-                                        }
-                                        ?>
-                                </select>
-                                <small><?= $errors['paylistID'] ?? '' ?></small>
-                            </div>
-                            <div class="form-element">
-                                <label for="accountName">Accounnt Name<div class="reqcolor">*</div></label>
-                                <div class="errormsg">       
-                                    <small><?= $errors['accountName'] ?? '' ?></small>
-                                </div>
-                                <input type="text" name="accountName" id="accountName"  class="<?= error_class($errors, 'accountName') ?>">
-                            </div>
-                            <div class="form-element">
-                                <label for="accountName">Accounnt Details {account number}<div class="reqcolor">*</div></label>
-                                <div class="errormsg">       
-                                    <small><?= $errors['accountName'] ?? '' ?></small>
-                                </div>
-                                <input type="text" name="accountName" id="accountName"  class="<?= error_class($errors, 'accountName') ?>">
-                            </div>
-                            <div class="form-element">
-                                <label for="imageUpload">Upload Image</label>
-                                <input type="file" name="imageUpload" id="imageUpload">
-                            </div>
-                            <div class="form-element">
-                            <button type=="submit">Next</button>
+    <div class="overlaybg">
+        <div class="ccr-step--05">
+            <div class="ccr-container">
+                <div class="container-edit-left">
+                    <div class="wrapper">
+                        <ul class="ccr-progbar">
+                            <li class="ccr-progbar-item is-done">
+                                <h3>Step 01</h3>
+                            </li>
+                            <li class="ccr-progbar-item is-done">
+                                <h3>Step 02</h3>
+                            </li>
+                            <li class="ccr-progbar-item is-done">
+                                <h3>Step 03</h3>
+                            </li>
+                            <li class="ccr-progbar-item is-done">
+                                <h3>Step 04</h3>
+                            </li>
+                            <li class="ccr-progbar-item current">
+                                <h3>Step 05</h3>
+                            </li>
+                            <li class="ccr-progbar-item">
+                                <h3>Summary</h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="container-edit form-style">
+                    <form action="" method="POST">
+                        <h2>Create Class</h2>
+                        <div class="form-element">
+                            <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
+                            <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
+                                <option value="">- - - - Select - - - -</options>
+                                    <?php
+                                    foreach ($option_list as $options) {
+                                        echo '<option value="' . $options['paylistID'] . '">' . $options['paymentName'] . '</option>';
+                                    }
+                                    ?>
+                            </select>
+                            <small><?= $errors['paylistID'] ?? '' ?></small>
                         </div>
-                                    </form>
+                        <div class="form-element">
+                            <label for="accountName">Accounnt Name<div class="reqcolor">*</div></label>
+                            <div class="errormsg">
+                                <small><?= $errors['accountName'] ?? '' ?></small>
+                            </div>
+                            <input type="text" name="accountName" id="accountName" class="<?= error_class($errors, 'accountName') ?>">
+                        </div>
+                        <div class="form-element">
+                            <label for="accountName">Accounnt Details {account number}<div class="reqcolor">*</div></label>
+                            <div class="errormsg">
+                                <small><?= $errors['accountName'] ?? '' ?></small>
+                            </div>
+                            <input type="text" name="accountName" id="accountName" class="<?= error_class($errors, 'accountName') ?>">
+                        </div>
+                        <div class="form-element">
+                            <label for="imageUpload">Upload Image</label>
+                            <input type="file" name="imageUpload" id="imageUpload">
+                        </div>
+                        <div class="btn-right-03">
+                            <button class="btn btn-table btn-table-mb" onclick="history.back()" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
+                            <button type="submit" class="btn btn-table btn-full" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 

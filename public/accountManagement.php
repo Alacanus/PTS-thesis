@@ -32,30 +32,31 @@ view('header', ['title' => 'Account Manage']) ?>
         <button class="btn btn-full btn-nav"><i class="bi bi-search"></i> Search</button>
       </div>
       <div class="search--item--4">
-        <button class="btn btn-table-grn btn-nav"><i class="bi bi-plus-lg"></i> Create User</button>
+        <button id="show-modal04" class="btn btn-table-grn btn-nav"><i class="bi bi-plus-lg"></i> Create User</button>
       </div>
     </div>
-    <div class="table-container">
+    <div class="table-container table-container-am">
       <div class="table-row-container tbl-heading">
         <div class="th-item tbl-item--1">#</div>
         <div class="th-item tbl-item--2">User Name</div>
         <div class="th-item tbl-item--3">Email</div>
-        <div class="th-item tbl-item--4">First Name</div>
-        <div class="th-item tbl-item--5">Last Name</div>
-        <div class="th-item tbl-item--6">Role</div>
-        <div class="th-item tbl-item--7">Action</div>
+        <div class="th-item tbl-item--4">Name</div>
+        <!-- <div class="th-item tbl-item--5">Status</div> -->
+        <div class="th-item tbl-item--5">Role</div>
+        <div class="th-item tbl-item--6">Action</div>
       </div>
       <?php
+      // var_dump($option_list);
       if (is_array($option_list)) {
         foreach ($option_list as $options) {
           echo '<div class="table-row-container">';
           echo '<div class="td-item tbl-item--1">' . $options['userID'] . '</div>';
           echo '<div class="td-item tbl-item--2">' . $options['username'] . '</div>';
           echo '<div class="td-item tbl-item--3">' . $options['email'] . '</div>';
-          echo '<div class="td-item tbl-item--4">' . $options['firstname'] . '</div>';
-          echo '<div class="td-item tbl-item--5">' . $options['lastName'] . '</div>';
-          echo '<div class="td-item tbl-item--6">' . convert_roleID2Type($options['roleID'])  . '</div>';
-          echo '<div class="td-item tbl-item--7">';
+          echo '<div class="td-item tbl-item--4">' . $options['firstname'] . " " . $options['lastName'] . '</div>';
+          // echo '<div class="td-item tbl-item--5">' . "" .  '</div>';
+          echo '<div class="td-item tbl-item--5">' . convert_roleID2Type($options['roleID'])  . '</div>';
+          echo '<div class="td-item tbl-item--6">';
           echo '<button class="btn-table btn-full" src="../static/select.png" title="View User Details"><i class="bi bi-search"></i></button>';
           echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
           echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
@@ -70,7 +71,7 @@ view('header', ['title' => 'Account Manage']) ?>
 </div>
 
 
-<!-- Modal -->
+<!-- Edit User Profile - Modal -->
 <div class="am-modal--01">
   <div id="edit-modal" class="overlay-new">
     <div class="edit-profile">
@@ -211,95 +212,145 @@ view('header', ['title' => 'Account Manage']) ?>
   </div>
 </div>
 
-<!-- Create User Modal-->
+<!-- Create User - Modal-->
 
-<div id="edit-profile" class="overlaynew">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLavelCreate">Create User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="#modalCreate" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-            <form id="form" name="createForm" method="post">
+<div class="am-modal--02">
+  <div id="cu-modal" class="overlay-new">
+    <div class="edit-profile">
+      <div class="container-edit form-style">
+        <div class="close-btn02">&times;</div>
+        <form id="form" name="createForm" method="post">
+          <h2 id="modalLavelCreate">Create User</h2>
+          <div class="form-element">
             <label for="usertype">User Type:</label>
-            <select name="usertype" id="usertype"  class="<?= error_class($errors, 'usertype') ?>"required>
-            <option value=""></option>
-            <?php 
-            foreach($option_list2 as $options2)
-            {
-                echo '<option value="'.$options2['roleID'].'">'.$options2['roleType'].'</option>';
-            }
-            ?>
+            <select name="usertype" id="usertype" class="<?= error_class($errors, 'usertype') ?>" required>
+              <option value=""></option>
+              <?php
+              foreach ($option_list2 as $options2) {
+                echo '<option value="' . $options2['roleID'] . '">' . $options2['roleType'] . '</option>';
+              }
+              ?>
             </select>
-            username<input type="text" name="username" id="username" value=""><br>
-            email<input type="email" name="email" id="email" value=""><br>
-            fname<input type="text" name="firstname" id="firstname" value=""><br>
-            lname<input type="text" name="lastName" id="lastName" value=""><br>
-            password<input type="text" name="password" id="password" value=""><br>
-            </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="#modalCreate">Close</button> 
-        <button onclick="createUser()" class="btn btn-primary">Save changes</button>
+          </div>
+          <div class="form-element">
+            <label for="username">User Name</label>
+            <input type="text" name="username" id="username" value="">
+          </div>
+          <div class="form-element">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="">
+          </div>
+          <div class="form-element">
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" id="firstname" value="">
+          </div>
+          <div class="form-element">
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" value="">
+          </div>
+          <div class="form-element">
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password" value="">
+          </div>
+          <div class="form-element">
+            <button onclick="createUser()" class="btn btn-nav btn-full btn-edit">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalFile" tabindex="-2" aria-labelledby="modalLavelFile" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLavelFile">User Files</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="#modalCreate" aria-label="Close"></button>
+<!-- View File - Modal  -->
+<div class="am-modal--03">
+  <div id="file-modal" class="overlay-new">
+    <div class="edit-profile">
+      <h2 id="modalLavelFile">User Files</h2>
+      <div class="close-btn03">&times;</div>
+      <div class="search-container">
+        <div class="search--item--1">
+          <label id="am-search" for="searchinput">Search</label>
+        </div>
+        <div class="search--item--2">
+          <input id="searchinput" name="searchinput" type="text">
+        </div>
+        <div class="search--item--3">
+          <button class="btn btn-full btn-nav"><i class="bi bi-search"></i> Search</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <table class="table" name="filesT">
-          <thead>
-            <tr>
-              <th scope="col">File name</th>
-              <th scope="col">Path</th>
-              <th scope="col">owner</th>
-              <th scope="col">controls</th>
-            </tr>
-          </thead>
-          <tbody id="filesT">
-            <?php
-            if(is_array($option_list3)){
-            foreach($option_list3 as $options){
-                echo "<tr>";
-                echo '<td>'. $options['fileName'] .'</td>';
-                echo '<td>'. $options['filePath'] .'</td>';
-                echo '<td>'. $options['userID'] .'</td>';
-                echo '<td>';
-                  echo '<button class="btn" onclick ="downloadFile('.$options['fileID'].')" ><i class="fa fa-trash"></i> Download</button>';
-                  echo '<button class="btn" onclick ="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
-                echo '</tr>';
-              }
+      <table class="table table-container table-container-files" name="filesT">
+        <thead class="tbl-heading">
+          <tr class="table-row-container">
+            <th class="th-item tbl-item--2" scope="col">File name</th>
+            <th class="th-item tbl-item--3" scope="col">Path</th>
+            <th class="th-item tbl-item--4" scope="col">Owner</th>
+            <th class="th-item tbl-item--5" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <div id="filesT">
+          <?php
+          if (is_array($option_list3)) {
+            foreach ($option_list3 as $options) {
+              echo '<tr class="table-row-container">';
+              echo '<td class="th-item tbl-item--2">' . $options['fileName'] . '</td>';
+              echo '<td class="th-item tbl-item--3">' . $options['filePath'] . '</td>';
+              echo '<td class="th-item tbl-item--4">' . $options['userID'] . '</td>';
+              echo '<td class="th-item tbl-item--5">';
+              echo '<button class="btn btn-table btn-full" title="Download" onclick ="downloadFile(' . $options['fileID'] . ')" ><i class="bi bi-download"></i></button>';
+              echo '<button class="btn btn-table btn-table-red" title="Delete" onclick ="deleteFile(' . $options['fileID'] . ')"><i class="bi bi-trash"></i></button>';
+              echo '</tr>';
             }
-            ?>
-          </tbody>
-        </table>
+          }
+          ?>
+        </div>
+      </table>
+      <div class="container-edit form-style">
+        <div>
+          <h3>Upload Image</h3>
+        </div>
         <form action="../src/upload.php" method="post" enctype="multipart/form-data">
-          Select image to upload:
           <input type="hidden" name="user_idfile" id="user_idfile" value="">
-          <input type="file" name="fileToUpload" id="fileToUpload" required>
-          <button type="submit" name="submit">Upload File</button>
-        </form>
-        <?php if (isset($errors['accountMGTFile'])) : ?>
-          <div class="alert alert-error">
-            <?= $errors['accountMGTFile'] ?>
+          <div class="form-element">
+            <label>Select image to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" required>
+            <button class="btn btn-nav btn-table-grn" type="submit" name="submit">Upload File</button>
           </div>
-        <?php endif ?>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="#modalCreate">Close</button> 
-        <button onclick="" class="btn btn-primary">Save changes</button>
+      <?php if (isset($errors['accountMGTFile'])) : ?>
+        <div class="alert alert-error">
+          <?= $errors['accountMGTFile'] ?>
+        </div>
+      <?php endif ?>
+      <div class="am-modal--03-right">
+        <button onclick="" class="btn btn-nav btn-full">Save changes</button>
+        <button type="button" class="btn btn-nav btn-ghost" data-bs-dismiss="#modalCreate">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Delete Modal -->
+
+<!-- <button id="show-modal03" class="btn btn-nav btn-full">Click here</button>
+
+<div class="am-modal--04">
+  <div id="dlt-modal" class="overlay-new">
+    <div class="edit-profile">
+      <div class="container-edit form-style">
+        <h2>Delete File</h2>
+        <div class="close-btn04">&times;</div>
+        <div class="form-element">
+          <p>Are you sure you want to delete this User?</p>
+        </div>
+        <div class="form-element">
+          <button class="btn btn-nav btn-table-red">Delete</button>
+          <button class="btn btn-nav btn-full">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 
 <!--  scripts  -->
@@ -395,10 +446,9 @@ function UpdateStatus(id)
 
         },
     });
+  }
 
-        
-    }
-function deleteUser(id){
+  function deleteUser(id) {
     var Option = 'delete';
     var link = '../src/inc/ajaxModal.php?userID=';
     var newlink = link + id + '&modalOption=' + Option;
@@ -507,36 +557,65 @@ function downloadFile(id){
     toggleTbl.classList.toggle('active')
   }
 
-  // Modal - JS Function
+  // Modal - JS Function ====================================================
 
+  // Button for Modal
   var btnEdit = document.getElementById("show-modal01");
-  var btnFolder = document.getElementById("show-modal02");
+  var btnFile = document.getElementById("show-modal02");
   var btnDelete = document.getElementById("show-modal03");
+  var btnCrtUsr = document.getElementById("show-modal04");
+
+  // CSS SHOW MODAL
   var modal = document.getElementById("edit-modal");
-  var modalCrtUsr = document.getElementById("cu-modal");
+  var modalFile = document.getElementById("file-modal");
   var modalDlt = document.getElementById("dlt-modal");
+  var modalCrtUsr = document.getElementById("cu-modal");
+
   var span = document.getElementsByClassName("close-btn")[0];
+  var spanCrtUsr = document.getElementsByClassName("close-btn02")[0];
+  var spanFile = document.getElementsByClassName("close-btn03")[0];
+  var spanDlt = document.getElementsByClassName("close-btn04")[0];
 
   // btnEdit.onclick = function() {
   //   modal.style.display = "block";
-  // } remove this
+  // }
 
-  btnFolder.onclick = function() {
-    modalCrtUsr.style.display = "block";
+  btnFile.onclick = function() {
+    modalFile.style.display = "block";
   }
 
   btnDelete.onclick = function() {
     modalDlt.style.display = "block";
   }
 
+  btnCrtUsr.onclick = function() {
+    modalCrtUsr.style.display = "block";
+  }
+
   span.onclick = function() {
     modal.style.display = "none";
   }
+
+  spanCrtUsr.onclick = function() {
+    modalCrtUsr.style.display = "none";
+  }
+
+  spanFile.onclick = function() {
+    modalFile.style.display = "none";
+  }
+
+  spanDlt.onclick = function() {
+    modalDlt.style.display = "none";
+  }
+
+  // Out of Bounce click close modal
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
   }
+
+  
 </script>
 
 <!-- 
@@ -595,3 +674,5 @@ function downloadFile(id){
   <button class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>
   <button class="btn-table btn-table-red" title="Delete User" onclick="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>
 </div> -->
+
+<?php view('footer') ?>

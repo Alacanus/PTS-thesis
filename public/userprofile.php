@@ -44,13 +44,26 @@ $imageAddress = substr($temp['filePath'], 15);
                             <p><?= $user['roleType'] ?></p>
                         </div>
                         <div class="general-info">
-                            <i class="ion-android-person icon-small"></i>
-                            <p><?= $user['gender'] ?></p>
-                            <i class="person-outline"></i>
-                            <p><?= $user['age'] ?></p>
-                            <p><?= $user['birthday'] ?></p>
-                            <p><?= $user['contactno'] ?></p>
-                            <p><?= $user['address'] ?></p>
+                            <div class="gi-item">
+                                <i class="bi bi-person" title="Gender"></i>
+                                <p id="gi-p"><?= $user['gender'] ?></p>
+                            </div>
+                            <div class="gi-item">
+                                <i class="bi bi-person-badge" title="Age"></i>
+                                <p id="gi-p"><?= $user['age'] ?></p>
+                            </div>
+                            <div class="gi-item">
+                                <i class="bi bi-calendar" title="Birthday"></i>
+                                <p id="gi-p"><?= $user['birthday'] ?></p>
+                            </div>
+                            <div class="gi-item">
+                                <i class="bi bi-phone" title="Contact No"></i>
+                                <p id="gi-p"><?= $user['contactno'] ?></p>
+                            </div>
+                            <div class="gi-item">
+                                <i class="bi bi-card-text" title="Address"></i>
+                                <p id="gi-p"><?= $user['address'] ?></p>
+                            </div>
                         </div>
                         <div class="edit-user-profile">
                             <button class="btn btn-nav btn-full" id="show-modal">Edit Profile</button>
@@ -154,7 +167,7 @@ $imageAddress = substr($temp['filePath'], 15);
                                                     <button type="submit" class="btn btn-nav btn-full btn-edit">Save Changes</button>
                                                     <button type="button" class="btn btn-nav btn-ghost btn-edit" data-bs-dismiss="modal">Cancel</button>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                     </form>

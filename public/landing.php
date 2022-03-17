@@ -27,29 +27,11 @@ require __DIR__ . '/../src/bootstrap.php';
       <section class="lp-section--2">
         <div class="search-container">
           <div class="search--item--1">
+            <i class="bi bi-search"></i>
             <label for="#"><i></i>Search</label>
           </div>
           <div class="search--item--2">
             <input type="text">
-          </div>
-          <div class="search--item--3">
-            <label for="#">Sort By: </label>
-          </div>
-          <div class="search--item--4">
-            <select name="Filter" id="filter">
-              <option value="#">Name</option>
-              <option value="#">Date</option>
-              <option value="#">Popular</option>
-              <option value="#">Trending</option>
-            </select>
-          </div>
-          <div class="search--item--5">
-            <select name="Category" id="Category">
-              <option value="#">Cooking</option>
-              <option value="#">Carpentry</option>
-              <option value="#">Web Design</option>
-              <option value="#">Web Development</option>
-            </select>
           </div>
           <div class="search--item--6">
             <button class="btn btn-full btn-nav">Search</button>
