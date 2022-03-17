@@ -231,6 +231,7 @@ function get_Class_CARDS() {
     return $option_list;
  }
 
+
  function get_review_CARDS(int $classID) {
     $option_list = '';
         $sql = "SELECT * FROM reviewcards WHERE classID  = :classID 
@@ -243,4 +244,15 @@ function get_Class_CARDS() {
         }
       
     return $option_list;
+ }
+ 
+
+ function get_review_totalRating(int $classID) {
+    $option_list = '';
+        $sql = "SELECT Avg(`totalRating`) as avg from reviewcards WHERE classID  = :classID
+        ";//WHERE classes.classID = :fileID
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':classID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
  }

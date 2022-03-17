@@ -13,7 +13,7 @@ if (isset($classInfo)) {
     $temp = $classInfo[0]['imageAddress'];
     $imageAddress = substr($temp, 15);
 }
-
+var_dump($_SESSION['Debugval']);
 ?>
 <main id="mymain1">
     <div class="ViewClass">
@@ -126,11 +126,59 @@ if (isset($classInfo)) {
             </section>
             <section class="vc--section04">
                 <h2>Review Cards</h2>
+                <h4>Overall Rating: <?=mb_substr($overRatingStars['avg'],0, 4);?>/ 5.0</h4>
                 <div class="grid-container">
                     <?php
                     if (!empty($revidewCARD)) {
                         foreach ($revidewCARD as $options) {
                             $reviewer = find_user_by_uid($options['userID']);
+                            $revidewCARDfeild['presentation'] = '';
+                            $revidewCARDfeild['content'] = '';
+                            $revidewCARDfeild['legibility'] = '';
+                            $revidewCARDfeild['attendance'] = '';
+                            $revidewCARDfeild['totalRating']='';
+                             $totalRating = ($options['presentation'] + $options['content'] + $options['legibility'] + $options['attendance'])/4;
+                             $wholeNum = (int)$totalRating;
+                             $frac  = $totalRating - $wholeNum;
+                        
+                                for ($x = 1; $x <= $options['presentation']; $x++) {
+                                    $revidewCARDfeild['presentation'] .= '<i class="bi bi-star-fill"></i>';
+                                 }
+                                 for ($x = 1; $x <= $options['content']; $x++) {
+                                    $revidewCARDfeild['content'] .= '<i class="bi bi-star-fill"></i>';
+                                 }
+                                 for ($x = 1; $x <= $options['legibility']; $x++) {
+                                    $revidewCARDfeild['legibility'] .= '<i class="bi bi-star-fill"></i>';
+                                 }
+                                 for ($x = 1; $x <= $options['attendance']; $x++) {
+                                    $revidewCARDfeild['attendance'] .= '<i class="bi bi-star-fill"></i>';
+                                 }
+                                 for ($x = 1; $x <= $wholeNum; $x++) {
+                                    $revidewCARDfeild['totalRating'] .= '<i class="bi bi-star-fill"></i>';
+                                 }
+                                 //set empty stars
+                                 for ($x = 1; $x <= (5-$options['presentation']); $x++) {
+                                    $revidewCARDfeild['presentation'] .= '<i class="bi bi-star"></i>';
+                                 }
+                                 for ($x = 1; $x <= (5-$options['content']); $x++) {
+                                    $revidewCARDfeild['content'] .= '<i class="bi bi-star"></i>';
+                                 }
+                                 for ($x = 1; $x <= (5-$options['legibility']); $x++) {
+                                    $revidewCARDfeild['legibility'] .= '<i class="bi bi-star"></i>';
+                                 }
+                                 for ($x = 1; $x <= (5-$options['attendance']); $x++) {
+                                    $revidewCARDfeild['attendance'] .= '<i class="bi bi-star"></i>';
+                                 }
+                                 if($frac >= 0.5){
+                                    $revidewCARDfeild['totalRating'] .= '<i class="bi bi-star-half"></i>';
+                                    for ($x = 1; $x <= (4-$wholeNum); $x++) {
+                                        $revidewCARDfeild['totalRating'] .= '<i class="bi bi-star"></i>';
+                                     }
+                                 }else{
+                                    for ($x = 1; $x <= (5-$wholeNum); $x++) {
+                                        $revidewCARDfeild['totalRating'] .= '<i class="bi bi-star"></i>';
+                                     }
+                                 }
                             echo '
                             <div class="card">
                                 <div class="card-body">
@@ -138,11 +186,11 @@ if (isset($classInfo)) {
                                         <p>' . $reviewer['lastName'] . '</p>
                                     </div>
                                 <div class="card-desc">
-                                    <p>Overall ' . $options['totalRating'] . '</p>
-                                    <p>Presentation  ' . $options['presentation'] . '</p>
-                                    <p>Content ' . $options['content'] . '</p>
-                                    <p>Grammar ' . $options['legibility'] . '</p>
-                                    <p>Attendance ' . $options['attendance'] . '</p>
+                                    <p>Overall ' . $revidewCARDfeild['totalRating'] . '</p>
+                                    <p>Presentation  ' . $revidewCARDfeild['presentation'] . '</p>
+                                    <p>Content ' . $revidewCARDfeild['content'] . '</p>
+                                    <p>Grammar ' . $revidewCARDfeild['legibility'] . '</p>
+                                    <p>Attendance ' . $revidewCARDfeild['attendance'] . '</p>
                                     <p>' . $options['description'] . '</p>
                                 </div>
                             </div>
@@ -161,60 +209,60 @@ if (isset($classInfo)) {
                             <p>
                                 <label for="rating">Presentation</label>
                             <div class="wrapper">
-                                <input type="checkbox" id="st1--01" name="presentation" value="1" />
+                                <input type="checkbox" id="st1--01" name="presentation" value="5" />
                                 <label for="st1--01"></label>
-                                <input type="checkbox" id="st2--02" name="presentation" value="2" />
+                                <input type="checkbox" id="st2--02" name="presentation" value="4" />
                                 <label for="st2--02"></label>
                                 <input type="checkbox" id="st3--03" name="presentation" value="3" />
                                 <label for="st3--03"></label>
-                                <input type="checkbox" id="st4--04" name="presentation" value="4" />
+                                <input type="checkbox" id="st4--04" name="presentation" value="2" />
                                 <label for="st4--04"></label>
-                                <input type="checkbox" id="st5--05" name="presentation" value="5" />
+                                <input type="checkbox" id="st5--05" name="presentation" value="1" />
                                 <label for="st5--05"></label>
                             </div>
                             </p>
                             <p>
                                 <label for="rating">Legibility</label>
                             <div class="wrapper">
-                                <input type="checkbox" id="st1--06" name="legibility" value="1" />
+                                <input type="checkbox" id="st1--06" name="legibility" value="5" />
                                 <label for="st1--06"></label>
-                                <input type="checkbox" id="st2--07" name="legibility" value="2" />
+                                <input type="checkbox" id="st2--07" name="legibility" value="4" />
                                 <label for="st2--07"></label>
                                 <input type="checkbox" id="st3--08" name="legibility" value="3" />
                                 <label for="st3--08"></label>
-                                <input type="checkbox" id="st4--09" name="legibility" value="4" />
+                                <input type="checkbox" id="st4--09" name="legibility" value="2" />
                                 <label for="st4--09"></label>
-                                <input type="checkbox" id="st5--10" name="legibility" value="5" />
+                                <input type="checkbox" id="st5--10" name="legibility" value="1" />
                                 <label for="st5--10"></label>
                             </div>
                             </p>
                             <p>
                                 <label for="rating">Content</label>
                             <div class="wrapper">
-                                <input type="checkbox" id="st1--11" name="content" value="1" />
+                                <input type="checkbox" id="st1--11" name="content" value="5" />
                                 <label for="st1--11"></label>
-                                <input type="checkbox" id="st2--12" name="content" value="2" />
+                                <input type="checkbox" id="st2--12" name="content" value="4" />
                                 <label for="st2--12"></label>
                                 <input type="checkbox" id="st3--13" name="content" value="3" />
                                 <label for="st3--13"></label>
-                                <input type="checkbox" id="st4--14" name="content" value="4" />
+                                <input type="checkbox" id="st4--14" name="content" value="2" />
                                 <label for="st4--14"></label>
-                                <input type="checkbox" id="st5--15" name="content" value="5" />
+                                <input type="checkbox" id="st5--15" name="content" value="1" />
                                 <label for="st5--15"></label>
                             </div>
                             </p>
                             <p>
                                 <label for="rating">Attendance</label>
                             <div class="wrapper">
-                                <input type="checkbox" id="st1--16" name="attendance" value="1" />
+                                <input type="checkbox" id="st1--16" name="attendance" value="5" />
                                 <label for="st1--16"></label>
-                                <input type="checkbox" id="st2--17" name="attendance" value="2" />
+                                <input type="checkbox" id="st2--17" name="attendance" value="4" />
                                 <label for="st2--17"></label>
                                 <input type="checkbox" id="st3--18" name="attendance" value="3" />
                                 <label for="st3--18"></label>
-                                <input type="checkbox" id="st4--19" name="attendance" value="4" />
+                                <input type="checkbox" id="st4--19" name="attendance" value="2" />
                                 <label for="st4--19"></label>
-                                <input type="checkbox" id="st5--20" name="attendance" value="5" />
+                                <input type="checkbox" id="st5--20" name="attendance" value="1" />
                                 <label for="st5--20"></label>
                             </div>
                             </p>
