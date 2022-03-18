@@ -3,11 +3,13 @@ session_start();
 require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/libs/pdfi.php';
 
-// echo '<pre>';
+echo '<pre>';
 
-// var_dump($_SESSION['upload_token']);
+var_dump($_SESSION['classpayment']);
+var_dump($_SESSION['debug']);
 
-// echo '</pre>';
+
+echo '</pre>';
 
 // $client = init_Client();
 

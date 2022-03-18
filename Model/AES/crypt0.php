@@ -8,7 +8,8 @@ function generate_Public_Key($privateKey){
     return $generated_key;
 } 
 $privateKey = generate_Public_Key('PTS-th3s!s');
-function encrypt0($plaintext, $password, $privateKey = null) {
+
+function encrypt0($plaintext, $password = 'elder ring', $privateKey = null) {
     $method = openssl_get_cipher_methods()[23];
     $key = isset($privateKey) ? $privateKey : hash('sha256', $password, true);
     $iv_size = openssl_cipher_iv_length($method); 
@@ -19,7 +20,7 @@ function encrypt0($plaintext, $password, $privateKey = null) {
     return bin2hex($iv . $hash . $ciphertext);
 }
 
-function decrypt0($ivHashCiphertext, $password, $privateKey = null) {
+function decrypt0($ivHashCiphertext, $password = 'elder ring', $privateKey = null) {
     $ivHashCiphertext2 = hex2bin($ivHashCiphertext);
     $method = openssl_get_cipher_methods()[23];
     $iv = substr($ivHashCiphertext2, 0, 16);

@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+    function umToggle_01() {
+        const toggleUM = document.querySelector('.user-menu--01');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_02() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_03() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_04() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_05() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +56,25 @@
 
 </head>
 <body>
-    <?php
-    function Get_Navbar(int $roleID){
+    <header>
+        <!-- <nav class="not-loggedin">
+            <div class="row">
+                <div class="logo">
+                    <h2>
+                        <div class="logo-blue">P</div>TS
+                    </h2>
+                </div>
+                <ul class="main-nav">
+                    <li><a href="landing.php">Home</a></li>
+                    <li><a href="aboutus.php">About Us</a></li>
+                    <li><a href="viewFAQ.php">FAQ</a></li>
+                    <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
+                    <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
+                </ul>
+            </div>
+        </nav> -->
+        <?php
+        function Get_Navbar(int $roleID){
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
         $link = "https";
         else $link = "http";
@@ -67,17 +110,42 @@
                                   <p id="content--1">Admin</p>
                               </div>
                               <ul>
-                                  <li><img src="/PTS-thesis/static/user-solid.svg" alt=""><a href="'.$link.'AccountManagement.php">Account Management</a></li>
+                                  <li><img src="/PTS-thesis/static/user-solid.svg" alt=""><a href="'.$link.'accountManagement.php">Account Management</a></li>
                                   <li><i class="bi bi-file-earmark-person-fill"></i><a href="'.$link.'">Class Management</a></li>
                                   <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="'.$link.'">Transaction</a></li>
                                   <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="'.$link.'">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout">Logout</a></li>
                               </ul>
                           </div>
                       </li>
                   </ul>
               </div>
-          </nav>';
+          </nav>'."<script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu--01');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_02() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_03() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_04() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_05() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      </script>";
               break;
             case "3":
               $roletype = 'Learner';
@@ -117,7 +185,32 @@
                   </ul>
               </div>
           </nav>
-          ';
+          '."<script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu--01');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_02() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_03() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_04() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_05() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      </script>";
               break;
             case "4":
               $roletype = 'Instructor';
@@ -155,7 +248,32 @@
                       </li>
                   </ul>
               </div>
-          </nav>';
+          </nav>'."<script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu--01');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_02() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_03() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_04() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_05() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      </script>";;
               break;
             case "5":
               $roletype = 'Coordinator';
@@ -192,7 +310,32 @@
                       </li>
                   </ul>
               </div>
-          </nav>';
+          </nav>'."<script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu--01');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_02() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_03() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_04() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_05() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      </script>";
               break;
             case "6":
               $roletype = 'Procurement';
@@ -228,61 +371,102 @@
                       </li>
                   </ul>
               </div>
-          </nav>';
+          </nav>'."<script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu--01');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_02() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_03() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_04() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_05() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      </script>";
               break;
+              default:
+              $nav = '<header>
+              <nav class="not-loggedin">
+                  <div class="row">
+                      <div class="logo">
+                          <h2>
+                              <div class="logo-blue">P</div>TS
+                          </h2>
+                      </div>
+                      <ul class="main-nav">
+                          <li><a href="landing.php">Home</a></li>
+                          <li><a href="aboutus.php">About Us</a></li>
+                          <li><a href="viewFAQ.php">FAQ</a></li>
+                          <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
+                          <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
+                      </ul>
+                  </div>
+              </nav>
+          </header>'."<script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu--01');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_02() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_03() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_04() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+          function umToggle_05() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      </script>";
             }
         return $nav;
     }
     if(isset($_SESSION['logedroleID'])){
     echo Get_Navbar($_SESSION['logedroleID']);
     }else{
-        var_dump($_SESSION['logedroleID']);
-        echo '    <header>
-        <nav class="not-loggedin">
-            <div class="row">
-                <div class="logo">
-                    <h2>
-                        <div class="logo-blue">P</div>TS
-                    </h2>
-                </div>
-                <ul class="main-nav">
-                    <li><a href="landing.php">Home</a></li>
-                    <li><a href="aboutus.php">About Us</a></li>
-                    <li><a href="viewFAQ.php">FAQ</a></li>
-                    <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
-                    <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
-                </ul>
+        echo'<nav class="not-loggedin">
+        <div class="row">
+            <div class="logo">
+                <h2>
+                    <div class="logo-blue">P</div>TS
+                </h2>
             </div>
-        </nav>
-    </header>';
+            <ul class="main-nav">
+                <li><a href="landing.php">Home</a></li>
+                <li><a href="aboutus.php">About Us</a></li>
+                <li><a href="viewFAQ.php">FAQ</a></li>
+                <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
+                <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
+            </ul>
+        </div>
+    </nav>';
     }
     ?>
-    <script>
-    function umToggle_01() {
-        const toggleUM = document.querySelector('.user-menu--01');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_02() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_03() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_04() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_05() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-</script>
+    </header>
 <main>
     <?php flash(
     'user_register_success',

@@ -5,14 +5,28 @@ require __DIR__ . '/../src/viewClasses.php';
 // $revidewCARD=[];
 $Username = "KAT";
 ?>
-<?php view('header', ['title' => 'Class page']);
+<?php 
 
-if (isset($classInfo)) {
+
+if (isset($classInfo) && $classInfo !== "") {
     $teacher = find_user_by_uid($classInfo[0]['userID']);
 
     $temp = $classInfo[0]['imageAddress'];
     $imageAddress = substr($temp, 15);
+}else{
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    $link = "https";
+    else $link = "http";
+    // Here append the common URL characters.
+    $link .= "://";
+    // Append the host(domain name, ip) to the URL.
+    $link .= $_SERVER['HTTP_HOST'];
+    // Append the requested resource location to the URL
+    $link .= $_SERVER['REQUEST_URI'];
+    // redirect_to('emailmsg.php');
+    header("Location: emailmsg.php");
 }
+view('header', ['title' => 'Class page']);
 ?>
 <main id="mymain1">
     <div class="ViewClass">
@@ -125,7 +139,11 @@ if (isset($classInfo)) {
             </section>
             <section class="vc--section04">
                 <h2>Review Cards</h2>
-                <h4>Overall Rating: <?=mb_substr($overRatingStars['avg'],0, 4);?>/ 5.0</h4>
+                <h4>Overall Rating: <?php if(isset($overRatingStars['avg'])){
+                    echo mb_substr($overRatingStars['avg'],0, 4);
+                }else{
+                    echo 0;
+                } ?>/ 5.0</h4>
                 <div class="grid-container">
                     <?php
                     if (!empty($revidewCARD)) {

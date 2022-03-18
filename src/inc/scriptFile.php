@@ -209,25 +209,38 @@ function replaceclassPic(int $userID){
 
 
 
-function replacepaymentPic(int $userID){
+function replacePaymentPic(int $userID){
   $sql = 'SELECT * FROM debugfiles 
-  JOIN userprofile
-  ON userprofile.pictureID = debugfiles.fileID
-  JOIN users
-  ON users.userID = userprofile.userID
-  WHERE users.userID = :userID
+  JOIN paymentmethod
+  ON paymentmethod.methodfileID = debugfiles.fileID
+  WHERE debugfiles.userID = :userID
   ';
   $statement = db()->prepare($sql);
   $statement->bindValue(':userID', $userID, PDO::PARAM_INT);
   $statement->execute();
   $filearr = $statement->fetch(PDO::FETCH_ASSOC);
-  if (!unlink($filearr['filePath'])) { 
-            echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
-        } 
-        else { 
-          $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
-          $statement2 = db()->prepare($sql2);
-          $statement2->bindParam(':fileID', $filearr['fileID'], PDO::PARAM_INT);
-          $return_arr = $statement2->execute();
-        }
+  if(!is_bool($filearr)){
+      if (!unlink($filearr['filePath'])) { 
+        echo ($filearr['fileName'] . " cannot be deleted due to an error"); 
+    } 
+    else { 
+      $sql2 = 'DELETE FROM debugfiles WHERE fileID = :fileID';
+      $statement2 = db()->prepare($sql2);
+      $statement2->bindParam(':fileID', $filearr['fileID'], PDO::PARAM_INT);
+      $return_arr = $statement2->execute();
+    }
+  }
+}
+
+function getPaymentPic(int $userID){
+  $sql = 'SELECT * FROM debugfiles 
+  JOIN paymentmethod
+  ON paymentmethod.methodfileID = debugfiles.fileID
+  WHERE paymentmethod.userID = :userID
+  ';
+  $statement = db()->prepare($sql);
+  $statement->bindValue(':userID', $userID, PDO::PARAM_INT);
+  $statement->execute();
+  $filearr = $statement->fetch(PDO::FETCH_ASSOC);
+    return $filearr;
 }

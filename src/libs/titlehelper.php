@@ -141,3 +141,21 @@ function convert_roleID2Type(int $roleID){
         }
     return $roletype;
 }
+
+function convert_paylistID2Type(int $paylistID){
+    switch ($paylistID) {
+        case "1":
+          $roletype = 'Paymaya';
+          break;
+        case "2":
+          $roletype = 'Gcash';
+          break;
+        case "3":
+          $roletype = 'Bank Transfer';
+          break;
+        case "4":
+          $roletype = 'Credit Card';
+          break;
+        }
+    return $roletype;
+}

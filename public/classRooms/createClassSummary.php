@@ -10,11 +10,13 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
+
+$pay = display_class_Payment();
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
 ?>
-<?php if (isset($errors['userProfile'])) : ?>
+<?php if (isset($errors['classRooms'])) : ?>
     <div class="alert alert-error">
         <?= $errors['classRooms'] ?>
     </div>
@@ -212,15 +214,22 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
                                 <div class="summary-item--04">
                                     <div class="sub-item">
                                         <label for="#">Payment Method</label>
+                                        <label for="#"><?= $pay['paylistID']?></label>
+
                                     </div>
                                     <div class="sub-item">
-                                        <label for="#">Account Name</label>
+                                        <label for="#">Account Name:</label>
+                                        <label for="#"><?= decrypt0($pay['accountName'])?></label>
+
                                     </div>
                                     <div class="sub-item">
-                                        <label for="#">Account No.</label>
+                                        <label for="#">Account No:</label>
+                                        <label for="#"><?= decrypt0($pay['accountDetail'])?></label>
+
                                     </div>
                                     <div class="sub-item">
-                                        <label for="#">Upload Image</label>
+                                        <label for="#">Upload Image ID:</label>
+                                        <label for="#"><?= $pay['methodfileID']?></label>
                                     </div>
                                 </div>
                             </div>

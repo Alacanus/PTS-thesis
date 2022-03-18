@@ -14,7 +14,7 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 
 <?php view('header', ['title' => 'Create Class']);
 ?>
-<?php if (isset($errors['userProfile'])) : ?>
+<?php if (isset($errors['classRooms'])) : ?>
     <div class="alert alert-error">
         <?= $errors['classRooms'] ?>
     </div>
@@ -49,8 +49,8 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
                 </div>
 
                 <div class="container-edit form-style">
-                    <form action="" method="POST">
-                        <h2>Create Class</h2>
+                    <form action="createClass5.php" method="POST" enctype="multipart/form-data">
+                        <h2>Payment Details</h2>
                         <div class="form-element">
                             <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
                             <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
@@ -71,11 +71,11 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
                             <input type="text" name="accountName" id="accountName" class="<?= error_class($errors, 'accountName') ?>">
                         </div>
                         <div class="form-element">
-                            <label for="accountName">Accounnt Details {account number}<div class="reqcolor">*</div></label>
+                            <label for="accountDetails">Accounnt Details {Purchase details}<div class="reqcolor">*</div></label>
                             <div class="errormsg">
-                                <small><?= $errors['accountName'] ?? '' ?></small>
+                                <small><?= $errors['accountDetails'] ?? '' ?></small>
                             </div>
-                            <input type="text" name="accountName" id="accountName" class="<?= error_class($errors, 'accountName') ?>">
+                            <input type="number" step="any" name="accountDetails" id="accountDetails" class="<?= error_class($errors, 'accountDetails') ?>">
                         </div>
                         <div class="form-element">
                             <label for="imageUpload">Upload Image</label>
@@ -83,6 +83,7 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
                         </div>
                         <div class="btn-right-03">
                             <button class="btn btn-table btn-table-mb" onclick="history.back()" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
+                            <button type="submit" >Submit</button>
                             <button type="submit" class="btn btn-table btn-full" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
                         </div>
                     </form>

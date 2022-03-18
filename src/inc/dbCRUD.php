@@ -256,3 +256,21 @@ function get_Class_CARDS() {
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
  }
+
+ function get_class_Payment(){
+     $sql ="SELECT * from paymentmethod WHERE userID  = :userID";
+     $statement = db()->prepare($sql);
+     $statement->bindValue(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+     $statement->execute();
+     $_SESSION['classpayment'] = $statement->rowCount() > 0;
+
+        return $statement->rowCount() > 0;
+ }
+
+ function display_class_Payment(){
+    $sql ="SELECT * from paymentmethod WHERE userID  = :userID";
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
