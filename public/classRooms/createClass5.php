@@ -10,6 +10,8 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
+$pay = display_class_Payment();
+
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
@@ -54,7 +56,7 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
                         <div class="form-element">
                             <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
                             <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
-                                <option value="">- - - - Select - - - -</options>
+                                <option value="<?= $pay['paylistID']?>"><?= $pay['paylistID']?></options>
                                     <?php
                                     foreach ($option_list as $options) {
                                         echo '<option value="' . $options['paylistID'] . '">' . $options['paymentName'] . '</option>';
@@ -68,14 +70,14 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
                             <div class="errormsg">
                                 <small><?= $errors['accountName'] ?? '' ?></small>
                             </div>
-                            <input type="text" name="accountName" id="accountName" class="<?= error_class($errors, 'accountName') ?>">
+                            <input type="text" name="accountName" id="accountName" value="<?= decrypt0($pay['accountName']) ?? ''?>" class="<?= error_class($errors, 'accountName') ?>">
                         </div>
                         <div class="form-element">
                             <label for="accountDetails">Accounnt Details {Purchase details}<div class="reqcolor">*</div></label>
                             <div class="errormsg">
                                 <small><?= $errors['accountDetails'] ?? '' ?></small>
                             </div>
-                            <input type="number" step="any" name="accountDetails" id="accountDetails" class="<?= error_class($errors, 'accountDetails') ?>">
+                            <input type="number" step="any" name="accountDetails" id="accountDetails" value="<?= decrypt0($pay['accountDetail'])?>" class="<?= error_class($errors, 'accountDetails') ?>">
                         </div>
                         <div class="form-element">
                             <label for="imageUpload">Upload Image</label>

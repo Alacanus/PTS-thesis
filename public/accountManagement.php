@@ -57,7 +57,7 @@ view('header', ['title' => 'Account Manage']) ?>
           // echo '<div class="td-item tbl-item--5">' . "" .  '</div>';
           echo '<div class="td-item tbl-item--5">' . convert_roleID2Type($options['roleID'])  . '</div>';
           echo '<div class="td-item tbl-item--6">';
-          echo '<button class="btn-table btn-full" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
+          echo '<button class="btn-table btn-full" id="show-modal00" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
           echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
           echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
           echo '<button id="show-modal03" class="btn-table btn-table-red" title="Delete User" onclick="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';

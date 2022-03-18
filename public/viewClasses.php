@@ -24,7 +24,7 @@ if (isset($classInfo) && $classInfo !== "") {
     // Append the requested resource location to the URL
     $link .= $_SERVER['REQUEST_URI'];
     // redirect_to('emailmsg.php');
-    header("Location: emailmsg.php");
+    header("Location: allowedNot.php");//request denied
 }
 view('header', ['title' => 'Class page']);
 ?>

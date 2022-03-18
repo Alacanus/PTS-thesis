@@ -205,7 +205,9 @@ $pay = display_class_Payment();
                             <div class="sample-flex-con2">
                                 <div class="summary-item--03">
                                     <div class="sub-item">
-                                        <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">
+                                        <!-- <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">substr(getPic_byID($pay['methodfileID']), 15) -->
+                                        <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">substr(getPic_byID($pay['methodfileID']), 15)
+
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">Payment Image</label>
@@ -229,7 +231,7 @@ $pay = display_class_Payment();
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">Upload Image ID:</label>
-                                        <label for="#"><?= $pay['methodfileID']?></label>
+                                        <label><?=$pay['methodfileID']?></label>
                                     </div>
                                 </div>
                             </div>
