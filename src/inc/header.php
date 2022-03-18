@@ -1,32 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-    function umToggle_01() {
-        const toggleUM = document.querySelector('.user-menu--01');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_02() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_03() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_04() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_05() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +32,14 @@
 <body>
     <?php
     function Get_Navbar(int $roleID){
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        $link = "https";
+        else $link = "http";
+        // Here append the common URL characters.
+        $link .= "://";
+        // Append the host(domain name, ip) to the URL.
+        $link .= $_SERVER['HTTP_HOST'];
+        $link .= "/pts-thesis/public/";
         switch ($roleID) {
             case "2":
               $roletype = 'Admin';
@@ -69,13 +51,15 @@
                       </h2>
                   </div>
                   <ul class="main-nav">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="aboutUs.php">About Us</a></li>
-                      <li><a href="#">Courses</a></li>
-                      <li><a href="viewfaq.php">FAQ</a></li>
+                      <li><a href="'.$link.'landing.php">Home</a></li>
+                      <li><a href="'.$link.'aboutUs.php">About Us</a></li>
+                      <li><a href="#">Courses</a></li> <!-- classlist -->
+                      <li><a href="'.$link.'viewfaq.php">FAQ</a></li>
                       <li>
                           <div class="user-img" onclick="umToggle_04();">
-                              <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg">
+                              
+                              <!-- <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg"> -->
+                              <!-- style this -->
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
@@ -83,11 +67,11 @@
                                   <p id="content--1">Admin</p>
                               </div>
                               <ul>
-                                  <li><img src="/PTS-thesis/static/user-solid.svg" alt=""><a href="#">Account Management</a></li>
-                                  <li><i class="bi bi-file-earmark-person-fill"></i><a href="#">Class Management</a></li>
-                                  <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="#">Transaction</a></li>
-                                  <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="#">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="#">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/user-solid.svg" alt=""><a href="'.$link.'AccountManagement.php">Account Management</a></li>
+                                  <li><i class="bi bi-file-earmark-person-fill"></i><a href="'.$link.'">Class Management</a></li>
+                                  <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="'.$link.'">Transaction</a></li>
+                                  <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="'.$link.'">Audit Trail</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
                               </ul>
                           </div>
                       </li>
@@ -105,7 +89,7 @@
                       </h2>
                   </div>
                   <ul class="main-nav">
-                      <li><a href="#">Home</a></li>
+                      <li><a href="landing.php">Home</a></li>
                       <li><a href="aboutUs.php">About Us</a></li>
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
@@ -145,7 +129,7 @@
                       </h2>
                   </div>
                   <ul class="main-nav">
-                      <li><a href="#">Home</a></li>
+                      <li><a href="landing.php">Home</a></li>
                       <li><a href="aboutUs.php">About Us</a></li>
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
@@ -183,7 +167,7 @@
                       </h2>
                   </div>
                   <ul class="main-nav">
-                      <li><a href="#">Home</a></li>
+                      <li><a href="landing.php">Home</a></li>
                       <li><a href="aboutUs.php">About Us</a></li>
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
@@ -220,7 +204,7 @@
                       </h2>
                   </div>
                   <ul class="main-nav">
-                      <li><a href="#">Home</a></li>
+                      <li><a href="landing.php">Home</a></li>
                       <li><a href="aboutUs.php">About Us</a></li>
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
@@ -273,6 +257,32 @@
     </header>';
     }
     ?>
+    <script>
+    function umToggle_01() {
+        const toggleUM = document.querySelector('.user-menu--01');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_02() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_03() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_04() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+
+    function umToggle_05() {
+        const toggleUM = document.querySelector('.user-menu');
+        toggleUM.classList.toggle('active')
+    }
+</script>
 <main>
     <?php flash(
     'user_register_success',
