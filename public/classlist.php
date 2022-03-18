@@ -22,7 +22,7 @@ $ClassCARD = get_Class_CARDS();
       
         <div class="card">
           <div class="card-header">
-            <img src="' . $imageAddress . '" alt="...">
+            <img class="broken-img" src="' . $imageAddress . '" alt="...">
           </div>
           <div class="card-body">
             <div class="card-title">
@@ -45,4 +45,10 @@ $ClassCARD = get_Class_CARDS();
     </div>
   </div>
 </div>
+
+<script>
+  $(".card img").on("error", function() {
+    $(this).attr("src", "/PTS-thesis/static/broken-img.jpg")
+  });
+</script>
 <?php view('footer') ?>

@@ -1,12 +1,12 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
-if (is_user_2fa() == 'false'){
+if (is_user_2fa() == 'false') {
   redirect_to('login.php');
-}else{
+} else {
   audit_trail('User has visited AccountManagement', 2);
-  }
-if(!auth_Level('Admin')){
-    redirect_to('allowedNOT.php');
+}
+if (!auth_Level('Admin')) {
+  redirect_to('allowedNOT.php');
 }
 require __DIR__ . '/../src/loggedin/accountManagement.php';
 
@@ -16,7 +16,7 @@ view('header', ['title' => 'Account Manage']) ?>
     <?= $errors['accountMGT'] ?>
   </div>
 <?php endif ?>
-<div class="overlaybg">
+<div class="overlaybg-02">
   <div class="am-container">
     <div>
       <h2>Account Management</h2>
@@ -35,55 +35,108 @@ view('header', ['title' => 'Account Manage']) ?>
         <button id="show-modal04" class="btn btn-table-grn btn-nav"><i class="bi bi-plus-lg"></i> Create User</button>
       </div>
     </div>
-    <div class="table-container table-container-am">
-      <div class="table-row-container tbl-heading">
-        <div class="th-item tbl-item--1">#</div>
-        <div class="th-item tbl-item--2">User Name</div>
-        <div class="th-item tbl-item--3">Email</div>
-        <div class="th-item tbl-item--4">Name</div>
-        <!-- <div class="th-item tbl-item--5">Status</div> -->
-        <div class="th-item tbl-item--5">Role</div>
-        <div class="th-item tbl-item--6">Action</div>
-      </div>
-      <?php
-      // var_dump($option_list);
-      if (is_array($option_list)) {
-        foreach ($option_list as $options) {
-          echo '<div class="table-row-container">';
-          echo '<div class="td-item tbl-item--1">' . $options['userID'] . '</div>';
-          echo '<div class="td-item tbl-item--2">' . $options['username'] . '</div>';
-          echo '<div class="td-item tbl-item--3">' . $options['email'] . '</div>';
-          echo '<div class="td-item tbl-item--4">' . $options['firstname'] . " " . $options['lastName'] . '</div>';
-          // echo '<div class="td-item tbl-item--5">' . "" .  '</div>';
-          echo '<div class="td-item tbl-item--5">' . convert_roleID2Type($options['roleID'])  . '</div>';
-          echo '<div class="td-item tbl-item--6">';
-          echo '<button class="btn-table btn-full" id="show-modal00" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
-          echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
-          echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
-          echo '<button id="show-modal03" class="btn-table btn-table-red" title="Delete User" onclick="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';
-          echo '</div>';
-          echo '</div>';
+    <table class="table-container table-container-am">
+      <thead class="tbl-heading">
+        <tr class="table-row-container">
+          <th class="th-item tbl-item--1">#</th>
+          <th class="th-item tbl-item--2">User Name</th>
+          <th class="th-item tbl-item--3">Email</th>
+          <th class="th-item tbl-item--4">Name</th>
+          <!-- <div class="th-item tbl-item--5">Status</div> -->
+          <th class="th-item tbl-item--5">Role</th>
+          <th class="th-item tbl-item--6">Action</th>
+        </tr>
+      </thead>
+      <tbody class="tbody-overflow">
+        <?php
+        // var_dump($option_list);
+        if (is_array($option_list)) {
+          foreach ($option_list as $options) {
+            echo '<tr class="table-row-container">';
+            echo '<td class="td-item tbl-item--1">' . $options['userID'] . '</td>';
+            echo '<td class="td-item tbl-item--2">' . $options['username'] . '</td>';
+            echo '<td class="td-item tbl-item--3">' . $options['email'] . '</td>';
+            echo '<td class="td-item tbl-item--4">' . $options['firstname'] . " " . $options['lastName'] . '</td>';
+            // echo '<div class="td-item tbl-item--5">' . "" .  '</div>';
+            echo '<td class="td-item tbl-item--5">' . convert_roleID2Type($options['roleID'])  . '</td>';
+            echo '<td class="td-item tbl-item--6">';
+            echo '<button id="show-modal00" class="btn-table btn-full" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
+            echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
+            echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
+            echo '<button id="show-modal03" class="btn-table btn-table-red" title="Delete User" onclick="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';
+            echo '</td>';
+            echo '</tr>';
+          }
         }
-      }
-      ?>
-    </div>
+        ?>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <!-- view Profile - Modal -->
 <div class="am-modal--00">
-<label id="viewuser_id"></label>
-<label id="viewusername"></label>
-<label id="viewaboutme"></label>
-<label id="viewemail"></label>
-<label id="viewfirstname"></label>
-<label id="viewlastName"></label>
-<label id="viewgender"></label>
-<label id="viewage"></label>
-<label id="viewbirthday"></label>
-<label id="viewaddress"></label>
-<label id="viewcontactno"></label>
-<label id="viewaboutme"></label>
+  <div id="view-modal" class="overlay-new">
+    <div class="edit-profile">
+      <h2>View Profile</h2>
+      <div class="container-edit form-style">
+        <div class="close-btnView">&times;</div>
+        <div class="form-element element-bg-01">
+
+          <div class="sub-item-vp">
+            <h3>Account Information</h3>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-hash"></i>User ID :</label>
+            <label id="viewuser_id"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-postcard"></i>User Name :</label>
+            <label id="viewusername"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-envelope"></i>Email : </label>
+            <label id="viewemail"></label>
+          </div>
+        </div>
+
+        <div class="form-element element-bg-02">
+          <div class="sub-item-vp">
+            <h3>Basic Information</h3>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-person-circle"></i>Name : </label>
+            <label id="viewfirstname"></label>
+            <label id="viewlastName"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-gender-female"></i><i class="bi bi-gender-male"></i>Gender : </label>
+            <label id="viewgender"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-calendar-date"></i>Age : </label>
+            <label id="viewage"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-calendar-event"></i>Birthday : </label>
+            <label id="viewbirthday"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-geo-alt"></i>Address : </label>
+            <label id="viewaddress"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-phone"></i>Contact No : </label>
+            <label id="viewcontactno"></label>
+          </div>
+          <div class="sub-item-vp">
+            <label for="lb-title"><i class="bi bi-card-text"></i>About Me : </label>
+            <label id="viewaboutme"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Edit User Profile - Modal -->
@@ -293,7 +346,7 @@ view('header', ['title' => 'Account Manage']) ?>
           <button class="btn btn-full btn-nav"><i class="bi bi-search"></i> Search</button>
         </div>
       </div>
-      <table class="table" name="filesT">
+      <!-- <table class="table" name="filesT">
         <thead>
           <tr>
             <th scope="col">File name</th>
@@ -302,21 +355,21 @@ view('header', ['title' => 'Account Manage']) ?>
             <th scope="col">controls</th>
           </tr>
         </thead>
-              <tbody id= "filesT">
-              </tbody>
-      </table>
-      <!-- <table class="table table-container table-container-files" name="filesT">
+        <tbody id="filesT">
+        </tbody>
+      </table> -->
+      <table class="table table-container table-container-files" name="filesT">
         <thead class="tbl-heading">
           <tr class="table-row-container">
-            <th class="th-item tbl-item--2" scope="col">File name</th>
+            <th class="th-item tbl-item--3" scope="col">File name</th>
             <th class="th-item tbl-item--3" scope="col">Path</th>
-            <th class="th-item tbl-item--4" scope="col">Owner</th>
+            <th class="th-item tbl-item--8" scope="col">Owner</th>
             <th class="th-item tbl-item--5" scope="col">Actions</th>
           </tr>
         </thead>
-        <div id="filesT">
-        </div>
-      </table> -->
+        <tbody id="filesT">
+        </tbody>
+      </table>
 
       <div class="container-edit form-style">
         <div>
@@ -327,6 +380,8 @@ view('header', ['title' => 'Account Manage']) ?>
           <div class="form-element">
             <label>Select image to upload:</label>
             <input type="file" name="fileToUpload" id="fileToUpload" required>
+          </div>
+          <div class="form-element">
             <button class="btn btn-nav btn-table-grn" type="submit" name="submit">Upload File</button>
           </div>
         </form>
@@ -336,9 +391,9 @@ view('header', ['title' => 'Account Manage']) ?>
           <?= $errors['accountMGTFile'] ?>
         </div>
       <?php endif ?>
-      <div class="am-modal--03-right">
+      <div class="btn-right-04">
         <button onclick="" class="btn btn-nav btn-full">Save changes</button>
-        <button type="button" class="btn btn-nav btn-ghost" data-bs-dismiss="#modalCreate">Close</button>
+        <button type="button" class="btn btn-nav btn-ghost2" data-bs-dismiss="#modalCreate">Close</button>
       </div>
     </div>
   </div>
@@ -346,7 +401,7 @@ view('header', ['title' => 'Account Manage']) ?>
 
 <!-- Delete Modal -->
 
-<!-- <button id="show-modal03" class="btn btn-nav btn-full">Click here</button>
+<button id="show-modal03" class="btn btn-nav btn-full">Click here</button>
 
 <div class="am-modal--04">
   <div id="dlt-modal" class="overlay-new">
@@ -364,7 +419,7 @@ view('header', ['title' => 'Account Manage']) ?>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 
 <!--  scripts  -->
@@ -375,9 +430,9 @@ view('header', ['title' => 'Account Manage']) ?>
   })
 
   function SetID(id) {
-    var temp = id; 
+    var temp = id;
     modalFile.style.display = "block";
-    console.log("this->",temp);
+    console.log("this->", temp);
     document.getElementById("user_idfile").value = temp;
     // $.post('../src/loggedin/accountManagement.php', { user_idfile: id }, function(result) {
     // alert(result);
@@ -401,7 +456,7 @@ view('header', ['title' => 'Account Manage']) ?>
         let Owner = row.insertCell(2);
         Owner.innerHTML = items[i]['userID'];
         let Controls = row.insertCell(3);
-        Controls.innerHTML = "<button type='button' onclick=\" downloadFile(\'" + items[i]['fileID'] + "\')\">Download</button><br><button type='button' onclick=\"deleteFile(\'" + items[i]['fileID'] + "\')\">Delete</button><br>";
+        Controls.innerHTML = "<button class='btn btn-table btn-full' type='button' onclick=\" downloadFile(\'" + items[i]['fileID'] + "\')\"><i class='bi bi-upload'></i></button><br><button class='btn btn-table btn-table-red' type='button' onclick=\"deleteFile(\'" + items[i]['fileID'] + "\')\"><i class='bi bi-trash'></i></button><br>";
         // '<button class="btn" onclick="downloadFile('.$options['fileID'].')"><i class="fa fa-trash"></i> Download</button>';
         // '<button class="btn" onclick="deleteFile('.$options['fileID'].')"><i class="fa fa-close"></i> Delete</button>';
       }
@@ -419,7 +474,7 @@ view('header', ['title' => 'Account Manage']) ?>
       },
       success: function(response) {
         const myJSON = JSON.parse(response);
-        console.log("respone->",response);
+        console.log("respone->", response);
         if (typeof myJSON[0]['fileName'] !== 'undefined') {
           loadTableData(myJSON);
         }
@@ -427,180 +482,186 @@ view('header', ['title' => 'Account Manage']) ?>
     });
   }
 
-function UpdateStatus(id)
-    {
-        var Option = 'get';
-        var link = '../src/inc/ajaxModal.php?userID=';
-        var newlink = link + id + '&modalOption=' + Option;
-        console.log(newlink);
-        modal.style.display = "block";
-        $.ajax({
-        type: 'GET',
-        url: newlink,
-        success: function(data) {
-          console.log(data);
-            const myJSON = JSON.parse(data);
-            var select = document.querySelector('#usertype');
-            select.options[select.selectedIndex].value = myJSON[0]['roleID'];
-            select.options[select.selectedIndex].text = myJSON[0]['roleType'];
-            document.getElementById("user_id").value = myJSON[0]['userID'];
-            document.getElementById("username").value = myJSON[0]['username'];
-            document.getElementById("email").value = myJSON[0]['email'];
-            document.getElementById("firstname").value = myJSON[0]['firstname'];
-            document.getElementById("lastName").value = myJSON[0]['lastName'];
-            document.getElementById("gender").value = myJSON[0]['gender'];
-            document.getElementById("age").value = myJSON[0]['age'];
-            document.getElementById("birthday").value = myJSON[0]['birthday'];
-            document.getElementById("address").value = myJSON[0]['address'];
-            document.getElementById("contactno").value = myJSON[0]['contactno'];
-            document.getElementById("aboutme").value = myJSON[0]['aboutme'];
-            //convert to forloop to build modal body
+  function UpdateStatus(id) {
+    var Option = 'get';
+    var link = '../src/inc/ajaxModal.php?userID=';
+    var newlink = link + id + '&modalOption=' + Option;
+    console.log(newlink);
+    modal.style.display = "block";
+    $.ajax({
+      type: 'GET',
+      url: newlink,
+      success: function(data) {
+        console.log(data);
+        const myJSON = JSON.parse(data);
+        var select = document.querySelector('#usertype');
+        select.options[select.selectedIndex].value = myJSON[0]['roleID'];
+        select.options[select.selectedIndex].text = myJSON[0]['roleType'];
+        document.getElementById("user_id").value = myJSON[0]['userID'];
+        document.getElementById("username").value = myJSON[0]['username'];
+        document.getElementById("email").value = myJSON[0]['email'];
+        document.getElementById("firstname").value = myJSON[0]['firstname'];
+        document.getElementById("lastName").value = myJSON[0]['lastName'];
+        document.getElementById("gender").value = myJSON[0]['gender'];
+        document.getElementById("age").value = myJSON[0]['age'];
+        document.getElementById("birthday").value = myJSON[0]['birthday'];
+        document.getElementById("address").value = myJSON[0]['address'];
+        document.getElementById("contactno").value = myJSON[0]['contactno'];
+        document.getElementById("aboutme").value = myJSON[0]['aboutme'];
+        //convert to forloop to build modal body
 
-        },
-        error:function(err){
-            alert("error");
+      },
+      error: function(err) {
+        alert("error");
 
-        },
+      },
     });
   }
 
-  function getUserDetails(id)
-    {
-        var Option = 'get';
-        var link = '../src/inc/ajaxModal.php?userID=';
-        var newlink = link + id + '&modalOption=' + Option;
-        console.log(newlink);
-        modal.style.display = "block";//change this to view users
-        $.ajax({
-        type: 'GET',
-        url: newlink,
-        success: function(data) {
-          console.log(data);
-            const myJSON = JSON.parse(data);
-            var select = document.querySelector('#usertype');
-            // select.options[select.selectedIndex].value = myJSON[0]['roleID'];
-            select.options[select.selectedIndex].text = myJSON[0]['roleType'];
-            document.getElementById("viewuser_id").innerHTML = myJSON[0]['userID'];
-            document.getElementById("viewusername").innerHTML = myJSON[0]['username'];
-            document.getElementById("viewemail").innerHTML = myJSON[0]['email'];
-            document.getElementById("viewfirstname").innerHTML = myJSON[0]['firstname'];
-            document.getElementById("viewlastName").innerHTML = myJSON[0]['lastName'];
-            document.getElementById("viewgender").innerHTML = myJSON[0]['gender'];
-            document.getElementById("viewage").innerHTML = myJSON[0]['age'];
-            document.getElementById("viewbirthday").innerHTML = myJSON[0]['birthday'];
-            document.getElementById("viewaddress").innerHTML = myJSON[0]['address'];
-            document.getElementById("viewcontactno").innerHTML = myJSON[0]['contactno'];
-            document.getElementById("viewaboutme").innerHTML = myJSON[0]['aboutme'];
-            //convert to forloop to build modal body
+  function getUserDetails(id) {
+    var modalView = document.getElementById("view-modal");
+    var Option = 'get';
+    var link = '../src/inc/ajaxModal.php?userID=';
+    var newlink = link + id + '&modalOption=' + Option;
+    console.log(newlink);
+    modalView.style.display = "block"; //change this to view users
+    $.ajax({
+      type: 'GET',
+      url: newlink,
+      success: function(data) {
+        console.log(data);
+        const myJSON = JSON.parse(data);
+        var select = document.querySelector('#usertype');
+        // select.options[select.selectedIndex].value = myJSON[0]['roleID'];
+        select.options[select.selectedIndex].text = myJSON[0]['roleType'];
+        document.getElementById("viewuser_id").innerHTML = myJSON[0]['userID'];
+        document.getElementById("viewusername").innerHTML = myJSON[0]['username'];
+        document.getElementById("viewemail").innerHTML = myJSON[0]['email'];
+        document.getElementById("viewfirstname").innerHTML = myJSON[0]['firstname'];
+        document.getElementById("viewlastName").innerHTML = myJSON[0]['lastName'];
+        document.getElementById("viewgender").innerHTML = myJSON[0]['gender'];
+        document.getElementById("viewage").innerHTML = myJSON[0]['age'];
+        document.getElementById("viewbirthday").innerHTML = myJSON[0]['birthday'];
+        document.getElementById("viewaddress").innerHTML = myJSON[0]['address'];
+        document.getElementById("viewcontactno").innerHTML = myJSON[0]['contactno'];
+        document.getElementById("viewaboutme").innerHTML = myJSON[0]['aboutme'];
+        //convert to forloop to build modal body
 
-        },
-        error:function(err){
-            alert("error");
+      },
+      error: function(err) {
+        alert("error");
 
-        },
+      },
     });
   }
+
   function deleteUser(id) {
     var Option = 'delete';
     var link = '../src/inc/ajaxModal.php?userID=';
     var newlink = link + id + '&modalOption=' + Option;
     $.ajax({
-    type: 'GET',
-    url: newlink,
-    success: function(data) {
+      type: 'GET',
+      url: newlink,
+      success: function(data) {
         // const myJSON = JSON.parse(data);
         alert("User Deleted");
         location.reload();
-    },
-    error:function(err){
+      },
+      error: function(err) {
         // alert("error"+JSON.stringify(err));
         alert("error");
 
-    },
+      },
     });
 
-}
-function deleteFile(id){
+  }
+
+  function deleteFile(id) {
     var Option = 'delete2';
     var link = '../src/inc/ajaxModal.php?userID=';
     var newlink = link + id + '&modalOption=' + Option;
     $.ajax({
-    type: 'GET',
-    url: newlink,
-    success: function(data) {
-      console.log(data);
+      type: 'GET',
+      url: newlink,
+      success: function(data) {
+        console.log(data);
         // const myJSON = JSON.parse(data);
         alert("File Deleted", data);
         location.reload();
-    },
-    error:function(err){
+      },
+      error: function(err) {
         // alert("error"+JSON.stringify(err));
-        alert("error"+JSON.stringify(err));
+        alert("error" + JSON.stringify(err));
 
-    },
+      },
     });
 
-}
+  }
 
-function createUser(){
+  function createUser() {
     var link = '../src/inc/ajaxModal.php';
 
     var data = $("form[name=createForm]").serializeArray(); // convert form to array
-    data.push({name: 'Option', value: 'Create'});
+    data.push({
+      name: 'Option',
+      value: 'Create'
+    });
     $.ajax({
-    type: 'POST',
-    url: link,
-    data: data,
-    success: function(data) {
+      type: 'POST',
+      url: link,
+      data: data,
+      success: function(data) {
         // const myJSON = JSON.parse(data);
         console.log('it workz', data);
         alert("User Created");
         location.reload();
-    },
-    error:function(err){
+      },
+      error: function(err) {
         // alert("error"+JSON.stringify(err));
         alert("error");
 
-    },
+      },
     });
-}
+  }
 
-function downloadFile(id){
-  var Option = 'download';
+  function downloadFile(id) {
+    var Option = 'download';
     var link = '../src/inc/ajaxModal.php?fileID=';
     var newlink = link + id + '&modalOption=' + Option;
 
 
     $.ajax({
-    type: 'GET',
-    url: newlink,
-    success: function(data) {
-      const myJSON = JSON.parse(data);
+      type: 'GET',
+      url: newlink,
+      success: function(data) {
+        const myJSON = JSON.parse(data);
         // console.log('it workz', myJSON['fileName']);
         var Option = 'download2';
         var link = '../src/inc/ajaxModal.php?fileID=';
         var newlink = link + id + '&modalOption=' + Option;
         fetch(newlink)
-        .then(resp => resp.blob())
-        .then(blob => {
-          var blobf = new Blob([blob], {type: "application/zip"});
-          var link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blobf);
-          var fileName = myJSON['fileName'];
-          link.download = fileName;
-          link.click();
-          alert('your file has downloaded!'); // or you know, something with better UX...
-        })
-        .catch(() => alert('oh no!'));
+          .then(resp => resp.blob())
+          .then(blob => {
+            var blobf = new Blob([blob], {
+              type: "application/zip"
+            });
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blobf);
+            var fileName = myJSON['fileName'];
+            link.download = fileName;
+            link.click();
+            alert('your file has downloaded!'); // or you know, something with better UX...
+          })
+          .catch(() => alert('oh no!'));
 
 
 
-    },
-    error:function(err){
+      },
+      error: function(err) {
         // alert("error"+JSON.stringify(err));
         alert("error");
 
-    },
+      },
     });
   }
 
@@ -612,17 +673,20 @@ function downloadFile(id){
   // Modal - JS Function ====================================================
 
   // Button for Modal
+  var btnView = document.getElementById("show-modal00");
   var btnEdit = document.getElementById("show-modal01");
   var btnFile = document.getElementById("show-modal02");
   var btnDelete = document.getElementById("show-modal03");
   var btnCrtUsr = document.getElementById("show-modal04");
 
   // CSS SHOW MODAL
+  var modalView = document.getElementById("view-modal");
   var modal = document.getElementById("edit-modal");
   var modalFile = document.getElementById("file-modal");
   var modalDlt = document.getElementById("dlt-modal");
   var modalCrtUsr = document.getElementById("cu-modal");
 
+  var spanView = document.getElementsByClassName("close-btnView")[0];
   var span = document.getElementsByClassName("close-btn")[0];
   var spanCrtUsr = document.getElementsByClassName("close-btn02")[0];
   var spanFile = document.getElementsByClassName("close-btn03")[0];
@@ -648,6 +712,10 @@ function downloadFile(id){
     modal.style.display = "none";
   }
 
+  spanView.onclick = function() {
+    modalView.style.display = "none";
+  }
+
   spanCrtUsr.onclick = function() {
     modalCrtUsr.style.display = "none";
   }
@@ -666,64 +734,6 @@ function downloadFile(id){
       modal.style.display = "none";
     }
   }
-
-  
 </script>
-
-<!-- 
-  <div class="overlaybg">
-  <div class="am-container">
-    <div class="table-style">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">username</th>
-            <th scope="col">email</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Role</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php
-        if (is_array($option_list)) {
-          foreach ($option_list as $options) {
-            echo "<tr>";
-            echo '<th scope="row">' . $options['userID'] . '</th>';
-            echo '<td>' . $options['username'] . '</td>';
-            echo '<td>' . $options['email'] . '</td>';
-            echo '<td>' . $options['firstname'] . '</td>';
-            echo '<td>' . $options['lastName'] . '</td>';
-            echo '<td>' . convert_roleID2Type($options['roleID'])  . '</td>';
-            echo '<td>';
-            echo '<button class="btn" src="../static/select.png"><i class="fa fa-bars"></i> View</button>';
-            echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modal" onclick ="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="fa fa-trash"></i> Update User</button>';
-            echo '<button class="btn" onclick ="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="fa fa-close"></i> Delete</button>';
-            echo '<button class="btn" data-bs-toggle="modal" data-bs-target="#modalFile" onclick = SetID(' . $options['userID'] . ')><i class="fa fa-folder"></i> Folder</button></td>';
-            echo '</tr>';
-          }
-        }
-        ?>
-        </tbody>
-      </table>
-      <button data-bs-toggle="modal" data-bs-target="#modalCreate">Create User</button>
-    </div>
-  </div>
-</div>
-
-<!-- 
-  <div class="td-item tbl-item--1"> . $options['userID'] . </div>
-  <div class="td-item tbl-item--2"> . $options['username'] . </div>
-  <div class="td-item tbl-item--3"> . $options['email'] . </div>
-  <div class="td-item tbl-item--4"> . $options['firstname'] . </div>
-  <div class="td-item tbl-item--5"> . $options['lastName'] . </div>
-  <div class="td-item tbl-item--6"> . convert_roleID2Type($options['roleID']) . </div>
-  <div class="td-item tbl-item--7">
-  <button class="btn-table btn-full" src="../static/select.png" title="View User Details"><i class="bi bi-search"></i></button>
-  <button class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>
-  <button class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>
-  <button class="btn-table btn-table-red" title="Delete User" onclick="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>
-</div> -->
 
 <?php view('footer') ?>
