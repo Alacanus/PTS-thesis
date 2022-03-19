@@ -51,8 +51,7 @@ require __DIR__ . '/../src/login.php';
                                 </div>      
                             </div>
                             <div class="form-element">
-                                <a href="register.php"><button class="btnsignup">Sign Up</button></a>
-                            </div>
+                            <a href="register.php"><button class="btnsignup">Sign Up</button></a>
                             <div class="form-element">
                                 <a href="changepassword/requestChange.php">Change Password</a>
                             </div>
