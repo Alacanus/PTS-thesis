@@ -10,8 +10,12 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
-
-$pay = display_class_Payment();
+if(!is_bool(display_class_Payment())){
+    $pay = display_class_Payment();
+    $pay['image'] = substr(getPic_byID($pay['methodfileID'])['filePath'], 15);
+}else{
+    $pay = [];
+}
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
@@ -206,7 +210,7 @@ $pay = display_class_Payment();
                                 <div class="summary-item--03">
                                     <div class="sub-item">
                                         <!-- <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">substr(getPic_byID($pay['methodfileID']), 15) -->
-                                        <img src="<?=substr(getPic_byID($pay['methodfileID'])['filePath'], 15)?>" alt="placeholder">
+                                        <img src="<?= $pay['image']?>" alt="placeholder">
 
                                     </div>
                                     <div class="sub-item">
