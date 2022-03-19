@@ -1,32 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-    function umToggle_01() {
-        const toggleUM = document.querySelector('.user-menu--01');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_02() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_03() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_04() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-
-    function umToggle_05() {
-        const toggleUM = document.querySelector('.user-menu');
-        toggleUM.classList.toggle('active')
-    }
-</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
     
     <!-- own code -->
     <script type="text/javascript" src= <?= 'http://'. $_SERVER['HTTP_HOST'] . '/PTS-thesis/static/Sitewide.js'?>></script>  
@@ -57,22 +32,6 @@
 </head>
 <body>
     <header>
-        <!-- <nav class="not-loggedin">
-            <div class="row">
-                <div class="logo">
-                    <h2>
-                        <div class="logo-blue">P</div>TS
-                    </h2>
-                </div>
-                <ul class="main-nav">
-                    <li><a href="landing.php">Home</a></li>
-                    <li><a href="aboutus.php">About Us</a></li>
-                    <li><a href="viewFAQ.php">FAQ</a></li>
-                    <li><a href="login.php"><button class="btn btn-nav btn-full">LOGIN</button></a></li>
-                    <li><a href="register.php"><button class="btn btn-nav btn-nav-ghost btn-ghost">REGISTER</button></a></li>
-                </ul>
-            </div>
-        </nav> -->
         <?php
         function Get_Navbar(int $roleID){
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
@@ -99,10 +58,8 @@
                       <li><a href="#">Courses</a></li> <!-- classlist -->
                       <li><a href="'.$link.'viewfaq.php">FAQ</a></li>
                       <li>
-                          <div class="user-img" onclick="umToggle_04();">
-                              
-                              <!-- <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg"> -->
-                              <!-- style this -->
+                          <div class="user-img" onclick="umToggle_01();">  
+                            <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg">
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
@@ -114,38 +71,13 @@
                                   <li><i class="bi bi-file-earmark-person-fill"></i><a href="'.$link.'">Class Management</a></li>
                                   <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="'.$link.'">Transaction</a></li>
                                   <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="'.$link.'">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
                               </ul>
                           </div>
                       </li>
                   </ul>
               </div>
-          </nav>'."<script>
-          function umToggle_01() {
-              const toggleUM = document.querySelector('.user-menu--01');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_02() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_03() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_04() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_05() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      </script>";
+          </nav>';
               break;
             case "3":
               $roletype = 'Learner';
@@ -178,39 +110,13 @@
                                   <li><i class="bi bi-cart"></i><a href="#">Order</a></li>
                                   <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="#">Transaction</a></li>
                                   <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="#">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="#">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
                               </ul>
                           </div>
                       </li>
                   </ul>
               </div>
-          </nav>
-          '."<script>
-          function umToggle_01() {
-              const toggleUM = document.querySelector('.user-menu--01');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_02() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_03() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_04() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_05() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      </script>";
+          </nav>';
               break;
             case "4":
               $roletype = 'Instructor';
@@ -227,7 +133,7 @@
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
                       <li>
-                          <div class="user-img" onclick="umToggle_02();">
+                          <div class="user-img" onclick="umToggle_01();">
                               <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg">
                           </div>
                           <div class="user-menu">
@@ -242,38 +148,13 @@
                                   <li><i class="bi bi-calendar-event"></i><a href="#">Schedules</a></li>
                                   <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="#">Transaction</a></li>
                                   <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="#">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="#">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
                               </ul>
                           </div>
                       </li>
                   </ul>
               </div>
-          </nav>'."<script>
-          function umToggle_01() {
-              const toggleUM = document.querySelector('.user-menu--01');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_02() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_03() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_04() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_05() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      </script>";;
+          </nav>';
               break;
             case "5":
               $roletype = 'Coordinator';
@@ -290,7 +171,7 @@
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
                       <li>
-                          <div class="user-img" onclick="umToggle_03();">
+                          <div class="user-img" onclick="umToggle_01();">
                               <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg">
                           </div>
                           <div class="user-menu">
@@ -304,38 +185,13 @@
                                   <li><i class="bi bi-calendar-event"></i><a href="#">Schedules</a></li>
                                   <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="#">Transaction</a></li>
                                   <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="#">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="#">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
                               </ul>
                           </div>
                       </li>
                   </ul>
               </div>
-          </nav>'."<script>
-          function umToggle_01() {
-              const toggleUM = document.querySelector('.user-menu--01');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_02() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_03() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_04() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_05() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      </script>";
+          </nav>';
               break;
             case "6":
               $roletype = 'Procurement';
@@ -352,7 +208,7 @@
                       <li><a href="#">Courses</a></li>
                       <li><a href="viewfaq.php">FAQ</a></li>
                       <li>
-                          <div class="user-img" onclick="umToggle_04();">
+                          <div class="user-img" onclick="umToggle_01();">
                               <img src="/PTS-thesis/static/profilepic.jpg" alt="profile picture.jpg">
                           </div>
                           <div class="user-menu">
@@ -365,38 +221,13 @@
                                   <li><img src="/PTS-thesis/static/truck-fast-solid.svg" alt=""><a href="#">Delivery</a></li>
                                   <li><img src="/PTS-thesis/static/table-solid.svg" alt=""><a href="#">Transaction</a></li>
                                   <li><img src="/PTS-thesis/static/audittrail-solid.svg" alt=""><a href="#">Audit Trail</a></li>
-                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="#">Logout</a></li>
+                                  <li><img src="/PTS-thesis/static/logout.svg" alt=""><a href="'.$link.'logout.php">Logout</a></li>
                               </ul>
                           </div>
                       </li>
                   </ul>
               </div>
-          </nav>'."<script>
-          function umToggle_01() {
-              const toggleUM = document.querySelector('.user-menu--01');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_02() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_03() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_04() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_05() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      </script>";
+          </nav>';
               break;
               default:
               $nav = '<header>
@@ -416,32 +247,7 @@
                       </ul>
                   </div>
               </nav>
-          </header>'."<script>
-          function umToggle_01() {
-              const toggleUM = document.querySelector('.user-menu--01');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_02() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_03() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_04() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      
-          function umToggle_05() {
-              const toggleUM = document.querySelector('.user-menu');
-              toggleUM.classList.toggle('active')
-          }
-      </script>";
+          </header>';
             }
         return $nav;
     }
@@ -467,6 +273,32 @@
     }
     ?>
     </header>
+    <script>
+          function umToggle_01() {
+              const toggleUM = document.querySelector('.user-menu');
+              toggleUM.classList.toggle('active')
+          }
+      
+        //   function umToggle_02() {
+        //       const toggleUM = document.querySelector('.user-menu');
+        //       toggleUM.classList.toggle('active')
+        //   }
+      
+        //   function umToggle_03() {
+        //       const toggleUM = document.querySelector('.user-menu');
+        //       toggleUM.classList.toggle('active')
+        //   }
+      
+        //   function umToggle_04() {
+        //       const toggleUM = document.querySelector('.user-menu');
+        //       toggleUM.classList.toggle('active')
+        //   }
+      
+        //   function umToggle_05() {
+        //       const toggleUM = document.querySelector('.user-menu');
+        //       toggleUM.classList.toggle('active')
+        //   }
+      </script>
 <main>
     <?php flash(
     'user_register_success',
