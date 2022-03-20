@@ -14,7 +14,7 @@ $ClassCARD = get_Class_CARDS();
   <div class="cl-container">
     <h2>Class List</h2>
     <div class="grid-container">
-      <?php
+      <?php // Add Function to show cards if enrolled
       foreach ($ClassCARD as $options) {
         $temp = $options['imageAddress'];
         $imageAddress = substr($temp, 15); //../static/OIP.jpg
