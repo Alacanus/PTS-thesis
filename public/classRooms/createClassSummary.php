@@ -206,7 +206,7 @@ $pay = display_class_Payment();
                                 <div class="summary-item--03">
                                     <div class="sub-item">
                                         <!-- <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">substr(getPic_byID($pay['methodfileID']), 15) -->
-                                        <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">substr(getPic_byID($pay['methodfileID']), 15)
+                                        <img src="<?=substr(getPic_byID($pay['methodfileID'])['filePath'], 15)?>" alt="placeholder">
 
                                     </div>
                                     <div class="sub-item">
