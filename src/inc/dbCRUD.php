@@ -206,9 +206,9 @@ function get_Class_CARDS() {
  function get_class_Info(int $classID) {
     $option_list = '';
         $sql = "SELECT * FROM classes JOIN classprofile ON classes.classID  = classprofile.classID 
-        WHERE classes.classID = :fileID";
+        WHERE classes.classID = :classID";
         $statement = db()->prepare($sql);
-        $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->bindValue(':classID', $classID, PDO::PARAM_INT);
         $statement->execute();
         while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
             $option_list = $data;
@@ -273,4 +273,12 @@ function get_Class_CARDS() {
     $statement->bindValue(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
     $statement->execute();
     return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function get_class_vidData($classID){
+    $sql = 'SELECT * FROM videofiles JOIN classprofile ON classprofile.videoAddress = videofiles.youtubeVidID WHERE classprofile.classID = :classID';
+$statement = db()->prepare($sql);
+$statement->bindParam(':classID', $classID, PDO::PARAM_INT);
+$statement->execute();
+return $statement->fetch(PDO::FETCH_ASSOC);
 }

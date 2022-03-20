@@ -84,16 +84,33 @@ $pay = display_class_Payment();
                             <input type="file" name="imageUpload" id="imageUpload">
                         </div>
                         <div class="btn-right-03">
-                            <button class="btn btn-table btn-table-mb" onclick="history.back()" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
                             <button type="submit" >Submit</button>
                             <button type="submit" class="btn btn-table btn-full" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
                         </div>
                     </form>
+                    <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID']?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<script>
+  function back(classID){
+    $.ajax({
+        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=4',
+        type: 'POST',
+        success: function(response) {
+                    console.log(response);
+        alert(response);
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
+
+        },
+        });
+        }
+</script>
 
 
 <?php view('footer') ?>

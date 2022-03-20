@@ -10,6 +10,43 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
+if(isset($_GET['classID'])){
+    $classID = $_GET['classID'];
+   $classInfo= get_class_Info($classID);
+   $_SESSION['viewClassID']=$classID;
+   $revidewCARD = get_review_CARDS($classID);
+   $overRatingStars = get_review_totalRating($classID);
+
+}elseif(isset($_SESSION['post']['classID'])){
+    $classID = $_SESSION['post']['classID'];
+   $classInfo= get_class_Info($classID);
+   $_SESSION['viewClassID']=$classID;
+   $revidewCARD = get_review_CARDS($classID);
+  $Card_entries = get_ingredient_CARDS($_SESSION['post']['classID']);
+$option_list = get_db_Modules($_SESSION['post']['tempClassid']);
+$videoFile = get_class_vidData($_SESSION['post']['classID']);
+
+   $overRatingStars = get_review_totalRating($classID);
+
+}
+if (isset($classInfo) && $classInfo !== "") {
+    $teacher = find_user_by_uid($classInfo[0]['userID']);
+
+    $temp = $classInfo[0]['imageAddress'];
+    $imageAddress = substr($temp, 15);
+} else {
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        $link = "https";
+    else $link = "http";
+    // Here append the common URL characters.
+    $link .= "://";
+    // Append the host(domain name, ip) to the URL.
+    $link .= $_SERVER['HTTP_HOST'];
+    // Append the requested resource location to the URL
+    $link .= $_SERVER['REQUEST_URI'];
+    // redirect_to('emailmsg.php');
+    header("Location: allowedNot.php"); //request denied
+}
 if(!is_bool(display_class_Payment())){
     $pay = display_class_Payment();
     $pay['image'] = substr(getPic_byID($pay['methodfileID'])['filePath'], 15);
@@ -72,19 +109,19 @@ if(!is_bool(display_class_Payment())){
                         <div class="summary-item--02">
                             <div class="sub-item">
                                 <label for="#">Class Name: </label>
-                                <!-- Input Data Here -->
+                                <?= $classInfo[0]['className'] ?>
                             </div>
                             <div class="sub-item">
                                 <label for="#">Equivalent Hours: </label>
-                                <!-- Input Data Here -->
+                                <?= $classInfo[0]['equivalentHours'] ?>
                             </div>
                             <div class="sub-item">
                                 <label for="#">Skill Level: </label>
-                                <!-- Input Data Here -->
+                                <?= $classInfo[0]['skillLevel'] ?>
                             </div>
                             <div class="sub-item">
                                 <label for="#">Description: </label>
-                                <!-- Input Data Here -->
+                                <?= $classInfo[0]['classDescription'] ?>
                             </div>
                         </div>
                     </div>
@@ -94,37 +131,38 @@ if(!is_bool(display_class_Payment())){
                             <h3>Package</h3>
                         </div>
                         <div class="grid-container">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <h3>Package Name
-                                            <!-- Input Date Here -->
-                                        </h3>
-                                    </div>
-                                    <div class="card-description">
-                                        <p>
-                                            Description
-                                            <!-- Input Date Here -->
-                                        </p>
-                                        <p>
-                                            Unit of Measurement
-                                            <!-- Input Date Here -->
-                                        </p>
-                                        <p>
-                                            Quantity
-                                            <!-- Input Date Here -->
-                                        </p>
-                                        <p>
-                                            Price
-                                            <!-- Input Date Here -->
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <!-- Go Somewhere Button? -->
-                                    <a href="#"><button class="btn btn-nav btn-full" value="">Redirect</button></a>
-                                </div>
-                            </div>
+                        <?php
+        // var_dump($_SESSION['post']['classID']);
+        // var_dump($Card_entries);
+        if (!empty($Card_entries)) {
+          foreach ($Card_entries as $options2) {
+            echo '<div class="card">
+                      <div class="card-body">
+                        <div class="card-title">
+                          <h2>' . $options2['IngredientName'] . '</h2>
+                        </div>  
+                        <div class="card-description">
+                          <p>
+                            Description: ' . $options2['description'] . '
+                          </p>
+                          <p>
+                            Unit of Measure: ' . $options2['unitMID'] . '
+                          </p>
+                           <p>
+                            Quanitity: ' . $options2['amount'] . '
+                          </p>
+                          <p>
+                            Price: ' . $options2['price'] . '
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn btn-nav btn-full">Go somewhere</a>
+                      </div>
+                    </div>';
+          }
+        }
+        ?>
                         </div>
                     </div>
                     <div class="sum-section--03">
@@ -141,18 +179,21 @@ if(!is_bool(display_class_Payment())){
                                         <div class="th-item tbl-item--">File Upload</div>
                                     </div>
                                     <div class="table-row-container">
-                                        <div class="td-item tbl-item--">
-                                            TempData
-                                            <!-- Input Date Here -->
-                                        </div>
-                                        <div class="td-item tbl-item--">
-                                            TempData
-                                            <!-- Input Date Here -->
-                                        </div>
-                                        <div class="td-item tbl-item--">
-                                            TempData
-                                            <!-- Input Date Here -->
-                                        </div>
+                                    <?php
+        if (is_array($option_list)) {
+          foreach ($option_list as $options) {
+            echo '<div class="table-row-container">';
+            echo '<div class="td-item tbl-item--1">' . $options['chapter'] . '</div>';
+            echo '<div class="td-item tbl-item--2">' . $options['moduleName'] . '</div>';
+            echo '<div class="td-item tbl-item--2">' . $options['fileName'] . '</div>';
+            echo '<div class="td-item tbl-item--1">';
+            echo '<button class="btn btn-table btn-full" onclick ="downloadFile(' . $options['fileID'] . ')" ><i class="bi bi-download"></i></button>';
+            echo '<button class="btn btn-table btn-table-red" onclick ="deleteFile2(' . $options['fileID'] . ')"><i class="bi bi-trash"></i></button>';
+            echo '</div>';
+            echo '</div>';
+          }
+        }
+        ?>
                                     </div>
                                 </div>
                             </div>
@@ -167,12 +208,12 @@ if(!is_bool(display_class_Payment())){
                                 <div class="summary-item--03">
                                     <div class="sub-item">
                                         <!-- Video inputed needs an element/phpcode -->
-                                        <iframe src="https://www.youtube.com/embed/S7brGlaYNdM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe src="https://www.youtube.com/embed/lR-u5iHozBo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">
                                             Video File
-                                            <!-- Input Date Here -->
+                                            
                                         </label>
                                     </div>
                                 </div>
@@ -180,19 +221,19 @@ if(!is_bool(display_class_Payment())){
                                     <div class="sub-item">
                                         <label for="#">
                                             Title:
-                                            <!-- Input Date Here -->
+                                            <?= $videoFile['vidTitle']?>
                                         </label>
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">
                                             Tags:
-                                            <!-- Input Date Here -->
+                                            <?= $videoFile['vidDesc']?>
                                         </label>
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">
                                             Description:
-                                            <!-- Input Date Here -->
+                                            <?= $videoFile['vidTags']?>
                                         </label>
                                     </div>
                                 </div>

@@ -90,12 +90,11 @@ if (is_post_request()) {
         JOIN
         classes
         ON classprofile.classID = classes.classID
-        SET classprofile.className = :className, classprofile.classDescription = :classDescription, classprofile.youtubeChannel = :youtubeChannel, classprofile.equivalentHours = :equivalentHours, classprofile.skillLevel=:skillLevel
+        SET classprofile.className = :className, classprofile.classDescription = :classDescription, classprofile.equivalentHours = :equivalentHours, classprofile.skillLevel=:skillLevel
         WHERE classprofile.classID = :classID";
         $statement2 = db()->prepare($sql2);
         $statement2->bindParam(':className', $inputs['className'], PDO::PARAM_STR);
         $statement2->bindParam(':classDescription', $inputs['classDescription'], PDO::PARAM_STR);
-        $statement2->bindValue(':youtubeChannel', $_GET['youtubeChannel'] ?? ' ', PDO::PARAM_STR);
         $statement2->bindValue(':equivalentHours', $_GET['equivalentHours'], PDO::PARAM_STR);
         $statement2->bindParam(':skillLevel', $_GET['skillLevel'], PDO::PARAM_STR);
         $statement2->bindParam(':classID', $_SESSION['post']['classID'], PDO::PARAM_INT);

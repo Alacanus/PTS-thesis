@@ -121,7 +121,7 @@ if (!empty($_SESSION['upload_token'])) {
               echo '<i class="bi bi-shield-check"><a href="' . $authUrl . '"><input type="submit" value ="Auth PTS" class="btn btn-nav btn-ghost2"/></a></i>';
             };
             ?>
-            <a href="createClassSummary.php">
+            <a href="createClass5.php">
               <i class="bi bi-arrow-right-circle"></i>
               <input type="submit" value="Next" class="btn btn-nav btn-full" />
             </a>
@@ -130,6 +130,22 @@ if (!empty($_SESSION['upload_token'])) {
       </div>
     </div>
   </div>
+  <buttonon onclick="back(<?= $_SESSION['post']['classID']?>)">Back</button>
 </main>
 
+<script>
+function back(classID){
+    $.ajax({
+        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=3',
+        type: 'POST',
+        success: function(response) {
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
+
+        },
+        });
+        }
+</script>
 <?php view('footer') ?>

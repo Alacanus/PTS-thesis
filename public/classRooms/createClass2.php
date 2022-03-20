@@ -86,10 +86,12 @@ if (isset($_SESSION['post']['classID'])) {
               </div>
             </div>
             <div class="form-element-btn">
-              <button class="btn btn-table btn-table-mb" onclick="history.back()" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
               <button class="btn btn-table btn-full" type="submit" title="Next" id="btn-next"><i class="bi bi-arrow-right-circle"></i></button>
             </div>
           </form>
+          <button class="btn btn-table btn-table-mb" onclick="next(<?= $_SESSION['post']['classID']?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i>SKIP</button>
+          <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID']?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
+
         </div>
       </div>
     </div>
@@ -163,7 +165,34 @@ if (isset($_SESSION['post']['classID'])) {
     });
   });
 </script>
+<script>
+    function back(classID){
+    $.ajax({
+        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=1',
+        type: 'POST',
+        success: function(response) {
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
 
+        },
+        });
+        }
+    function next(classID){
+    $.ajax({
+        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=3',
+        type: 'POST',
+        success: function(response) {
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
+
+        },
+        });
+        }
+</script>
 
 <?php view('footer');
 

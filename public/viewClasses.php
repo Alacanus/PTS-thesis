@@ -70,7 +70,7 @@ view('header', ['title' => 'Class page']);
                         </div>
                         <div class="vc--item">
                             <i class="bi bi-clock"></i>
-                            <label for="equivalentHours">Class Duration: <?= $class[''] ?></label>
+                            <label for="equivalentHours">Class Duration: <?= $classInfo[0]['equivalentHours'] ?></label>
                         </div>
                         <div class="vc--item">
                             <div class="vc--sub-item">
@@ -79,10 +79,11 @@ view('header', ['title' => 'Class page']);
                             </div>
                             <div class="vc--sub-item">
                                 <i class="bi bi-pencil-square"></i>
-                                <label for="modifiedDate">Course Updated:<?= $classInfo[0]['modifiedDate'] ?? '' ?></label>
+                                <label for="modifiedDate">Course Updated:<?= $classInfo[0]['modefiedDate'] ?? '' ?></label>
                             </div>
                         </div>
                     </div>
+                    <button onclick="editClass(<?= $classInfo[0]['classID']?>)">Edit Class</button><button>Go to Class</button>
                 </section>
             </div>
             <div class="section-bg--02">
@@ -96,12 +97,12 @@ view('header', ['title' => 'Class page']);
                             <label for="classDescription"><?= $classInfo[0]['classDescription'] ?></label>
                         </div>
                         <div class="vc--item">
-                            <h3>Skills Invovled: </h3>
+                            <h3>Skills Level: </h3>
                             <label for="skillLevel"><?= $class[''] ?></label>
                         </div>
                         <div class="vc--item">
                             <h3>Schedules Available: </h3>
-                            <label for="classSchedules"><?= $class[''] ?></label>
+                            <label for="classSchedules"><?= $classInfo[0]['skillLevel'] ?></label>
                         </div>
                     </div>
                 </section>
@@ -346,10 +347,50 @@ view('header', ['title' => 'Class page']);
     </div>
 </div> -->
 <script>
-function Purchase(){
-    $.ajax({url:"../src/buyClass.php", success:function(result){
-})
-} 
+    function Purchase(){
+$.ajax(
+'../src/buyClass.php',
+  {
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function() {
+        alert('There was some error performing the AJAX call!');
+      }
+   }
+);
+    }
 </script>
+<script>
+    function editClass(classID){
+    $.ajax({
+        url: '../src/redirectDir.php?editClass=1&classID='+classID+'&step=1',
+        type: 'POST',
+        success: function(response) {
+        // console.log(response);
+        // alert(response);
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
 
+        },
+        });
+        }
+</script>
+<script>
+    function Purchase(){
+$.ajax(
+'../src/buyClass.php',
+  {
+      success: function(data) {
+        window.location.href = data;
+      },
+      error: function() {
+        alert('There was some error performing the AJAX call!');
+      }
+   }
+);
+    }
+</script>
 <?php view('footer') ?>

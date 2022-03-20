@@ -1,4 +1,4 @@
 <?php
 
-
-header('Location:' . 'wwww.google.com');
+echo '../public/emailmsg.php';
+// header('Location:' . );

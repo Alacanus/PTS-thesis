@@ -76,7 +76,7 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
           <div class="btn-right">
             <!-- id="show-modal" -->
             <button class="btn btn-nav btn-table-grn" onclick="SetID()"><i class="bi bi-plus-lg"></i> Milestones</button>
-            <button class="btn btn-nav btn-table-mb" onclick="history.back()"><i class="bi bi-arrow-left-circle"></i></button>
+            <button class="btn btn-nav btn-table-mb" onclick="back(<?= $_SESSION['post']['classID']?>)"><i class="bi bi-arrow-left-circle"></i></button>
             <a href="createClass4.php"><i class="bi bi-arrow-right-circle"></i><input class="btn btn-nav btn-full" type="submit" value="Next" /></a>
           </div>
         </div>
@@ -394,6 +394,32 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
       modal.style.display = "none";
     }
   }
+  function back(classID){
+    $.ajax({
+        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=2',
+        type: 'POST',
+        success: function(response) {
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
+
+        },
+        });
+        }
+    function next(classID){
+    $.ajax({
+        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=4',
+        type: 'POST',
+        success: function(response) {
+            window.location.href = response;
+        },
+        error: function(err) {
+            alert("There was some error performing the AJAX call!");
+
+        },
+        });
+        }
 </script>
 
 

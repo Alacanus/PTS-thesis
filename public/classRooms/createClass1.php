@@ -33,7 +33,6 @@ if (is_get_request()) {
 } else{
   $submitMethod = "post";
 }
-echo $submitMethod;
 ?>
 
 <?php view('header', ['title' => 'Create Class']);
@@ -50,7 +49,6 @@ if (!isset($_SESSION['post']['tempClassid'])) {
 }
 ?>
 <main id="mymain1">
-  <!-- PA ADD https://getbootstrap.com/docs/5.0/components/progress/ -->
   <div class="overlaybg">
     <div class="ccr-step--01">
       <div class="ccr-container">
