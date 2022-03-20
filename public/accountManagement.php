@@ -16,7 +16,7 @@ view('header', ['title' => 'Account Manage']) ?>
     <?= $errors['accountMGT'] ?>
   </div>
 <?php endif ?>
-<div class="overlaybg-02">
+<div class="overlaybg">
   <div class="am-container">
     <div>
       <h2>Account Management</h2>
@@ -63,7 +63,7 @@ view('header', ['title' => 'Account Manage']) ?>
             echo '<button id="show-modal00" class="btn-table btn-full" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
             echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
             echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
-            echo '<button id="show-modal03" class="btn-table btn-table-red" title="Delete User" onclick="deleteUser(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';
+            echo '<button id="" class="btn-table btn-table-red" title="Delete User" onclick="displayModalDlt('. $options['userID'] .')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';
             echo '</td>';
             echo '</tr>';
           }
@@ -401,7 +401,7 @@ view('header', ['title' => 'Account Manage']) ?>
 
 <!-- Delete Modal -->
 
-<button id="show-modal03" class="btn btn-nav btn-full">Click here</button>
+<!-- <button id="dltbtnID" class="btn btn-nav btn-full">Yes</button> -->
 
 <div class="am-modal--04">
   <div id="dlt-modal" class="overlay-new">
@@ -413,7 +413,7 @@ view('header', ['title' => 'Account Manage']) ?>
           <p>Are you sure you want to delete this User?</p>
         </div>
         <div class="form-element">
-          <button class="btn btn-nav btn-table-red">Delete</button>
+          <button id="dltbtnID" class="btn btn-nav btn-full">Yes</button>
           <button class="btn btn-nav btn-full">Cancel</button>
         </div>
       </div>
@@ -670,6 +670,11 @@ view('header', ['title' => 'Account Manage']) ?>
     toggleTbl.classList.toggle('active')
   }
 
+  function displayModalDlt(deleteID) {
+    modalDlt.style.display = "block";
+    document.getElementById("dltbtnID").onclick = function(){deleteUser(deleteID);}
+  }
+
   // Modal - JS Function ====================================================
 
   // Button for Modal
@@ -700,9 +705,9 @@ view('header', ['title' => 'Account Manage']) ?>
   //   modalFile.style.display = "block";
   // }
 
-  btnDelete.onclick = function() {
-    modalDlt.style.display = "block";
-  }
+  // btnDelete.onclick = function() {
+  //   modalDlt.style.display = "block";
+  // }
 
   btnCrtUsr.onclick = function() {
     modalCrtUsr.style.display = "block";

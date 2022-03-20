@@ -1873,15 +1873,45 @@ section {
 }
 
 .faqsection--2 {
-  background: #eeeeeef3;
-  height: 65vh;
-  padding: 100px 0;
+  background: url("/PTS-thesis/static/faqbg-01.jpg");
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  min-height: 65vh;
+  /* #eeeeeef3 */
 }
 
 .faqsection--3 {
   background: #1b262c;
-  height: 70vh;
+  min-height: 70vh;
   padding: 5% 0;
+}
+
+.faqsection--2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16%;
+  flex: 1;
+}
+
+.faqsection--2 .flex-item--01 {
+  min-width: 40%;
+}
+
+
+.faqsection--2 .flex-item--02 {
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.faqsection--2 .flex-item--02 h2 {
+  margin: 0;
 }
 
 /* ------------ Landing Page ------------ */
@@ -3510,43 +3540,224 @@ section {
 }
 
 /* Class Content ========================= */
+
+/* Page Container */
 .cc-container {
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.cc-container .cc--nested-01 {
+.cc-container h2 {
+  color: rgb(243, 243, 243);
+  font-size: 60px;
+  margin: 30px 0;
+}
+
+/* 1st Flexbox */
+.cc-container .flex-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  max-width: 1280px;
-  height: 100%;
+  height: 700px;
+  min-height: 100%;
   background: #f3f3f3;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 1px 1px 5px #3a3a3ab0;
+  overflow: hidden;
 }
 
-.cc--nested-02 {
+.flex-container img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.msg-row-container img,
+.flex-container .msg-header img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.msg-row-container img {
+  margin-right: 0;
+}
+
+.flex-container .flex-item {
+  min-height: 100%;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container .flex-item:first-child {
+  background: #ececec;
+  width: 440px;
+}
+
+.flex-container .flex-item:last-child {
+  background: #ececec;
+  width: 840px;
+}
+
+.flex-item .userlist-body p:first-child {
+  color: #18a0fb;
+  font-weight: 500;
+}
+
+.flex-item .userlist-body p:last-child {
+  font-weight: 400;
+}
+
+.flex-item .userlist-header,
+.flex-item .msg-header {
+  background-color: #001827;
+}
+
+.flex-item .msg-header,
+.flex-item .userlist-header {
+  min-height: 80px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.userlist-header .cut-text {
+  width: 400px;
+  height: 24px;
+}
+
+.flex-item .userlist-header i {
+  margin-right: 5px;
+}
+
+.flex-item .msg-header p,
+.flex-item .userlist-header p,
+.flex-item .userlist-header i {
+  font-size: 20px;
+  color: #f5f5f5;
+}
+
+.flex-item .userlist-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  overflow-y: overlay;
+  height: 100%;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.flex-item .msg-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 30px 40px;
+  overflow-y: overlay;
+  height: 540px;
+  max-height: 100%;
+  background: #ececec;
+  border-left: 1px solid #001827;
+  gap: 10px;
+}
+
+.flex-item .msg-row-container {
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
-  flex-direction: column;
-  background-color: #bbdefb;
-  height: 100%;
+  flex-direction: row;
+  max-height: 100%;
+  max-width: 100%;
 }
 
-.cc--nested-02 .nested-02--header { 
-  /* flex:1 1 auto; */
-  flex-grow: .5;
+.msg-row-container .row-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.msg-row-container .row-item:last-child {
+  margin-left: 10px;
+}
+
+.msg-row-container .row-item .user-title p {
+  display: inline;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.row-item .msg-item p {
+  font-size: 18px;
+}
+
+.row-item .msg-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  overflow-wrap: break-word;
+}
+
+.flex-item .ul-row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  min-height: 80px;
+  padding: 0px 20px;
+  gap: 20px;
+}
+
+.flex-item .ul-row-container:hover {
+  border-radius: 8px;
+  background: #d6d6d6;
+}
+
+.flex-item .msg-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #001827;
+  padding: 20px;
+}
+
+.msg-footer input[type="text"] {
+  font: inherit;
+  padding: 6px;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  height: 40px;
+  width: 100%;
+  margin-right: 5px;
+}
+
+.cut-text { 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 300px;  
+  height: 100%; 
+  white-space: nowrap;
+}
+
+/* .cc--nested-02 .nested-02--header { 
+  min-height: 80px;
+  border-top-right-radius: 8px;
   background: #001827;
 }
     
 .cc--nested-02 .nested-02--body { 
-  /* flex:15 1 auto; */
-  flex-grow: 3;
+  min-height: 380px;
   background: #ececec;
 }
 
@@ -3558,13 +3769,11 @@ section {
   outline: none;
   border: 1px solid #aaa;
   border-radius: 5px;
-  height: 40px;
+  height: 35px;
   width: 100%;
 }
     
 .cc--nested-02 .nested-02--footer { 
-  /* flex:1 1 auto; */
-  flex-grow: .5;
   background: #0f4c75;
 }
 
@@ -3573,22 +3782,21 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding: 20px;
+  height: 80px;
 }
 
 .footer-flex--01 {
-  flex-grow: 2;
-  width: 100%;
+  display: flex;
+  flex: 1;
+  min-width: 85%;
+  padding-right: 10px;
 }
 
 .footer-flex--02 {
-  flex-grow: .5;
   width: 100%;
-}
-
-.cc-container h2 {
-  color: #ddd;
-  font-size: 60px;
-  margin: 40px 0;
 }
 
 h2#cc-step03 {
@@ -3599,14 +3807,16 @@ h2#cc-step03 {
 }
 
 .cc--nested-01 .cc-flex--01 {
-  height: 500px;
+  height: 540px;
   width: 500px;
 }
 
 .cc--nested-01 .cc-flex--02 {
-  height: 500px;
+  height: 540px;
   width: 780px;
-}
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+} */
 
 /* .cc--msg-container {
   background: #deedff;

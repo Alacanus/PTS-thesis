@@ -26,90 +26,58 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
   <div class="overlaybg">
     <div class="cc-container">
       <h2>Class Content</h2>
-      <div class="cc--nested-01">
-        <div class="cc-flex--01">
-          <?php
-          // (A) GET USERS
-          require "2-core.php";
-          require "3-lib-msg.php";
-          $users = $MSG->getUsers($_SESSION["user"]["id"]);
-          ?>
-          <!-- (B) LEFT : USER NOW & LIST -->
-          <div id="userLeft">
-            <!-- (B1) CURRENT USER -->
-            <div id="userNow">
-              You are <?= $_SESSION["user"]["name"] ?>
-            </div>
-            <!-- (B2) USER LIST -->
-            <?php foreach ($users as $uid => $u) { ?>
-              <div class="userRow" id="usr<?= $uid ?>" onclick="msg.show(<?= $uid ?>)">
-                <?php if (isset($u["unread"])) { ?>
-                  <u class="userUR" id="ur<?= $uid ?>"><?= $u["unread"] ?></u>
-                <?php } ?>
-                <?= $u["email"] ?>
+      <!-- flexbox -->
+      <div class="flex-container">
+
+        <!-- flex item & Container -->
+        <div class="flex-item">
+          <div class="userlist-header">
+            <!-- User Email -->
+            <p class="cut-text"><i class="bi bi-person-circle"></i> markhenricklinsangan@benilde.edu.ph</p>
+          </div>
+          <!-- Display User Enrolled Per Row -->
+          <div class="userlist-body">
+            <!-- User List -->
+            <div class="ul-row-container">
+              <img src="/PTS-thesis/static/instructorpf.jpg" alt="">
+              <div class="sub-item">
+                <p class="cut-text">Sean Dennie Go</p>
+                <p class="cut-text">seandennie.go@benilde.edu.ph</p>
               </div>
-            <?php } ?>
+            </div>
           </div>
         </div>
-        <div class="cc-flex--02">
-          <div class="cc--nested-02">
-            <div class="nested-02--header">
-              <?= $_SESSION["user"]["name"] ?>
-            </div>
-            <div class="nested-02--body">
 
-            </div>
-            <div class="nested-02--footer footer--container">
-              <div class="footer-flex--01">
-                <input type="text">
-              </div>
-              <div class="footer-flex--02">
-                <button class="btn btn-nav btn-full">Send</button>
-              </div>
-            </div>
-            <!-- <div id="userRight">
-              (C1) SEND MESSAGE
-
-              <div>
-
-              </div>
-
-              (C2) MESSAGES
-
-            </div> -->
+        <!-- flex item & Container -->
+        <div class="flex-item">
+          <div class="msg-header">
+            <!-- Selected - User Email -->
+            <img src="/PTS-thesis/static/instructorpf.jpg" alt="">
+            <p>markhenricklinsangan@benilde.edu.ph</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="overlaybg">
-    <div class="cc-container">
-      <h2>Class Content</h2>
-      <div class="cc--nested-01">
-        <div class="cc-flex--01">
-          <?php foreach ($users as $uid => $u) { ?>
-            <div class="userRow" id="usr<?= $uid ?>" onclick="msg.show(<?= $uid ?>)">
-              <?php if (isset($u["unread"])) { ?>
-                <u class="userUR" id="ur<?= $uid ?>"><?= $u["unread"] ?></u>
-              <?php } ?>
-              <?= $u["email"] ?>
+          <!-- message -->
+          <div class="msg-body">
+            <div class="msg-row-container">
+              <div class="row-item">
+                <!-- User Details -->
+                <img src="/PTS-thesis/static/instructorpf.jpg" alt="">
+              </div>
+              <div class="row-item">
+                <div class="user-title">
+                  <p>Sean Dennie Go</p>
+                  <p>Fri 12:00pm</p>
+                </div>
+                <div class="msg-item">
+                  <p>
+                    Hello! Learner
+                  </p>
+                </div>
+              </div>
             </div>
-          <?php } ?>
-        </div>
-        <div class="cc-flex--02">
-          <div class="cc--nested-02">
-            <div class="nested-02--header">
-
-            </div>
-            <div class="nested-02--body">
-
-            </div>
-            <div class="nested-02--footer">
-              <form>
-                <input type="text" id="msgTxt" required />
-                <input type="submit" value="Send" />
-              </form>
-            </div>
+          </div>
+          <div class="msg-footer">
+            <input type="text">
+            <button class="btn btn-nav btn-full"><i class="bi bi-send"></i> Send</button>
           </div>
         </div>
       </div>
