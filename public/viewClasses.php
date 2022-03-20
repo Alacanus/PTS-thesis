@@ -41,7 +41,7 @@ view('header', ['title' => 'Class page']);
                             <label for="Price">Price: &#x20B1;1000</label>
                         </div>
                         <div class="vc--item">
-                            <button class="btn btn-nav btn-full">Purchase Class</button>
+                            <button class="btn btn-nav btn-full" onclick="Purchase()">Purchase Class</button>
                         </div>
                     </div>
                     <div class="vc-block-02">
@@ -345,5 +345,11 @@ view('header', ['title' => 'Class page']);
         </div>
     </div>
 </div> -->
+<script>
+function Purchase(){
+    $.ajax({url:"../src/buyClass.php", success:function(result){
+})
+} 
+</script>
 
 <?php view('footer') ?>
