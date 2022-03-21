@@ -99,7 +99,7 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
   </div>
 </main>
 
-<!-- <?php if (isset($errors['classContent'])) : ?>
+<?php if (isset($errors['classContent'])) : ?>
   <div class="alert alert-error">
     <?= $errors['classContent'] ?>
   </div>
@@ -107,147 +107,145 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
 <main id="mymain1"><br><br>
   <?php
   // (A) GET USERS
-  // require "2-core.php";
-  // require "3-lib-msg.php";
-  // $users = $MSG->getUsers($_SESSION["user"]["id"]);
-  // 
+  require "2-core.php";
+  require "3-lib-msg.php";
+  $Classes = $MSG->getClasses($_SESSION['post']['classID']);
   ?>
   <h2>Class Content</h2>
   <!-- (B) LEFT : USER NOW & LIST -->
-<!-- <div id="userLeft"> -->
-<!-- (B1) CURRENT USER -->
-<!-- <div id="userNow">
-      You are <?= $_SESSION["user"]["name"] ?>
-    </div> -->
-<!-- (B2) USER LIST -->
-<!-- <?php foreach ($users as $uid => $u) { ?>
+  <div id="userLeft">
+    <!-- (B1) CURRENT USER -->
+    <div id="userNow">
+      Class's <?= $_SESSION['post']['classID'] ?> space
+    </div>
+    <!-- (B2) USER LIST -->
+    <?php foreach ($Classes as $uid => $u) { ?>
       <div class="userRow" id="usr<?= $uid ?>" onclick="msg.show(<?= $uid ?>)">
         <?php if (isset($u["unread"])) { ?>
           <u class="userUR" id="ur<?= $uid ?>"><?= $u["unread"] ?></u>
         <?php } ?>
-        <?= $u["email"] ?>
+        <?= $u["className"] ?>
       </div>
     <?php } ?>
-  </div> -->
+  </div>
 
-<!-- (C) RIGHT : MESSAGES LIST -->
-<!-- <div id="userRight"> -->
-<!-- (C1) SEND MESSAGE -->
-<!-- <form id="userSend" onsubmit="return msg.send()">
+  <!-- (C) RIGHT : MESSAGES LIST -->
+  <div id="userRight">
+    <!-- (C1) SEND MESSAGE -->
+    <form id="userSend" onsubmit="return msg.send()">
       <input type="text" id="msgTxt" required />
       <input type="submit" value="Send" />
-    </form> -->
+    </form>
 
-<!-- (C2) MESSAGES -->
-<!-- <div id="userMsg"></div>
+    <!-- (C2) MESSAGES -->
+    <div id="userMsg"></div>
   </div>
-</main> -->
 
 
-<!-- <div class="userlist-header"> -->
-<!-- User Name rather than Email -->
-<!-- <p class="cut-text"><i class="bi bi-person-circle"></i> First Name Last Name</p> -->
-<!-- </div> -->
-<!-- Display User Enrolled Per Row -->
-<!-- <div class="userlist-body"> -->
-<!-- User List -->
-<!-- <div class="ul-row-container"> -->
-<!-- DB pull - Profile -->
-<!-- <img class="broken-img" src="/PTS-thesis/static/instructorpf.jpg" alt=""> -->
-<!-- <div class="sub-item"> -->
-<!-- DB pull - Name -->
-<!-- <p class="cut-text">Sean Dennie Go</p> -->
-<!-- DB pull - Email -->
-<!-- <p class="cut-text">seandennie.go@benilde.edu.ph</p> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
+  <!-- <div class="userlist-header"> -->
+  <!-- User Name rather than Email -->
+  <!-- <p class="cut-text"><i class="bi bi-person-circle"></i> First Name Last Name</p> -->
+  <!-- </div> -->
+  <!-- Display User Enrolled Per Row -->
+  <!-- <div class="userlist-body"> -->
+  <!-- User List -->
+  <!-- <div class="ul-row-container"> -->
+  <!-- DB pull - Profile -->
+  <!-- <img class="broken-img" src="/PTS-thesis/static/instructorpf.jpg" alt=""> -->
+  <!-- <div class="sub-item"> -->
+  <!-- DB pull - Name -->
+  <!-- <p class="cut-text">Sean Dennie Go</p> -->
+  <!-- DB pull - Email -->
+  <!-- <p class="cut-text">seandennie.go@benilde.edu.ph</p> -->
+  <!-- </div> -->
+  <!-- </div> -->
+  <!-- </div> -->
 
-<?php view('footer') ?>
+  <?php view('footer') ?>
 
-<Script>
-  var msg = {
-    // (A) HELPER - AJAX FETCH
-    ajax: (data, after) => {
-      // (A1) FORM DATA
-      let fdata = new FormData();
-      for (const [k, v] of Object.entries(data)) {
-        fdata.append(k, v);
-      }
+  <Script>
+    var msg = {
+      // (A) HELPER - AJAX FETCH
+      ajax: (data, after) => {
+        // (A1) FORM DATA
+        let fdata = new FormData();
+        for (const [k, v] of Object.entries(data)) {
+          fdata.append(k, v);
+        }
 
-      // (A2) FETCH
-      fetch("6-ajax.php", {
-          method: "POST",
-          body: fdata
-        })
-        .then((res) => {
-          if (res.status != 200) {
-            alert(`Server ${res.status} error.`)
+        // (A2) FETCH
+        fetch("6-ajax.php", {
+            method: "POST",
+            body: fdata
+          })
+          .then((res) => {
+            if (res.status != 200) {
+              alert(`Server ${res.status} error.`)
+            } else {
+              return res.text();
+            }
+          }).then(after).catch((err) => {
+            console.error(err);
+          });
+      },
+
+      // (B) SHOW MESSAGES
+      uid: null, // CURRENT SELECTED USER
+      show: (uid) => {
+        // (B1) SET SELECTED USER ID
+        msg.uid = uid;
+
+        // (B2) HTML INTERFACE UPDATE
+        let form = document.getElementById("userSend"),
+          field = document.getElementById("msgTxt"),
+          unread = document.getElementById("ur" + uid),
+          wrap = document.getElementById("userMsg");
+        wrap.innerHTML = "";
+        form.style.display = "flex";
+        field.value = "";
+        field.focus();
+        for (let r of document.querySelectorAll(".userRow")) {
+          if (r.id == "usr" + uid) {
+            r.classList.add("now");
           } else {
-            return res.text();
+            r.classList.remove("now");
           }
-        }).then(after).catch((err) => {
-          console.error(err);
+        }
+
+        // (B3) AJAX LOAD MESSAGES
+        msg.ajax({
+          "req": "list",
+          "uid": uid
+        }, (txt) => {
+          wrap.innerHTML = txt;
+          if (unread !== null) {
+            unread.remove();
+          }
         });
-    },
+      },
 
-    // (B) SHOW MESSAGES
-    uid: null, // CURRENT SELECTED USER
-    show: (uid) => {
-      // (B1) SET SELECTED USER ID
-      msg.uid = uid;
-
-      // (B2) HTML INTERFACE UPDATE
-      let form = document.getElementById("userSend"),
-        field = document.getElementById("msgTxt"),
-        unread = document.getElementById("ur" + uid),
-        wrap = document.getElementById("userMsg");
-      wrap.innerHTML = "";
-      form.style.display = "flex";
-      field.value = "";
-      field.focus();
-      for (let r of document.querySelectorAll(".userRow")) {
-        if (r.id == "usr" + uid) {
-          r.classList.add("now");
-        } else {
-          r.classList.remove("now");
-        }
+      // (C) SEND MESSAGE
+      send: () => {
+        let field = document.getElementById("msgTxt");
+        msg.ajax({
+          "req": "send",
+          "to": msg.uid,
+          "msg": field.value
+        }, (txt) => {
+          if (txt == "OK") {
+            msg.show(msg.uid);
+            field.value = "";
+          } else {
+            alert(txt);
+          }
+        });
+        return false;
       }
+    };
 
-      // (B3) AJAX LOAD MESSAGES
-      msg.ajax({
-        "req": "list",
-        "uid": uid
-      }, (txt) => {
-        wrap.innerHTML = txt;
-        if (unread !== null) {
-          unread.remove();
-        }
-      });
-    },
+    $(".card img").on("error", function() {
+      $(this).attr("src", "/PTS-thesis/static/broken-img.jpg")
+    });
+  </Script>
 
-    // (C) SEND MESSAGE
-    send: () => {
-      let field = document.getElementById("msgTxt");
-      msg.ajax({
-        "req": "send",
-        "to": msg.uid,
-        "msg": field.value
-      }, (txt) => {
-        if (txt == "OK") {
-          msg.show(msg.uid);
-          field.value = "";
-        } else {
-          alert(txt);
-        }
-      });
-      return false;
-    }
-  };
-
-  $(".card img").on("error", function() {
-    $(this).attr("src", "/PTS-thesis/static/broken-img.jpg")
-  });
-</Script>
-
-<?php view('footer') ?>
+  <?php view('footer') ?>

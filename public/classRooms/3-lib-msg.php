@@ -1,4 +1,5 @@
 <?php
+//This code is an imitation of W.S. Toh's Simple Messaging System With PHP MySQL 
 class Message {
   // (A) CONSTRUCTOR - CONNECT TO THE DATABASE
   private $pdo = null;
@@ -73,6 +74,31 @@ class Message {
     return $users;
   }
 
+    // (F) GET ALL Classes & UNREAD MESSAGES
+    function getClasses ($for=null) {
+      // (F1) GET USERS
+      $classes = $this->fetchAll(
+        // "SELECT * FROM `classes` WHERE `classID`!=?",
+        //  [$for], "classID"
+        "SELECT * FROM `classes` WHERE `classID`=?",
+         [$for], "classID"
+      );
+      if (!is_array($classes)) { return false; }
+  
+      // (F2) COUNT UNREAD MESSAGES
+      // if ($this->exec(
+      //   "SELECT `user_from`, COUNT(*) `ur`
+      //   FROM `messages` WHERE `user_to`=?
+      //   AND `date_read` IS NULL
+      //   GROUP BY `user_from`", [$for]) === false) { return false; }
+      // while ($r = $this->stmt->fetch()) {
+      //   $classes[$r["user_from"]]["unread"] = $r["ur"];
+      // }
+  
+      // (F3) RESULTS
+      return $classes;
+    }
+
   // (G) GET MESSAGES
   function getMsg ($from, $to, $limit=30) {
     // (G1) MARK ALL AS "READ"
@@ -84,12 +110,19 @@ class Message {
     // (G2) GET MESSAGES
     return $this->fetchAll(
       "SELECT * FROM `messages`
-      WHERE `user_from` IN (?,?)
-      AND `user_to` IN (?,?)
+      WHERE `user_to` = (?)
       ORDER BY `date_send` DESC
       LIMIT 0, $limit",
-      [$from, $to, $from, $to]
+      [$to]
     );
+    // return $this->fetchAll(
+    //   "SELECT * FROM `messages`
+    //   WHERE `user_from` IN (?,?)
+    //   AND `user_to` IN (?,?)
+    //   ORDER BY `date_send` DESC
+    //   LIMIT 0, $limit",
+    //   [$from, $to, $from, $to]
+    // );
   }
 
   // (H) SEND MESSAGE
