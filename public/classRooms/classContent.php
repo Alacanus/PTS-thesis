@@ -95,22 +95,22 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
   // (A) GET USERS
   require "2-core.php";
   require "3-lib-msg.php";
-  $users = $MSG->getUsers($_SESSION["user"]["id"]);
+  $Classes = $MSG->getClasses($_SESSION["user_id"]);
   ?>
   <h2>Class Content</h2>
   <!-- (B) LEFT : USER NOW & LIST -->
   <div id="userLeft">
     <!-- (B1) CURRENT USER -->
     <div id="userNow">
-      You are <?= $_SESSION["user"]["name"] ?>
+      Class's <?= $_SESSION['post']['classID'] ?> space
     </div>
     <!-- (B2) USER LIST -->
-    <?php foreach ($users as $uid => $u) { ?>
+    <?php foreach ($Classes as $uid => $u) { ?>
       <div class="userRow" id="usr<?= $uid ?>" onclick="msg.show(<?= $uid ?>)">
         <?php if (isset($u["unread"])) { ?>
           <u class="userUR" id="ur<?= $uid ?>"><?= $u["unread"] ?></u>
         <?php } ?>
-        <?= $u["email"] ?>
+        <?= $u["className"] ?>
       </div>
     <?php } ?>
   </div>
@@ -132,6 +132,7 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
 <?php view('footer') ?>
 
 <Script>
+  //This code is an imitation of W.S. Toh's Simple Messaging System With PHP MySQL 
   var msg = {
     // (A) HELPER - AJAX FETCH
     ajax: (data, after) => {

@@ -1,4 +1,7 @@
 <?php
+require __DIR__ . '/../../src/bootstrap.php';
+//This code is an imitation of W.S. Toh's Simple Messaging System With PHP MySQL 
+
 if (isset($_POST["req"])) {
   // (A) LOAD LIBRARY
   require "2-core.php";
@@ -10,11 +13,18 @@ if (isset($_POST["req"])) {
 
     // (C) LIST MESSAGES
     case "list":
-      $msg = $MSG->getMsg($_POST["uid"], $_SESSION["user"]["id"]);
+      $msg = $MSG->getMsg($_POST["uid"], $_SESSION['user_id']);
       if (count($msg)>0) { foreach ($msg as $m) {
-        $css = $m["user_from"] == $_SESSION["user"]["id"] ? "mout" : "min" ; ?>
+        $css = $m["user_from"] == $_SESSION['user_id'] ? "mout" : "min" ; ?>
         <div class="<?=$css?>">
-          <div class="mdate"><?=$m["date_send"]?></div>
+          <div class="mdate">
+            <?php 
+            $MsgUser = find_user_by_uid($m["user_from"]);
+            echo $MsgUser['lastName'].": ";
+            $dtend= new DateTime($m["date_send"]);
+            echo date_format($dtend, 'M d Y h:i a')
+          ?>
+          </div> 
           <div class="mtxt"><?=$m["message"]?></div>
         </div>
       <?php }}
@@ -22,7 +32,7 @@ if (isset($_POST["req"])) {
 
     // (D) SEND MESSAGE
     case "send":
-      echo $MSG->send($_SESSION["user"]["id"], $_POST["to"], $_POST["msg"])
+      echo $MSG->send($_SESSION['user_id'], $_POST["to"], $_POST["msg"])
         ? "OK" : $MSG->error ;
       break;
   }
