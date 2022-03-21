@@ -81,19 +81,19 @@ class Message {
         // "SELECT * FROM `classes` WHERE `classID`!=?",
         //  [$for], "classID"
         "SELECT * FROM `classes` WHERE `classID`=?",
-         [4], "classID"
+         [$for], "classID"
       );
       if (!is_array($classes)) { return false; }
   
       // (F2) COUNT UNREAD MESSAGES
-      if ($this->exec(
-        "SELECT `user_from`, COUNT(*) `ur`
-        FROM `messages` WHERE `user_to`=?
-        AND `date_read` IS NULL
-        GROUP BY `user_from`", [$for]) === false) { return false; }
-      while ($r = $this->stmt->fetch()) {
-        $classes[$r["user_from"]]["unread"] = $r["ur"];
-      }
+      // if ($this->exec(
+      //   "SELECT `user_from`, COUNT(*) `ur`
+      //   FROM `messages` WHERE `user_to`=?
+      //   AND `date_read` IS NULL
+      //   GROUP BY `user_from`", [$for]) === false) { return false; }
+      // while ($r = $this->stmt->fetch()) {
+      //   $classes[$r["user_from"]]["unread"] = $r["ur"];
+      // }
   
       // (F3) RESULTS
       return $classes;
@@ -110,12 +110,19 @@ class Message {
     // (G2) GET MESSAGES
     return $this->fetchAll(
       "SELECT * FROM `messages`
-      WHERE `user_from` IN (?,?)
-      AND `user_to` IN (?,?)
+      WHERE `user_to` = (?)
       ORDER BY `date_send` DESC
       LIMIT 0, $limit",
-      [$from, $to, $from, $to]
+      [$to]
     );
+    // return $this->fetchAll(
+    //   "SELECT * FROM `messages`
+    //   WHERE `user_from` IN (?,?)
+    //   AND `user_to` IN (?,?)
+    //   ORDER BY `date_send` DESC
+    //   LIMIT 0, $limit",
+    //   [$from, $to, $from, $to]
+    // );
   }
 
   // (H) SEND MESSAGE

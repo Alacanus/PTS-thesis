@@ -95,7 +95,7 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
   // (A) GET USERS
   require "2-core.php";
   require "3-lib-msg.php";
-  $Classes = $MSG->getClasses($_SESSION["user_id"]);
+  $Classes = $MSG->getClasses($_SESSION['post']['classID']);
   ?>
   <h2>Class Content</h2>
   <!-- (B) LEFT : USER NOW & LIST -->
@@ -132,7 +132,6 @@ require __DIR__ . '/../../src/loggedin/classStep1.php';
 <?php view('footer') ?>
 
 <Script>
-  //This code is an imitation of W.S. Toh's Simple Messaging System With PHP MySQL 
   var msg = {
     // (A) HELPER - AJAX FETCH
     ajax: (data, after) => {

@@ -13,7 +13,7 @@ if (isset($_POST["req"])) {
 
     // (C) LIST MESSAGES
     case "list":
-      $msg = $MSG->getMsg($_POST["uid"], $_SESSION['user_id']);
+      $msg = $MSG->getMsg($_SESSION['user_id'], $_POST["uid"]);
       if (count($msg)>0) { foreach ($msg as $m) {
         $css = $m["user_from"] == $_SESSION['user_id'] ? "mout" : "min" ; ?>
         <div class="<?=$css?>">
@@ -21,8 +21,8 @@ if (isset($_POST["req"])) {
             <?php 
             $MsgUser = find_user_by_uid($m["user_from"]);
             echo $MsgUser['lastName'].": ";
-            $dtend= new DateTime($m["date_send"]);
-            echo date_format($dtend, 'M d Y h:i a')
+            $dt= new DateTime($m["date_send"]);
+            echo date_format($dt, 'M d Y h:i a')
           ?>
           </div> 
           <div class="mtxt"><?=$m["message"]?></div>
