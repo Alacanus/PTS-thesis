@@ -12,67 +12,84 @@ require __DIR__ . '/../src/loggedin/accountManagement.php';
 
 view('header', ['title' => 'Account Manage']) ?>
 <?php if (isset($errors['accountMGT'])) : ?>
-  <div class="alert alert-error">
-    <?= $errors['accountMGT'] ?>
+  <div class="overlay-new02" id="error-modal">
+    <div class="error-container">
+      <div class="edit-profile">
+        <div class="error-close-btn">&times;</div>
+        <i class="bi bi-exclamation-triangle"></i>
+        <?= $errors['accountMGT'] ?>
+      </div>
+    </div>
   </div>
+  <script>
+    var modalerror = document.getElementById("error-modal");
+    modalerror.style.display = "block";
+
+    var span = document.getElementsByClassName("error-close-btn")[0];
+    span.onclick = function() {
+      modalerror.style.display = "none";
+    }
+  </script>
 <?php endif ?>
 <div class="overlaybg">
-  <div class="am-container">
-    <div>
-      <h2>Account Management</h2>
-    </div>
-    <div class="search-container">
-      <div class="search--item--1">
-        <label id="am-search" for="searchinput">Search</label>
+  <div class="AccountManagement">
+    <div class="am-container">
+      <div>
+        <h2>Account Management</h2>
       </div>
-      <div class="search--item--2">
-        <input id="searchinput" name="searchinput" type="text">
+      <div class="search-container">
+        <div class="search--item--1">
+          <label id="am-search" for="searchinput">Search</label>
+        </div>
+        <div class="search--item--2">
+          <input id="searchinput" name="searchinput" type="text">
+        </div>
+        <div class="search--item--3">
+          <button class="btn btn-full btn-nav"><i class="bi bi-search"></i> Search</button>
+        </div>
+        <div class="search--item--4">
+          <button id="show-modal04" class="btn btn-table-grn btn-nav"><i class="bi bi-plus-lg"></i> Create User</button>
+        </div>
       </div>
-      <div class="search--item--3">
-        <button class="btn btn-full btn-nav"><i class="bi bi-search"></i> Search</button>
-      </div>
-      <div class="search--item--4">
-        <button id="show-modal04" class="btn btn-table-grn btn-nav"><i class="bi bi-plus-lg"></i> Create User</button>
-      </div>
-    </div>
-    <table class="table-container table-container-am">
-      <thead class="tbl-heading">
-        <tr class="table-row-container">
-          <th class="th-item tbl-item--1">#</th>
-          <th class="th-item tbl-item--2">User Name</th>
-          <th class="th-item tbl-item--3">Email</th>
-          <th class="th-item tbl-item--4">Name</th>
-          <!-- <div class="th-item tbl-item--5">Status</div> -->
-          <th class="th-item tbl-item--5">Role</th>
-          <th class="th-item tbl-item--6">Action</th>
-        </tr>
-      </thead>
-      <tbody class="tbody-overflow">
-        <?php
-        // var_dump($option_list);
-        if (is_array($option_list)) {
-          foreach ($option_list as $options) {
-            echo '<tr class="table-row-container">';
-            echo '<td class="td-item tbl-item--1">' . $options['userID'] . '</td>';
-            echo '<td class="td-item tbl-item--2">' . $options['username'] . '</td>';
-            echo '<td class="td-item tbl-item--3">' . $options['email'] . '</td>';
-            echo '<td class="td-item tbl-item--4">' . $options['firstname'] . " " . $options['lastName'] . '</td>';
-            // echo '<div class="td-item tbl-item--5">' . "" .  '</div>';
-            echo '<td class="td-item tbl-item--5">' . convert_roleID2Type($options['roleID'])  . '</td>';
-            echo '<td class="td-item tbl-item--6">';
-            echo '<button id="show-modal00" class="btn-table btn-full" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
-            echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
-            echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
-            echo '<button id="" class="btn-table btn-table-red" title="Delete User" onclick="displayModalDlt('. $options['userID'] .')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';
-            echo '</td>';
-            echo '</tr>';
+      <table class="table-container table-container-am">
+        <thead class="tbl-heading">
+          <tr class="table-row-container">
+            <th class="th-item tbl-item--1">#</th>
+            <th class="th-item tbl-item--2">User Name</th>
+            <th class="th-item tbl-item--3">Email</th>
+            <th class="th-item tbl-item--4">Name</th>
+            <!-- <div class="th-item tbl-item--5">Status</div> -->
+            <th class="th-item tbl-item--5">Role</th>
+            <th class="th-item tbl-item--6">Action</th>
+          </tr>
+        </thead>
+        <tbody class="tbody-overflow">
+          <?php
+          // var_dump($option_list);
+          if (is_array($option_list)) {
+            foreach ($option_list as $options) {
+              echo '<tr class="table-row-container">';
+              echo '<td class="td-item tbl-item--1">' . $options['userID'] . '</td>';
+              echo '<td class="td-item tbl-item--2">' . $options['username'] . '</td>';
+              echo '<td class="td-item tbl-item--3">' . $options['email'] . '</td>';
+              echo '<td class="td-item tbl-item--4">' . $options['firstname'] . " " . $options['lastName'] . '</td>';
+              // echo '<div class="td-item tbl-item--5">' . "" .  '</div>';
+              echo '<td class="td-item tbl-item--5">' . convert_roleID2Type($options['roleID'])  . '</td>';
+              echo '<td class="td-item tbl-item--6">';
+              echo '<button id="show-modal00" class="btn-table btn-full" src="../static/select.png" title="View User Details" onclick="getUserDetails(' . $options['userID'] . ')"><i class="bi bi-search"></i></button>';
+              echo '<button id="show-modal01" class="btn-table btn-table-mb" title="Edit User" onclick="UpdateStatus(' . $options['userID'] . ')" src="../static/delete-user.png"><i class="bi bi-pencil"></i></button>';
+              echo '<button id="show-modal02" class="btn-table btn-table-grn" title="View Folder" onclick=SetID(' . $options['userID'] . ')><i class="bi bi-folder"></i></button>';
+              echo '<button id="" class="btn-table btn-table-red" title="Delete User" onclick="displayModalDlt(' . $options['userID'] . ')" src="../static/editing.png"><i class="bi bi-trash"></i></button>';
+              echo '</td>';
+              echo '</tr>';
+            }
           }
-        }
-        ?>
-      </tbody>
-    </table>
+          ?>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+  </div>
 
 <!-- view Profile - Modal -->
 <div class="am-modal--00">
@@ -672,7 +689,9 @@ view('header', ['title' => 'Account Manage']) ?>
 
   function displayModalDlt(deleteID) {
     modalDlt.style.display = "block";
-    document.getElementById("dltbtnID").onclick = function(){deleteUser(deleteID);}
+    document.getElementById("dltbtnID").onclick = function() {
+      deleteUser(deleteID);
+    }
   }
 
   // Modal - JS Function ====================================================
@@ -683,7 +702,6 @@ view('header', ['title' => 'Account Manage']) ?>
   var btnFile = document.getElementById("show-modal02");
   var btnDelete = document.getElementById("show-modal03");
   var btnCrtUsr = document.getElementById("show-modal04");
-
   // CSS SHOW MODAL
   var modalView = document.getElementById("view-modal");
   var modal = document.getElementById("edit-modal");
