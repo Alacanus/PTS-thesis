@@ -35,6 +35,7 @@ $ClassCARD = get_Class_CARDS();
               <a href="viewClasses.php?classID=' . $options['classID'] . '">
                 <button class="btn btn-nav btn-full">View Class</button>
               </a>
+              <button onclick="editClass('.$options['classID'].')">Edit Class</button>
             </div>
           </div>
         </div>
@@ -47,6 +48,22 @@ $ClassCARD = get_Class_CARDS();
 </div>
 
 <script>
+  function editClass(classID) {
+    $.ajax({
+      url: '../src/redirectDir.php?editClass=1&classID=' + classID + '&step=1',
+      type: 'POST',
+      success: function(response) {
+        // console.log(response);
+        // alert(response);
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
+
+      },
+    });
+  }
+  
   $(".card img").on("error", function() {
     $(this).attr("src", "/PTS-thesis/static/broken-img.jpg")
   });

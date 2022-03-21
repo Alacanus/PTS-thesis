@@ -17,9 +17,24 @@ $pay = display_class_Payment();
 <?php view('header', ['title' => 'Create Class']);
 ?>
 <?php if (isset($errors['classRooms'])) : ?>
-    <div class="alert alert-error">
-        <?= $errors['classRooms'] ?>
+    <div class="overlay-new02" id="error-modal">
+        <div class="error-container">
+            <div class="edit-profile">
+                <div class="error-close-btn">&times;</div>
+                <i class="bi bi-exclamation-triangle"></i>
+                <?= $errors['classRooms'] ?>
+            </div>
+        </div>
     </div>
+    <script>
+        var modalerror = document.getElementById("error-modal");
+        modalerror.style.display = "block";
+
+        var span = document.getElementsByClassName("error-close-btn")[0];
+        span.onclick = function() {
+            modalerror.style.display = "none";
+        }
+    </script>
 <?php endif ?>
 <main id="mymain1">
     <div class="overlaybg">
@@ -52,11 +67,11 @@ $pay = display_class_Payment();
 
                 <div class="container-edit form-style">
                     <form action="createClass5.php" method="POST" enctype="multipart/form-data">
-                        <h2>Payment Details</h2>
+                        <h2>Create Class</h2>
                         <div class="form-element">
                             <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
                             <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
-                                <option value="<?= $pay['paylistID']?>"><?= $pay['paylistID']?></options>
+                                <option value="<?= $pay['paylistID'] ?>"><?= $pay['paylistID'] ?></options>
                                     <?php
                                     foreach ($option_list as $options) {
                                         echo '<option value="' . $options['paylistID'] . '">' . $options['paymentName'] . '</option>';
@@ -70,46 +85,46 @@ $pay = display_class_Payment();
                             <div class="errormsg">
                                 <small><?= $errors['accountName'] ?? '' ?></small>
                             </div>
-                            <input type="text" name="accountName" id="accountName" value="<?= decrypt0($pay['accountName']) ?? ''?>" class="<?= error_class($errors, 'accountName') ?>">
+                            <input type="text" name="accountName" id="accountName" value="<?= decrypt0($pay['accountName']) ?? '' ?>" class="<?= error_class($errors, 'accountName') ?>">
                         </div>
                         <div class="form-element">
                             <label for="accountDetails">Accounnt Details {Purchase details}<div class="reqcolor">*</div></label>
                             <div class="errormsg">
                                 <small><?= $errors['accountDetails'] ?? '' ?></small>
                             </div>
-                            <input type="number" step="any" name="accountDetails" id="accountDetails" value="<?= decrypt0($pay['accountDetail'])?>" class="<?= error_class($errors, 'accountDetails') ?>">
+                            <input type="number" step="any" name="accountDetails" id="accountDetails" value="<?= decrypt0($pay['accountDetail']) ?>" class="<?= error_class($errors, 'accountDetails') ?>">
                         </div>
                         <div class="form-element">
                             <label for="imageUpload">Upload Image</label>
                             <input type="file" name="imageUpload" id="imageUpload">
                         </div>
-                        <div class="btn-right-03">
-                            <button type="submit" >Submit</button>
+                        <div class="form-element-btn">
+                            <button class="btn btn-nav btn-table-grn" type="submit"><i class="bi bi-upload"></i> Upload</button>
+                        </div>
+                        <div class="outside-btn">
+                            <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID'] ?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
                             <button type="submit" class="btn btn-table btn-full" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
                         </div>
                     </form>
-                    <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID']?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </main>
 <script>
-  function back(classID){
-    $.ajax({
-        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=4',
-        type: 'POST',
-        success: function(response) {
-                    console.log(response);
-        alert(response);
-            window.location.href = response;
-        },
-        error: function(err) {
-            alert("There was some error performing the AJAX call!");
+    function back(classID) {
+        $.ajax({
+            url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=4',
+            type: 'POST',
+            success: function(response) {
+                window.location.href = response;
+            },
+            error: function(err) {
+                alert("There was some error performing the AJAX call!");
 
-        },
+            },
         });
-        }
+    }
 </script>
 
 

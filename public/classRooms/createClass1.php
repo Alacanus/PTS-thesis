@@ -38,9 +38,24 @@ if (is_get_request()) {
 <?php view('header', ['title' => 'Create Class']);
 ?>
 <?php if (isset($errors['classRooms'])) : ?>
-  <div class="alert alert-error">
-    <?= $errors['classRooms'] ?>
-  </div>
+  <div class="overlay-new02" id="error-modal">
+        <div class="error-container">
+            <div class="edit-profile">
+                <div class="error-close-btn">&times;</div>
+                <i class="bi bi-exclamation-triangle"></i>
+                <?= $errors['classRooms'] ?>
+            </div>
+        </div>
+    </div>
+    <script>
+        var modalerror = document.getElementById("error-modal");
+        modalerror.style.display = "block";
+
+        var span = document.getElementsByClassName("error-close-btn")[0];
+        span.onclick = function() {
+            modalerror.style.display = "none";
+        }
+    </script>
 <?php endif ?>
 <?php
 if (!isset($_SESSION['post']['tempClassid'])) {
@@ -113,7 +128,9 @@ if (!isset($_SESSION['post']['tempClassid'])) {
             </div>
             <div class="form-element-btn">
               <button class="btn btn-nav btn-ghost2"><i class="bi bi-arrow-clockwise"></i> Reset</button>
-              <button class="btn btn-table btn-full" title="Next" id="btn-next"><i class="bi bi-arrow-right-circle"></i></button>
+            </div>
+            <div class="form-element-btn">
+              <button class="btn btn-table btn-full" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
             </div>
           </form>
         </div>

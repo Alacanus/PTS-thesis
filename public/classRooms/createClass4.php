@@ -51,9 +51,24 @@ if (!empty($_SESSION['upload_token'])) {
 <!-- <img src="<?= $imageAddress ?>" alt="" width="500" height="333"><br>
 <iframe src="https://www.youtube.com/embed/'<?= $_SESSION['videoID'] ?? 'Y5uQqLbzviU' ?>" height="200" width="300" title="Iframe Example"></iframe> -->
 <?php if (isset($errors['classRooms'])) : ?>
-  <div class="alert alert-error">
-    <?= $errors['classRooms'] ?>
+  <div class="overlay-new02" id="error-modal">
+    <div class="error-container">
+      <div class="edit-profile">
+        <div class="error-close-btn">&times;</div>
+        <i class="bi bi-exclamation-triangle"></i>
+        <?= $errors['classRooms'] ?>
+      </div>
+    </div>
   </div>
+  <script>
+    var modalerror = document.getElementById("error-modal");
+    modalerror.style.display = "block";
+
+    var span = document.getElementsByClassName("error-close-btn")[0];
+    span.onclick = function() {
+      modalerror.style.display = "none";
+    }
+  </script>
 <?php endif ?>
 <main id="mymain1">
   <div class="overlaybg">
@@ -87,65 +102,61 @@ if (!empty($_SESSION['upload_token'])) {
           <form id="form" action="createClass4.php" method="post" name="multiple_upload_form" id="multiple_upload_form" enctype="multipart/form-data">
             <h2>Create Class</h2>
             <div class="form-element">
-              <label for="title">Title:</label>
+              <label for="title">Video Title:</label>
               <input type="text" name="title" id="title" value="" />
             </div>
             <div class="form-element">
-              <label for="description">Description:</label> 
+              <label for="description">Video Description:</label>
               <textarea name="description" id="description" cols="20" rows="2"></textarea>
             </div>
             <div class="form-element">
-              <label for="tags">Tags:</label> 
+              <label for="tags">Video Tags:</label>
               <input type="text" name="tags" id="tags" value="" />
             </div>
             <div class="form-element">
-              <label for="imageUpload">Image<div class="reqcolor">*</div></label>
+              <label for="imageUpload">Class Image: <div class="reqcolor">*</div></label>
               <input type="file" name="imageUpload" id="imageUpload">
             </div>
             <div class="form-element">
-              <label for="video_file">Choose Video File:</label> <input type="file" name="videoFile" id="videoFile">
+              <label for="video_file">Video File:</label> <input type="file" name="videoFile" id="videoFile">
             </div>
-            <div class="form-element">
-              <label name="status">Upload Progress:</label>
-              <progress id="progressBar" value="0" max="100" style="width:300hv;"></progress><p id="loaded_total"></p>
-            </div>
-            <div class="form-element">
-              <button class="btn btn-nav btn-table-mb"><i class="bi bi-upload"></i> Upload</button>
+            <div class="form-element-btn">
+              <button class="btn btn-nav btn-table-grn"><i class="bi bi-upload"></i> Upload</button>
+              <?php
+              if ($client->getAccessToken() && !$client->isAccessTokenExpired()) {
+                echo '<label class="oauth-container"><i class="bi bi-check-circle"></i> Authorized to Upload</label>';
+              } else {
+                echo '<a href="' . $authUrl . '"><button type="submit" value ="Auth PTS" class="btn btn-nav btn-ghost2"><i class="bi bi-shield"></i> OAuth</button></a>';
+              };
+              ?>
             </div>
           </form>
-          <div class="btn-right-02">
-            <?php
-            if ($client->getAccessToken() && !$client->isAccessTokenExpired()) {
-              echo 'Authorized to Upload';
-            } else {
-              echo '<i class="bi bi-shield-check"><a href="' . $authUrl . '"><input type="submit" value ="Auth PTS" class="btn btn-nav btn-ghost2"/></a></i>';
-            };
-            ?>
+          <div class="outside-btn">
+            <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID'] ?>)"><i class="bi bi-arrow-left-circle"></i></button>
             <a href="createClass5.php">
-              <i class="bi bi-arrow-right-circle"></i>
-              <input type="submit" value="Next" class="btn btn-nav btn-full" />
+              <button type="submit" value="Next" class="btn btn-table btn-full"><i class="bi bi-arrow-right-circle"></i></button>
             </a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <buttonon onclick="back(<?= $_SESSION['post']['classID']?>)">Back</button>
+
 </main>
 
 <script>
-function back(classID){
+  function back(classID) {
     $.ajax({
-        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=3',
-        type: 'POST',
-        success: function(response) {
-            window.location.href = response;
-        },
-        error: function(err) {
-            alert("There was some error performing the AJAX call!");
+      url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=3',
+      type: 'POST',
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
 
-        },
-        });
-        }
+      },
+    });
+  }
 </script>
 <?php view('footer') ?>

@@ -10,24 +10,22 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
-if(isset($_GET['classID'])){
+if (isset($_GET['classID'])) {
     $classID = $_GET['classID'];
-   $classInfo= get_class_Info($classID);
-   $_SESSION['viewClassID']=$classID;
-   $revidewCARD = get_review_CARDS($classID);
-   $overRatingStars = get_review_totalRating($classID);
-
-}elseif(isset($_SESSION['post']['classID'])){
+    $classInfo = get_class_Info($classID);
+    $_SESSION['viewClassID'] = $classID;
+    $revidewCARD = get_review_CARDS($classID);
+    $overRatingStars = get_review_totalRating($classID);
+} elseif (isset($_SESSION['post']['classID'])) {
     $classID = $_SESSION['post']['classID'];
-   $classInfo= get_class_Info($classID);
-   $_SESSION['viewClassID']=$classID;
-   $revidewCARD = get_review_CARDS($classID);
-  $Card_entries = get_ingredient_CARDS($_SESSION['post']['classID']);
-$option_list = get_db_Modules($_SESSION['post']['tempClassid']);
-$videoFile = get_class_vidData($_SESSION['post']['classID']);
+    $classInfo = get_class_Info($classID);
+    $_SESSION['viewClassID'] = $classID;
+    $revidewCARD = get_review_CARDS($classID);
+    $Card_entries = get_ingredient_CARDS($_SESSION['post']['classID']);
+    $option_list = get_db_Modules($_SESSION['post']['tempClassid']);
+    $videoFile = get_class_vidData($_SESSION['post']['classID']);
 
-   $overRatingStars = get_review_totalRating($classID);
-
+    $overRatingStars = get_review_totalRating($classID);
 }
 if (isset($classInfo) && $classInfo !== "") {
     $teacher = find_user_by_uid($classInfo[0]['userID']);
@@ -47,10 +45,10 @@ if (isset($classInfo) && $classInfo !== "") {
     // redirect_to('emailmsg.php');
     header("Location: allowedNot.php"); //request denied
 }
-if(!is_bool(display_class_Payment())){
+if (!is_bool(display_class_Payment())) {
     $pay = display_class_Payment();
     $pay['image'] = substr(getPic_byID($pay['methodfileID'])['filePath'], 15);
-}else{
+} else {
     $pay = [];
 }
 ?>
@@ -58,9 +56,24 @@ if(!is_bool(display_class_Payment())){
 <?php view('header', ['title' => 'Create Class']);
 ?>
 <?php if (isset($errors['classRooms'])) : ?>
-    <div class="alert alert-error">
-        <?= $errors['classRooms'] ?>
+    <div class="overlay-new02" id="error-modal">
+        <div class="error-container">
+            <div class="edit-profile">
+                <div class="error-close-btn">&times;</div>
+                <i class="bi bi-exclamation-triangle"></i>
+                <?= $errors['classRooms'] ?>
+            </div>
+        </div>
     </div>
+    <script>
+        var modalerror = document.getElementById("error-modal");
+        modalerror.style.display = "block";
+
+        var span = document.getElementsByClassName("error-close-btn")[0];
+        span.onclick = function() {
+            modalerror.style.display = "none";
+        }
+    </script>
 <?php endif ?>
 <main id="mymain1">
     <div class="overlaybg">
@@ -108,20 +121,16 @@ if(!is_bool(display_class_Payment())){
                         <!-- Main Content -->
                         <div class="summary-item--02">
                             <div class="sub-item">
-                                <label for="#">Class Name: </label>
-                                <?= $classInfo[0]['className'] ?>
+                                <label for="#">Class Name: <?= $classInfo[0]['className'] ?></label>
                             </div>
                             <div class="sub-item">
-                                <label for="#">Equivalent Hours: </label>
-                                <?= $classInfo[0]['equivalentHours'] ?>
+                                <label for="#">Equivalent Hours: <?= $classInfo[0]['equivalentHours'] ?></label>
                             </div>
                             <div class="sub-item">
-                                <label for="#">Skill Level: </label>
-                                <?= $classInfo[0]['skillLevel'] ?>
+                                <label for="#">Skill Level: <?= $classInfo[0]['skillLevel'] ?></label>
                             </div>
                             <div class="sub-item">
-                                <label for="#">Description: </label>
-                                <?= $classInfo[0]['classDescription'] ?>
+                                <label for="#">Description: <?= $classInfo[0]['classDescription'] ?></label>
                             </div>
                         </div>
                     </div>
@@ -131,12 +140,12 @@ if(!is_bool(display_class_Payment())){
                             <h3>Package</h3>
                         </div>
                         <div class="grid-container">
-                        <?php
-        // var_dump($_SESSION['post']['classID']);
-        // var_dump($Card_entries);
-        if (!empty($Card_entries)) {
-          foreach ($Card_entries as $options2) {
-            echo '<div class="card">
+                            <?php
+                            // var_dump($_SESSION['post']['classID']);
+                            // var_dump($Card_entries);
+                            if (!empty($Card_entries)) {
+                                foreach ($Card_entries as $options2) {
+                                    echo '<div class="card">
                       <div class="card-body">
                         <div class="card-title">
                           <h2>' . $options2['IngredientName'] . '</h2>
@@ -157,12 +166,16 @@ if(!is_bool(display_class_Payment())){
                         </div>
                       </div>
                       <div class="card-footer">
-                        <a href="#" class="btn btn-nav btn-full">Go somewhere</a>
+                        <a href="#">
+                            <button class="btn btn-nav btn-full">
+                                <i class="bi bi-pencil"></i> Edit
+                            </button>
+                        </a>
                       </div>
                     </div>';
-          }
-        }
-        ?>
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="sum-section--03">
@@ -174,27 +187,27 @@ if(!is_bool(display_class_Payment())){
                             <div class="sample-flex-con2">
                                 <div class="table-container table-container-sum">
                                     <div class="table-row-container tbl-heading">
-                                        <div class="th-item tbl-item--">Chapter Name</div>
-                                        <div class="th-item tbl-item--">Module Name</div>
-                                        <div class="th-item tbl-item--">File Upload</div>
+                                        <div class="th-item">Chapter #</div>
+                                        <div class="th-item">Module Name</div>
+                                        <div class="th-item">File Upload</div>
                                     </div>
-                                    <div class="table-row-container">
+                                    <!-- <div class="table-row-container"> -->
                                     <?php
-        if (is_array($option_list)) {
-          foreach ($option_list as $options) {
-            echo '<div class="table-row-container">';
-            echo '<div class="td-item tbl-item--1">' . $options['chapter'] . '</div>';
-            echo '<div class="td-item tbl-item--2">' . $options['moduleName'] . '</div>';
-            echo '<div class="td-item tbl-item--2">' . $options['fileName'] . '</div>';
-            echo '<div class="td-item tbl-item--1">';
-            echo '<button class="btn btn-table btn-full" onclick ="downloadFile(' . $options['fileID'] . ')" ><i class="bi bi-download"></i></button>';
-            echo '<button class="btn btn-table btn-table-red" onclick ="deleteFile2(' . $options['fileID'] . ')"><i class="bi bi-trash"></i></button>';
-            echo '</div>';
-            echo '</div>';
-          }
-        }
-        ?>
-                                    </div>
+                                    if (is_array($option_list)) {
+                                        foreach ($option_list as $options) {
+                                            echo '<div class="table-row-container">';
+                                            echo '<div class="td-item">' . $options['chapter'] . '</div>';
+                                            echo '<div class="td-item">' . $options['moduleName'] . '</div>';
+                                            echo '<div class="td-item">' . $options['fileName'] . '</div>';
+                                            //echo '<div class="td-item">';
+                                            // echo '<button class="btn btn-table btn-full" onclick ="downloadFile(' . $options['fileID'] . ')" ><i class="bi bi-download"></i></button>';
+                                            // echo '<button class="btn btn-table btn-table-red" onclick ="deleteFile2(' . $options['fileID'] . ')"><i class="bi bi-trash"></i></button>';
+                                            //echo '</div>';
+                                            echo '</div>';
+                                        }
+                                    }
+                                    ?>
+                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
@@ -213,7 +226,7 @@ if(!is_bool(display_class_Payment())){
                                     <div class="sub-item">
                                         <label for="#">
                                             Video File
-                                            
+
                                         </label>
                                     </div>
                                 </div>
@@ -221,19 +234,19 @@ if(!is_bool(display_class_Payment())){
                                     <div class="sub-item">
                                         <label for="#">
                                             Title:
-                                            <?= $videoFile['vidTitle']?>
+                                            <?= $videoFile['vidTitle'] ?>
                                         </label>
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">
                                             Tags:
-                                            <?= $videoFile['vidDesc']?>
+                                            <?= $videoFile['vidDesc'] ?>
                                         </label>
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">
                                             Description:
-                                            <?= $videoFile['vidTags']?>
+                                            <?= $videoFile['vidTags'] ?>
                                         </label>
                                     </div>
                                 </div>
@@ -251,7 +264,7 @@ if(!is_bool(display_class_Payment())){
                                 <div class="summary-item--03">
                                     <div class="sub-item">
                                         <!-- <img src="\PTS-thesis\public\Writable\Capture33.png" alt="placeholder">substr(getPic_byID($pay['methodfileID']), 15) -->
-                                        <img src="<?= $pay['image']?>" alt="placeholder">
+                                        <img src="<?= $pay['image'] ?>" alt="placeholder">
 
                                     </div>
                                     <div class="sub-item">
@@ -261,22 +274,22 @@ if(!is_bool(display_class_Payment())){
                                 <div class="summary-item--04">
                                     <div class="sub-item">
                                         <label for="#">Payment Method</label>
-                                        <label for="#"><?= $pay['paylistID']?></label>
+                                        <label for="#"><?= $pay['paylistID'] ?></label>
 
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">Account Name:</label>
-                                        <label for="#"><?= decrypt0($pay['accountName'])?></label>
+                                        <label for="#"><?= decrypt0($pay['accountName']) ?></label>
 
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">Account No:</label>
-                                        <label for="#"><?= decrypt0($pay['accountDetail'])?></label>
+                                        <label for="#"><?= decrypt0($pay['accountDetail']) ?></label>
 
                                     </div>
                                     <div class="sub-item">
                                         <label for="#">Upload Image ID:</label>
-                                        <label><?=$pay['methodfileID']?></label>
+                                        <label><?= $pay['methodfileID'] ?></label>
                                     </div>
                                 </div>
                             </div>

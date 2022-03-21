@@ -9,7 +9,7 @@ define("DB_CHARSET", "utf8");
  
 // (C) START SESSION - ACT AS USER
 session_start();
-$_SESSION["user"] = ["id" => 2, "name" => "markhenrick.linsangan@benilde.edu.ph"];
+$_SESSION["user"] = ["id" => 2, "name" => "Mark Henrick Linsangan"];
 // $_SESSION["user"] = ["id" => 3, "name" => "Joe Doe"];
 // $_SESSION["user"] = ["id" => 4, "name" => "Jon Doe"];
 // $_SESSION["user"] = ["id" => 5, "name" => "Joy Doe"];

@@ -83,7 +83,8 @@ view('header', ['title' => 'Class page']);
                             </div>
                         </div>
                     </div>
-                    <button onclick="editClass(<?= $classInfo[0]['classID']?>)">Edit Class</button><button>Go to Class</button>
+                    <!-- <button onclick="editClass(<?= $classInfo[0]['classID']?>)">Edit Class</button> -->
+                    <button>Go to Class</button>
                 </section>
             </div>
             <div class="section-bg--02">
@@ -361,7 +362,7 @@ $.ajax(
 );
     }
 </script>
-<script>
+<!-- <script>
     function editClass(classID){
     $.ajax({
         url: '../src/redirectDir.php?editClass=1&classID='+classID+'&step=1',
@@ -377,7 +378,7 @@ $.ajax(
         },
         });
         }
-</script>
+</script> -->
 <script>
     function Purchase(){
 $.ajax(

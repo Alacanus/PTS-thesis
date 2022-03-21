@@ -16,9 +16,24 @@ $imageAddress = substr($temp['filePath'], 15);
 <?php view('header', ['title' => 'User Profile']);
 ?>
 <?php if (isset($errors['userProfile'])) : ?>
-    <div class="alert alert-error">
-        <?= $errors['userProfile'] ?>
+    <div class="overlay-new02" id="error-modal">
+        <div class="error-container">
+            <div class="edit-profile">
+                <div class="error-close-btn">&times;</div>
+                <i class="bi bi-exclamation-triangle"></i>
+                <?= $errors['userProfile'] ?>
+            </div>
+        </div>
     </div>
+    <script>
+        var modalerror = document.getElementById("error-modal");
+        modalerror.style.display = "block";
+
+        var span = document.getElementsByClassName("error-close-btn")[0];
+        span.onclick = function() {
+            modalerror.style.display = "none";
+        }
+    </script>
 <?php endif ?>
 <main id="mymain1">
     <div class="userprofile">

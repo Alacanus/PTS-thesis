@@ -22,9 +22,24 @@ if (isset($_SESSION['post']['classID'])) {
 <?php view('header', ['title' => 'Create Class']);
 ?>
 <?php if (isset($errors['classRooms'])) : ?>
-  <div class="alert alert-error">
-    <?= $errors['classRooms'] ?>
+  <div class="overlay-new02" id="error-modal">
+    <div class="error-container">
+      <div class="edit-profile">
+        <div class="error-close-btn">&times;</div>
+        <i class="bi bi-exclamation-triangle"></i>
+        <?= $errors['classRooms'] ?>
+      </div>
+    </div>
   </div>
+  <script>
+    var modalerror = document.getElementById("error-modal");
+    modalerror.style.display = "block";
+
+    var span = document.getElementsByClassName("error-close-btn")[0];
+    span.onclick = function() {
+      modalerror.style.display = "none";
+    }
+  </script>
 <?php endif ?>
 <div id="mymain1">
   <div class="overlaybg">
@@ -86,12 +101,13 @@ if (isset($_SESSION['post']['classID'])) {
               </div>
             </div>
             <div class="form-element-btn">
-              <button class="btn btn-table btn-full" type="submit" title="Next" id="btn-next"><i class="bi bi-arrow-right-circle"></i></button>
+              <button class="btn btn-nav btn-table-grn" type="submit" title="Upload Pckage" id="btn-next"><i class="bi bi-upload"></i> Upload</button>
             </div>
           </form>
-          <button class="btn btn-table btn-table-mb" onclick="next(<?= $_SESSION['post']['classID']?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i>SKIP</button>
-          <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID']?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
-
+          <div class="outside-btn">
+            <button type="button" class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID'] ?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
+            <button type="button" class="btn btn-table btn-full" onclick="next(<?= $_SESSION['post']['classID'] ?>)" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
+          </div>
         </div>
       </div>
     </div>
@@ -126,7 +142,11 @@ if (isset($_SESSION['post']['classID'])) {
                         </div>
                       </div>
                       <div class="card-footer">
-                        <a href="#" class="btn btn-nav btn-full">Go somewhere</a>
+                        <a href="#">
+                          <button class="btn btn-nav btn-full">
+                            <i class="bi bi-penicl"></i> Edit
+                          </button> 
+                        </a>
                       </div>
                     </div>';
           }
@@ -166,32 +186,33 @@ if (isset($_SESSION['post']['classID'])) {
   });
 </script>
 <script>
-    function back(classID){
+  function back(classID) {
     $.ajax({
-        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=1',
-        type: 'POST',
-        success: function(response) {
-            window.location.href = response;
-        },
-        error: function(err) {
-            alert("There was some error performing the AJAX call!");
+      url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=1',
+      type: 'POST',
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
 
-        },
-        });
-        }
-    function next(classID){
+      },
+    });
+  }
+
+  function next(classID) {
     $.ajax({
-        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=3',
-        type: 'POST',
-        success: function(response) {
-            window.location.href = response;
-        },
-        error: function(err) {
-            alert("There was some error performing the AJAX call!");
+      url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=3',
+      type: 'POST',
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
 
-        },
-        });
-        }
+      },
+    });
+  }
 </script>
 
 <?php view('footer');

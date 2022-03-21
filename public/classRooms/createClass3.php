@@ -17,9 +17,24 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
 <?php view('header', ['title' => 'Create Class']);
 ?>
 <?php if (isset($errors['classRooms'])) : ?>
-  <div class="alert alert-error">
-    <?= $errors['classRooms'] ?>
+  <div class="overlay-new02" id="error-modal">
+    <div class="error-container">
+      <div class="edit-profile">
+        <div class="error-close-btn">&times;</div>
+        <i class="bi bi-exclamation-triangle"></i>
+        <?= $errors['classRooms'] ?>
+      </div>
+    </div>
   </div>
+  <script>
+    var modalerror = document.getElementById("error-modal");
+    modalerror.style.display = "block";
+
+    var span = document.getElementsByClassName("error-close-btn")[0];
+    span.onclick = function() {
+      modalerror.style.display = "none";
+    }
+  </script>
 <?php endif ?>
 <?php
 
@@ -53,7 +68,9 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
           </div>
         </div>
         <div class="container-edit form-style">
-          <h2>Create Class</h2>
+          <div class="form-element">
+            <h2>Create Class</h2>
+          </div>
           <form action="createClass3.php" method="post" enctype="multipart/form-data">
             <div class="form-element">
               <label for="chapter">Chapter<div class="reqcolor">*</div></label>
@@ -69,22 +86,22 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
               <label for="file">Choose File to Upload<div class="reqcolor">*</div></label>
               <input type="file" name="fileToUpload" id="fileToUpload" required>
             </div>
-            <div class="form-element">
+            <div class="form-element-btn">
               <button class="btn btn-nav btn-ghost2"><i class="bi bi-upload"></i> Upload File</button>
+              <button type="button" class="btn btn-nav btn-table-grn" onclick="SetID()"><i class="bi bi-plus-lg"></i> Milestones</button>
             </div>
           </form>
-          <div class="btn-right">
-            <!-- id="show-modal" -->
-            <button class="btn btn-nav btn-table-grn" onclick="SetID()"><i class="bi bi-plus-lg"></i> Milestones</button>
-            <button class="btn btn-nav btn-table-mb" onclick="back(<?= $_SESSION['post']['classID']?>)"><i class="bi bi-arrow-left-circle"></i></button>
-            <a href="createClass4.php"><i class="bi bi-arrow-right-circle"></i><input class="btn btn-nav btn-full" type="submit" value="Next" /></a>
+          <div class="outside-btn">
+            <div class="form-element-btn">
+              <!-- id="show-modal" -->
+              <button type="button" class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID'] ?>)"><i class="bi bi-arrow-left-circle"></i></button>
+              <a href="createClass4.php"><button type="submit" class="btn btn-table btn-full" value="Next"><i class="bi bi-arrow-right-circle"></i></button></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="overlaybg">
-    <div class="cc-section--02">
+    <div class="ccr-section-03">
       <h2 id="cc-step03">Created View Modules</h2>
       <div class="table-container">
         <div class="table-row-container tbl-heading">
@@ -172,9 +189,8 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
           </tbody>
         </table>
         <!-- Modal Save Changes -->
-        <div class="btn-style">
-          <button onclick="" class="btn btn-nav btn-table-grn">Save changes</button>
-          <button type="button" class="btn btn-nav btn-table-red">Close</button>
+        <div class="btn-style-02">
+          <button onclick="" class="btn btn-nav btn-table-grn"><i class="bi bi-box-arrow-down"></i>Save changes</button>
         </div>
       </div>
     </div>
@@ -394,32 +410,34 @@ require __DIR__ . '/../../src/loggedin/classStep3.php';
       modal.style.display = "none";
     }
   }
-  function back(classID){
-    $.ajax({
-        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=2',
-        type: 'POST',
-        success: function(response) {
-            window.location.href = response;
-        },
-        error: function(err) {
-            alert("There was some error performing the AJAX call!");
 
-        },
-        });
-        }
-    function next(classID){
+  function back(classID) {
     $.ajax({
-        url: '../../src/redirectDir.php?editClass=1&classID='+classID+'&step=4',
-        type: 'POST',
-        success: function(response) {
-            window.location.href = response;
-        },
-        error: function(err) {
-            alert("There was some error performing the AJAX call!");
+      url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=2',
+      type: 'POST',
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
 
-        },
-        });
-        }
+      },
+    });
+  }
+
+  function next(classID) {
+    $.ajax({
+      url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=4',
+      type: 'POST',
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
+
+      },
+    });
+  }
 </script>
 
 
