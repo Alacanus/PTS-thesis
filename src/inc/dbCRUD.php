@@ -330,3 +330,18 @@ if ($statement->execute()) {
     }   
 return false;
 }
+
+function get_Fname_Lname(int $userID){
+    $sql = "SELECT * FROM userprofile 
+    INNER JOIN users
+      ON users.userID = userprofile.userID
+      JOIN userroles
+      ON users.roleID = userroles.roleID
+  WHERE users.userID = :userID";
+    $statement = db()->prepare($sql);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    $Data = $statement->fetch(PDO::FETCH_ASSOC);
+    
+    return $Data['firstname']. ' '. $Data['lastName'];
+}

@@ -126,9 +126,9 @@ if(is_post_request()){
     });
   }
 
-  function disableClass(classID) {
+  function certAuth(classID) {
     $.ajax({
-      url: '../../src/ajaxFunction.php?markVerified=3&classID='+classID,
+      url: '../../src/ajaxFunction.php?certAuth=1&classID='+classID,
       type: 'GET',
       success: function(response) {
         window.location.href = response;

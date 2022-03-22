@@ -22,4 +22,10 @@ if(isset($_GET['markVerified'])){
     if($_GET['markVerified'] == 3){
         mark_Class_Status('DISABLED', $_GET['classID']);
     }
+}//http://127.0.0.1/PTS-thesis/public/Coordinator/generateCertificate.php
+
+if(isset($_GET['certAuth'])){
+    if($_GET['certAuth'] == 1){
+        echo '/PTS-thesis/public/Coordinator/generateCertificate.php?classID='.$_GET['classID'];
+    }
 }

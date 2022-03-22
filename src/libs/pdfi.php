@@ -3,7 +3,7 @@
 use setasign\Fpdi\Tcpdf\Fpdi;
 
 
-require_once('../vendor/autoload.php');
+require_once('../../vendor/autoload.php');//../../vendor/autoload.php
 
 function Get_PDF_INFO($classID){
     $PDFarr = [];
@@ -21,7 +21,7 @@ function Get_PDF_INFO($classID){
     $statement->bindParam(':classID', $classID, PDO::PARAM_INT);
     $statement->execute();
         
-        return $statement->fetch(PDO::FETCH_ASSOC);
+    return $statement->fetch(PDO::FETCH_ASSOC);
     // return $PDFarr;
 }
 
@@ -73,7 +73,7 @@ function Store_PDF($dtB, $learnerName, $equivalenthours, $className, $instructor
     
 }
 
-function Generate_PDF($date, $certCode, $learnerName, $equivalenthours, $className, $instructorName, $coordinatorName){
+function Generate_PDF($date, $certCode, $learnerName, $equivalenthours, $className, $instructorName, $coordinatorName, $skillLevel){
     if(is_string($date)){
         $dtN = strtotime($date);
         $dtC = date('Y-m-d H:i:s', $dtN);
@@ -85,12 +85,13 @@ function Generate_PDF($date, $certCode, $learnerName, $equivalenthours, $classNa
     $dayVar = $validDate->format('d'); 
     $yearVar = $validDate->format('Y');
     // $certCode = bin2hex(random_bytes(8));
-    $learnerName = 'Genesis fragas';
-    $equivalenthours = '12';
-    $className = 'Building Responsive Real world Websites with HTML5 and CSS3';
-    $htmlText ='This is to certify that <b>'.$learnerName .'</b>, successfully completed <b>'. $equivalenthours .' </b>total hours of <b>'. $className .'</b> online course on <b>'. $monthVar. ' '. $dayVar. ', '. $yearVar . '</b>';
-    $instructorName = 'Instructor Alpha';
-    $coordinatorName = 'Coordinator theta';
+    // $learnerName = 'Genesis fragas';
+    // $equivalenthours = '12';
+    // $className = 'Building Responsive Real world Websites with HTML5 and CSS3';
+    $htmlText ='This is to certify that <b>'.$learnerName .'</b>, successfully completed <b>'. $equivalenthours .' </b>total hours of <b>'. $className .'</b> online course on <b>'. $monthVar. ' '. $dayVar. ', '. $yearVar . 
+    '</b> with the skill level of a <b>'. $skillLevel . '</b>';
+    // $instructorName = 'Instructor Alpha';
+    // $coordinatorName = 'Coordinator theta';
     //
     $style = array(
         'border' => true,
@@ -102,18 +103,19 @@ function Generate_PDF($date, $certCode, $learnerName, $equivalenthours, $classNa
         'module_height' => 1 // height of a single module in points
     );
     // initiate FPDI
+    ob_end_clean();
     $pdf = new Fpdi();
     $pdf->SetMargins(40, PDF_MARGIN_TOP, 40);
     $pdf->SetAutoPageBreak(FALSE);
     
     $pdf->addPage('L');
     //Add page Set to Landscape
-    $pdf->setSourceFile("../certiTemplate.pdf");
+    $pdf->setSourceFile("../../certiTemplate.pdf");
     // import page 1
     
     $pdfTemplate = $pdf->importPage(1);
 
-    $pdf->Image('../static/5496772.jpg',0,0,300,210,'JPG');
+    $pdf->Image('../../static/5496772.jpg',0,0,300,210,'JPG');
     
     
     $pdf->setFont('Helvetica', 'B', 24);
@@ -132,7 +134,7 @@ function Generate_PDF($date, $certCode, $learnerName, $equivalenthours, $classNa
     $pdf->SetY(140);
     $pdf->SetX(100);
 
-    $pdf->writeHTML($instructorName. ', Approved by ' .$coordinatorName);
+    $pdf->writeHTML('Instructor: '.$instructorName. ', Approved by ' .$coordinatorName);
     // $pdf->Text(100, 140, 'Instructor Name HERE, Approved by Coordinator Name Here');
     $pdf->write2DBarcode($certCode, 'QRCODE,L', 220, 155,  0, 20, $style, 'N', true);
     $pdf->Text(180, 175, 'Certificate Number: '. $certCode);
