@@ -63,7 +63,7 @@
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
-                                  <p>Genesis Fragas</p>
+                                  <p>'.$_SESSION['username'].'</p>
                                   <p id="content--1">Admin</p>
                               </div>
                               <ul>
@@ -99,7 +99,7 @@
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
-                                  <p>Genesis Fragas</p>
+                              <p>'.$_SESSION['username'].'</p>
                                   <p id="content--1">Learner</p>
                               </div>
                               <ul>
@@ -138,7 +138,7 @@
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
-                                  <p>Mark Linsangan</p>
+                              <p>'.$_SESSION['username'].'</p>
                                   <p id="content--1">Instructor</p>
                               </div>
                               <ul>
@@ -176,7 +176,7 @@
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
-                                  <p>Dennie Go</p>
+                              <p>'.$_SESSION['username'].'</p>
                                   <p id="content--1">Coordinator</p>
                               </div>
                               <ul>
@@ -213,7 +213,7 @@
                           </div>
                           <div class="user-menu">
                               <div class="user-content">
-                                  <p>Samuel Narbuada</p>
+                              <p>'.$_SESSION['username'].'</p>
                                   <p id="content--1">Procurement</p>
                               </div>
                               <ul>

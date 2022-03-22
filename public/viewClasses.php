@@ -41,7 +41,7 @@ view('header', ['title' => 'Class page']);
                             <label for="Price">Price: &#x20B1;1000</label>
                         </div>
                         <div class="vc--item">
-                            <button class="btn btn-nav btn-full" onclick="Purchase()">Purchase Class</button>
+                            <button class="btn btn-nav btn-full" onclick="Purchase(<?= $classInfo[0]['classID'] ?>)">Purchase Class</button>
                         </div>
                     </div>
                     <div class="vc-block-02">
@@ -347,25 +347,27 @@ view('header', ['title' => 'Class page']);
         </div>
     </div>
 </div> -->
+
 <script>
-    function Purchase(){
-$.ajax(
-'../src/buyClass.php',
-  {
-      success: function(response) {
-        window.location.href = response;
-      },
-      error: function() {
-        alert('There was some error performing the AJAX call!');
-      }
-   }
-);
-    }
-</script>
-<!-- <script>
-    function editClass(classID){
+    // function editClass(classID){
+    // $.ajax({
+    //     url: '../src/redirectDir.php?editClass=1&classID='+classID+'&step=1',
+    //     type: 'POST',
+    //     success: function(response) {
+    //     // console.log(response);
+    //     // alert(response);
+    //         window.location.href = response;
+    //     },
+    //     error: function(err) {
+    //         alert("There was some error performing the AJAX call!");
+
+    //     },
+    //     });
+    //     }
+
+        function Purchase(classID){
     $.ajax({
-        url: '../src/redirectDir.php?editClass=1&classID='+classID+'&step=1',
+        url: '../src/redirectDir.php?purChase=1&classID='+classID+'&step=1',
         type: 'POST',
         success: function(response) {
         // console.log(response);
@@ -378,20 +380,5 @@ $.ajax(
         },
         });
         }
-</script> -->
-<script>
-    function Purchase(){
-$.ajax(
-'../src/buyClass.php',
-  {
-      success: function(data) {
-        window.location.href = data;
-      },
-      error: function() {
-        alert('There was some error performing the AJAX call!');
-      }
-   }
-);
-    }
 </script>
 <?php view('footer') ?>

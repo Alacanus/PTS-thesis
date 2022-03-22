@@ -16,6 +16,8 @@ if (isset($_GET['classID'])) {
     $_SESSION['viewClassID'] = $classID;
     $revidewCARD = get_review_CARDS($classID);
     $overRatingStars = get_review_totalRating($classID);
+    $videoFile = get_class_vidData($_GET['classID']);
+    $option_list = get_db_Modules($_GET['classID']);
 } elseif (isset($_SESSION['post']['classID'])) {
     $classID = $_SESSION['post']['classID'];
     $classInfo = get_class_Info($classID);
@@ -45,8 +47,8 @@ if (isset($classInfo) && $classInfo !== "") {
     // redirect_to('emailmsg.php');
     header("Location: allowedNot.php"); //request denied
 }
-if (!is_bool(display_class_Payment())) {
-    $pay = display_class_Payment();
+if (!is_bool(display_class_Payment($classInfo[0]['userID']))) {
+    $pay = display_class_Payment($classInfo[0]['userID']);
     $pay['image'] = substr(getPic_byID($pay['methodfileID'])['filePath'], 15);
 } else {
     $pay = [];

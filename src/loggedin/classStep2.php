@@ -31,7 +31,7 @@ if (is_post_request()) {
             $statement2->bindParam(':description', $_POST['description'][$key], PDO::PARAM_STR);
             $statement2->bindParam(':amount', $_POST['quantity'][$key], PDO::PARAM_INT);
             $statement2->bindParam(':price', $_POST['price'][$key]);
-            $statement2->bindValue(':unitMID', 10);
+            $statement2->bindParam(':unitMID', $_POST['unitOfMeasure'][$key]);
             // $statement2->bindParam(':unitMID', $_POST['unitOfMeasure'][$key]);
             // $statement2->bindParam(':classID', $_SESSION['post']['classID']);
             $statement2->bindParam(':classID', $temp);

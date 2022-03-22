@@ -75,11 +75,6 @@ if (is_post_request()) {
             }
     
         $errors['classRooms'] = "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-        if($inputs['next']){
-            redirect_with('createClass3.php', [
-                'errors' => $errors
-            ]);
-        }
 
         } else {
         $errors['classRooms'] = "Sorry, there was an error in your submission your file.";

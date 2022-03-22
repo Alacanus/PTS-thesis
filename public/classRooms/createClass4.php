@@ -100,7 +100,7 @@ if (!empty($_SESSION['upload_token'])) {
         </div>
         <div class="container-edit form-style">
           <form id="form" action="createClass4.php" method="post" name="multiple_upload_form" id="multiple_upload_form" enctype="multipart/form-data">
-            <h2>Create Class</h2>
+            <h2>Create Video Class</h2>
             <div class="form-element">
               <label for="title">Video Title:</label>
               <input type="text" name="title" id="title" value="" />
@@ -126,7 +126,7 @@ if (!empty($_SESSION['upload_token'])) {
               if ($client->getAccessToken() && !$client->isAccessTokenExpired()) {
                 echo '<label class="oauth-container"><i class="bi bi-check-circle"></i> Authorized to Upload</label>';
               } else {
-                echo '<a href="' . $authUrl . '"><button type="submit" value ="Auth PTS" class="btn btn-nav btn-ghost2"><i class="bi bi-shield"></i> OAuth</button></a>';
+                echo '<a href="' . $authUrl . '"><button value ="Auth PTS" class="btn btn-nav btn-ghost2"><i class="bi bi-shield"></i> OAuth</button></a>';
               };
               ?>
             </div>

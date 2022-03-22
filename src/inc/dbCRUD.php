@@ -203,6 +203,40 @@ function get_Class_CARDS() {
     return $option_list;
  }
 
+ function get_EnrolledClass_CARDS() {
+    $option_list = '';
+        $sql = "SELECT * FROM classes JOIN classprofile ON classes.classID  = classprofile.classID 
+        ";//WHERE classes.classID = :fileID
+        $statement = db()->prepare($sql);
+        // $statement->bindValue(':fileID', $classID, PDO::PARAM_INT);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+      
+    return $option_list;
+ }
+ function get_Class_Rows($className = null) {
+    $option_list = '';
+    $baseSTR = '%';
+    $className .= '%';
+    $baseSTR .= $className;
+        $sql = "SELECT * FROM classes JOIN classprofile ON classes.classID  = classprofile.classID WHERE UPPER (classes.className) LIKE :className";
+        $statement = db()->prepare($sql);
+        $statement->bindValue(':className', $baseSTR);
+        $statement->execute();
+        while($data =  $statement->fetchAll(PDO::FETCH_ASSOC)) {
+            $option_list = $data;
+        }
+
+
+      if(is_array($option_list)){
+          return $option_list;
+      }else{
+          $option_list = [];
+      }
+ }
+
  function get_class_Info(int $classID) {
     $option_list = '';
         $sql = "SELECT * FROM classes JOIN classprofile ON classes.classID  = classprofile.classID 
@@ -267,10 +301,10 @@ function get_Class_CARDS() {
         return $statement->rowCount() > 0;
  }
 
- function display_class_Payment(){
+ function display_class_Payment($userID){
     $sql ="SELECT * from paymentmethod WHERE userID  = :userID";
     $statement = db()->prepare($sql);
-    $statement->bindValue(':userID', $_SESSION['user_id'], PDO::PARAM_INT);
+    $statement->bindValue(':userID', $userID, PDO::PARAM_INT);
     $statement->execute();
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
@@ -281,4 +315,18 @@ $statement = db()->prepare($sql);
 $statement->bindParam(':classID', $classID, PDO::PARAM_INT);
 $statement->execute();
 return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function mark_Class_Status(string $status, int $classID){
+    $sql = 'UPDATE classes
+    SET classStatus = :classStatus
+    WHERE classID  = :classID';
+$statement = db()->prepare($sql);
+$statement->bindParam(':classID', $classID , PDO::PARAM_INT);
+$statement->bindParam(':classStatus', $status, PDO::PARAM_STR);
+// execute the UPDATE statment
+if ($statement->execute()) {
+    return true;
+    }   
+return false;
 }

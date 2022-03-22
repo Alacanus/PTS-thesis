@@ -10,7 +10,12 @@ require __DIR__ . '/../../src/loggedin/classStep5.php';
 // if(!auth_Level('Instructor')){
 //     redirect_to('../allowedNOT.php');
 // }
-$pay = display_class_Payment();
+if (isset($_GET['classID'])) {
+    $pay = display_class_Payment();
+    $tempNAme = decrypt0($pay['accountName']);
+}else{
+
+}
 
 ?>
 
@@ -71,7 +76,7 @@ $pay = display_class_Payment();
                         <div class="form-element">
                             <label for="paylistID">Payment Method<div class="reqcolor">*</div></label>
                             <select name="paylistID" class="<?= error_class($errors, 'paylistID') ?>">
-                                <option value="<?= $pay['paylistID'] ?>"><?= $pay['paylistID'] ?></options>
+                                <option value="<?= $pay['paylistID'] ?? '' ?>"><?= $pay['paylistID'] ?? ''?></options>
                                     <?php
                                     foreach ($option_list as $options) {
                                         echo '<option value="' . $options['paylistID'] . '">' . $options['paymentName'] . '</option>';
@@ -85,7 +90,7 @@ $pay = display_class_Payment();
                             <div class="errormsg">
                                 <small><?= $errors['accountName'] ?? '' ?></small>
                             </div>
-                            <input type="text" name="accountName" id="accountName" value="<?= decrypt0($pay['accountName']) ?? '' ?>" class="<?= error_class($errors, 'accountName') ?>">
+                            <input type="text" name="accountName" id="accountName" value="<?= $tempNAme ?? '' ?>" class="<?= error_class($errors, 'accountName') ?>">
                         </div>
                         <div class="form-element">
                             <label for="accountDetails">Accounnt Details {Purchase details}<div class="reqcolor">*</div></label>
@@ -100,12 +105,13 @@ $pay = display_class_Payment();
                         </div>
                         <div class="form-element-btn">
                             <button class="btn btn-nav btn-table-grn" type="submit"><i class="bi bi-upload"></i> Upload</button>
+                    </form>
+
                         </div>
                         <div class="outside-btn">
                             <button class="btn btn-table btn-table-mb" onclick="back(<?= $_SESSION['post']['classID'] ?>)" title="Previous"><i class="bi bi-arrow-left-circle"></i></button>
-                            <button type="submit" class="btn btn-table btn-full" title="Next"><i class="bi bi-arrow-right-circle"></i></button>
+                            <button type="submit" class="btn btn-table btn-full" title="Next" onclick="next(<?= $_SESSION['post']['classID'] ?>)"><i class="bi bi-arrow-right-circle"></i></button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -117,7 +123,7 @@ $pay = display_class_Payment();
             url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=4',
             type: 'POST',
             success: function(response) {
-                window.location.href = response;
+                window.location.href = response;//http://127.0.0.1/pts-thesis/public/classRooms/createClass4.php
             },
             error: function(err) {
                 alert("There was some error performing the AJAX call!");
@@ -125,6 +131,19 @@ $pay = display_class_Payment();
             },
         });
     }
+    function next(classID) {
+    $.ajax({
+      url: '../../src/redirectDir.php?editClass=1&classID=' + classID + '&step=6',
+      type: 'POST',
+      success: function(response) {
+        window.location.href = response;
+      },
+      error: function(err) {
+        alert("There was some error performing the AJAX call!");
+
+      },
+    });
+  }
 </script>
 
 
